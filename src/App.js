@@ -7,6 +7,8 @@ import img3 from './image/img-3.JPG'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 // import Shop from './components/shopPage/Shop';
 import CartList from './components/shopPage/CardList'
+import Header from './components/common/header/header'
+import Footer from './components/common/footer/footer'
 
 // import CardPrice from './components/productPage/CardPrice'
 
@@ -57,11 +59,13 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <Header />
         {/* <Shop list={list}/> */}
         <CartList list= {list}/>
       </Router> 
       {/* <CardPrice quantity={10} price="100" addCartHandle = {addCartHandle}/> */}
       {/* <Stepper imgs={imgs}/> */}
+      <Footer />
       
     </div>
   );
