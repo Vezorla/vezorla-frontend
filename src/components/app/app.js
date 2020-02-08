@@ -7,8 +7,8 @@ import img3 from '../../assets/images/img-3.JPG'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 // import Shop from './components/shopPage/Shop';
 import CartList from '../shopPage/CardList';
-import Header from './components/common/header/header';
-import Footer from './components/common/footer/footer';
+import Header from '../common/header/header';
+import Footer from '../common/footer/footer';
 
 // import CardPrice from './components/productPage/CardPrice'
 
