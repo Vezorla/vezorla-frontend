@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import img1 from "./image/img-1.JPG";
-import img2 from "./image/img-2.JPG";
-import img3 from "./image/img-3.JPG";
+import img1 from '../../assets/images/img-1.JPG'
+import img2 from '../../assets/images/img-2.JPG'
+import img3 from '../../assets/images/img-3.JPG'
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 // import Shop from './components/shopPage/Shop';
-import CartList from "./components/shopPage/CardList";
-import Header from "./components/common/header/header";
-import Footer from "./components/common/footer/footer";
+import CartList from '../shopPage/CardList';
+import Header from './components/common/header/header';
+import Footer from './components/common/footer/footer';
 
 // import CardPrice from './components/productPage/CardPrice'
 
@@ -17,7 +17,7 @@ import Footer from "./components/common/footer/footer";
 function App() {
   const [id, setId] = useState(0);
 
-  let cardItemfunc = idIn => {
+  let cardItemfunc = (idIn)=>{
     setId(idIn);
   };
 
