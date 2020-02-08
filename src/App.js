@@ -1,24 +1,68 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+
+import img1 from './image/img-1.JPG'
+import img2 from './image/img-2.JPG'
+import img3 from './image/img-3.JPG'
+
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+// import Shop from './components/shopPage/Shop';
+import CartList from './components/shopPage/CardList'
+
+// import CardPrice from './components/productPage/CardPrice'
+
+// import Stepper from './components/Utils/Stepper'
 
 function App() {
+
+  const [id,setId] = useState(0)
+
+  let cardItemfunc = (idIn)=>{
+    setId(idIn);
+  }
+
+  const list = [{
+    id: 1,
+    name: "abc",
+    subdescription: "abcsd",
+    harvest: "12-2-1231",
+    image: [img1,img2],
+    oldprice: 123,
+    currentprice: 1234
+  },{
+    id: 2,
+    name: "asc",
+    subdescription: "aqd",
+    harvest: "12-2-4321",
+    image: [img2,img3],
+    oldprice: 123,
+    currentprice: 1234
+  }]  
+
+
+  function addCartHandle(val1){
+    console.log(val1)
+  }
+
+  //props need to array have img object. 
+    // img obj (imgPath + label)
+    const imgs = [{
+        imgPath: img1,
+        label: "hello"
+      }, 
+      {
+        imgPath: img2,
+        label: "ok"
+      }];
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        {/* <Shop list={list}/> */}
+        <CartList list= {list}/>
+      </Router> 
+      {/* <CardPrice quantity={10} price="100" addCartHandle = {addCartHandle}/> */}
+      {/* <Stepper imgs={imgs}/> */}
+      
     </div>
   );
 }
