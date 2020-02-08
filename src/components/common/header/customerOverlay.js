@@ -42,8 +42,8 @@ const useStyles = makeStyles({
     color: "#D0C50A"
   },
   text: {
-    fontSize: "5em",
-    letterSpacing: ".2em"
+    letterSpacing: ".11em",
+    fontWeight: "500"
   }
 });
 
@@ -78,7 +78,7 @@ export default function TemporaryDrawer() {
               <ListItemIcon>
                 <HomeIcon className={classes.icon} />
               </ListItemIcon>
-              <ListItemText primary={"Home"} className={classes.text} />
+              <ListItemText primary={"Home"} classes={{primary: classes.text}} />
             </ListItem>
           </Box>
           <Box boxShadow={3} padding="5px">
@@ -86,7 +86,7 @@ export default function TemporaryDrawer() {
               <ListItemIcon>
                 <ShoppingCartIcon className={classes.icon} />
               </ListItemIcon>
-              <ListItemText primary={"Cart"} className={classes.type} />
+              <ListItemText primary={"Cart"} classes={{primary: classes.text}} />
             </ListItem>
           </Box>
           <Box boxShadow={3} padding="5px">
@@ -94,7 +94,7 @@ export default function TemporaryDrawer() {
               <ListItemIcon>
                 <StoreIcon className={classes.icon} />
               </ListItemIcon>
-              <ListItemText primary={"Shop"} className={classes.type} />
+              <ListItemText primary={"Shop"} classes={{primary: classes.text}} />
             </ListItem>
           </Box>
           <Divider
@@ -114,7 +114,7 @@ export default function TemporaryDrawer() {
               <ListItemIcon>
                 <ExploreIcon className={classes.icon} />
               </ListItemIcon>
-              <ListItemText primary={"Find Us"} className={classes.type} />
+              <ListItemText primary={"Find Us"} classes={{primary: classes.text}} />
             </ListItem>
           </Box>
           <Box boxShadow={3} padding="5px">
@@ -122,7 +122,7 @@ export default function TemporaryDrawer() {
               <ListItemIcon>
                 <MailOutlineIcon className={classes.icon} />
               </ListItemIcon>
-              <ListItemText primary={"Contact Us"} className={classes.type} />
+              <ListItemText primary={"Contact Us"} classes={{primary: classes.text}} />
             </ListItem>
           </Box>
           <Divider
@@ -140,7 +140,7 @@ export default function TemporaryDrawer() {
               <ListItemIcon>
                 <BookmarkIcon className={classes.icon} />
               </ListItemIcon>
-              <ListItemText primary={"About Us"} className={classes.type} />
+              <ListItemText primary={"About Us"} classes={{primary: classes.text}} />
             </ListItem>
           </Box>
           <Divider style={{ marginBottom: "15px", marginTop: "15px" }} />
@@ -149,7 +149,7 @@ export default function TemporaryDrawer() {
               <ListItemIcon>
                 <AccountCircleIcon className={classes.icon} />
               </ListItemIcon>
-              <ListItemText primary={"Sign In"} className={classes.type} />
+              <ListItemText primary={"Sign In"} classes={{primary: classes.text}} />
             </ListItem>
           </Box>
         </Box>
