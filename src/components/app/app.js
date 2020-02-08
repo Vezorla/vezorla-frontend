@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-import img1 from './assets/images/img-1.JPG'
-import img2 from './assets/images/img-2.JPG'
-import img3 from './assets/images/img-3.JPG'
+import img1 from '../../assets/images/img-1.JPG'
+import img2 from '../../assets/images/img-2.JPG'
+import img3 from '../../assets/images/img-3.JPG'
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 // import Shop from './components/shopPage/Shop';
-import CartList from './components/shopPage/CardList'
+import CartList from '../shopPage/CardList'
 
 // import CardPrice from './components/productPage/CardPrice'
 
