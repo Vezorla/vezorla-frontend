@@ -4,7 +4,10 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  Badge
+  Badge,
+  createMuiTheme,
+  withTheme,
+  ThemeProvider
 } from "@material-ui/core";
 
 import IconButton from "@material-ui/core/IconButton";
@@ -23,6 +26,17 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   }
 }));
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#fff",
+    },
+    secondary: {
+        main: "#4c00ff"
+    }
+  }
+});
 
 export default function ButtonAppBar() {
   const classes = useStyles();
@@ -43,9 +57,11 @@ export default function ButtonAppBar() {
             Vezorla
           </Typography>
           <IconButton color="#D0C50A">
-            <Badge badgeContent={4} color="secondary">
-              <ShoppingCart style={{ color: "#0C3658" }} />
-            </Badge>
+            <ThemeProvider theme={theme}>
+              <Badge badgeContent={4} color="secondary">
+                <ShoppingCart style={{ color: "#0C3658" }} />
+              </Badge>
+            </ThemeProvider>
           </IconButton>
         </Toolbar>
       </AppBar>
