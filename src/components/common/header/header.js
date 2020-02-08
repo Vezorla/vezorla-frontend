@@ -31,9 +31,6 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       main: "#fff",
-    },
-    secondary: {
-        main: "#4c00ff"
     }
   }
 });
@@ -58,7 +55,7 @@ export default function ButtonAppBar() {
           </Typography>
           <IconButton color="#D0C50A">
             <ThemeProvider theme={theme}>
-              <Badge badgeContent={4} color="secondary">
+              <Badge badgeContent={4} color="primary">
                 <ShoppingCart style={{ color: "#0C3658" }} />
               </Badge>
             </ThemeProvider>
