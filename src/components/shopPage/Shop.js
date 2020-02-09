@@ -16,9 +16,6 @@ import Grid from '@material-ui/core/Grid';
 //     },
 //   }));
 
-const style = {
-    minWidth: '120'
-}
 
 class Shop extends Component{   
 
@@ -66,10 +63,6 @@ class Shop extends Component{
          this.fetchData();
     }
     
-    
-
-    
-
     render(){
         return (
             <div>
@@ -78,7 +71,7 @@ class Shop extends Component{
 
                     {/*-------- Filter --------*/}
                     <Grid item>   
-                        <FormControl className="shop--form" style={style}>
+                        <FormControl className="shop--form">
                             <InputLabel id="filter--label">Filter</InputLabel>
                             <Select
                             labelId="demo-simple-select-label"

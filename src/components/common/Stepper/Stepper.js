@@ -22,14 +22,10 @@ const useStyles = makeStyles(theme => ({
 
     //props need to array have img object. 
     // img obj (imgPath + label)
-    //const imgs = [{
-    //     imgPath: img1,
-    //     label: "hello"
-    //   }, 
-    //   {
-    //     imgPath: img2,
-    //     label: "ok"
-    //   }];
+    //const imgs = [
+    //     img1,  
+    //     img2,
+    //   ];
 
 
 // props: like the example above
@@ -68,9 +64,9 @@ function Stepper(props) {
                 enableMouseEvents
             >
                 {imgs.map((step, index) => (
-                <div key={step.label}>
+                <div key={step}>
                     {Math.abs(activeStep - index) <= 2 ? (
-                    <img className={classes.img} src={step.imgPath} alt={step.label} />
+                    <img className={classes.img} src={step} alt="Product Pictures"/>
                     ) : null}
                 </div>
                 ))}

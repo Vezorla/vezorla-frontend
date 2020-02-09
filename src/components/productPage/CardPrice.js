@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Grid from '@material-ui/core/Grid';
 
-// props: price, quantity, maybe oldPrice?
+// props: productid, price, quantity, maybe oldPrice?
 
 // TODO change helper props to better phrase
 function CardPrice(props) {
@@ -17,6 +17,23 @@ function CardPrice(props) {
 
     let onChangeHandle = (e)=>{
         setValue(e.target.value);
+    }
+
+    const onClickHandler = async (e) =>{
+        let json = await fetch(`url/${props.id}`, {
+            method: 'post',
+            headers:{
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(value)
+        })
+        let data = await json.json();
+
+        //add to cart sucess
+        if(data === true){
+            props.addCartHandle()
+        }
+        
     }
 
     return (
@@ -48,7 +65,7 @@ function CardPrice(props) {
                                     <Button 
                                         size="medium"
                                         endIcon={<ShoppingCartIcon/>}
-                                        onClick={()=>props.addCartHandle(value)} //this addCartHanle need to be pass from App so it can trigger with header
+                                        onClick={onClickHandler} //this addCartHanle need to be pass from App so it can trigger with header
                                     >
                                         Add to Cart
                                     </Button>

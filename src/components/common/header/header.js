@@ -6,13 +6,12 @@ import {
   Typography,
   Badge,
   createMuiTheme,
-  withTheme,
   ThemeProvider
 } from "@material-ui/core";
 
 import IconButton from "@material-ui/core/IconButton";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
-
+import Link from 'react-router-dom'
 import NavBar from "./customerOverlay";
 
 const useStyles = makeStyles(theme => ({
@@ -35,7 +34,7 @@ const theme = createMuiTheme({
   }
 });
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar(props) {
   const classes = useStyles();
 
   return (
@@ -55,7 +54,7 @@ export default function ButtonAppBar() {
           </Typography>
           <IconButton color="#D0C50A">
             <ThemeProvider theme={theme}>
-              <Badge badgeContent={4} color="primary">
+              <Badge badgeContent={props.cart} color="primary">
                 <ShoppingCart style={{ color: "#0C3658" }} />
               </Badge>
             </ThemeProvider>

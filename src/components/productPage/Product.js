@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import Stepper from '../Utils/Stepper'
+import Stepper from '../common/Stepper/Stepper'
 import CardPrice from './CardPrice'
 
 
@@ -32,12 +32,13 @@ class Product extends Component{
 
     //fetch quantity and product information
     fetchData = async ()=>{
-        const jsonQuantity = await fetch('url' + this.match.params.productId);
+        const jsonQuantity = await fetch(`url/${this.match.params.productid}`);
         const quantity = await jsonQuantity.json();
-        this.setQuantity(quantity);
-
-        const jsonData = await fetch('url' + this.match.params.productId);
+    
+        const jsonData = await fetch(`url/${this.match.params.productid}`);
         const data = await jsonData.json();
+
+        this.setQuantity(quantity);
         this.setProduct(data);
     }
 
@@ -48,7 +49,7 @@ class Product extends Component{
             <div>
                 <h1>{this.state.product.name}</h1>
                 <Stepper imgs={this.state.product.image}/>
-                <CardPrice quantity={this.state.quantiy} price={this.state.product.currentprice}/>
+                <CardPrice id={this.match.params.productid} quantity={this.state.quantiy} price={this.state.product.currentprice} addCartHandle={this.props.addCartHandle}/>
                 <section>
                     <h1>Description</h1>
                     <span>
