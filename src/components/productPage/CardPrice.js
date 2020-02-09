@@ -20,19 +20,19 @@ function CardPrice(props) {
     }
 
     const onClickHandler = async (e) =>{
-        let json = await fetch(`url/${props.id}`, {
-            method: 'post',
-            headers:{
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(value)
-        })
-        let data = await json.json();
+        // let json = await fetch(`url/${props.id}`, {
+        //     method: 'post',
+        //     headers:{
+        //         'Content-Type': 'application/json;charset=utf-8'
+        //     },
+        //     body: JSON.stringify(value)
+        // })
+        // let data = await json.json();
 
         //add to cart sucess
-        if(data === true){
+        // if(data === true){
             props.addCartHandle()
-        }
+        // }
         
     }
 

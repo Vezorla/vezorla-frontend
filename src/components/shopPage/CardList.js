@@ -23,9 +23,10 @@ import Grid from '@material-ui/core/Grid';
 //   }] 
 export default function CardList(props) {
 
-    const list = props.list;
+    
 
-    const listCard = list.map((item) =>
+    
+    const listCard = props.list.map((item) =>
         <CardItem 
             product={item}
         />

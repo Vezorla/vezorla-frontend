@@ -11,7 +11,6 @@ import {
 
 import IconButton from "@material-ui/core/IconButton";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
-import Link from 'react-router-dom'
 import NavBar from "./customerOverlay";
 
 const useStyles = makeStyles(theme => ({

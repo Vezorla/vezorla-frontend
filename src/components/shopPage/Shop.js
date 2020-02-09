@@ -6,6 +6,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
 
+import img1 from '../../assets/images/img-1.JPG'
+import img2 from '../../assets/images/img-2.JPG'
+import img3 from '../../assets/images/img-3.JPG'
+
 // const useStyles = makeStyles(theme => ({
 //     formControl: {
 //       margin: theme.spacing(1),
@@ -16,6 +20,24 @@ import Grid from '@material-ui/core/Grid';
 //     },
 //   }));
 
+const dummydata = [{
+    name:'hello',
+    description: 'helloA',
+    subdescription:'helloB',
+    currentprice: 123,
+    oldprice: 1235,
+    prodId: 1,
+    image: [img1, img2]
+},{
+    name:'hello2',
+    description: 'helloB',
+    subdescription:'helloC',
+    currentprice: 456,
+    oldprice: 9999,
+    prodId: 2,
+    image: [img2, img3]
+}
+]
 
 class Shop extends Component{   
 
@@ -24,7 +46,7 @@ class Shop extends Component{
         this.state = {
             filter: '',
             order: '',
-            list: '',
+            list: dummydata,
         }
         this.setFilter = this.setFilter.bind(this);
         this.setOrder = this.setOrder.bind(this);
@@ -60,7 +82,8 @@ class Shop extends Component{
     
     // ------fetch on load-------
     componentDidMount(){
-         this.fetchData();
+        //  this.fetchData();
+        console.log('a')
     }
     
     render(){
@@ -107,7 +130,7 @@ class Shop extends Component{
                 </Grid>
 
                 {/* ------List of product ---------*/}
-                <CardList list={this.props.list}/>{/* TODO: change this into this.state.list */}
+                <CardList list={this.state.list}/>{/* TODO: change this into this.state.list */}
             </div>
         )
     }

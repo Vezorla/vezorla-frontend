@@ -19,7 +19,8 @@ const list = [
     harvest: "12-2-1231",
     image: [img1, img2],
     oldprice: 123,
-    currentprice: 1234
+    currentprice: 1234,
+    
   },
   {
     id: 2,
@@ -28,7 +29,7 @@ const list = [
     harvest: "12-2-4321",
     image: [img2, img3],
     oldprice: 123,
-    currentprice: 1234
+    currentprice: 1234,
   }
 ];
 
@@ -46,21 +47,22 @@ function App() {
   return (
     <div className="App">
       
-      <Header quantity={lineItems}/>
       <Router>
+        <Header cart={lineItems}/>
           {/* <Route path={["/","/index"]} exact strict component={Home}/> */}
           {/* <Route path={["/cart","/cart/:userid"]} exact strict component={Cart}/> */}
           <Route path="/shop" exact strict component={Shop}/>
           {/* <Route path="/findus" exact strict component={FindUs}/> */}
           {/* <Route path="/contact" exact strict component={Contact}/> */}
           {/* <Route path="/about" exact strict component={About}/> */}
+          {/* <Route path="/login" exact strict component={Login}/> */}
 
           <Route path="/product/:productid" exact strict 
-            render={() => <Product addCartHandle={increaseCart}/>}
+            render={({match}) => <Product prodId={match.params.productid} addCartHandle={increaseCart}/>}
           />
       </Router>
+      {/* <Footer /> */}
 
-      <Footer />
     </div>
   );
 }
