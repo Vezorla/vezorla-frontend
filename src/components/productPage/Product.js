@@ -83,7 +83,7 @@ class Product extends Component{
                     <Grid item xs={12} md={6}>
                         <Stepper imgs={this.state.product.image}/>  
                     </Grid>
-                    <CardPrice id={this.props.prodId} quantity={this.state.quantiy} price={this.state.product.currentprice} addCartHandle={this.props.addCartHandle}/>
+                    <CardPrice id={this.props.prodId} quantity={this.state.quantity} price={this.state.product.currentprice} addCartHandle={this.props.addCartHandle}/>
                 </Grid>
                 
                 <section>
