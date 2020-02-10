@@ -5,6 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import img1 from '../../assets/images/img-1.JPG'
 import img2 from '../../assets/images/img-2.JPG'
@@ -36,6 +37,30 @@ const dummydata = [{
     oldprice: 9999,
     prodId: 2,
     image: [img2, img3]
+},{
+    name:'hello2',
+    description: 'helloB',
+    subdescription:'helloC',
+    currentprice: 456,
+    oldprice: 9999,
+    prodId: 2,
+    image: [img2, img3]
+},{
+    name:'hello2',
+    description: 'helloB',
+    subdescription:'helloC',
+    currentprice: 456,
+    oldprice: 9999,
+    prodId: 2,
+    image: [img2, img3]
+},{
+    name:'hello2',
+    description: 'helloB',
+    subdescription:'helloC',
+    currentprice: 456,
+    oldprice: 9999,
+    prodId: 2,
+    image: [img2, img3]
 }
 ]
 
@@ -47,11 +72,13 @@ class Shop extends Component{
             filter: '',
             order: '',
             list: dummydata,
+            loading: false,
         }
         this.setFilter = this.setFilter.bind(this);
         this.setOrder = this.setOrder.bind(this);
         this.setList = this.setList.bind(this);
-        this.fetchData = this.fetchData.bind(this);
+        this.setLoading = this.setLoading.bind(this);
+        this.fetchData = this.fetchData.bind(this);     
     }
 
     //-------Setter for state-----
@@ -64,6 +91,9 @@ class Shop extends Component{
     setList(listVal){
         this.setState({list: listVal})
     }
+    setLoading(loadingVal){
+        this.setState({loading:loadingVal})
+    }
 
     // event handler of filter and order. Use to fetch and set the value display
     handleChangeFilter = event => {
@@ -75,9 +105,11 @@ class Shop extends Component{
     }
        
     fetchData = async () => {
+        this.setLoading(true);
         const json = await fetch('url');
         const data = await json.json();
         this.setList(data);
+        this.setLoading(false);
     }
     
     // ------fetch on load-------
@@ -130,7 +162,9 @@ class Shop extends Component{
                 </Grid>
 
                 {/* ------List of product ---------*/}
-                <CardList list={this.state.list}/>{/* TODO: change this into this.state.list */}
+                {this.state.loading?
+                <CircularProgress/>:
+                <CardList list={this.state.list}/>}
             </div>
         )
     }

@@ -4,7 +4,7 @@ import img1 from '../../assets/images/img-1.JPG'
 import img2 from '../../assets/images/img-2.JPG'
 import img3 from '../../assets/images/img-3.JPG'
 
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {Switch, Route} from 'react-router-dom'
 import Shop from '../shopPage/Shop'
 import Header from '../common/header/header';
 import Footer from '../common/footer/footer';
@@ -46,9 +46,10 @@ function App() {
 
   return (
     <div className="App">
-      
-      <Router>
-        <Header cart={lineItems}/>
+
+      <Header cart={lineItems}/>
+
+      <Switch>
           {/* <Route path={["/","/index"]} exact strict component={Home}/> */}
           {/* <Route path={["/cart","/cart/:userid"]} exact strict component={Cart}/> */}
           <Route path="/shop" exact strict component={Shop}/>
@@ -60,7 +61,8 @@ function App() {
           <Route path="/product/:productid" exact strict 
             render={({match}) => <Product prodId={match.params.productid} addCartHandle={increaseCart}/>}
           />
-      </Router>
+      </Switch>
+      
       {/* <Footer /> */}
 
     </div>

@@ -2,6 +2,8 @@ import React from 'react'
 import CardItem from './CardItem'
 import Grid from '@material-ui/core/Grid';
 
+import {makeStyles} from '@material-ui/core'
+
 //props: list of product object
 //product object need to have format
 // const list = [{
@@ -21,20 +23,24 @@ import Grid from '@material-ui/core/Grid';
 //     oldprice: 123,
 //     currentprice: 1234
 //   }] 
+
+
+
+
+
 export default function CardList(props) {
-
     
-
-    
-    const listCard = props.list.map((item) =>
+    const listCard = props.list.map((item) => (
         <CardItem 
             product={item}
-        />
+        />  
+    )
+        
     );
 
     return (
         <div>
-            <Grid container spacing={5} xs={12} justify='center'>
+            <Grid container xs={12} spacing={2} justify='center'>
                 {listCard}
             </Grid>
         </div>

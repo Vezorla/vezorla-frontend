@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import Stepper from '../common/Stepper/Stepper'
 import CardPrice from './CardPrice'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import img1 from '../../assets/images/img-1.JPG'
 import img2 from '../../assets/images/img-2.JPG'
@@ -23,10 +24,12 @@ class Product extends Component{
         super(props);
         this.state = {
             product: dummydata[0],
-            quantity: 10
+            quantity: 10,
+            loading: false,
         }
         this.setProduct = this.setProduct.bind(this)
         this.setQuantity = this.setQuantity.bind(this)
+        this.setLoading = this.setLoading.bind(this)
     }
     //setter for state
     setProduct(productVal){
@@ -37,6 +40,10 @@ class Product extends Component{
         this.setState({quantity: quantityVal})
     }
 
+    setLoading(loadingVal){
+        this.setState({loading: loadingVal})
+    }
+
     //fetch on load
     componentDidMount(){
         // this.fetchData();
@@ -45,6 +52,7 @@ class Product extends Component{
 
     //fetch quantity and product information
     fetchData = async ()=>{
+        this.setLoading(true);
         const jsonQuantity = await fetch(`url/${this.props.prodId}`);
         const quantity = await jsonQuantity.json();
     
@@ -53,12 +61,16 @@ class Product extends Component{
 
         this.setQuantity(quantity);
         this.setProduct(data); //need to set [0] maybe
+        this.setLoading(false);
     }
 
     
 
     render(){
         return (
+            this.state.loading?
+            <CircularProgress />
+            :
             <div>
                 <h1>{this.state.product.name}</h1>
                 <Stepper imgs={this.state.product.image}/>

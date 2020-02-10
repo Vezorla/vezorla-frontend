@@ -11,7 +11,7 @@ function CardItem(props) {
 
 
   return (
-    <Grid item xs={10} md={5} lg={3} >
+    <Grid item xs={12} sm={6} md={6} lg={4} >
       <Link to={url}>
         <Card key={prodId} >
           <h1>{name}</h1>
