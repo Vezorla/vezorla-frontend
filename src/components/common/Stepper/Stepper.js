@@ -5,6 +5,7 @@ import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';  
+import {Grid} from '@material-ui/core'
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
@@ -12,24 +13,21 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const useStyles = makeStyles(theme => ({
     img: {
-      height: 255,
+      height: '50vh',
       display: 'block',
-      maxWidth: 400,
-      overflow: 'hidden',
+    //   maxWidth: 400,
+    //   overflow: 'hidden',
       width: '100%',
+      margin: '0 auto',
     },
 }));
 
     //props need to array have img object. 
     // img obj (imgPath + label)
-    //const imgs = [{
-    //     imgPath: img1,
-    //     label: "hello"
-    //   }, 
-    //   {
-    //     imgPath: img2,
-    //     label: "ok"
-    //   }];
+    //const imgs = [
+    //     img1,  
+    //     img2,
+    //   ];
 
 
 // props: like the example above
@@ -68,9 +66,9 @@ function Stepper(props) {
                 enableMouseEvents
             >
                 {imgs.map((step, index) => (
-                <div key={step.label}>
+                <div key={step}>
                     {Math.abs(activeStep - index) <= 2 ? (
-                    <img className={classes.img} src={step.imgPath} alt={step.label} />
+                    <img className={classes.img} src={step} alt="Product Pictures"/>
                     ) : null}
                 </div>
                 ))}

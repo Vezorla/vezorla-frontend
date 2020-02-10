@@ -20,6 +20,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import ExploreIcon from "@material-ui/icons/Explore";
 import StoreIcon from "@material-ui/icons/Storefront";
+import {NavLink} from 'react-router-dom';
 
 const useStyles = makeStyles({
   paper: {
@@ -74,28 +75,34 @@ export default function TemporaryDrawer() {
       <List className={classes.boxSpacing}>
         <Box>
           <Box boxShadow={3} padding="5px">
-            <ListItem button key={"Home"} className={classes.type}>
-              <ListItemIcon>
-                <HomeIcon className={classes.icon} />
-              </ListItemIcon>
-              <ListItemText primary={"Home"} classes={{primary: classes.text}} />
-            </ListItem>
+            <NavLink to="/" exact>
+              <ListItem button key={"Home"} className={classes.type}>
+                <ListItemIcon>
+                  <HomeIcon className={classes.icon} />
+                </ListItemIcon>
+                <ListItemText primary={"Home"} classes={{primary: classes.text}} />
+              </ListItem>
+            </NavLink>
           </Box>
           <Box boxShadow={3} padding="5px">
-            <ListItem button key={"Cart"} className={classes.type}>
-              <ListItemIcon>
-                <ShoppingCartIcon className={classes.icon} />
-              </ListItemIcon>
-              <ListItemText primary={"Cart"} classes={{primary: classes.text}} />
-            </ListItem>
+            <NavLink to="/cart" exact>
+              <ListItem button key={"Cart"} className={classes.type}>
+                <ListItemIcon>
+                  <ShoppingCartIcon className={classes.icon} />
+                </ListItemIcon>
+                <ListItemText primary={"Cart"} classes={{primary: classes.text}} />
+              </ListItem>
+            </NavLink>
           </Box>
           <Box boxShadow={3} padding="5px">
-            <ListItem button key={"Shop"} className={classes.type}>
-              <ListItemIcon>
-                <StoreIcon className={classes.icon} />
-              </ListItemIcon>
-              <ListItemText primary={"Shop"} classes={{primary: classes.text}} />
-            </ListItem>
+            <NavLink to="/shop" exact>
+              <ListItem button key={"Shop"} className={classes.type}>
+                <ListItemIcon>
+                  <StoreIcon className={classes.icon} />
+                </ListItemIcon>
+                <ListItemText primary={"Shop"} classes={{primary: classes.text}} />
+              </ListItem>
+            </NavLink>
           </Box>
           <Divider
             style={{
@@ -110,20 +117,24 @@ export default function TemporaryDrawer() {
             }}
           />
           <Box boxShadow={3} padding="5px">
-            <ListItem button key={"Find us"} className={classes.type}>
-              <ListItemIcon>
-                <ExploreIcon className={classes.icon} />
-              </ListItemIcon>
-              <ListItemText primary={"Find Us"} classes={{primary: classes.text}} />
-            </ListItem>
+            <NavLink to="/findus" exact>
+              <ListItem button key={"Find us"} className={classes.type}>
+                <ListItemIcon>
+                  <ExploreIcon className={classes.icon} />
+                </ListItemIcon>
+                <ListItemText primary={"Find Us"} classes={{primary: classes.text}} />
+              </ListItem>
+            </NavLink>
           </Box>
           <Box boxShadow={3} padding="5px">
-            <ListItem button key={"Contact Us"} className={classes.type}>
-              <ListItemIcon>
-                <MailOutlineIcon className={classes.icon} />
-              </ListItemIcon>
-              <ListItemText primary={"Contact Us"} classes={{primary: classes.text}} />
-            </ListItem>
+            <NavLink to="/contact" exact>
+              <ListItem button key={"Contact Us"} className={classes.type}>
+                <ListItemIcon>
+                  <MailOutlineIcon className={classes.icon} />
+                </ListItemIcon>
+                <ListItemText primary={"Contact Us"} classes={{primary: classes.text}} />
+              </ListItem>
+            </NavLink>
           </Box>
           <Divider
             style={{
@@ -136,21 +147,25 @@ export default function TemporaryDrawer() {
             }}
           />
           <Box boxShadow={3} padding="5px">
-            <ListItem button key={"About Us"} className={classes.type}>
-              <ListItemIcon>
-                <BookmarkIcon className={classes.icon} />
-              </ListItemIcon>
-              <ListItemText primary={"About Us"} classes={{primary: classes.text}} />
-            </ListItem>
+            <NavLink to="/about" exact>
+              <ListItem button key={"About Us"} className={classes.type}>
+                <ListItemIcon>
+                  <BookmarkIcon className={classes.icon} />
+                </ListItemIcon>
+                <ListItemText primary={"About Us"} classes={{primary: classes.text}} />
+              </ListItem>
+            </NavLink>
           </Box>
           <Divider style={{ marginBottom: "15px", marginTop: "15px" }} />
           <Box boxShadow={3} padding="5px">
-            <ListItem button key={"Sign In"} className={classes.type}>
-              <ListItemIcon>
-                <AccountCircleIcon className={classes.icon} />
-              </ListItemIcon>
-              <ListItemText primary={"Sign In"} classes={{primary: classes.text}} />
-            </ListItem>
+            <NavLink to="login">
+              <ListItem button key={"Sign In"} className={classes.type}>
+                <ListItemIcon>
+                  <AccountCircleIcon className={classes.icon} />
+                </ListItemIcon>
+                <ListItemText primary={"Sign In"} classes={{primary: classes.text}} />
+              </ListItem>
+            </NavLink>
           </Box>
         </Box>
       </List>

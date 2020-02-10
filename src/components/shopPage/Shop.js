@@ -5,6 +5,11 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+import img1 from '../../assets/images/img-1.JPG'
+import img2 from '../../assets/images/img-2.JPG'
+import img3 from '../../assets/images/img-3.JPG'
 
 // const useStyles = makeStyles(theme => ({
 //     formControl: {
@@ -16,9 +21,48 @@ import Grid from '@material-ui/core/Grid';
 //     },
 //   }));
 
-const style = {
-    minWidth: '120'
+const dummydata = [{
+    name:'hello',
+    description: 'helloA',
+    subdescription:'helloB',
+    currentprice: 123,
+    oldprice: 1235,
+    prodId: 1,
+    image: [img1, img2]
+},{
+    name:'hello2',
+    description: 'helloB',
+    subdescription:'helloC',
+    currentprice: 456,
+    oldprice: 9999,
+    prodId: 2,
+    image: [img2, img3]
+},{
+    name:'hello2',
+    description: 'helloB',
+    subdescription:'helloC',
+    currentprice: 456,
+    oldprice: 9999,
+    prodId: 2,
+    image: [img2, img3]
+},{
+    name:'hello2',
+    description: 'helloB',
+    subdescription:'helloC',
+    currentprice: 456,
+    oldprice: 9999,
+    prodId: 2,
+    image: [img2, img3]
+},{
+    name:'hello2',
+    description: 'helloB',
+    subdescription:'helloC',
+    currentprice: 456,
+    oldprice: 9999,
+    prodId: 2,
+    image: [img2, img3]
 }
+]
 
 class Shop extends Component{   
 
@@ -27,12 +71,14 @@ class Shop extends Component{
         this.state = {
             filter: '',
             order: '',
-            list: '',
+            list: dummydata,
+            loading: false,
         }
         this.setFilter = this.setFilter.bind(this);
         this.setOrder = this.setOrder.bind(this);
         this.setList = this.setList.bind(this);
-        this.fetchData = this.fetchData.bind(this);
+        this.setLoading = this.setLoading.bind(this);
+        this.fetchData = this.fetchData.bind(this);     
     }
 
     //-------Setter for state-----
@@ -45,6 +91,9 @@ class Shop extends Component{
     setList(listVal){
         this.setState({list: listVal})
     }
+    setLoading(loadingVal){
+        this.setState({loading:loadingVal})
+    }
 
     // event handler of filter and order. Use to fetch and set the value display
     handleChangeFilter = event => {
@@ -56,29 +105,28 @@ class Shop extends Component{
     }
        
     fetchData = async () => {
+        this.setLoading(true);
         const json = await fetch('url');
         const data = await json.json();
         this.setList(data);
+        this.setLoading(false);
     }
     
     // ------fetch on load-------
     componentDidMount(){
-         this.fetchData();
+        //  this.fetchData();
+        console.log('a')
     }
     
-    
-
-    
-
     render(){
         return (
             <div>
                 {/* ------Filter and Order section--------- */}
-                <Grid className="shop--filter" container spacing={5} xs={12} justify='center'>
+                <Grid className="shop--filter" container xs={12} justify='space-around'>
 
                     {/*-------- Filter --------*/}
-                    <Grid item>   
-                        <FormControl className="shop--form" style={style}>
+                    <Grid item >   
+                        <FormControl className="shop--form">
                             <InputLabel id="filter--label">Filter</InputLabel>
                             <Select
                             labelId="demo-simple-select-label"
@@ -96,7 +144,7 @@ class Shop extends Component{
                 
 
                     {/*-------- Order --------*/}
-                    <Grid item>  
+                    <Grid item >  
                         <FormControl className="shop--form">   
                             <InputLabel id="order--label">Order</InputLabel>
                             <Select
@@ -114,7 +162,9 @@ class Shop extends Component{
                 </Grid>
 
                 {/* ------List of product ---------*/}
-                <CardList list={this.props.list}/>{/* TODO: change this into this.state.list */}
+                {this.state.loading?
+                <CircularProgress/>:
+                <CardList list={this.state.list}/>}
             </div>
         )
     }
