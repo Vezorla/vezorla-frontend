@@ -122,10 +122,10 @@ class Shop extends Component{
         return (
             <div>
                 {/* ------Filter and Order section--------- */}
-                <Grid className="shop--filter" container spacing={5} xs={12} justify='center'>
+                <Grid className="shop--filter" container xs={12} justify='space-around'>
 
                     {/*-------- Filter --------*/}
-                    <Grid item>   
+                    <Grid item >   
                         <FormControl className="shop--form">
                             <InputLabel id="filter--label">Filter</InputLabel>
                             <Select
@@ -144,7 +144,7 @@ class Shop extends Component{
                 
 
                     {/*-------- Order --------*/}
-                    <Grid item>  
+                    <Grid item >  
                         <FormControl className="shop--form">   
                             <InputLabel id="order--label">Order</InputLabel>
                             <Select

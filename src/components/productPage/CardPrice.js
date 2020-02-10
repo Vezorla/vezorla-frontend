@@ -37,7 +37,7 @@ function CardPrice(props) {
     }
 
     return (
-        <div>
+        <Grid item xs={12} md={6}>
             <Grid container justify="center">
                 <Grid item xs={10} md={6}>
                     {/* Card container for the price, quantity, add to card */}
@@ -75,11 +75,8 @@ function CardPrice(props) {
                     </Card>
 
                 </Grid>
-            </Grid>
-
-
-            
-        </div>
+            </Grid>      
+        </Grid>
     )
 }
 

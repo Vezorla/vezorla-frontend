@@ -2,6 +2,8 @@ import React,{Component} from 'react'
 import Stepper from '../common/Stepper/Stepper'
 import CardPrice from './CardPrice'
 import CircularProgress from '@material-ui/core/CircularProgress';
+import {Grid} from '@material-ui/core'
+import {makeStyles} from '@material-ui/core/styles'
 
 import img1 from '../../assets/images/img-1.JPG'
 import img2 from '../../assets/images/img-2.JPG'
@@ -17,6 +19,9 @@ const dummydata = [{
 }
 ]
 
+
+//TODO make css for width 
+
 //this need function pass from App so it can associate with cart in header also match is for react route
 class Product extends Component{
 
@@ -31,6 +36,7 @@ class Product extends Component{
         this.setQuantity = this.setQuantity.bind(this)
         this.setLoading = this.setLoading.bind(this)
     }
+
     //setter for state
     setProduct(productVal){
         this.setState({product: productVal})
@@ -73,8 +79,13 @@ class Product extends Component{
             :
             <div>
                 <h1>{this.state.product.name}</h1>
-                <Stepper imgs={this.state.product.image}/>
-                <CardPrice id={this.props.prodId} quantity={this.state.quantiy} price={this.state.product.currentprice} addCartHandle={this.props.addCartHandle}/>
+                <Grid container xs={12} justify='center' spacing={3}>
+                    <Grid item xs={12} md={6}>
+                        <Stepper imgs={this.state.product.image}/>  
+                    </Grid>
+                    <CardPrice id={this.props.prodId} quantity={this.state.quantiy} price={this.state.product.currentprice} addCartHandle={this.props.addCartHandle}/>
+                </Grid>
+                
                 <section>
                     <h1>Description</h1>
                     <span>

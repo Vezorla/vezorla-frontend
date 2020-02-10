@@ -4,6 +4,8 @@ import  {Link} from 'react-router-dom';
 import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 
+
+
 //props: product obj
 function CardItem(props) {
   const {prodId,name,subdescription,harvest,image,oldprice,currentprice} = props.product
@@ -11,7 +13,7 @@ function CardItem(props) {
 
 
   return (
-    <Grid item xs={12} sm={6} md={6} lg={4} >
+    <Grid  item xs={12} sm={6} md={4} >
       <Link to={url}>
         <Card key={prodId} >
           <h1>{name}</h1>

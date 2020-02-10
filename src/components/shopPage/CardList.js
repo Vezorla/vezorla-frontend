@@ -1,8 +1,9 @@
 import React from 'react'
 import CardItem from './CardItem'
-import Grid from '@material-ui/core/Grid';
 
-import {makeStyles} from '@material-ui/core'
+import { Grid } from '@material-ui/core';
+
+import {makeStyles} from '@material-ui/core/styles'
 
 //props: list of product object
 //product object need to have format
@@ -24,23 +25,34 @@ import {makeStyles} from '@material-ui/core'
 //     currentprice: 1234
 //   }] 
 
-
+const useStyle = makeStyles(theme => ({
+    grid: {
+        [theme.breakpoints.between('sm','xs')]:{
+            width:"100%"
+        },
+        [theme.breakpoints.up('xs')] : {
+            width:"80%",
+            margin:"0 auto"
+        },
+    }
+}));
 
 
 
 export default function CardList(props) {
     
+    const classes = useStyle();
+
     const listCard = props.list.map((item) => (
         <CardItem 
             product={item}
         />  
-    )
-        
-    );
+    ));
+
 
     return (
         <div>
-            <Grid container xs={12} spacing={2} justify='center'>
+            <Grid className={classes.grid} container xs={12} spacing={3}>
                 {listCard}
             </Grid>
         </div>

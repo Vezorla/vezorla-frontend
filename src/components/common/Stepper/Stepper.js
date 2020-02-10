@@ -5,6 +5,7 @@ import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';  
+import {Grid} from '@material-ui/core'
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
@@ -12,11 +13,12 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const useStyles = makeStyles(theme => ({
     img: {
-      height: 255,
+      height: '50vh',
       display: 'block',
-      maxWidth: 400,
-      overflow: 'hidden',
+    //   maxWidth: 400,
+    //   overflow: 'hidden',
       width: '100%',
+      margin: '0 auto',
     },
 }));
 
