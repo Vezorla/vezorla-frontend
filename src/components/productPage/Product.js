@@ -35,6 +35,7 @@ class Product extends Component{
         this.setProduct = this.setProduct.bind(this)
         this.setQuantity = this.setQuantity.bind(this)
         this.setLoading = this.setLoading.bind(this)
+        
     }
 
     //setter for state
@@ -48,12 +49,6 @@ class Product extends Component{
 
     setLoading(loadingVal){
         this.setState({loading: loadingVal})
-    }
-
-    //fetch on load
-    componentDidMount(){
-        // this.fetchData();
-        console.log(this.props.prodId)
     }
 
     //fetch quantity and product information
@@ -70,7 +65,10 @@ class Product extends Component{
         this.setLoading(false);
     }
 
-    
+    componentDidMount(){
+        // this.fetchData();
+        console.log('av');
+    }
 
     render(){
         return (
