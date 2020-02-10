@@ -78,7 +78,8 @@ class Shop extends Component{
         this.setOrder = this.setOrder.bind(this);
         this.setList = this.setList.bind(this);
         this.setLoading = this.setLoading.bind(this);
-        this.fetchData = this.fetchData.bind(this);     
+        this.fetchData = this.fetchData.bind(this);  
+         
     }
 
     //-------Setter for state-----
@@ -114,8 +115,8 @@ class Shop extends Component{
     
     // ------fetch on load-------
     componentDidMount(){
-        //  this.fetchData();
-        console.log('a')
+        // this.fetchData();  
+        console.log('a');
     }
     
     render(){

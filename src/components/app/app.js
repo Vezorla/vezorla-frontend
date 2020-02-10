@@ -4,11 +4,12 @@ import img1 from '../../assets/images/img-1.JPG'
 import img2 from '../../assets/images/img-2.JPG'
 import img3 from '../../assets/images/img-3.JPG'
 
-import {Switch, Route} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom'
 import Shop from '../shopPage/Shop'
 import Header from '../common/header/header';
 import Footer from '../common/footer/footer';
 import Product from '../productPage/Product';
+import NotFound from '../404/NotFound'
 
 //Dummy data
 const list = [
@@ -61,6 +62,9 @@ function App() {
           <Route path="/product/:productid" exact strict 
             render={({match}) => <Product prodId={match.params.productid} addCartHandle={increaseCart}/>}
           />
+
+          <Route path="/404" component={NotFound}/>
+          <Redirect to="/404"/>
       </Switch>
       
       {/* <Footer /> */}
