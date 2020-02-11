@@ -40,11 +40,12 @@ const trueData ={
 //this need function pass from App so it can associate with cart in header also match is for react route
 class Product extends Component{
 
+    //constructor
     constructor(props){
         super(props);
         this.state = {
             product: '',
-            quantity: 10,
+            quantity: 0,
             loading: false,
             imgs: [],
         }
@@ -88,24 +89,22 @@ class Product extends Component{
     //fetch quantity and product information
     fetchData = async ()=>{
         this.setLoading(true);
-        // const jsonQuantity = await fetch(`10.186.128.210:28590/${this.props.prodId}`);
-        // const quantity = await jsonQuantity.json();
-    
-        const jsonData = await fetch(`http://10.185.150.236:28590/api/customer/inventory/product/${this.props.prodId}`);
-        
-        console.log(jsonData)
+        const jsonQuantity = await fetch(`http://10.187.224.141:28590/api/customer/inventory/product/quantity/${this.props.prodId}`);
+        if(jsonQuantity.ok){
+            const quantity = await jsonQuantity.json();
+            this.setQuantity(quantity);
+        }
 
+        const jsonData = await fetch(`http://10.187.224.141:28590/api/customer/inventory/product/${this.props.prodId}`);
         const data = await jsonData.json();
-        
-        // this.setQuantity(quantity);
         this.setProduct(data);
         this.setImgs(data.imageOne, data.imageTwo, data.imageThree, data.imageMain);
         this.setLoading(false);
     }
 
+    // fetch data again when the component mount
     componentDidMount(){
         this.fetchData();
-        // console.log('av');
     }
 
     render(){

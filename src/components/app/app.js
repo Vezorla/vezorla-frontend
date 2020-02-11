@@ -4,7 +4,7 @@ import img1 from '../../assets/images/img-1.JPG'
 import img2 from '../../assets/images/img-2.JPG'
 import img3 from '../../assets/images/img-3.JPG'
 
-import {Switch, Route, Redirect} from 'react-router-dom'
+import {Switch, Route, Redirect, useLocation} from 'react-router-dom'
 import Shop from '../shopPage/Shop'
 import Header from '../common/header/header';
 import Footer from '../common/footer/footer';
@@ -34,16 +34,37 @@ const list = [
   }
 ];
 
+// Function will run everytime go to new path or first access the application
+function usePageViews(setLineItems,currentLineItem){
+    let location = useLocation();
+    React.useEffect(()=>{
+      fetchCartLineItems(setLineItems,currentLineItem);
+    },[location])
+}
+
+// Function will fetch for number of item in cart
+const fetchCartLineItems = async (setLineItems, currentLineItem) =>{
+  setLineItems(currentLineItem)
+  let jsonData = await fetch('http://10.187.224.141:28590/api/customer/cart/get');
+  if(jsonData.ok){
+    let data = await jsonData.json();  
+    setLineItems(data)
+  }
+}
+
 //-------App--------------
 function App() {
   
-  //state
+  //-------state------
   const [lineItems, setLineItems] = useState(0)
 
   //increate Cart function
   const increaseCart = (value) => {    
     setLineItems(Number(lineItems)+Number(value)) 
   }
+
+  //set the get cart function up and run
+  usePageViews(setLineItems,lineItems);
 
   return (
     <div className="App">

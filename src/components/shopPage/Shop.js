@@ -75,6 +75,7 @@ const dummydata = [{
 
 class Shop extends Component {
 
+    //----Constructor---
     constructor(props) {
         super(props);
         this.state = {
@@ -122,10 +123,10 @@ class Shop extends Component {
         this.setOrder(event.target.value);
     }
 
+    // -----add to cart-----
     fetchData = async () => {
-        console.log('here in fetch')
         this.setLoading(true);
-        const response = await fetch('http://10.185.150.236:28590/api/customer/inventory/products/all',{
+        const response = await fetch('http://10.187.224.141:28590/api/customer/inventory/products/all',{
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -133,17 +134,13 @@ class Shop extends Component {
             }
         });
         const data = await response.json();
-        console.log(data);
         this.setList(data);
         this.setLoading(false);
-        console.log('here after getch')
     }
 
     // ------fetch on load-------
     componentDidMount() {
-        console.log('here')
         this.fetchData();
-        // console.log('a');
     }
 
     render() {

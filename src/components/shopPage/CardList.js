@@ -45,6 +45,7 @@ export default function CardList(props) {
 
     const listCard = props.list.map((item) => (
         <CardItem 
+            key={item.prodId}
             product={item}
         />  
     ));

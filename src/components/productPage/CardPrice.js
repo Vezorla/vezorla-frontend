@@ -19,14 +19,11 @@ function CardPrice(props) {
         setValue(e.target.value);
     }
 
-    function temp(){
-        onClickHandler();
-    }
-
+    //---handler for add item to cart---    
     const onClickHandler = async () =>{
         let data = '';
 
-        let jsonData = await fetch(`http://10.185.150.236:28590/api/customer/cart/add/${props.id}`, {
+        let jsonData = await fetch(`http://10.187.224.141:28590/api/customer/cart/add/${props.id}`, {
             method: 'PUT',
             headers:{
                 'Accept':'application/json',
@@ -39,7 +36,7 @@ function CardPrice(props) {
             data = await jsonData.json();
         }
         
-        //add to cart sucess
+        //add to cart success
          if(data === true){
             props.addCartHandle(value)  
 
@@ -65,9 +62,9 @@ function CardPrice(props) {
                                 <TextField
                                     id="standard-number"
                                     label="Quantity"
-                                    helperText={(value > max || value < 0)?"Invalid quantity":" "}
+                                    helperText={(value > max || value < 0)?(max===0?"Out of stock":"Invalid quantity"):" "}
                                     type="number"
-                                    value={value}
+                                    value={max===0 ?0 : value}
                                     error={(value > max || value < 1)?true:false}
                                     inputProps={{
                                         max: max,
@@ -82,7 +79,7 @@ function CardPrice(props) {
                                     <Button 
                                         size="medium"
                                         endIcon={<ShoppingCartIcon/>}
-                                        onClick={temp} //this addCartHanle need to be pass from App so it can trigger with header
+                                        onClick={onClickHandler} //this addCartHanle need to be pass from App so it can trigger with header
                                         disabled={(value > max || value < 1)?true:false}
                                     >
                                         Add to Cart
