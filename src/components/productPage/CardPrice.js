@@ -48,7 +48,7 @@ function CardPrice(props) {
                                 <TextField
                                     id="standard-number"
                                     label="Quantity"
-                                    helperText={(value > max || value < 1)?"Number is wrong":" "}
+                                    helperText={(value > max || value < 1)?"Invalid Quantity":" "}
                                     type="number"
                                     value={value}
                                     error={(value > max || value < 1)?true:false}
