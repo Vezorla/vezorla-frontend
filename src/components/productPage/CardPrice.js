@@ -10,6 +10,8 @@ import Grid from '@material-ui/core/Grid';
 // props: productid, price, quantity, maybe oldPrice?
 
 // TODO change helper props to better phrase
+
+// TODO: REMOVE NUMBER INCREMENTER/DECTEMENTER
 function CardPrice(props) {
 
     let max = props.quantity;
@@ -38,15 +40,13 @@ function CardPrice(props) {
 
     return (
         <Grid item xs={12} md={6}>
-            <Grid container justify="center">
-                <Grid item xs={10} md={6}>
                     {/* Card container for the price, quantity, add to card */}
                     <Card style={{border: "1px solid black", color: "#0C3658"}}>    
                         <CardContent>
                             <form className="someclass" noValidate autoComplete="off">
                                 <h1>${props.price}</h1>
                                 <TextField
-                                    id="standard-number"
+                                    id="standard-basic"
                                     label="Quantity"
                                     helperText={(value > max || value < 1)?"Invalid Quantity":" "}
                                     type="number"
@@ -73,10 +73,7 @@ function CardPrice(props) {
                                 </CardActions>
                             </form>
                         </CardContent>
-                    </Card>
-
-                </Grid>
-            </Grid>      
+                    </Card>  
         </Grid>
     )
 }

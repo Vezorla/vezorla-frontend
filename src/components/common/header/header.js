@@ -38,7 +38,7 @@ export default function ButtonAppBar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar style={{ backgroundColor: "#D0C50A", position: "fixed", top: 0 }}>
+      <AppBar style={{ backgroundColor: "#D0C50A", position: "fixed", top: 0, marginBottom: "3vh" }}>
         <Toolbar>
           <IconButton
             edge="start"
