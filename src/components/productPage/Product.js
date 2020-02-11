@@ -77,12 +77,8 @@ class Product extends Component{
             :
             <div>
                 <h1>{this.state.product.name}</h1>
-                <Grid container xs={12} justify='center' spacing={3}>
-                    <Grid item xs={12} md={6}>
-                        <Stepper imgs={this.state.product.image}/>  
-                    </Grid>
+                    <Stepper imgs={this.state.product.image}/>
                     <CardPrice id={this.props.prodId} quantity={this.state.quantity} price={this.state.product.currentprice} addCartHandle={this.props.addCartHandle}/>
-                </Grid>
                 
                 <section style={{marginLeft: "8%"}} >
                     <h1 >Description</h1>
