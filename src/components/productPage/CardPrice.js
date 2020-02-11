@@ -39,9 +39,8 @@ function CardPrice(props) {
     }
 
     return (
-        <Grid item xs={12} md={6}>
-                    {/* Card container for the price, quantity, add to card */}
-                    <Card style={{border: "1px solid black", color: "#0C3658", width: "80vw", margin: "auto", marginTop: "5vh", marginBottom: "5vh"}}>    
+                  
+                    <Card style={{border: "1px solid black", color: "#0C3658", width: "60%", marginLeft: "auto", marginRight: "auto", marginTop: "5vh", marginBottom: "5vh", textAlign: "center"}}>    
                         <CardContent>
                             <form className="someclass" noValidate autoComplete="off">
                                 <h1>${props.price}</h1>
@@ -73,8 +72,7 @@ function CardPrice(props) {
                                 </CardActions>
                             </form>
                         </CardContent>
-                    </Card>  
-        </Grid>
+                    </Card>
     )
 }
 
