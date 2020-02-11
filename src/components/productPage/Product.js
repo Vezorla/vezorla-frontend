@@ -84,8 +84,8 @@ class Product extends Component{
                     <CardPrice id={this.props.prodId} quantity={this.state.quantity} price={this.state.product.currentprice} addCartHandle={this.props.addCartHandle}/>
                 </Grid>
                 
-                <section>
-                    <h1>Description</h1>
+                <section style={{marginLeft: "8%"}} >
+                    <h1 >Description</h1>
                     <span>
                         {this.state.product.description}
                     </span>
