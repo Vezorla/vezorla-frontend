@@ -77,17 +77,15 @@ class Product extends Component{
             :
             <div>
                 <h1>{this.state.product.name}</h1>
-                <Grid container xs={12} justify='center' spacing={3}>
-                    <Grid item xs={12} md={6}>
-                        <Stepper imgs={this.state.product.image}/>  
-                    </Grid>
+                    <Stepper imgs={this.state.product.image}/>
                     <CardPrice id={this.props.prodId} quantity={this.state.quantity} price={this.state.product.currentprice} addCartHandle={this.props.addCartHandle}/>
-                </Grid>
                 
-                <section>
-                    <h1>Description</h1>
-                    <span>
-                        {this.state.product.description}
+                <section style={{marginLeft: "8%", marginRight: "8%", color: "#0C3658"}} >
+                    <h1 style={{fontSize: "2em", letterSpacing: "0.09em", textTransform: "uppercase"}}>Description</h1>
+                    <span style={{fontSize: "1.3em", letterSpacing: "0.07em"}}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac massa sagittis, eleifend augue id, varius nisl. Praesent eget sapien nisi. Maecenas in mauris vel nisi vehicula varius non quis nulla. Quisque maximus tempor mi sed scelerisque. In imperdiet ipsum ac sem congue, eget fringilla sem vehicula. Pellentesque laoreet lacus ante, et malesuada nunc ultricies eu. Nulla in maximus eros. Nunc sagittis sed tellus sit amet sodales. In vel diam nec justo scelerisque tincidunt. Curabitur ultrices mi nisi, non bibendum magna volutpat vel. Morbi sagittis pulvinar erat.
+
+Nullam in varius magna, quis rhoncus ex. Mauris mollis eros eget dui vulputate efficitur. Cras mi felis, facilisis ut nisi a, porta rhoncus tortor. Fusce dignissim eros vehicula ligula rutrum condimentum. Cras nec arcu laoreet, consectetur erat id, finibus nisl. Vivamus a diam quam. Fusce et lectus magna. Aenean tincidunt dolor vitae ante rhoncus, vel egestas nibh hendrerit. Aenean nec tempus leo. Aenean quam ligula, ornare ac tellus quis, sagittis porttitor lorem. Morbi eget ante at augue tempus accumsan at in tortor. Donec mattis scelerisque aliquet. Donec molestie augue eu tellus lobortis, eu tempor est mollis. Mauris suscipit consectetur eleifend. Integer blandit massa eu enim vehicula, ut ornare enim faucibus. Pellentesque aliquam, ex ultricies aliquam vulputate, quam tellus ornare elit, sit amet vulputate lectus tellus eget felis. 
                     </span>
                 </section>
             </div>

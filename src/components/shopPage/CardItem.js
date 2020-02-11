@@ -15,7 +15,7 @@ function CardItem(props) {
   return (
     <Grid  item xs={12} sm={6} md={4} >
       <Link to={url}>
-        <Card key={prodId} >
+        <Card key={prodId} justifyContent="center">
           <h1>{name}</h1>
           <h2>{subdescription}</h2>
           <p>{harvest}</p>

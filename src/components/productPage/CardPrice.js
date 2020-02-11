@@ -10,6 +10,8 @@ import Grid from '@material-ui/core/Grid';
 // props: productid, price, quantity, maybe oldPrice?
 
 // TODO change helper props to better phrase
+
+// TODO: REMOVE NUMBER INCREMENTER/DECTEMENTER
 function CardPrice(props) {
 
     let max = props.quantity;
@@ -37,20 +39,17 @@ function CardPrice(props) {
     }
 
     return (
-        <Grid item xs={12} md={6}>
-            <Grid container justify="center">
-                <Grid item xs={10} md={6}>
-                    {/* Card container for the price, quantity, add to card */}
-                    <Card>    
+                
+                    <Card style={{border: "1px solid black", color: "#0C3658", width: "65%", marginLeft: "auto", marginRight: "auto", marginTop: "5vh", marginBottom: "5vh", textAlign: "center"}}>    
                         <CardContent>
                             <form className="someclass" noValidate autoComplete="off">
                                 <h1>${props.price}</h1>
                                 <TextField
-                                    id="standard-number"
+                                    id="standard-basic"
                                     label="Quantity"
-                                    helperText={(value > max || value < 1)?"Number is wrong":" "}
+                                    helperText={(value > max || value < 1)?"Invalid Quantity":" "}
                                     type="number"
-                                    value={value}
+                                    placeholder="Enter Quantity"
                                     error={(value > max || value < 1)?true:false}
                                     inputProps={{
                                         max: max,
@@ -66,6 +65,7 @@ function CardPrice(props) {
                                         size="medium"
                                         endIcon={<ShoppingCartIcon/>}
                                         onClick={onClickHandler} //this addCartHanle need to be pass from App so it can trigger with header
+                                        style={{backgroundColor: "#D0C50A", color: "#0C3658", padding: ".75em", boxShadow: "0 5px 5px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)", margin: "auto", maxWidth: "65%"}}
                                     >
                                         Add to Cart
                                     </Button>
@@ -73,10 +73,6 @@ function CardPrice(props) {
                             </form>
                         </CardContent>
                     </Card>
-
-                </Grid>
-            </Grid>      
-        </Grid>
     )
 }
 
