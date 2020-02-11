@@ -1,4 +1,6 @@
-import React,{Component} from 'react'
+import React, {
+    Component
+} from 'react'
 import CardList from './CardList'
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -21,79 +23,94 @@ import img3 from '../../assets/images/img-3.JPG'
 //     },
 //   }));
 
-const dummydata = [{
-    name:'hello',
+const trueData = [{
+
+    name: 'hello',
     description: 'helloA',
-    subdescription:'helloB',
+    subdescription: 'helloB',
     currentprice: 123,
     oldprice: 1235,
     prodId: 1,
-    image: [img1, img2]
-},{
-    name:'hello2',
-    description: 'helloB',
-    subdescription:'helloC',
-    currentprice: 456,
-    oldprice: 9999,
-    prodId: 2,
-    image: [img2, img3]
-},{
-    name:'hello2',
-    description: 'helloB',
-    subdescription:'helloC',
-    currentprice: 456,
-    oldprice: 9999,
-    prodId: 2,
-    image: [img2, img3]
-},{
-    name:'hello2',
-    description: 'helloB',
-    subdescription:'helloC',
-    currentprice: 456,
-    oldprice: 9999,
-    prodId: 2,
-    image: [img2, img3]
-},{
-    name:'hello2',
-    description: 'helloB',
-    subdescription:'helloC',
-    currentprice: 456,
-    oldprice: 9999,
-    prodId: 2,
-    image: [img2, img3]
-}
-]
+    imageOne: "imageOne",
+    imageTwo: "imageTwo",
+    imageThree: "temp",
+    imageFour: "temps"
 
-class Shop extends Component{   
+}]
 
-    constructor(props){
+
+const dummydata = [{
+    name: 'hello2',
+    description: 'helloB',
+    subdescription: 'helloC',
+    currentprice: 456,
+    oldprice: 9999,
+    prodId: 2,
+    image: [img2, img3]
+}, {
+    name: 'hello2',
+    description: 'helloB',
+    subdescription: 'helloC',
+    currentprice: 456,
+    oldprice: 9999,
+    prodId: 2,
+    image: [img2, img3]
+}, {
+    name: 'hello2',
+    description: 'helloB',
+    subdescription: 'helloC',
+    currentprice: 456,
+    oldprice: 9999,
+    prodId: 2,
+    image: [img2, img3]
+}, {
+    name: 'hello2',
+    description: 'helloB',
+    subdescription: 'helloC',
+    currentprice: 456,
+    oldprice: 9999,
+    prodId: 2,
+    image: [img2, img3]
+}]
+
+class Shop extends Component {
+
+    constructor(props) {
         super(props);
         this.state = {
             filter: '',
             order: '',
-            list: dummydata,
+            list: [],
             loading: false,
         }
         this.setFilter = this.setFilter.bind(this);
         this.setOrder = this.setOrder.bind(this);
         this.setList = this.setList.bind(this);
         this.setLoading = this.setLoading.bind(this);
-        this.fetchData = this.fetchData.bind(this);  
-         
+        this.fetchData = this.fetchData.bind(this);
+
     }
 
     //-------Setter for state-----
-    setFilter(filterVal){
-        this.setState({filter: filterVal});
+    setFilter(filterVal) {
+        this.setState({
+            filter: filterVal
+        });
     }
-    setOrder(orderVal){
-        this.setState({order: orderVal})
+    setOrder(orderVal) {
+        this.setState({
+            order: orderVal
+        })
     }
-    setList(listVal){
-        this.setState({list: listVal})
+    setList(listVal) {
+        this.setState({
+            list: listVal
+        })
     }
-    setLoading(loadingVal){
-        this.setState({loading:loadingVal})
+    setLoading(loadingVal) {
+        this.setState({
+            loading: loadingVal
+        })
     }
 
     // event handler of filter and order. Use to fetch and set the value display
@@ -101,26 +118,36 @@ class Shop extends Component{
         this.setFilter(event.target.value);
     };
 
-    handleChangeOrder = event =>{
-       this.setOrder(event.target.value);
+    handleChangeOrder = event => {
+        this.setOrder(event.target.value);
     }
-       
+
     fetchData = async () => {
+        console.log('here in fetch')
         this.setLoading(true);
-        const json = await fetch('url');
-        const data = await json.json();
+        const response = await fetch('http://10.185.150.236:28590/api/customer/inventory/products/all',{
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        console.log(data);
         this.setList(data);
         this.setLoading(false);
+        console.log('here after getch')
     }
-    
+
     // ------fetch on load-------
-    componentDidMount(){
-        // this.fetchData();  
-        console.log('a');
+    componentDidMount() {
+        console.log('here')
+        this.fetchData();
+        // console.log('a');
     }
-    
-    render(){
-        return (
+
+    render() {
+        return ( 
             <div>
                 {/* ------Filter and Order section--------- */}
                 <Grid className="shop--filter" container xs={12} justify='space-around'>
@@ -169,6 +196,6 @@ class Shop extends Component{
             </div>
         )
     }
-    
-    }
+
+}
 export default Shop;

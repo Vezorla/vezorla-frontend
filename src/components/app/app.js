@@ -41,8 +41,8 @@ function App() {
   const [lineItems, setLineItems] = useState(0)
 
   //increate Cart function
-  const increaseCart = () => {    
-    setLineItems(lineItems+1) 
+  const increaseCart = (value) => {    
+    setLineItems(Number(lineItems)+Number(value)) 
   }
 
   return (
@@ -67,7 +67,7 @@ function App() {
           <Redirect to="/404"/>
       </Switch>
       
-      {/* <Footer /> */}
+      <Footer />
 
     </div>
   );

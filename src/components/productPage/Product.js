@@ -3,7 +3,6 @@ import Stepper from '../common/Stepper/Stepper'
 import CardPrice from './CardPrice'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {Grid} from '@material-ui/core'
-import {makeStyles} from '@material-ui/core/styles'
 
 import img1 from '../../assets/images/img-1.JPG'
 import img2 from '../../assets/images/img-2.JPG'
@@ -20,6 +19,22 @@ const dummydata = [{
 ]
 
 
+const trueData ={
+    
+    name:'hello',
+    description: 'helloA',
+    subdescription:'helloB',
+    currentprice: 123,
+    oldprice: 1235,
+    prodId: 1,
+    imageOne: "imageOne",
+    imageTwo: "imageTwo",
+    imageThree: "temp",
+    imageFour: "temps"
+
+}
+
+
 //TODO make css for width 
 
 //this need function pass from App so it can associate with cart in header also match is for react route
@@ -28,14 +43,15 @@ class Product extends Component{
     constructor(props){
         super(props);
         this.state = {
-            product: dummydata[0],
+            product: '',
             quantity: 10,
             loading: false,
+            imgs: [],
         }
         this.setProduct = this.setProduct.bind(this)
         this.setQuantity = this.setQuantity.bind(this)
         this.setLoading = this.setLoading.bind(this)
-        
+        this.setImgs = this.setImgs.bind(this)
     }
 
     //setter for state
@@ -51,23 +67,45 @@ class Product extends Component{
         this.setState({loading: loadingVal})
     }
 
+    setImgs(imageMain, imageOne, imageTwo, imageThree){
+        let images = [];
+        if(imageOne != null){
+            images.push(imageOne);
+        }
+        if(imageTwo != null){
+            images.push(imageTwo);
+        }
+        if(imageThree != null){
+            images.push(imageThree);
+        }
+        if(imageMain != null){
+            images.push(imageMain);
+        }
+
+        this.setState({imgs:images});
+    }
+
     //fetch quantity and product information
     fetchData = async ()=>{
         this.setLoading(true);
-        const jsonQuantity = await fetch(`url/${this.props.prodId}`);
-        const quantity = await jsonQuantity.json();
+        // const jsonQuantity = await fetch(`10.186.128.210:28590/${this.props.prodId}`);
+        // const quantity = await jsonQuantity.json();
     
-        const jsonData = await fetch(`url/${this.props.prodId}`);
-        const data = await jsonData.json();
+        const jsonData = await fetch(`http://10.185.150.236:28590/api/customer/inventory/product/${this.props.prodId}`);
+        
+        console.log(jsonData)
 
-        this.setQuantity(quantity);
-        this.setProduct(data); //need to set [0] maybe
+        const data = await jsonData.json();
+        
+        // this.setQuantity(quantity);
+        this.setProduct(data);
+        this.setImgs(data.imageOne, data.imageTwo, data.imageThree, data.imageMain);
         this.setLoading(false);
     }
 
     componentDidMount(){
-        // this.fetchData();
-        console.log('av');
+        this.fetchData();
+        // console.log('av');
     }
 
     render(){
@@ -79,9 +117,9 @@ class Product extends Component{
                 <h1>{this.state.product.name}</h1>
                 <Grid container xs={12} justify='center' spacing={3}>
                     <Grid item xs={12} md={6}>
-                        <Stepper imgs={this.state.product.image}/>  
+                        <Stepper imgs={this.state.imgs}/>  
                     </Grid>
-                    <CardPrice id={this.props.prodId} quantity={this.state.quantity} price={this.state.product.currentprice} addCartHandle={this.props.addCartHandle}/>
+                    <CardPrice id={this.props.prodId} quantity={this.state.quantity} price={this.state.product.price} addCartHandle={this.props.addCartHandle}/>
                 </Grid>
                 
                 <section>

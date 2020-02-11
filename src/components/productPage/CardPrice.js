@@ -12,28 +12,45 @@ import Grid from '@material-ui/core/Grid';
 // TODO change helper props to better phrase
 function CardPrice(props) {
 
-    let max = props.quantity;
+    const [max, setMax] = React.useState(props.quantity);
     const [value, setValue] = React.useState('1')
 
     let onChangeHandle = (e)=>{
         setValue(e.target.value);
     }
 
-    const onClickHandler = async (e) =>{
-        // let json = await fetch(`url/${props.id}`, {
-        //     method: 'post',
-        //     headers:{
-        //         'Content-Type': 'application/json;charset=utf-8'
-        //     },
-        //     body: JSON.stringify(value)
-        // })
-        // let data = await json.json();
+    function temp(){
+        onClickHandler();
+    }
 
-        //add to cart sucess
-        // if(data === true){
-            props.addCartHandle()
-        // }
+    const onClickHandler = async () =>{
+        let data = '';
+
+        let jsonData = await fetch(`http://10.185.150.236:28590/api/customer/cart/add/${props.id}`, {
+            method: 'PUT',
+            headers:{
+                'Accept':'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(value)
+        })
+
+        if(jsonData.ok){
+            data = await jsonData.json();
+        }
         
+        //add to cart sucess
+         if(data === true){
+            props.addCartHandle(value)  
+
+         }
+        
+    }
+
+    const getNewQuantity = async () =>{
+        let jsonData = await fetch('url');
+        let data = await jsonData.json();
+        setMax(data);
     }
 
     return (
@@ -48,7 +65,7 @@ function CardPrice(props) {
                                 <TextField
                                     id="standard-number"
                                     label="Quantity"
-                                    helperText={(value > max || value < 1)?"Number is wrong":" "}
+                                    helperText={(value > max || value < 0)?"Invalid quantity":" "}
                                     type="number"
                                     value={value}
                                     error={(value > max || value < 1)?true:false}
@@ -65,7 +82,8 @@ function CardPrice(props) {
                                     <Button 
                                         size="medium"
                                         endIcon={<ShoppingCartIcon/>}
-                                        onClick={onClickHandler} //this addCartHanle need to be pass from App so it can trigger with header
+                                        onClick={temp} //this addCartHanle need to be pass from App so it can trigger with header
+                                        disabled={(value > max || value < 1)?true:false}
                                     >
                                         Add to Cart
                                     </Button>
