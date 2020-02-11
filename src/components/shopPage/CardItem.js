@@ -15,17 +15,18 @@ function CardItem(props) {
   return (
     <Grid  item xs={12} sm={6} md={4} >
       <Link to={url}>
-        <Card key={prodId} justifyContent="center">
-          <h1>{name}</h1>
-          <h2>{subdescription}</h2>
-          <p>{harvest}</p>
-          <CardMedia
+        <Card key={prodId} justifyContent="center" style={{border: "1px solid black", marginTop: "3em", }}>
+        <CardMedia
             component="img"
             alt={name}
             height="140"
             image={image[0]}
             title="props.name"
           />
+          <h1 style={{textAlign: "center",}}>{name}</h1>
+          <h2>{subdescription}</h2>
+          <p>{harvest}</p>
+          
           <div className="card--price">
             <p>{oldprice}</p>
             <p>{currentprice}</p>
