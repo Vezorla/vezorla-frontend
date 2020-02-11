@@ -20,7 +20,7 @@ const dummydata = [{
 
 
 const trueData ={
-    
+
     name:'hello',
     description: 'helloA',
     subdescription:'helloB',
@@ -35,7 +35,7 @@ const trueData ={
 }
 
 
-//TODO make css for width 
+//TODO make css for width
 
 //this need function pass from App so it can associate with cart in header also match is for react route
 class Product extends Component{
@@ -114,17 +114,13 @@ class Product extends Component{
             :
             <div>
                 <h1>{this.state.product.name}</h1>
-                <Grid container xs={12} justify='center' spacing={3}>
-                    <Grid item xs={12} md={6}>
-                        <Stepper imgs={this.state.imgs}/>  
-                    </Grid>
+                    <Stepper imgs={this.state.imgs}/>
                     <CardPrice id={this.props.prodId} quantity={this.state.quantity} price={this.state.product.price} addCartHandle={this.props.addCartHandle}/>
-                </Grid>
                 
-                <section>
-                    <h1>Description</h1>
-                    <span>
-                        {this.state.product.description}
+                <section style={{marginLeft: "8%", marginRight: "8%", color: "#0C3658"}} >
+                    <h1 style={{fontSize: "2em", letterSpacing: "0.09em", textTransform: "uppercase"}}>Description</h1>
+                    <span style={{fontSize: "1.3em", letterSpacing: "0.07em"}}>
+                    {this.state.product.description}
                     </span>
                 </section>
             </div>
