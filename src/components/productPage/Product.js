@@ -2,7 +2,6 @@ import React,{Component} from 'react'
 import Stepper from '../common/Stepper/Stepper'
 import CardPrice from './CardPrice'
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {Grid} from '@material-ui/core'
 
 import img1 from '../../assets/images/img-1.JPG'
 import img2 from '../../assets/images/img-2.JPG'

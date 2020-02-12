@@ -10,7 +10,8 @@ import Shop from '../shopPage/Shop'
 import Header from '../common/header/header';
 import Footer from '../common/footer/footer';
 import Product from '../productPage/Product';
-import NotFound from '../404/NotFound'
+import NotFound from '../404/NotFound';
+import Cart from '../cartPage/Cart'
 
 //Dummy data
 const list = [
@@ -70,11 +71,11 @@ function App() {
   return (
     <div className="App">
 
-      <Header cart={lineItems}/>
+      {/* <Header cart={lineItems}/> */}
         <Box overflow="scroll" style={{paddingBottom: "15vh"}}>
           <Switch>
               {/* <Route path={["/","/index"]} exact strict component={Home}/> */}
-              {/* <Route path={["/cart","/cart/:userid"]} exact strict component={Cart}/> */}
+              <Route path={["/cart","/cart/:userid"]} exact strict component={Cart}/>
               <Route path="/shop" exact strict component={Shop}/>
               {/* <Route path="/findus" exact strict component={FindUs}/> */}
               {/* <Route path="/contact" exact strict component={Contact}/> */}
