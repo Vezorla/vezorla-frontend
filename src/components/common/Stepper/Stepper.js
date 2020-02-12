@@ -56,9 +56,17 @@ function Stepper(props) {
       setActiveStep(step);
     };
 
+    // --------- CSS --------------
+    const styles = theme => ({
+        test: {
+            width: '60%'
+        }
+    });
+
+
     // ---------return jsx---------
     return (
-        <div>
+        <div className={classes.test}>
             <AutoPlaySwipeableViews
                 axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                 index={activeStep}
