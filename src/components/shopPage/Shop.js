@@ -24,9 +24,9 @@ import img3 from '../../assets/images/img-3.JPG'
 const dummydata = [{
     name:'hello',
     description: 'helloA',
-    subdescription:'helloB',
-    currentprice: 123,
-    oldprice: 1235,
+    subdescription:'$35.00',
+    currentprice: '$35',
+    oldprice: '$35',
     prodId: 1,
     image: [img1, img2]
 },{
