@@ -5,7 +5,7 @@ import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';  
-import {Grid} from '@material-ui/core'
+
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 

@@ -3,7 +3,6 @@ import Stepper from '../common/Stepper/Stepper'
 import CardPrice from './CardPrice'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {Grid} from '@material-ui/core'
-import {makeStyles} from '@material-ui/core/styles'
 
 import img1 from '../../assets/images/img-1.JPG'
 import img2 from '../../assets/images/img-2.JPG'
@@ -20,22 +19,40 @@ const dummydata = [{
 ]
 
 
-//TODO make css for width 
+const trueData ={
+
+    name:'hello',
+    description: 'helloA',
+    subdescription:'helloB',
+    currentprice: 123,
+    oldprice: 1235,
+    prodId: 1,
+    imageOne: "imageOne",
+    imageTwo: "imageTwo",
+    imageThree: "temp",
+    imageFour: "temps"
+
+}
+
+
+//TODO make css for width
 
 //this need function pass from App so it can associate with cart in header also match is for react route
 class Product extends Component{
 
+    //constructor
     constructor(props){
         super(props);
         this.state = {
-            product: dummydata[0],
-            quantity: 10,
+            product: '',
+            quantity: 0,
             loading: false,
+            imgs: [],
         }
         this.setProduct = this.setProduct.bind(this)
         this.setQuantity = this.setQuantity.bind(this)
         this.setLoading = this.setLoading.bind(this)
-        
+        this.setImgs = this.setImgs.bind(this)
     }
 
     //setter for state
@@ -51,23 +68,43 @@ class Product extends Component{
         this.setState({loading: loadingVal})
     }
 
+    setImgs(imageMain, imageOne, imageTwo, imageThree){
+        let images = [];
+        if(imageOne != null){
+            images.push(imageOne);
+        }
+        if(imageTwo != null){
+            images.push(imageTwo);
+        }
+        if(imageThree != null){
+            images.push(imageThree);
+        }
+        if(imageMain != null){
+            images.push(imageMain);
+        }
+
+        this.setState({imgs:images});
+    }
+
     //fetch quantity and product information
     fetchData = async ()=>{
         this.setLoading(true);
-        const jsonQuantity = await fetch(`url/${this.props.prodId}`);
-        const quantity = await jsonQuantity.json();
-    
-        const jsonData = await fetch(`url/${this.props.prodId}`);
-        const data = await jsonData.json();
+        const jsonQuantity = await fetch(`http://10.187.224.141:28590/api/customer/inventory/product/quantity/${this.props.prodId}`);
+        if(jsonQuantity.ok){
+            const quantity = await jsonQuantity.json();
+            this.setQuantity(quantity);
+        }
 
-        this.setQuantity(quantity);
-        this.setProduct(data); //need to set [0] maybe
+        const jsonData = await fetch(`http://10.187.224.141:28590/api/customer/inventory/product/${this.props.prodId}`);
+        const data = await jsonData.json();
+        this.setProduct(data);
+        this.setImgs(data.imageOne, data.imageTwo, data.imageThree, data.imageMain);
         this.setLoading(false);
     }
 
+    // fetch data again when the component mount
     componentDidMount(){
-        // this.fetchData();
-        console.log('av');
+        this.fetchData();
     }
 
     render(){
@@ -77,15 +114,13 @@ class Product extends Component{
             :
             <div>
                 <h1>{this.state.product.name}</h1>
-                    <Stepper imgs={this.state.product.image}/>
-                    <CardPrice id={this.props.prodId} quantity={this.state.quantity} price={this.state.product.currentprice} addCartHandle={this.props.addCartHandle}/>
+                    <Stepper imgs={this.state.imgs}/>
+                    <CardPrice id={this.props.prodId} quantity={this.state.quantity} price={this.state.product.price} addCartHandle={this.props.addCartHandle}/>
                 
                 <section style={{marginLeft: "8%", marginRight: "8%", color: "#0C3658"}} >
                     <h1 style={{fontSize: "2em", letterSpacing: "0.09em", textTransform: "uppercase"}}>Description</h1>
                     <span style={{fontSize: "1.3em", letterSpacing: "0.07em"}}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac massa sagittis, eleifend augue id, varius nisl. Praesent eget sapien nisi. Maecenas in mauris vel nisi vehicula varius non quis nulla. Quisque maximus tempor mi sed scelerisque. In imperdiet ipsum ac sem congue, eget fringilla sem vehicula. Pellentesque laoreet lacus ante, et malesuada nunc ultricies eu. Nulla in maximus eros. Nunc sagittis sed tellus sit amet sodales. In vel diam nec justo scelerisque tincidunt. Curabitur ultrices mi nisi, non bibendum magna volutpat vel. Morbi sagittis pulvinar erat.
-
-Nullam in varius magna, quis rhoncus ex. Mauris mollis eros eget dui vulputate efficitur. Cras mi felis, facilisis ut nisi a, porta rhoncus tortor. Fusce dignissim eros vehicula ligula rutrum condimentum. Cras nec arcu laoreet, consectetur erat id, finibus nisl. Vivamus a diam quam. Fusce et lectus magna. Aenean tincidunt dolor vitae ante rhoncus, vel egestas nibh hendrerit. Aenean nec tempus leo. Aenean quam ligula, ornare ac tellus quis, sagittis porttitor lorem. Morbi eget ante at augue tempus accumsan at in tortor. Donec mattis scelerisque aliquet. Donec molestie augue eu tellus lobortis, eu tempor est mollis. Mauris suscipit consectetur eleifend. Integer blandit massa eu enim vehicula, ut ornare enim faucibus. Pellentesque aliquam, ex ultricies aliquam vulputate, quam tellus ornare elit, sit amet vulputate lectus tellus eget felis. 
+                    {this.state.product.description}
                     </span>
                 </section>
             </div>

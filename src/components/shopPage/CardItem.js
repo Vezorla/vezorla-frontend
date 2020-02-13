@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 
 //props: product obj
 function CardItem(props) {
-  const {prodId,name,subdescription,harvest,image,oldprice,currentprice} = props.product
+  const {prodId,name,subdescription,harvestTime,imageMain,oldPrice,price, active} = props.product
   const url = "/product/"+ prodId;
 
 
@@ -18,17 +18,17 @@ function CardItem(props) {
         <Card key={prodId} justifyContent="center">
           <h1>{name}</h1>
           <h2>{subdescription}</h2>
-          <p>{harvest}</p>
+          <p>{harvestTime}</p>
           <CardMedia
             component="img"
             alt={name}
             height="140"
-            image={image[0]}
+            image={imageMain}
             title="props.name"
           />
           <div className="card--price">
-            <p>{oldprice}</p>
-            <p>{currentprice}</p>
+            <p>{oldPrice}</p>
+            <p>{price}</p>
           </div>
         </Card>
       </Link>
