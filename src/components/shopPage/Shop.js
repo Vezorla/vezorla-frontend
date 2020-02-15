@@ -9,70 +9,12 @@ import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import img1 from '../../assets/images/img-1.JPG'
-import img2 from '../../assets/images/img-2.JPG'
-import img3 from '../../assets/images/img-3.JPG'
 
-// const useStyles = makeStyles(theme => ({
-//     formControl: {
-//       margin: theme.spacing(1),
-//       minWidth: 120,
-//     },
-//     selectEmpty: {
-//       marginTop: theme.spacing(2),
-//     },
-//   }));
-
-const trueData = [{
-
-    name: 'hello',
-    description: 'helloA',
-    subdescription: 'helloB',
-    currentprice: 123,
-    oldprice: 1235,
-    prodId: 1,
-    imageOne: "imageOne",
-    imageTwo: "imageTwo",
-    imageThree: "temp",
-    imageFour: "temps"
-
-}]
-
-
-const dummydata = [{
-    name: 'hello2',
-    description: 'helloB',
-    subdescription: 'helloC',
-    currentprice: 456,
-    oldprice: 9999,
-    prodId: 2,
-    image: [img2, img3]
-}, {
-    name: 'hello2',
-    description: 'helloB',
-    subdescription: 'helloC',
-    currentprice: 456,
-    oldprice: 9999,
-    prodId: 2,
-    image: [img2, img3]
-}, {
-    name: 'hello2',
-    description: 'helloB',
-    subdescription: 'helloC',
-    currentprice: 456,
-    oldprice: 9999,
-    prodId: 2,
-    image: [img2, img3]
-}, {
-    name: 'hello2',
-    description: 'helloB',
-    subdescription: 'helloC',
-    currentprice: 456,
-    oldprice: 9999,
-    prodId: 2,
-    image: [img2, img3]
-}]
-
+/**
+ * @author Minh Lam
+ * @description Class Component for Shop Page.
+ * This component contains 2 FormControl (dropdown filters) and 1 CardList (list of product)
+ */
 class Shop extends Component {
 
     //----Constructor---
@@ -114,7 +56,7 @@ class Shop extends Component {
         })
     }
 
-    // event handler of filter and order. Use to fetch and set the value display
+    //---- event handler of filter and order. Use to fetch and set the value display----
     handleChangeFilter = event => {
         this.setFilter(event.target.value);
     };
@@ -123,8 +65,10 @@ class Shop extends Component {
         this.setOrder(event.target.value);
     }
 
-    // -----add to cart-----
+    // -----load data-----
     fetchData = async () => {
+        //TODO check type of customer then if esle for different type of fetch
+
         this.setLoading(true);
         const response = await fetch('http://10.187.224.141:28590/api/customer/inventory/products/all',{
             method: 'GET',

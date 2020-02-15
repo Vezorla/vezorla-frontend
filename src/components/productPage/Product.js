@@ -2,45 +2,19 @@ import React,{Component} from 'react'
 import Stepper from '../common/Stepper/Stepper'
 import CardPrice from './CardPrice'
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {Grid} from '@material-ui/core'
 
-import img1 from '../../assets/images/img-1.JPG'
-import img2 from '../../assets/images/img-2.JPG'
-
-const dummydata = [{
-    name:'hello',
-    description: 'helloA',
-    subdescription:'helloB',
-    currentprice: 123,
-    oldprice: 1235,
-    prodId: 1,
-    image: [img1, img2]
-}
-]
-
-
-const trueData ={
-
-    name:'hello',
-    description: 'helloA',
-    subdescription:'helloB',
-    currentprice: 123,
-    oldprice: 1235,
-    prodId: 1,
-    imageOne: "imageOne",
-    imageTwo: "imageTwo",
-    imageThree: "temp",
-    imageFour: "temps"
-
-}
-
-
+/**
+ * @author Minh Lam
+ * @description Class Component for Product Page.
+ * This component contains Stepper (slider for img) and CardPrice (quantity selection and add to cart button)
+ * props:
+ *      - prodId: product id 
+ *      - addCartHandle: add to cart function handler. This function associate with header component
+ */
 //TODO make css for width
-
-//this need function pass from App so it can associate with cart in header also match is for react route
 class Product extends Component{
 
-    //constructor
+    //---Constructor-----
     constructor(props){
         super(props);
         this.state = {
@@ -55,7 +29,7 @@ class Product extends Component{
         this.setImgs = this.setImgs.bind(this)
     }
 
-    //setter for state
+    //----Setter for state---
     setProduct(productVal){
         this.setState({product: productVal})
     }
@@ -86,8 +60,11 @@ class Product extends Component{
         this.setState({imgs:images});
     }
 
-    //fetch quantity and product information
+    //----fetch quantity and product information---
     fetchData = async ()=>{
+        //TODO fetch type of customer and then fetch product base on customer type
+
+        //--fetch for stock quantity---
         this.setLoading(true);
         const jsonQuantity = await fetch(`http://10.187.224.141:28590/api/customer/inventory/product/quantity/${this.props.prodId}`);
         if(jsonQuantity.ok){
@@ -95,6 +72,7 @@ class Product extends Component{
             this.setQuantity(quantity);
         }
 
+        //---fetch for product information----
         const jsonData = await fetch(`http://10.187.224.141:28590/api/customer/inventory/product/${this.props.prodId}`);
         const data = await jsonData.json();
         this.setProduct(data);
@@ -102,13 +80,14 @@ class Product extends Component{
         this.setLoading(false);
     }
 
-    // fetch data again when the component mount
+    //---fetch onload---
     componentDidMount(){
         this.fetchData();
     }
 
     render(){
         return (
+            // If fetching then display loading else display the product information
             this.state.loading?
             <CircularProgress />
             :

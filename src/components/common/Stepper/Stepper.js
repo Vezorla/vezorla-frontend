@@ -22,15 +22,14 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-    //props need to array have img object. 
-    // img obj (imgPath + label)
-    //const imgs = [
-    //     img1,  
-    //     img2,
-    //   ];
 
-
-// props: like the example above
+/**
+ * @author Minh Lam
+ * @description Function Component for  Stepper 
+ * This component contains AutoPlaySwipeableViews (images slidder) and MobileStepper (2 buttons)
+ * props: 
+ *      - imgs: array contain url of img
+ */
 function Stepper(props) {
 
     const classes = useStyles();
@@ -39,7 +38,7 @@ function Stepper(props) {
     //------state-----
     const [activeStep, setActiveStep] = React.useState(0);
 
-
+    //----variables for useful data-----
     const maxSteps = props.imgs.length;
     const imgs = props.imgs;
   
@@ -56,9 +55,10 @@ function Stepper(props) {
       setActiveStep(step);
     };
 
-    // ---------return jsx---------
+
     return (
         <div>
+            {/* ------Img slider--------- */}
             <AutoPlaySwipeableViews
                 axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                 index={activeStep}
@@ -74,6 +74,7 @@ function Stepper(props) {
                 ))}
             </AutoPlaySwipeableViews>
 
+            {/* ------Buttons to change img slide------- */}
             <MobileStepper
                 steps={maxSteps}
                 position="static"
