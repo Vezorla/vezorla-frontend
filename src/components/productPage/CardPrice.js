@@ -5,7 +5,6 @@ import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import Grid from '@material-ui/core/Grid';
 
 // props: productid, price, quantity, maybe oldPrice?
 
@@ -46,6 +45,7 @@ function CardPrice(props) {
         
     }
 
+    //when add to cart, get new quntity
     const getNewQuantity = async () =>{
         let jsonData = await fetch('url');
         let data = await jsonData.json();

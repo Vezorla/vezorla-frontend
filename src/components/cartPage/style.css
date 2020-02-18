@@ -1,0 +1,15 @@
+.lineItem{
+    display: grid;
+    grid-auto-flow: column dense;
+    grid-template-columns: repeat(5,1fr);
+    
+}
+
+.productImg{
+    width: 20%;
+    justify-self: center;
+}
+.lineItem--img, .lineItem--name, .lineItem--price{
+   text-align: center;
+}
+
