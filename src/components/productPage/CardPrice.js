@@ -24,7 +24,7 @@ function CardPrice(props) {
     const onClickHandler = async () =>{
         let data = '';
 
-        let jsonData = await fetch(`http://10.187.224.141:28590/api/customer/cart/add/${props.id}`, {
+        let jsonData = await fetch(`http://localhost:8080/api/customer/cart/add/${props.id}`, {
             method: 'PUT',
             headers:{
                 'Accept':'application/json',

@@ -47,7 +47,7 @@ function usePageViews(setLineItems,currentLineItem){
 // Function will fetch for number of item in cart
 const fetchCartLineItems = async (setLineItems, currentLineItem) =>{
   setLineItems(currentLineItem)
-  let jsonData = await fetch('http://10.187.224.141:28590/api/customer/cart/get');
+  let jsonData = await fetch('http://localhost:8080/api/customer/cart/get');
   if(jsonData.ok){
     let data = await jsonData.json();
     setLineItems(data)
@@ -71,7 +71,7 @@ function App() {
   return (
     <div className="App">
 
-      {/* <Header cart={lineItems}/> */}
+       <Header cart={lineItems}/>
         <Box overflow="scroll" style={{paddingBottom: "15vh"}}>
           <Switch>
               {/* <Route path={["/","/index"]} exact strict component={Home}/> */}

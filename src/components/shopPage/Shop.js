@@ -1,6 +1,4 @@
-import React, {
-    Component
-} from 'react'
+import React, {Component} from 'react'
 import CardList from './CardList'
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -24,7 +22,6 @@ import img3 from '../../assets/images/img-3.JPG'
 //   }));
 
 const trueData = [{
-
     name: 'hello',
     description: 'helloA',
     subdescription: 'helloB',
@@ -35,8 +32,7 @@ const trueData = [{
     imageTwo: "imageTwo",
     imageThree: "temp",
     imageFour: "temps"
-
-}]
+}];
 
 
 const dummydata = [{
@@ -71,10 +67,9 @@ const dummydata = [{
     oldprice: 9999,
     prodId: 2,
     image: [img2, img3]
-}]
+}];
 
 class Shop extends Component {
-
     //----Constructor---
     constructor(props) {
         super(props);
@@ -83,13 +78,12 @@ class Shop extends Component {
             order: '',
             list: [],
             loading: false,
-        }
+        };
         this.setFilter = this.setFilter.bind(this);
         this.setOrder = this.setOrder.bind(this);
         this.setList = this.setList.bind(this);
         this.setLoading = this.setLoading.bind(this);
         this.fetchData = this.fetchData.bind(this);
-
     }
 
     //-------Setter for state-----
@@ -121,12 +115,12 @@ class Shop extends Component {
 
     handleChangeOrder = event => {
         this.setOrder(event.target.value);
-    }
+    };
 
     // -----add to cart-----
     fetchData = async () => {
         this.setLoading(true);
-        const response = await fetch('http://10.187.224.141:28590/api/customer/inventory/products/all',{
+        const response = await fetch('http://localhost:8080/api/customer/inventory/products/all',{
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -136,7 +130,7 @@ class Shop extends Component {
         const data = await response.json();
         this.setList(data);
         this.setLoading(false);
-    }
+    };
 
     // ------fetch on load-------
     componentDidMount() {
@@ -144,7 +138,7 @@ class Shop extends Component {
     }
 
     render() {
-        return ( 
+        return (
             <div>
                 {/* ------Filter and Order section--------- */}
                 <Grid className="shop--filter" container xs={12} justify='space-around'>
