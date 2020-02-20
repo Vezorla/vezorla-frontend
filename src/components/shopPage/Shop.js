@@ -120,7 +120,7 @@ class Shop extends Component {
     // -----add to cart-----
     fetchData = async () => {
         this.setLoading(true);
-        const response = await fetch('http://10.187.224.141:28590/api/customer/inventory/products/all',{
+        const response = await fetch('http://localhost:8080/api/customer/inventory/products/all',{
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
