@@ -10,10 +10,10 @@ export default class CheckoutPage extends Component {
    constructor(props){
         super(props);
         this.state ={
-            stage : 1
+            stage : 0
         }
-        this.setStage = this.setStage.bind(this); 
-        this._switchCase = this._switchCase.bind(this); 
+        this.setStage = this.setStage.bind(this) 
+        this._switchCase = this._switchCase.bind(this)
         
    }
    steps = ['Shipping Information', 'Discount', 'Review', 'Payment']
@@ -23,14 +23,14 @@ export default class CheckoutPage extends Component {
 
    _switchCase(stageVal){
         switch(stageVal){
+            case 1:
+               return <Discount stage={this.state.stage} setStage={this.setStage}/>
             case 2:
-               return <Discount setStage={this.setStage}/>
+                return <Review stage={this.state.stage} setStage={this.setStage}/>
             case 3:
-                return <Review setStage={this.setStage}/>
-            case 4:
-                return <Payment setStage={this.setStage}/>
+                return <Payment stage={this.state.stage} setStage={this.setStage}/>
             default:
-                return <ShippingInfo setStage={this.setStage}/>
+                return <ShippingInfo stage={this.state.stage} setStage={this.setStage}/>
         }
    }
    
