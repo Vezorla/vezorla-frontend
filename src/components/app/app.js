@@ -71,7 +71,7 @@ function App() {
   return (
     <div className="App">
 
-      {/* <Header cart={lineItems}/> */}
+       <Header cart={lineItems}/>
         <Box overflow="scroll" style={{paddingBottom: "15vh"}}>
           <Switch>
               {/* <Route path={["/","/index"]} exact strict component={Home}/> */}
