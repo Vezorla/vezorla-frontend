@@ -8,7 +8,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
  * @description Class Component for Product Page.
  * This component contains Stepper (slider for img) and CardPrice (quantity selection and add to cart button)
  * props:
- *      - prodId: product id 
+ *      - prodId: product id
  *      - addCartHandle: add to cart function handler. This function associate with header component
  */
 //TODO make css for width
@@ -66,14 +66,13 @@ class Product extends Component{
 
         //--fetch for stock quantity---
         this.setLoading(true);
-        const jsonQuantity = await fetch(`http://10.187.224.141:28590/api/customer/inventory/product/quantity/${this.props.prodId}`);
+        const jsonQuantity = await fetch(`http://localhost:8080/api/customer/inventory/product/quantity/${this.props.prodId}`);
         if(jsonQuantity.ok){
             const quantity = await jsonQuantity.json();
             this.setQuantity(quantity);
         }
-
         //---fetch for product information----
-        const jsonData = await fetch(`http://10.187.224.141:28590/api/customer/inventory/product/${this.props.prodId}`);
+        const jsonData = await fetch(`http://localhost:8080/api/customer/inventory/product/${this.props.prodId}`);
         const data = await jsonData.json();
         this.setProduct(data);
         this.setImgs(data.imageOne, data.imageTwo, data.imageThree, data.imageMain);

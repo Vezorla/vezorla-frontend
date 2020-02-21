@@ -9,9 +9,9 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 /**
  * @author Minh Lam
- * @description Function Component for  CardPrice 
+ * @description Function Component for  CardPrice
  * This component contains TextField component (quantity selector) and Button (add to cart button)
- * props: 
+ * props:
  *      - productId: product id
  *      - price: price of the product
  *      - quantity: stock quantity
@@ -34,7 +34,7 @@ function CardPrice(props) {
     const onClickHandler = async () =>{
         let data = '';
 
-        let jsonData = await fetch(`http://10.187.224.141:28590/api/customer/cart/add/${props.id}`, {
+        let jsonData = await fetch(`http://localhost:8080/api/customer/cart/add/${props.id}`, {
             method: 'PUT',
             headers:{
                 'Accept':'application/json',
@@ -86,7 +86,7 @@ function CardPrice(props) {
                         onChange={onChangeHandle}
                     />
                     <CardActions>
-                        <Button 
+                        <Button
                             size="medium"
                             endIcon={<ShoppingCartIcon/>}
                             onClick={onClickHandler} //this addCartHanle need to be pass from App so it can trigger with header
