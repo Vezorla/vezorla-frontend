@@ -6,12 +6,14 @@ import img2 from '../../assets/images/img-2.JPG'
 import img3 from '../../assets/images/img-3.JPG'
 
 import {Switch, Route, Redirect, useLocation} from 'react-router-dom'
-import Shop from '../shopPage/Shop'
+import ShopContainer from '../shopPage/logic/ShopContainer'
+import ProductContainer from '../productPage/logic/ProductContainer'
 import Header from '../common/header/header';
 import Footer from '../common/footer/footer';
 import Product from '../productPage/Product';
 import NotFound from '../404/NotFound';
 import Cart from '../cartPage/Cart'
+import CartContainer from '../cartPage/logic/CartContainer'
 
 //Dummy data
 const list = [
@@ -71,19 +73,19 @@ function App() {
   return (
     <div className="App">
 
-       <Header cart={lineItems}/>
+        {/* <Header cart={lineItems}/> */}
         <Box overflow="scroll" style={{paddingBottom: "15vh"}}>
           <Switch>
-              {/* <Route path={["/","/index"]} exact strict component={Home}/> */}
-              <Route path={["/cart","/cart/:userid"]} exact strict component={Cart}/>
-              <Route path="/shop" exact strict component={Shop}/>
+              {/* <Route path={["/","/index"]} exact strict component={Home}/>  */}
+              <Route path={["/cart","/cart/:userid"]} exact strict component={CartContainer}/>
+              <Route path="/shop" exact strict component={ShopContainer}/>
               {/* <Route path="/findus" exact strict component={FindUs}/> */}
               {/* <Route path="/contact" exact strict component={Contact}/> */}
               {/* <Route path="/about" exact strict component={About}/> */}
               {/* <Route path="/login" exact strict component={Login}/> */}
 
               <Route path="/product/:productid" exact strict
-                render={({match}) => <Product prodId={match.params.productid} addCartHandle={increaseCart}/>}
+                render={({match}) => <ProductContainer prodId={match.params.productid} addCartHandler={increaseCart}/>}
               />
 
               <Route path="/404" component={NotFound}/>
@@ -91,9 +93,10 @@ function App() {
           </Switch>
         </Box>
       <Footer />
-
+      
     </div>
   );
-}
+} 
+
 
 export default App;
