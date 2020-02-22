@@ -36,6 +36,7 @@ class CartContainer extends Component {
         super(props);
         this.state = {
             list : dummyData,
+            stage: ''
         }
 
         this.setList = this.setList.bind(this);
@@ -47,9 +48,11 @@ class CartContainer extends Component {
 
     //---Setter for state-----
     setList = (listVal) =>{
-        
-        this.setState({list: listVal});
-        
+        this.setState({list: listVal});        
+    }
+
+    setStage = (stageVal) => {
+        this.setState({stage: stageVal})
     }
 
     onChange = (prodId, newVal) => {
@@ -93,10 +96,38 @@ class CartContainer extends Component {
         // }      
     }
 
+    fetchData = async () => {
+		this.setStage('loading');
+		
+		const data = await fetch(`url`, {
+            method: 'GET',
+            credentials:'include',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			}
+		})
+			.then((res) => {
+				return res.json();
+			})
+			.catch((err) => {
+				this.setStage('error');
+				return null;
+			});
+		if (data !== null) {
+			this.setList(data);
+			this.setStage('done');
+		}
+	};
+
+    componentDidMount(){
+        this.fetchData();
+    }
+
     render() {
         return (
             <div>
-                <Cart list={this.state.list} onDelete={this.onDelete} onChange={this.onChange}/>
+                <Cart {...this.state} onDelete={this.onDelete} onChange={this.onChange}/>
             </div>
         )
     }

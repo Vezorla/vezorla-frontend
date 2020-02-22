@@ -21,7 +21,7 @@ const ProductDetail = ({product, imgs, quantity, price, value, max, addCartHandl
 }
 
 function Product(props) {
-    const ProductComponent = loadingHOC(ProductDetail, props.stage)(props);
+    const ProductComponent = loadingHOC(ProductDetail)(props);
     return ProductComponent
 }
 
