@@ -5,19 +5,25 @@ import {Link} from 'react-router-dom';
 import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 
-
-
-//props: product obj
+/**
+ * @author Minh Lam
+ * @description Function Component for Cart
+ * This component contains information of card (product)
+ * props:
+ *      - product: object describe product
+ */
 function CardItem(props) {
   const {prodId,name,subdescription,harvestTime,imageMain,oldPrice,price,active} = props.product;
   const url = "/product/"+ prodId;
 
   return (
     <Grid  item xs={12} sm={6} md={4} >
+      {/* ---Link for router-------- */}
       <Link to={url}>
+        {/* ---Card container---- */}
         <Card key={prodId} justifyContent="center" disableUnderline={true} style={{border: "1px solid black", marginTop: "3em", paddingBottom: "10px", color: '#0C3658'}}>
-        <h1 style={{textAlign: "center",}}>{name}</h1>
-        <CardMedia
+          <h1 style={{textAlign: "center",}}>{name}</h1>
+          <CardMedia
             component="img"
             alt={name}
             height="140"
