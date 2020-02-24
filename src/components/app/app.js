@@ -6,15 +6,15 @@ import img2 from '../../assets/images/img-2.JPG'
 import img3 from '../../assets/images/img-3.JPG'
 
 import {Switch, Route, Redirect, useLocation} from 'react-router-dom'
-import Shop from '../shopPage/Shop'
+import NotFound from '../404/NotFound';
 import Header from '../common/header/header';
 import Footer from '../common/footer/footer';
-import Product from '../productPage/Product';
-import Cart from '../cartPage/Cart'
-import NotFound from '../404/NotFound';
+import ShopContainer from '../shopPage/logic/ShopContainer'
+import ProductContainer from '../productPage/logic/ProductContainer'
+import CartContainer from '../cartPage/logic/CartContainer'
 import CheckoutPage from '../checkoutPage/CheckoutPage'
 
-//Dummy data
+// Dummy data
 const list = [
   {
     id: 1,
@@ -23,8 +23,7 @@ const list = [
     harvest: "12-2-1231",
     image: [img1, img2],
     oldprice: 123,
-    currentprice: 1234,
-    
+    currentprice: 1234
   },
   {
     id: 2,
@@ -33,7 +32,7 @@ const list = [
     harvest: "12-2-4321",
     image: [img2, img3],
     oldprice: 123,
-    currentprice: 1234,
+    currentprice: 1234
   }
 ];
 
@@ -71,28 +70,26 @@ function App() {
 
   return (
     <div className="App">
-
-      <Header cart={lineItems}/>
+        <Header cart={lineItems}/>
         <Box overflow="scroll" style={{paddingBottom: "15vh"}}>
           <Switch>
               {/* <Route path={["/","/index"]} exact strict component={Home}/> */}
-              <Route path={["/cart","/cart/:userid"]} exact strict component={Cart}/>
-              <Route path="/shop" exact strict component={Shop}/>
+              <Route path={["/cart","/cart/:userid"]} exact strict component={CartContainer}/>
+              <Route path="/shop" exact strict component={ShopContainer}/>
               {/* <Route path="/findus" exact strict component={FindUs}/> */}
               {/* <Route path="/contact" exact strict component={Contact}/> */}
               {/* <Route path="/about" exact strict component={About}/> */}
               {/* <Route path="/login" exact strict component={Login}/> */}
 
               <Route path="/product/:productid" exact strict
-                render={({match}) => <Product prodId={match.params.productid} addCartHandle={increaseCart}/>}
+                render={({match}) => <ProductContainer prodId={match.params.productid} addCartHandler={increaseCart}/>}
               />
               <Route path="/checkout"exact strict component={CheckoutPage}/>
               <Route path="/404" component={NotFound}/>
               <Redirect to="/404"/>
           </Switch>
         </Box>
-      <Footer />
-
+        <Footer />
     </div>
   );
 }
