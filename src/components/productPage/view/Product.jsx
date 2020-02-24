@@ -8,7 +8,7 @@ const ProductDetail = ({product, imgs, quantity, price, value, max, addCartHandl
         <div>
             <h1>{product.name}</h1>
                 <Stepper imgs={imgs}/>
-                <CardPriceContainer price={price} value={value} quantity={quantity} max={max} addCartHandler={addCartHandler} />
+                <CardPriceContainer price={price} value={value} quantity={quantity} max={max} addCartHandler={addCartHandler} id={product.prodId}/>
             
             <section style={{marginLeft: "8%", marginRight: "8%", color: "#0C3658"}} >
                 <h1 style={{fontSize: "2em", letterSpacing: "0.09em", textTransform: "uppercase"}}>Description</h1>
