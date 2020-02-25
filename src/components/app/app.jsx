@@ -14,6 +14,7 @@ import Product from '../productPage/Product';
 import NotFound from '../404/NotFound';
 import Cart from '../cartPage/Cart';
 import CartContainer from '../cartPage/logic/CartContainer';
+import CheckoutPage from '../checkoutPage/CheckoutPage';
 
 //Dummy data
 const list = [
@@ -95,7 +96,7 @@ function App() {
 					{/* <Route path="/contact" exact strict component={Contact}/> */}
 					{/* <Route path="/about" exact strict component={About}/> */}
 					{/* <Route path="/login" exact strict component={Login}/> */}
-
+					<Route path='/checkout' exact strict component={CheckoutPage}/>
 					<Route
 						path="/product/:productid"
 						exact
