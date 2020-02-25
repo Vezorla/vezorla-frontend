@@ -9,11 +9,11 @@ function Cart(props) {
 			<div>
 				{props.list.map((lineItem) => (
 					<LineItem
-						key={lineItem.product.prodId}
-						product={lineItem.product}
+						key={lineItem.prodId}
 						quantity={lineItem.quantity}
 						onDelete={props.onDelete}
 						onChange={props.onChange}
+						{...lineItem}
 					/>
 				))}
 			</div>
