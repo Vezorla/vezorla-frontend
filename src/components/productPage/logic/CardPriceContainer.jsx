@@ -6,7 +6,7 @@ export default class CardPriceContainer extends Component {
 		super(props);
 		this.state = {
 			max: props.max,
-			value: 1
+			value: '1'
         };
         this.onChange = this.onChange.bind(this)
         this.oneClick = this.onClick.bind(this)
@@ -19,11 +19,11 @@ export default class CardPriceContainer extends Component {
 
 	onClick = async () => {
 		let data = '';
-
+		
 		data = await fetch(`http://localhost:8080/api/customer/cart/add/${this.props.id}`, {
 			method: 'PUT',
 			headers: {
-				Accept: 'application/json',
+				'Accept': 'application/json',
 				'Content-Type': 'application/json'
 			},
 			credentials: 'include',
@@ -40,8 +40,7 @@ export default class CardPriceContainer extends Component {
 			this.props.addCartHandler(data);
 		}
     };
-
-    
+  
      //when add to cart, get new quntity
     getNewQuantity = async () =>{
         let jsonData = await fetch('url');
