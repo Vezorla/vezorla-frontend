@@ -2,8 +2,9 @@ import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import TextField from '@material-ui/core/TextField';
+import '../style.css';
 
-export default function LineItem({prodId, price, imageMain, name, quantity, onChange, onDelete}) {
+export default function LineItem({ prodId, price, imageMain, name, quantity, onChange, onDelete }) {
 	return (
 		<div className="lineItem">
 			<div className="lineItem--img">
@@ -30,7 +31,7 @@ export default function LineItem({prodId, price, imageMain, name, quantity, onCh
 				/>
 			</div>
 			<div className="lineItem--price">
-				<p>{quantity +""+ price}</p>
+				<p>{quantity * price}</p>
 			</div>
 			<div className="lineItem--delete">
 				<IconButton edge="end" aria-label="delete">

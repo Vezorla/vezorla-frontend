@@ -10,33 +10,10 @@ import ShopContainer from '../shopPage/logic/ShopContainer';
 import ProductContainer from '../productPage/logic/ProductContainer';
 import Header from '../common/header/header';
 import Footer from '../common/footer/footer';
-import Product from '../productPage/Product';
 import NotFound from '../404/NotFound';
-import Cart from '../cartPage/Cart';
 import CartContainer from '../cartPage/logic/CartContainer';
 import CheckoutPage from '../checkoutPage/CheckoutPage';
 
-//Dummy data
-const list = [
-	{
-		id: 1,
-		name: 'abc',
-		subdescription: 'abcsd',
-		harvest: '12-2-1231',
-		image: [ img1, img2 ],
-		oldprice: 123,
-		currentprice: 1234
-	},
-	{
-		id: 2,
-		name: 'asc',
-		subdescription: 'aqd',
-		harvest: '12-2-4321',
-		image: [ img2, img3 ],
-		oldprice: 123,
-		currentprice: 1234
-	}
-];
 
 // Function will run everytime go to new path or first access the application
 function usePageViews(setLineItems, currentLineItem) {
@@ -86,7 +63,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<Header cart={lineItems} />
+			{/* <Header cart={lineItems} /> */}
 			<Box overflow="scroll" style={{ paddingBottom: '15vh' }}>
 				<Switch>
 					{/* <Route path={["/","/index"]} exact strict component={Home}/>  */}
