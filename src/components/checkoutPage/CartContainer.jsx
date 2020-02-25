@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
-import Cart from '../view/Cart';
+import Cart from '../cartPage/view/Cart'
 
-
-class CartContainer extends Component {
-	constructor(props) {
-		super(props);
+export default class CartContainer extends Component {
+	constructor({ stage, setStage }) {
+		super({ stage, setStage });
 		this.state = {
-			list: '',
-			stage: ''
+            list: '',
+            discount: 0
 		};
-
 		this.setList = this.setList.bind(this);
 		this.onChange = this.onChange.bind(this);
 		this.onDelete = this.onDelete.bind(this);
 	}
 
 	timeOutVar = [];
-	tax = 0;
-	total = 0;
 
 	//---Setter for state-----
 	setList = (listVal) => {
@@ -91,7 +87,11 @@ class CartContainer extends Component {
 			this.setList(data);
 			this.setStage('done');
 		}
-	};
+    };
+    
+    fetchLineItems = async () => {
+
+    }
 
 	componentDidMount() {
 		this.fetchData();
@@ -104,27 +104,22 @@ class CartContainer extends Component {
 			subTotal += lineItem.price * lineItem.quantity;
 		});
 		this.tax = subTotal * 5 / 100;
-		this.total = subTotal + this.tax;
+		this.total = subTotal + this.tax - this.state.discount;
 		return subTotal;
 	};
 
 	render() {
 		return (
 			<div>
-				{this.state.list !== '' ? (
-					<div>
-						<Cart {...this.state} onDelete={this.onDelete} onChange={this.onChange} />
-						<div>
-							<p>Subtotal: {this.calAll()}</p>
-							<p>Tax: {this.tax}</p>
-							<p>Total: {this.total}</p>
-						</div>
-					</div>
-				) : (
-					<p>add something you piece of shit</p>
-				)}
+				<Cart {...this.state} onDelete={this.onDelete} onChange={this.onChange} />
+				<div>
+                    
+					<p>Subtotal: {this.calAll()}</p>
+					<p>Tax: {this.tax}</p>
+                    <p>Discount: {this.state.discount}</p>
+					<p>Total: {this.total}</p>
+				</div>
 			</div>
 		);
 	}
 }
-export default CartContainer;
