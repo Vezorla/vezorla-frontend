@@ -13,7 +13,7 @@ import Footer from '../common/footer/footer';
 import NotFound from '../404/NotFound';
 import CartContainer from '../cartPage/logic/CartContainer';
 import CheckoutPage from '../checkoutPage/CheckoutPage';
-
+import Login from '../login/view/Login';
 
 // Function will run everytime go to new path or first access the application
 function usePageViews(setLineItems, currentLineItem) {
@@ -67,13 +67,14 @@ function App() {
 			<Box overflow="scroll" style={{ paddingBottom: '15vh' }}>
 				<Switch>
 					{/* <Route path={["/","/index"]} exact strict component={Home}/>  */}
-					<Route path={[ '/cart', '/cart/:userid' ]} exact strict component={CartContainer} />
-					<Route path="/shop" exact strict component={ShopContainer} />
+					{/* <Route path={[ '/cart', '/cart/:userid' ]} exact strict component={CartContainer} /> */}
+					{/* <Route path="/shop" exact strict component={ShopContainer} /> */}
 					{/* <Route path="/findus" exact strict component={FindUs}/> */}
 					{/* <Route path="/contact" exact strict component={Contact}/> */}
 					{/* <Route path="/about" exact strict component={About}/> */}
 					{/* <Route path="/login" exact strict component={Login}/> */}
-					<Route path='/checkout' exact strict component={CheckoutPage}/>
+					{/* <Route path='/checkout' exact strict component={CheckoutPage}/> */}
+					<Route path="/login" exact strict component={Login} />
 					<Route
 						path="/product/:productid"
 						exact

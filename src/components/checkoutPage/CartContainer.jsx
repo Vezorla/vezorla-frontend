@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Cart from '../cartPage/view/Cart'
+import Cart from '../cartPage/view/Cart';
 
 export default class CartContainer extends Component {
 	constructor({ stage, setStage }) {
 		super({ stage, setStage });
 		this.state = {
-            list: '',
-            discount: 0
+			list: '',
+			discount: 0
 		};
 		this.setList = this.setList.bind(this);
 		this.onChange = this.onChange.bind(this);
@@ -85,13 +85,29 @@ export default class CartContainer extends Component {
 			});
 		if (data !== null && data.status !== 500) {
 			this.setList(data);
+			this.fetchDiscount();
 			this.setStage('done');
 		}
-    };
-    
-    fetchLineItems = async () => {
+	};
 
-    }
+	//Many type of discount
+	fetchDiscount = async () => {
+		const data = await fetch(`http://localhost:8080/api/customer/cart/view`, {
+			method: 'GET',
+			credentials: 'include',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			}
+		})
+			.then((res) => {
+				return res.json();
+			})
+			.catch((err) => {
+				this.setDiscount(0);
+				return null;
+			});
+	};
 
 	componentDidMount() {
 		this.fetchData();
@@ -104,7 +120,7 @@ export default class CartContainer extends Component {
 			subTotal += lineItem.price * lineItem.quantity;
 		});
 		this.tax = subTotal * 5 / 100;
-		this.total = subTotal + this.tax - this.state.discount;
+		this.total = (subTotal + this.tax) - (subTotal* this.state.discount);
 		return subTotal;
 	};
 
@@ -113,10 +129,9 @@ export default class CartContainer extends Component {
 			<div>
 				<Cart {...this.state} onDelete={this.onDelete} onChange={this.onChange} />
 				<div>
-                    
 					<p>Subtotal: {this.calAll()}</p>
 					<p>Tax: {this.tax}</p>
-                    <p>Discount: {this.state.discount}</p>
+					<p>Discount: {this.state.discount}</p>
 					<p>Total: {this.total}</p>
 				</div>
 			</div>
