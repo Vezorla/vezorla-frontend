@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import Cart from '../cartPage/view/Cart';
+import ProcessButtons from '../common/Stepper/ProcessButtons';
 
 export default class CartContainer extends Component {
-	constructor({ stage, setStage }) {
-		super({ stage, setStage });
+	constructor(props) {
+		super(props);
 		this.state = {
-			list: '',
+			list: [],
 			discount: 0
 		};
 		this.setList = this.setList.bind(this);
+		this.setDiscount = this.setDiscount.bind(this);
 		this.onChange = this.onChange.bind(this);
 		this.onDelete = this.onDelete.bind(this);
 	}
@@ -20,8 +22,8 @@ export default class CartContainer extends Component {
 		this.setState({ list: listVal });
 	};
 
-	setStage = (stageVal) => {
-		this.setState({ stage: stageVal });
+	setDiscount = (discountVal) => {
+		this.setState({ discount: discountVal });
 	};
 
 	onChange = (prodId, newVal) => {
@@ -80,7 +82,7 @@ export default class CartContainer extends Component {
 			})
 			.catch((err) => {
 				this.setStage('error');
-				this.setList('');
+				this.setList([]);
 				return null;
 			});
 		if (data !== null && data.status !== 500) {
@@ -120,8 +122,16 @@ export default class CartContainer extends Component {
 			subTotal += lineItem.price * lineItem.quantity;
 		});
 		this.tax = subTotal * 5 / 100;
-		this.total = (subTotal + this.tax) - (subTotal* this.state.discount);
+		this.total = subTotal + this.tax - subTotal * this.state.discount;
 		return subTotal;
+	};
+
+	handleBack = () => {
+		this.props.setStage(this.props.stage - 1);
+	};
+
+	handleNext = () => {
+		this.props.setStage(this.props.stage + 1);
 	};
 
 	render() {
@@ -134,6 +144,12 @@ export default class CartContainer extends Component {
 					<p>Discount: {this.state.discount}</p>
 					<p>Total: {this.total}</p>
 				</div>
+				<ProcessButtons
+					handleBack={this.handleBack}
+					handleNext={this.handleNext}
+					complete={true}
+					hasNext={true}
+				/>
 			</div>
 		);
 	}

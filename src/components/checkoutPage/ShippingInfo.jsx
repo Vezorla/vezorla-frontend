@@ -2,31 +2,27 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import ProcessButtons from '../common/Stepper/ProcessButtons';
 
-var emailValid = true;
-var postalCodeValid = true;
+import PhoneInpute from '../common/Inputs/Phone/PhoneInput';
+import EmailInput from '../common/Inputs/Email/EmailInput';
+import PostalCodeInput from '../common/Inputs/PostalCode/PostalCodeInput';
+import PhoneInput from '../common/Inputs/Phone/PhoneInput';
 
 class ShippingInfo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			info: {
-				firstname: '',
-				lastname: '',
-				email: '',
-				phone: '',
-				address: '',
-				city: '',
-				postalCode: '',
-				pickup: false
-			},
-			phoneNumber: '',
+			firstname: '',
+			lastname: '',
+			email: '',
+			phone: '',
+			address: '',
+			city: '',
 			postalCode: '',
-			complete: false
+			pickup: false
 		};
 		this.setPhone = this.setPhone.bind(this);
-		this.emailHandler = this.emailHandler.bind(this);
-		this.phoneHandler = this.phoneHandler.bind(this);
-		this.postalCodeHandler = this.postalCodeHandler.bind(this);
+		this.setPostalCode = this.setPostalCode.bind(this);
+		this.setEmail = this.setEmail.bind(this);
 		this.handleNext = this.handleNext.bind(this);
 	}
 
@@ -34,62 +30,18 @@ class ShippingInfo extends Component {
 	setPhone(phoneVal) {
 		this.setState({ phone: phoneVal });
 	}
+	setPostalCode(postalCodeVal) {
+		this.setState({ postalCode: postalCodeVal });
+	}
+	setEmail(emailVal) {
+		this.setState({ email: emailVal });
+	}
 
 	componentDidMount() {
 		// TODO check account if user have account then auto fill the fill
 	}
 
-	//----Input Handler-----
-	emailHandler = (e) => {
-		const regrex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		const target = e.target;
-		emailValid = regrex.test(e.target.value.toLowerCase()) || e.target.value === '';
-		this.setState((prevState) => ({
-			info: {
-				...prevState.info,
-				email: target.value
-			}
-		}));
-	};
-
-	phoneHandler = (e) => {
-		const inputVal = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
-		this.setState((prevState) => ({
-			info: {
-				...prevState.info,
-				phone: inputVal[0]
-			}
-		}));
-		this.setState({
-			phoneNumber: !inputVal[2]
-				? inputVal[1]
-				: '(' + inputVal[1] + ') ' + inputVal[2] + (inputVal[3] ? '-' + inputVal[3] : '')
-		});
-	};
-
-	postalCodeHandler = (e) => {
-		const inputVal = e.target.value.replace(/\s/g, '').match(/([a-zA-Z0-9]{0,3})([a-zA-Z0-9]{0,3})/);
-		const regrex = /[A-Z]{1}\d{1}[A-Z]{1}\d{1}[A-Z]{1}\d{1}/g;
-
-		this.setState((prevState) => ({
-			info: {
-				...prevState.info,
-				postalCode: inputVal[0]
-			}
-		}));
-		this.setState({
-			postalCode: !inputVal[2]
-				? inputVal[1].toUpperCase()
-				: inputVal[1].toUpperCase() + ' ' + inputVal[2].toUpperCase()
-		});
-
-		if (!regrex.test(inputVal[0]) && inputVal[0].length === 6) {
-			postalCodeValid = false;
-		} else {
-			postalCodeValid = true;
-		}
-	};
-
+	//get customer info onload
 	fetchData = async () => {
 		this.setStage('loading');
 
@@ -108,23 +60,10 @@ class ShippingInfo extends Component {
 				return null;
 			});
 		if (data !== null) {
-			this.setState({ ...this.state, info: data });
+			this.setState({ ...data });
 
-			const phoneReceive = data.phone.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
-			this.setState({
-				phoneNumber: !phoneReceive[2]
-					? phoneReceive[1]
-					: '(' + phoneReceive[1] + ') ' + phoneReceive[2] + (phoneReceive[3] ? '-' + phoneReceive[3] : '')
-			});
-
-			const postalCodeReceive = data.postalCode.value
-				.replace(/\s/g, '')
-				.match(/([a-zA-Z0-9]{0,3})([a-zA-Z0-9]{0,3})/);
-			this.setState({
-				postalCode: !postalCodeReceive[2]
-					? postalCodeReceive[1].toUpperCase()
-					: postalCodeReceive[1].toUpperCase() + ' ' + postalCodeReceive[2].toUpperCase()
-			});
+			this.setPhone(data.phone);
+			this.setPostalCode(data.postalCode);
 		}
 	};
 
@@ -154,27 +93,6 @@ class ShippingInfo extends Component {
 		// }
 	};
 
-	//---check all the require field is filled
-	checkComplete = () => {
-		const email = this.state.info.email;
-		const address = this.state.info.address;
-		const city = this.state.info.city;
-		const postalCode = this.state.info.postalCode;
-
-		if (
-			email !== ' ' &&
-			address !== '' &&
-			city !== '' &&
-			postalCode.length === 6 &&
-			emailValid &&
-			postalCodeValid
-		) {
-			return true;
-		} else {
-			return false;
-		}
-	};
-
 	render() {
 		return (
 			<div>
@@ -182,80 +100,58 @@ class ShippingInfo extends Component {
 				<TextField
 					autoFocus
 					label="First Name"
-					value={this.state.info.firstname}
+					value={this.state.firstname}
 					onChange={(e) => {
 						const target = e.target;
-						this.setState((prevState) => ({
-							info: {
-								...prevState.info,
-								firstname: target.value
-							}
-						}));
+						this.setState({
+							firstname: target.value
+						});
 					}}
 				/>
 
 				<TextField
 					label="Last Name"
-					value={this.state.info.lastname}
+					value={this.state.lastname}
 					onChange={(e) => {
 						const target = e.target;
-						this.setState((prevState) => ({
-							info: {
-								...prevState.info,
-								lastname: target.value
-							}
-						}));
+						this.setState({
+							lastname: target.value
+						});
 					}}
 				/>
 
-				<TextField
-					required
-					label="Email"
-					error={!emailValid}
-					helperText={emailValid ? '' : 'Invalid Email'}
-					value={this.state.info.email}
-					onChange={this.emailHandler}
-				/>
+				<EmailInput value={this.state.email} helperText="Incorrect Format" onChange={this.setEmail} />
 
-				<TextField label="Phone" value={this.state.phoneNumber} onChange={this.phoneHandler} />
+				<PhoneInput value={this.state.phone} onChange={this.setPhone} />
 
 				<TextField
 					required
 					label="Shipping Address"
-					value={this.state.info.address}
+					value={this.state.address}
 					onChange={(e) => {
 						const target = e.target;
-						this.setState((prevState) => ({
-							info: {
-								...prevState.info,
-								address: target.value
-							}
-						}));
+						this.setState({
+							address: target.value
+						});
 					}}
 				/>
 
 				<TextField
 					required
 					label="City"
-					value={this.state.info.city}
+					value={this.state.city}
 					onChange={(e) => {
 						const target = e.target;
-						this.setState((prevState) => ({
-							info: {
-								...prevState.info,
-								city: target.value
-							}
-						}));
+						this.setState({
+							city: target.value
+						});
 					}}
 				/>
 
-				<TextField
-					required
-					label="Postal Code"
-					error={!postalCodeValid}
-					helperText={postalCodeValid ? '' : 'Invalid Postal Code'}
+				<PostalCodeInput
 					value={this.state.postalCode}
-					onChange={this.postalCodeHandler}
+					helperText="Invalid Post Code"
+					onChange={this.setPostalCode}
 				/>
 
 				<ProcessButtons

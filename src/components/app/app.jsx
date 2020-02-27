@@ -73,7 +73,7 @@ function App() {
 					{/* <Route path="/contact" exact strict component={Contact}/> */}
 					{/* <Route path="/about" exact strict component={About}/> */}
 					{/* <Route path="/login" exact strict component={Login}/> */}
-					{/* <Route path='/checkout' exact strict component={CheckoutPage}/> */}
+					<Route path='/checkout' exact strict component={CheckoutPage}/>
 					<Route path="/login" exact strict component={Login} />
 					<Route
 						path="/product/:productid"
