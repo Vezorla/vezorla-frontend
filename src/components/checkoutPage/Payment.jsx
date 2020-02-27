@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
+
+// Minh wqas here
 
 export default function Payment() {
-    return (
-        <div>
-            payment
-        </div>
-    )
+	return <div>payment</div>;
 }
