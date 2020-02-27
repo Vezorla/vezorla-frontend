@@ -13,6 +13,7 @@ import Footer from '../common/footer/footer';
 import NotFound from '../404/NotFound';
 import CartContainer from '../cartPage/logic/CartContainer';
 import CheckoutPage from '../checkoutPage/CheckoutPage';
+import RegisterContainer from '../Register/logic/RegisterContainer';
 import Login from '../login/view/Login';
 
 // Function will run everytime go to new path or first access the application
@@ -73,7 +74,8 @@ function App() {
 					{/* <Route path="/contact" exact strict component={Contact}/> */}
 					{/* <Route path="/about" exact strict component={About}/> */}
 					{/* <Route path="/login" exact strict component={Login}/> */}
-					<Route path='/checkout' exact strict component={CheckoutPage}/>
+					<Route path="/register" exact strict component={RegisterContainer} />
+					<Route path="/checkout" exact strict component={CheckoutPage} />
 					<Route path="/login" exact strict component={Login} />
 					<Route
 						path="/product/:productid"
