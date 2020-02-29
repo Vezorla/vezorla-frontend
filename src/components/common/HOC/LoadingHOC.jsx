@@ -7,7 +7,6 @@ const returnVal = (props, WrappedComponent) => {
     if (props.stage === 'loading') {
         returnVal = <CircularProgress />;
     } else if (props.stage === 'error') {
-        console.log(props.stage);
         returnVal = <Error />;
     } else {
         

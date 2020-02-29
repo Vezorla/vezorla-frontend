@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Cart from '../cartPage/view/Cart';
-import ProcessButtons from '../common/Stepper/ProcessButtons';
+import ProcessButtons from '../../common/Stepper/ProcessButtons';
 
 export default class CartContainer extends Component {
 	constructor(props) {

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
-import ProcessButtons from '../common/Stepper/ProcessButtons';
+import ProcessButtons from '../../common/Stepper/ProcessButtons';
 
-import PhoneInpute from '../common/Inputs/Phone/PhoneInput';
-import EmailInput from '../common/Inputs/Email/EmailInput';
-import PostalCodeInput from '../common/Inputs/PostalCode/PostalCodeInput';
-import PhoneInput from '../common/Inputs/Phone/PhoneInput';
+import PhoneInpute from '../../common/Inputs/Phone/PhoneInput';
+import EmailInput from '../../common/Inputs/Email/EmailInput';
+import PostalCodeInput from '../../common/Inputs/PostalCode/PostalCodeInput';
+import PhoneInput from '../../common/Inputs/Phone/PhoneInput';
 
 class ShippingInfo extends Component {
 	constructor(props) {

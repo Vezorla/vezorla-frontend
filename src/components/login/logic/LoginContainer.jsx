@@ -34,8 +34,8 @@ export default class LoginContainer extends Component {
 			credentials: 'include'
 		});
 
-		if (response.status >= 400) {
-			this.setState({ error: 'Error' });
+		if (response.status === 401) {
+			this.setState({ error: 'Invalid username or password' });
 		} else if (response.status === 200) {
 			const data = await response.json();
 			if (data === 'soemthing') {

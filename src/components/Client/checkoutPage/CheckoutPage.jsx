@@ -3,7 +3,7 @@ import Discount from './Discount';
 import Payment from './Payment';
 import CartContainer from './CartContainer'
 import ShippingInfo from './ShippingInfo';
-import ProcessBar from '../common/Stepper/ProcessBar';
+import ProcessBar from '../../common/Stepper/ProcessBar';
 
 export default class CheckoutPage extends Component {
 	constructor(props) {

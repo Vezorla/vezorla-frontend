@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
 import CardItem from './CardItem';
 
-import loadingHOC from '../../common/HOC/LoadingHOC';
+import loadingHOC from '../../../common/HOC/LoadingHOC';
 
 const useStyle = makeStyles((theme) => ({
 	grid: {

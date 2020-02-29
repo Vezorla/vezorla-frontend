@@ -10,11 +10,11 @@ export default function Login({ username, password, error, setUsername, setPassw
 				<h2>Sign in to continue</h2>
 			</div>
 			<div>
-				<TextField label="Username" error={error === ''} autoFocus value={username} onChange={setUsername} />
+				<TextField label="Username" error={error !== ''} autoFocus value={username} onChange={setUsername} />
 				<TextField
 					label="Password"
-					error={error === ''}
-					helperText="Invalid Username or Password! Please try again"
+					error={error !== ''}
+					helperText={error !== '' ? '' : error}
 					type="password"
 					value={password}
 					onChange={setPassword}

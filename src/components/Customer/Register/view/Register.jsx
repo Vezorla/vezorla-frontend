@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
-import EmailInput from '../../common/Inputs/Email/EmailInput';
+import EmailInput from '../../../common/Inputs/Email/EmailInput';
 
 export default function Register({
 	firstname,

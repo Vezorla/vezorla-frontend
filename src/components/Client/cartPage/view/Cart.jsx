@@ -1,6 +1,6 @@
 import React from 'react';
 import LineItem from './LineItem';
-import loadingHOC from '../../common/HOC/LoadingHOC';
+import loadingHOC from '../../../common/HOC/LoadingHOC';
 
 function Cart(props) {
 	const lineItemList = () => {

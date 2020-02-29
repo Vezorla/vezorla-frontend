@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Register from '../view/Register';
 import { Button } from '@material-ui/core';
-import Error from '../../common/Error/Error';
+import Error from '../../../common/Error/Error';
 
 var match = true;
 export default class RegisterContainer extends Component {
