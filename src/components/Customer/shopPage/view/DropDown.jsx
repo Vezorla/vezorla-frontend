@@ -22,8 +22,6 @@ const DropDownComponent = ({ label, selections, value, onChange, className }) =>
 	);
 };
 
-
-
 function DropDown(props) {
 	return useMemo(() => <DropDownComponent {...props} />, [ props ]);
 }

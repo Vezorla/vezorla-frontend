@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Cart from '../view/Cart';
 
-
 class CartContainer extends Component {
 	constructor(props) {
 		super(props);
@@ -28,6 +27,7 @@ class CartContainer extends Component {
 		this.setState({ stage: stageVal });
 	};
 
+	//---function active when user change value of line item
 	onChange = (prodId, newVal) => {
 		this.timeOutVar.forEach((timeout) => clearTimeout(timeout));
 		let tempList = this.state.list.map((lineItem) => {
@@ -40,57 +40,83 @@ class CartContainer extends Component {
 		this.setList(tempList);
 		this.timeOutVar.push(
 			setTimeout(() => {
-				console.log('a');
-				//put data.
+				this.putData();
 			}, 5000)
 		);
 	};
 
 	//-----function delete product----
-	onDelete = /*async*/ (prodId) => {
-		// let jsonData = await fetch(`http://url/${prodId}`, {
-		//     method: 'DELETE',
-		//     headers:{
-		//         'Accept':'application/json',
-		//         'Content-Type': 'application/json',
-		//     },
-		//     body: JSON.stringify(prodId)
-		// })
+	onDelete = async (prodId) => {
+		try {
+			let response = await fetch(`http://url/${prodId}`, {
+				method: 'DELETE',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(prodId)
+			});
 
-		// if(jsonData.ok){
-		//     let data = await jsonData.json();
-		//     if(data === true){
+			if (response.status === 200) {
+				let data = await response.json();
+				if (data === true) {
+					let newList = this.state.list.filter((lineItem) => lineItem.prodId !== prodId);
 
-		let newList = this.state.list.filter((lineItem) => lineItem.prodId !== prodId);
-
-		this.setList(newList);
-		//     }
-		// }
+					this.setList(newList);
+				}
+			} else if (response.status > 400) {
+				this.setStage('error');
+			}
+		} catch (err) {
+			this.setStage('error');
+		}
 	};
 
+	//--- function fetch line item-------
 	fetchData = async () => {
 		this.setStage('loading');
 
-		const data = await fetch(`http://localhost:8080/api/customer/cart/view`, {
-			method: 'GET',
-			credentials: 'include',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			}
-		})
-			.then((res) => {
-				return res.json();
-			})
-			.catch((err) => {
+		try {
+			const response = await fetch(`http://localhost:8080/api/customer/cart/view`, {
+				method: 'GET',
+				credentials: 'include',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				}
+			});
+
+			if (response.status === 200) {
+				const data = await response.json();
+				if (data !== null) {
+					this.setList(data);
+					this.setStage('done');
+				}
+			} else if (response.status > 400) {
 				this.setStage('error');
 				this.setList('');
 				return null;
-			});
-		if (data !== null && data.status !== 500) {
-			this.setList(data);
-			this.setStage('done');
+			}
+		} catch (err) {
+			this.setStage('error');
+			this.setList('');
+			return null;
 		}
+	};
+
+	// ---put data when user change quantity of line item
+	putData = async () => {
+		try {
+			const response = await fetch(`url`, {
+				method: 'PUT',
+				credentials: 'include',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(this.state.list)
+			});
+		} catch (err) {}
 	};
 
 	componentDidMount() {
@@ -121,7 +147,7 @@ class CartContainer extends Component {
 						</div>
 					</div>
 				) : (
-					<p>add something you piece of shit</p>
+					<p>Add something</p>
 				)}
 			</div>
 		);

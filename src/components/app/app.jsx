@@ -50,7 +50,7 @@ const fetchCartLineItems = async (setLineItems) => {
 function App() {
 	//-------state------
 	const [ lineItems, setLineItems ] = useState(0);
-	const [ auth, setAuth ] = useState('');
+	const [ auth, setAuth ] = useState('client');
 
 	//increate Cart function
 	const increaseCart = (value) => {

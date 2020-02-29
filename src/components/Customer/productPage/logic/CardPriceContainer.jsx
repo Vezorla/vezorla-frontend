@@ -12,32 +12,38 @@ export default class CardPriceContainer extends Component {
         this.oneClick = this.onClick.bind(this)
         this.getNewQuantity = this.getNewQuantity.bind(this)
     }
-    
+	
+	// setter for quantity selection
     onChange = (e) => {
         this.setState({value: e.target.value})
     }
 
+	// Handler for add to card btn
 	onClick = async () => {
 		let data = '';
 		
-		data = await fetch(`http://localhost:8080/api/customer/cart/add/${this.props.id}`, {
-			method: 'PUT',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			},
-			credentials: 'include',
-			body: JSON.stringify(this.state.value)
-		})
-			.then((res) => {
-				return res.json();
+		try {
+			const response = await fetch(`http://localhost:8080/api/customer/cart/add/${this.props.id}`, {
+				method: 'PUT',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				credentials: 'include',
+				body: JSON.stringify(this.state.value)
 			})
-			.catch((err) => {
-				return null;
-            });
-            
-		if (data !== null && data === true) {
-			this.props.addCartHandler(data);
+			if (response.status === 200) {
+				const confirmation = await response.json();
+				if (confirmation !== null && confirmation === true) {
+					this.props.addCartHandler(data);
+				} else {
+					this.setStage('error');
+				}
+			} else if (response.status > 400) {
+				this.setStage('error');
+			}
+		} catch (err) {
+			this.setStage('error');
 		}
     };
   

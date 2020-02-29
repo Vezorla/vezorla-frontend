@@ -3,8 +3,10 @@ import DropDown from '../view/DropDown';
 import Shop from '../view/Shop';
 import { Grid } from '@material-ui/core';
 
+//TODO change this into valid label and value
 const filterItem = [ { label: 'a', value: 'a' }, { label: 'b', value: 'b' } ];
 const orderItem = [ { label: 'a', value: 'a' }, { label: 'b', value: 'b' } ];
+
 const URL = 'http://localhost:8080/api/customer/inventory/products/all';
 
 export default class ShopContainer extends Component {
@@ -45,7 +47,7 @@ export default class ShopContainer extends Component {
 		});
 	}
 
-	// event handler of filter and order. Use to fetch and set the value display
+	// -----event handler of filter and order. Use to fetch and set the value display--------
 	handleChangeFilter = (event) => {
 		this.setFilter(event.target.value);
 		// this.fetchData('url'+event.target.value);
@@ -59,23 +61,21 @@ export default class ShopContainer extends Component {
 	// -----add to cart-----
 	fetchData = async (url) => {
 		this.setStage('loading');
-		const data = await fetch(url, {
-			method: 'GET',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
+		try {
+			const response = await fetch(url);
+
+			if (response.status === 200) {
+				const data = await response.json();
+				if (data !== null) {
+					this.setList(data);
+					this.setStage('done');
+				}
+			} else if (response.status >= 400) {
+				this.setStage('error');
 			}
-		}).then((res) => {
-				return res.json();
-		}).catch((err) => {
-                console.log('here')
-                this.setStage('error');
-                return null;
-        });
-        if(data !== null){
-            this.setList(data);
-            this.setStage('done');
-        }
+		} catch (err) {
+			this.setStage('error');
+		}
 	};
 
 	// ------fetch on load-------

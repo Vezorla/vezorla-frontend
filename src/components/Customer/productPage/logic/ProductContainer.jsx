@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Product from '../view/Product';
+import Error from '../../../common/Error/Error';
 
 export default class ProductContainer extends Component {
 	//constructor
@@ -9,12 +10,12 @@ export default class ProductContainer extends Component {
 			product: '',
 			max: '1',
 			stage: '',
-			imgs: []
+			imgs: [],
+			error: ''
 		};
 		this.setProduct = this.setProduct.bind(this);
 		this.setMax = this.setMax.bind(this);
 		this.setStage = this.setStage.bind(this);
-		this.setImgs = this.setImgs.bind(this);
 	}
 
 	//setter for state
@@ -48,43 +49,53 @@ export default class ProductContainer extends Component {
 		this.setState({ imgs: images });
 	}
 
-	//fetch quantity and product information
-	fetchData = async () => {
-		this.setStage('loading');
-		const jsonQuantity = await fetch(
-			`http://localhost:8080/api/customer/inventory/product/quantity/${this.props.prodId}`
-		);
-		if (jsonQuantity.ok) {
-            const max = await jsonQuantity.json();
-            this.setMax(max);
-		}
-		const data = await fetch(`http://localhost:8080/api/customer/inventory/product/${this.props.prodId}`, {
-			method: 'GET',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
+	fetchQuantity = async () => {
+		try {
+			const responseQuantity = await fetch(
+				`http://localhost:8080/api/customer/inventory/product/quantity/${this.props.prodId}`
+			);
+			if (responseQuantity.status === 200) {
+				const max = await responseQuantity.json();
+				if (max !== 0 || max !== null) {
+					this.setMax(max);
+				}
 			}
-		})
-			.then((res) => {
-				return res.json();
-			})
-			.catch((err) => {
+		} catch (err) {}
+	};
+
+	fetchProductInfo = async () => {
+		try {
+			const responseQuantity = await fetch(
+				`http://localhost:8080/api/customer/inventory/product/${this.props.prodId}`
+			);
+			if (responseQuantity.status === 200) {
+				const product = await responseQuantity.json();
+				if (product !== null) {
+					this.setProduct(product);
+					this.setImgs(product.imageOne, product.imageTwo, product.imageThree, product.imageMain);
+					this.setStage('done');
+				}
+			} else if (responseQuantity.status > 400) {
 				this.setStage('error');
-				return null;
-			});
-		if (data !== null) {
-			this.setProduct(data);
-			this.setImgs(data.imageOne, data.imageTwo, data.imageThree, data.imageMain);
-			this.setStage('done');
+			}
+		} catch (err) {
+			this.setStage('error');
 		}
 	};
 
 	// fetch data again when the component mount
 	componentDidMount() {
-        this.fetchData();
+		this.setStage('loading');
+		this.fetchQuantity();
+		this.fetchProductInfo();
 	}
 
 	render() {
-		return <Product {...this.state} addCartHandler={this.props.addCartHandler}/>;
+		return (
+			<div>
+				{this.state.error === '' ? '' : <Error />}
+				<Product {...this.state} addCartHandler={this.props.addCartHandler} />
+			</div>
+		);
 	}
 }
