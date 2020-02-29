@@ -16,24 +16,25 @@ export default class Discount extends Component {
 
 	componentDidMount() {}
 
+	//fetch discount list
 	fetchData = async () => {
-		const data = await fetch(`http://localhost:8080/api/customer/discount`, {
-			method: 'GET',
-			credentials: 'include',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			}
-		})
-			.then((res) => {
-				return res.json();
-			})
-			.catch((err) => {
-				return null;
+		try {
+			const response = await fetch(`http://localhost:8080/api/customer/discount`, {
+				method: 'GET',
+				credentials: 'include',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				}
 			});
-		if (data !== null) {
-			this.setStage({ list: data });
-		}
+
+			if (response.status === 200) {
+				let data = await response.json();
+				if (data !== null) {
+					this.setStage({ list: data });
+				}
+			}
+		} catch (err) {}
 	};
 
 	changeHandler = (e) => {
@@ -44,23 +45,26 @@ export default class Discount extends Component {
 		this.props.setStage(this.props.stage - 1);
 	};
 
+	// put the discount user choice
 	handleNext = async () => {
-		const data = await fetch(`http://localhost:8080/api/customer/discount`, {
-			method: 'PUT',
-			credentials: 'include',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.state.value)
-		})
-			.then((res) => {
-				return res.json();
-			})
-			.catch((err) => {
-				return null;
+		try {
+			const response = await fetch(`http://localhost:8080/api/customer/discount`, {
+				method: 'PUT',
+				credentials: 'include',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(this.state.value)
 			});
-		this.props.setStage(this.props.stage + 1);
+
+			if (response.status === 200) {
+				let data = await response.json();
+				return data;
+			}
+		} catch (err) {
+			return null;
+		}
 	};
 
 	render() {
@@ -74,14 +78,18 @@ export default class Discount extends Component {
 						value={this.state.value}
 						onChange={this.changeHandler}
 					>
-						{this.state.list.map((discout) => (
-							<FormControlLabel
-								key={discout.Id}
-								value={discout.Id + ''}
-								control={<Radio color="primary" />}
-								label={discout.description}
-							/>
-						))}
+						{this.state.list === '' ? (
+							''
+						) : (
+							this.state.list.map((discout) => (
+								<FormControlLabel
+									key={discout.Id}
+									value={discout.Id + ''}
+									control={<Radio color="primary" />}
+									label={discout.description}
+								/>
+							))
+						)}
 					</RadioGroup>
 				</FormControl>
 				<ProcessButtons

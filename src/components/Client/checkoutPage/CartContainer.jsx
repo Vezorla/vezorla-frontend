@@ -45,50 +45,60 @@ export default class CartContainer extends Component {
 	};
 
 	//-----function delete product----
-	onDelete = /*async*/ (prodId) => {
-		// let jsonData = await fetch(`http://url/${prodId}`, {
-		//     method: 'DELETE',
-		//     headers:{
-		//         'Accept':'application/json',
-		//         'Content-Type': 'application/json',
-		//     },
-		//     body: JSON.stringify(prodId)
-		// })
+	onDelete = async (prodId) => {
+		try {
+			let response = await fetch(`http://url/${prodId}`, {
+				method: 'DELETE',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(prodId)
+			});
 
-		// if(jsonData.ok){
-		//     let data = await jsonData.json();
-		//     if(data === true){
+			if (response.status === 200) {
+				let data = await response.json();
+				if (data === true) {
+					let newList = this.state.list.filter((lineItem) => lineItem.prodId !== prodId);
 
-		let newList = this.state.list.filter((lineItem) => lineItem.prodId !== prodId);
-
-		this.setList(newList);
-		//     }
-		// }
+					this.setList(newList);
+				}
+			} else if (response.status > 400) {
+				this.setStage('error');
+			}
+		} catch (err) {
+			this.setStage('error');
+		}
 	};
 
 	fetchData = async () => {
 		this.setStage('loading');
 
-		const data = await fetch(`http://localhost:8080/api/customer/cart/view`, {
-			method: 'GET',
-			credentials: 'include',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			}
-		})
-			.then((res) => {
-				return res.json();
-			})
-			.catch((err) => {
-				this.setStage('error');
-				this.setList([]);
-				return null;
+		try {
+			const response = await fetch(`http://localhost:8080/api/customer/cart/view`, {
+				method: 'GET',
+				credentials: 'include',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				}
 			});
-		if (data !== null && data.status !== 500) {
-			this.setList(data);
-			this.fetchDiscount();
-			this.setStage('done');
+
+			if (response.status === 200) {
+				const data = await response.json();
+				if (data !== null) {
+					this.setList(data);
+					this.setStage('done');
+				}
+			} else if (response.status > 400) {
+				this.setStage('error');
+				this.setList('');
+				return null;
+			}
+		} catch (err) {
+			this.setStage('error');
+			this.setList('');
+			return null;
 		}
 	};
 
