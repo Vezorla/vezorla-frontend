@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import TextField from '@material-ui/core/TextField';
 import ProcessButtons from '../../common/Stepper/ProcessButtons';
+import NecessaryInput from '../../common/Inputs/NecessaryInput/NecessaryInput';
 
-import PhoneInpute from '../../common/Inputs/Phone/PhoneInput';
-import EmailInput from '../../common/Inputs/Email/EmailInput';
-import PostalCodeInput from '../../common/Inputs/PostalCode/PostalCodeInput';
-import PhoneInput from '../../common/Inputs/Phone/PhoneInput';
+//TODO add toggle for pickup
 
 class ShippingInfo extends Component {
 	constructor(props) {
@@ -18,23 +15,73 @@ class ShippingInfo extends Component {
 			address: '',
 			city: '',
 			postalCode: '',
+			provice: '',
+			country: '',
 			pickup: false
 		};
+		this.handleNext = this.handleNext.bind(this);
+		this.setFistname = this.setFistname.bind(this);
+		this.setLastName = this.setLastName.bind(this);
 		this.setPhone = this.setPhone.bind(this);
 		this.setPostalCode = this.setPostalCode.bind(this);
 		this.setEmail = this.setEmail.bind(this);
-		this.handleNext = this.handleNext.bind(this);
+		this.setAddress = this.setAddress.bind(this);
+		this.setCity = this.setCity.bind(this);
+		this.setProvice = this.setProvice.bind(this);
+		this.setCountry = this.setCountry.bind(this);
 	}
 
 	//----setter------
-	setPhone(phoneVal) {
-		this.setState({ phone: phoneVal });
+	setFistname(e) {
+		const target = e.target;
+		this.setState({
+			firstname: target.value
+		});
 	}
-	setPostalCode(postalCodeVal) {
-		this.setState({ postalCode: postalCodeVal });
+	setLastName(e) {
+		const target = e.target;
+		this.setState({
+			lastname: target.value
+		});
 	}
-	setEmail(emailVal) {
-		this.setState({ email: emailVal });
+	setPhone(newVal) {
+		this.setState({
+			phone: newVal
+		});
+	}
+	setPostalCode(newVal) {
+		this.setState({
+			postalCode: newVal
+		});
+	}
+	setEmail(newVal) {
+		this.setState({
+			email: newVal
+		});
+	}
+	setAddress(e) {
+		const target = e.target;
+		this.setState({
+			address: target.value
+		});
+	}
+	setCity(e) {
+		const target = e.target;
+		this.setState({
+			city: target.value
+		});
+	}
+	setProvice(e) {
+		const target = e.target;
+		this.setState({
+			provice: target.value
+		});
+	}
+	setCountry(e) {
+		const target = e.target;
+		this.setState({
+			country: target.value
+		});
 	}
 
 	componentDidMount() {
@@ -97,63 +144,19 @@ class ShippingInfo extends Component {
 		return (
 			<div>
 				<h1>Shipping Information</h1>
-				<TextField
-					autoFocus
-					label="First Name"
-					value={this.state.firstname}
-					onChange={(e) => {
-						const target = e.target;
-						this.setState({
-							firstname: target.value
-						});
-					}}
+
+				<NecessaryInput
+					info={this.state}
+					setAddress={this.setAddress}
+					setCity={this.setCity}
+					setCountry={this.setCountry}
+					setEmail={this.setEmail}
+					setFirstname={this.setFistname}
+					setLastname={this.setLastName}
+					setPhone={this.setPhone}
+					setPostalCode={this.setPostalCode}
+					setProvice={this.setProvice}
 				/>
-
-				<TextField
-					label="Last Name"
-					value={this.state.lastname}
-					onChange={(e) => {
-						const target = e.target;
-						this.setState({
-							lastname: target.value
-						});
-					}}
-				/>
-
-				<EmailInput value={this.state.email} helperText="Incorrect Format" onChange={this.setEmail} />
-
-				<PhoneInput value={this.state.phone} onChange={this.setPhone} />
-
-				<TextField
-					required
-					label="Shipping Address"
-					value={this.state.address}
-					onChange={(e) => {
-						const target = e.target;
-						this.setState({
-							address: target.value
-						});
-					}}
-				/>
-
-				<TextField
-					required
-					label="City"
-					value={this.state.city}
-					onChange={(e) => {
-						const target = e.target;
-						this.setState({
-							city: target.value
-						});
-					}}
-				/>
-
-				<PostalCodeInput
-					value={this.state.postalCode}
-					helperText="Invalid Post Code"
-					onChange={this.setPostalCode}
-				/>
-
 				<ProcessButtons
 					stage={this.props.stage}
 					handleBack={null}

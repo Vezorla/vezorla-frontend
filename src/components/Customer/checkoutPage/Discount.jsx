@@ -46,25 +46,29 @@ export default class Discount extends Component {
 	};
 
 	// put the discount user choice
-	handleNext = async () => {
-		try {
-			const response = await fetch(`http://localhost:8080/api/customer/discount`, {
-				method: 'PUT',
-				credentials: 'include',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(this.state.value)
-			});
+	handleNext = () => {
+		(async () => {
+			try {
+				const response = await fetch(`http://localhost:8080/api/customer/discount`, {
+					method: 'PUT',
+					credentials: 'include',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(this.state.value)
+				});
 
-			if (response.status === 200) {
-				let data = await response.json();
-				return data;
+				if (response.status === 200) {
+					let data = await response.json();
+					return data;
+				}
+			} catch (err) {
+				return null;
 			}
-		} catch (err) {
-			return null;
-		}
+		})();
+		console.log('here');
+		this.props.setStage(this.props.stage + 1);
 	};
 
 	render() {

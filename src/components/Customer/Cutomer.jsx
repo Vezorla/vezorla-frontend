@@ -10,6 +10,7 @@ export default function Cutomer({ increaseCart }) {
 	return (
 		<Switch>
 			<Route path="/customer/shop" exact strict component={ShopContainer} />
+			{/* TODO make this register hidden for client */}
 			<Route path="/customer/register" exact strict component={RegisterContainer} />
 			<Route
 				path="/customer/product/:productid"
@@ -19,8 +20,8 @@ export default function Cutomer({ increaseCart }) {
 					<ProductContainer prodId={match.params.productid} addCartHandler={increaseCart} />
 				)}
 			/>
-			<Route path="/client/cart" exact strict component={CartContainer} />
-			<Route path="/client/checkout" exact strict component={CheckoutPage} />
+			<Route path="/customer/cart" exact strict component={CartContainer} />
+			<Route path="/customer/checkout" exact strict component={CheckoutPage} />
             <Redirect to="/404" />
 		</Switch>
 	);
