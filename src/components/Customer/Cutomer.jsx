@@ -2,7 +2,9 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import ShopContainer from './shopPage/logic/ShopContainer';
 import ProductContainer from './productPage/logic/ProductContainer';
-import RegisterContainer from './Register/logic/RegisterContainer';
+import RegisterContainer from './registerPage/logic/RegisterContainer';
+import CartContainer from './cartPage/logic/CartContainer';
+import CheckoutPage from './checkoutPage/CheckoutPage';
 
 export default function Cutomer({ increaseCart }) {
 	return (
@@ -17,6 +19,8 @@ export default function Cutomer({ increaseCart }) {
 					<ProductContainer prodId={match.params.productid} addCartHandler={increaseCart} />
 				)}
 			/>
+			<Route path="/client/cart" exact strict component={CartContainer} />
+			<Route path="/client/checkout" exact strict component={CheckoutPage} />
             <Redirect to="/404" />
 		</Switch>
 	);
