@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import Cart from '../view/Cart';
 
+/**
+ * @file Cart Logic Component
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 class CartContainer extends Component {
 	constructor(props) {
 		super(props);

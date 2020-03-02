@@ -3,6 +3,13 @@ import CardPriceContainer from '../logic/CardPriceContainer';
 import Stepper from '../../../common/Stepper/Stepper';
 import loadingHOC from '../../../common/HOC/LoadingHOC';
 
+/**
+ * @file Product View Component
+ * @author MinhL4m
+ * @version 1.0
+ */
+
+
 const ProductDetail = ({ product, imgs, quantity, price, value, max, addCartHandler }) => {
 	return (
 		<div>

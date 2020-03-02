@@ -1,10 +1,16 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import EmailInput from '../../../common/Inputs/Email/EmailInput';
 import PhoneInput from '../../../common/Inputs/Phone/PhoneInput';
 import PostalCodeInput from '../../../common/Inputs/PostalCode/PostalCodeInput';
 
-//Every setter accept event except PostalCode, Email, Phone 
+/**
+ * @file  Necessary Information Input Component
+ * @author MinhL4m
+ * @version 1.0
+ */
+
+//Every setter accept event except PostalCode, Email, Phone
 //They accept setter with new value as param
 export default function Info({
 	info,
@@ -19,10 +25,9 @@ export default function Info({
 	setCountry,
 	setPassword
 }) {
-
-    useEffect(() => {
-        console.log(info.password)
-    }, [])
+	useEffect(() => {
+		console.log(info.password);
+	}, []);
 	return (
 		<div>
 			<TextField label="First Name" value={info.firstname} onChange={setFirstname} />

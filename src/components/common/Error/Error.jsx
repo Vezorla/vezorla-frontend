@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import {Dialog, DialogTitle, DialogContent, DialogActions, Typography, Button} from '@material-ui/core'
 
+/**
+ * @file Error Component
+ * @author MinhL4m
+ * @version 1.0
+ */
+
+
 function Error() {
     const [open, setOpen] = useState(true)
     const handleClose = () => {

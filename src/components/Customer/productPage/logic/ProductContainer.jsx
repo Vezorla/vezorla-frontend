@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import Product from '../view/Product';
 import Error from '../../../common/Error/Error';
 
+/**
+ * @file Product Logic Component
+ * @author MinhL4m
+ * @version 1.0
+ */
+
+
 export default class ProductContainer extends Component {
 	//constructor
 	constructor(props) {

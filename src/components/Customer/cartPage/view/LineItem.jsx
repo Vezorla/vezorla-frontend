@@ -4,6 +4,13 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import TextField from '@material-ui/core/TextField';
 import '../style.css';
 
+/**
+ * @file LineItem View Component
+ * @author MinhL4m
+ * @version 1.0
+ */
+
+
 export default function LineItem({ prodId, price, imageMain, name, quantity, onChange, onDelete }) {
 	return (
 		<div className="lineItem">

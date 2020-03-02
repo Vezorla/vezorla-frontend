@@ -2,6 +2,13 @@ import React from 'react';
 import { Card, CardContent, TextField, CardActions, Button } from '@material-ui/core';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
+/**
+ * @file CardPrice View Component
+ * @author MinhL4m
+ * @version 1.0
+ */
+
+
 const CardPriceComponent = ({price, value, max, onChange, onClick}) => {
 	return (
 		<Card

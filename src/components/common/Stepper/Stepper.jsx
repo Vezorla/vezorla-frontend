@@ -5,9 +5,14 @@ import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';  
-
-
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+
+/**
+ * @file Stepper Component
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 

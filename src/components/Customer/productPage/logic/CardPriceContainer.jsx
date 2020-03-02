@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import CardPrice from '../view/CardPrice'
+/**
+ * @file CardPrice Logic Component
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 
 export default class CardPriceContainer extends Component {
 	constructor(props) {

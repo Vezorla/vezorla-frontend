@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import Login from '../view/Login';
 
+/**
+ * @file Login View Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
+/**
+ * Login Logic class component
+ */
 export default class LoginContainer extends Component {
 	constructor({ setAuth }) {
 		super(setAuth);
@@ -46,6 +55,9 @@ export default class LoginContainer extends Component {
 		}
 	};
 
+	/**
+	 * @returns Login component that Login Logic wrap around Login View
+	 */
 	render() {
 		return (
 			<div>
