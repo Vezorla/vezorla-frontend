@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import Box from '@material-ui/core/Box';
 
-import img1 from '../../assets/images/img-1.JPG';
-import img2 from '../../assets/images/img-2.JPG';
-import img3 from '../../assets/images/img-3.JPG';
-
 import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
-import ShopContainer from '../shopPage/logic/ShopContainer';
-import ProductContainer from '../productPage/logic/ProductContainer';
-import Header from '../common/header/header';
-import Footer from '../common/footer/footer';
-import NotFound from '../404/NotFound';
-import CartContainer from '../cartPage/logic/CartContainer';
-import CheckoutPage from '../checkoutPage/CheckoutPage';
 
+// import Header from '../common/header/header';
+// import Footer from '../common/footer/footer';
+import NotFound from '../common/404/NotFound';
+import LoginContainer from '../login/logic/LoginContainer';
+
+import Customer from '../Customer/Cutomer';
+import Client from '../Client/Client';
+
+import AuthHOC from '../common/HOC/AuthHOC';
 
 // Function will run everytime go to new path or first access the application
 function usePageViews(setLineItems, currentLineItem) {
@@ -52,6 +50,7 @@ const fetchCartLineItems = async (setLineItems) => {
 function App() {
 	//-------state------
 	const [ lineItems, setLineItems ] = useState(0);
+	const [ auth, setAuth ] = useState('client');
 
 	//increate Cart function
 	const increaseCart = (value) => {
@@ -66,28 +65,15 @@ function App() {
 			{/* <Header cart={lineItems} /> */}
 			<Box overflow="scroll" style={{ paddingBottom: '15vh' }}>
 				<Switch>
-					{/* <Route path={["/","/index"]} exact strict component={Home}/>  */}
-					<Route path={[ '/cart', '/cart/:userid' ]} exact strict component={CartContainer} />
-					<Route path="/shop" exact strict component={ShopContainer} />
-					{/* <Route path="/findus" exact strict component={FindUs}/> */}
-					{/* <Route path="/contact" exact strict component={Contact}/> */}
-					{/* <Route path="/about" exact strict component={About}/> */}
-					{/* <Route path="/login" exact strict component={Login}/> */}
-					<Route path='/checkout' exact strict component={CheckoutPage}/>
-					<Route
-						path="/product/:productid"
-						exact
-						strict
-						render={({ match }) => (
-							<ProductContainer prodId={match.params.productid} addCartHandler={increaseCart} />
-						)}
-					/>
-
+					<Route path="/client" render={() => AuthHOC(Client, auth)()} />
+					{/* <Route path="/admin" render={() => AuthHOC(Admin, auth)()} /> */}
+					<Route path="/customer" render={() => <Customer increaseCart={increaseCart} />} />
+					<Route path="/login" exact strict render={() => <LoginContainer setAuth={setAuth} />} />
 					<Route path="/404" component={NotFound} />
 					<Redirect to="/404" />
 				</Switch>
 			</Box>
-			<Footer />
+			{/* <Footer /> */}
 		</div>
 	);
 }
