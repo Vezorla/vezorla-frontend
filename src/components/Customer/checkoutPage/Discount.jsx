@@ -8,15 +8,15 @@ import ProcessButtons from '../../common/Stepper/ProcessButtons';
  * @version 1.0
  */
 
-
+const dummyData = [
+	{ Id: 12, code: 'avc', description: 'jdnsajdnjsandjknsajdnjsandjsandjnasd' },
+	{ Id: 1, code: 'avc', escription: 'dbsahdbhjsabdhbsahjbdhjsabdhjbasjhdbasdbjhbsadjhbasjhdb' }
+];
 export default class Discount extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			list: [
-				{ Id: 12, description: 'jdnsajdnjsandjknsajdnjsandjsandjnasd' },
-				{ Id: 1, description: 'dbsahdbhjsabdhbsahjbdhjsabdhjbasjhdbasdbjhbsadjhbasjhdb' }
-			],
+			list: [],
 			value: ''
 		};
 	}
@@ -37,7 +37,7 @@ export default class Discount extends Component {
 
 			if (response.status === 200) {
 				let data = await response.json();
-				if (data !== null) {
+				if (data !== null && (data !== undefined) & (data.length !== 0)) {
 					this.setStage({ list: data });
 				}
 			}
@@ -94,8 +94,8 @@ export default class Discount extends Component {
 						) : (
 							this.state.list.map((discout) => (
 								<FormControlLabel
-									key={discout.Id}
-									value={discout.Id + ''}
+									key={discout.code}
+									value={discout.code}
 									control={<Radio color="primary" />}
 									label={discout.description}
 								/>
