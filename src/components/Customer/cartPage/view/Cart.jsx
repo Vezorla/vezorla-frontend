@@ -2,6 +2,13 @@ import React from 'react';
 import LineItem from './LineItem';
 import loadingHOC from '../../../common/HOC/LoadingHOC';
 
+/**
+ * @file Cart View Component
+ * @author MinhL4m
+ * @version 1.0
+ */
+
+
 function Cart(props) {
 	const lineItemList = () => {
 		return (

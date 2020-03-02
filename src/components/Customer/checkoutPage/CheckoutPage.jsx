@@ -5,6 +5,13 @@ import CartContainer from './CartContainer'
 import ShippingInfo from './ShippingInfo';
 import ProcessBar from '../../common/Stepper/ProcessBar';
 
+/**
+ * @file CheckPage Component
+ * @author MinhL4m
+ * @version 1.0
+ */
+
+
 export default class CheckoutPage extends Component {
 	constructor(props) {
 		super(props);

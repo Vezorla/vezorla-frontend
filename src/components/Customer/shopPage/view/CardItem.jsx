@@ -5,7 +5,17 @@ import { Link } from 'react-router-dom';
 import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 
-//props: product obj
+/**
+ * @file CardItem View Component
+ * @author MinhL4m
+ * @version 1.0 
+ */
+
+/**
+ * creat CardItem view pass on props passed in
+ * @param {Object} props - props of this functional component
+ * @returns CardItem View
+ */
 function CardItem(props) {
 	const { prodId, name, subdescription, harvestTime, imageMain, oldPrice, price, active } = props.product;
 	const url = '/product/' + prodId;

@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import { FormControl, FormLabel, FormControlLabel, RadioGroup, Radio } from '@material-ui/core';
 import ProcessButtons from '../../common/Stepper/ProcessButtons';
 
+/**
+ * @file Discount Component
+ * @author MinhL4m
+ * @version 1.0
+ */
+
+
 export default class Discount extends Component {
 	constructor(props) {
 		super(props);

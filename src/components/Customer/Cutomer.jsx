@@ -6,6 +6,16 @@ import RegisterContainer from './registerPage/logic/RegisterContainer';
 import CartContainer from './cartPage/logic/CartContainer';
 import CheckoutPage from './checkoutPage/CheckoutPage';
 
+/**
+ * @file Routing Component for Customer features
+ * @author MinhL4m
+ * @version 1.0
+ */
+
+/**
+ * Return Switch component contains all route for customer 
+ * @param {Function} increaseCart - function use to increase line item of header component. line item is state of App component
+ */
 export default function Cutomer({ increaseCart }) {
 	return (
 		<Switch>
@@ -22,7 +32,7 @@ export default function Cutomer({ increaseCart }) {
 			/>
 			<Route path="/customer/cart" exact strict component={CartContainer} />
 			<Route path="/customer/checkout" exact strict component={CheckoutPage} />
-            <Redirect to="/404" />
+			<Redirect to="/404" />
 		</Switch>
 	);
 }

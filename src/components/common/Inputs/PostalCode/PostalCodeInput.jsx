@@ -3,6 +3,13 @@ import { TextField } from '@material-ui/core';
 
 var postalCodeValid = true;
 
+/**
+ * @file PostalCode Input Component
+ * @author MinhL4m
+ * @version 1.0
+ */
+
+
 const firstVal = (value) => {
 	const postalCodeReceive = value.replace(/\s/g, '').match(/([a-zA-Z0-9]{0,3})([a-zA-Z0-9]{0,3})/);
 	return !postalCodeReceive[2]

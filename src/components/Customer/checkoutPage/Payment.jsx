@@ -1,6 +1,11 @@
 import React from 'react';
 
-// Minh wqas here
+/**
+ * @file Payment Component
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 
 export default function Payment() {
 	return <div>payment</div>;

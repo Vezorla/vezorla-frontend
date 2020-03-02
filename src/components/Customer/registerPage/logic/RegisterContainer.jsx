@@ -3,7 +3,17 @@ import Register from '../view/Register';
 import { Button } from '@material-ui/core';
 import Error from '../../../common/Error/Error';
 
+/**
+ * @file Register Logic Component
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 var match = true;
+
+/**
+ * Register Logic class component
+ */
 export default class RegisterContainer extends Component {
 	constructor() {
 		super();
@@ -12,8 +22,8 @@ export default class RegisterContainer extends Component {
 			lastname: '',
 			email: '',
 			password: '',
-            rePassword: '',
-            error: false
+			rePassword: '',
+			error: false
 		};
 		this.setEmail = this.setEmail.bind(this);
 	}
@@ -42,6 +52,7 @@ export default class RegisterContainer extends Component {
 		this.setState({ rePassword: e.target.value });
 	};
 
+	//------ on Submit--------
 	onClick = async () => {
 		const response = await fetch('url', {
 			method: 'POST',
@@ -56,11 +67,13 @@ export default class RegisterContainer extends Component {
 		if (response.status === 200) {
 			//redirect back t login
 		} else {
-            
-			this.setState({error : true});
+			this.setState({ error: true });
 		}
 	};
 
+	/**
+	 * @returns Register component that Register Logic wrap around Register View
+	 */
 	render() {
 		return (
 			<div>

@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 
+/**
+ * @file PhoneInput Input Component
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 const firstVal = (value) => {
 	const phoneReceive = value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
 

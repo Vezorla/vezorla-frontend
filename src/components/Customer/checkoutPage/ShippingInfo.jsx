@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import ProcessButtons from '../../common/Stepper/ProcessButtons';
 import NecessaryInput from '../../common/Inputs/NecessaryInput/NecessaryInput';
 
+/**
+ * @file Shipping Component
+ * @author MinhL4m
+ * @version 1.0
+ */
+
+
 //TODO add toggle for pickup
 
 class ShippingInfo extends Component {

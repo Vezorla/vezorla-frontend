@@ -2,6 +2,22 @@ import React from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 
+/**
+ * @file Login View Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
+/**
+ * Login Functional Component
+ * @param {string} username - value of username textfield
+ * @param {string} password - value of password textfield
+ * @param {string} error - error that may occured during login process
+ * @param {function} setUsername - function set username when user type
+ * @param {function} setPassword - function set password when user type
+ * @param {function} onClick - function handle submit username and password
+ * @returns Login View Component
+ */
 export default function Login({ username, password, error, setUsername, setPassword, onClick }) {
 	return (
 		<div>
