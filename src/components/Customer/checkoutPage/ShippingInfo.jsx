@@ -9,7 +9,7 @@ import NecessaryInput from '../../common/Inputs/NecessaryInput/NecessaryInput';
  */
 
 
-//TODO add toggle for pickup
+//TODO add toggle for pickup, make the shipping stop when false, and give it some time so the server can process then make fetch request to get discount
 
 class ShippingInfo extends Component {
 	constructor(props) {

@@ -2,23 +2,17 @@ import React, { Component } from 'react';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 import OrderHistory from '../view/OrderHistory';
 /**
- * @file Client Logic Component 
+ * @file Order View logic Component 
  * @author MinhL4m
  * @version 1.0
  */
 
-export default class ClientContainer extends Component {
+export default class OrderHistoryContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
-			invoice: {
-				list: [],
-				stage: ''
-            },
-            page:'',
-            info:{
-                
-            }
+			list: [],
+			stage: ''
 		};
 	}
 
@@ -39,6 +33,10 @@ export default class ClientContainer extends Component {
 			this.setState({ stage: 'error' });
 		}
 	};
+
+	componentDidMount() {
+		this.fetchData();
+	}
 
 	render() {
 		return LoadingHOC(OrderHistory)(this.state);

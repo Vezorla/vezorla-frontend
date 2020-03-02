@@ -1,6 +1,12 @@
 import React from 'react';
 import NecessaryInput from '../../../common/Inputs/NecessaryInput/NecessaryInput';
 
+/**
+ * @file Info Component 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 export default function Info({
 	info,
 	setFirstname,
