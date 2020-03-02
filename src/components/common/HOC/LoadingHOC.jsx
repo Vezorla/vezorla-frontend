@@ -1,24 +1,26 @@
-import React from 'react'
-import { CircularProgress} from '@material-ui/core';
+import React from 'react';
+import { CircularProgress } from '@material-ui/core';
 import Error from '../Error/Error';
 
+/**
+ * @file HOC loading logic
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 const returnVal = (props, WrappedComponent) => {
-    let returnVal;
-    if (props.stage === 'loading') {
-        returnVal = <CircularProgress />;
-    } else if (props.stage === 'error') {
-        console.log(props.stage);
-        returnVal = <Error />;
-    } else {
-        
-        returnVal = <WrappedComponent {...props} />;
-    }
+	let returnVal;
+	if (props.stage === 'loading') {
+		returnVal = <CircularProgress />;
+	} else if (props.stage === 'error') {
+		returnVal = <Error />;
+	} else {
+		returnVal = <WrappedComponent {...props} />;
+	}
 
-    return returnVal;
-}
+	return returnVal;
+};
 
-const loadingHOC = (WrappedComponent) => (props) => returnVal(props, WrappedComponent) 
-
+const loadingHOC = (WrappedComponent) => (props) => returnVal(props, WrappedComponent);
 
 export default loadingHOC;
-
