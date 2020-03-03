@@ -32,7 +32,7 @@ const useStyle = makeStyles((theme) => ({
 const CardList = ({ list }) => {
 	const classes = useStyle();
 
-	//create a cartlist
+	// create a list of cards
 	const returnList = list.map((product) => {
 		return <CardItem key={product.prodId} product={product} />;
 	});

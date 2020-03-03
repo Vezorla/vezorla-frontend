@@ -3,8 +3,8 @@ import Box from '@material-ui/core/Box';
 
 import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
 
-// import Header from '../common/header/header';
-// import Footer from '../common/footer/footer';
+import Header from '../common/header/header';
+import Footer from '../common/footer/footer';
 import NotFound from '../common/404/NotFound';
 import LoginContainer from '../login/logic/LoginContainer';
 
@@ -12,6 +12,7 @@ import Customer from '../Customer/Cutomer';
 import Client from '../Client/Client';
 
 import AuthHOC from '../common/HOC/AuthHOC';
+import About from "../staticPages/About";
 
 // Function will run everytime go to new path or first access the application
 function usePageViews(setLineItems, currentLineItem) {
@@ -62,18 +63,19 @@ function App() {
 
 	return (
 		<div className="App">
-			{/* <Header cart={lineItems} /> */}
+			<Header cart={lineItems} />
 			<Box overflow="scroll" style={{ paddingBottom: '15vh' }}>
 				<Switch>
 					<Route path="/client" render={() => AuthHOC(Client, auth)()} />
 					{/* <Route path="/admin" render={() => AuthHOC(Admin, auth)()} /> */}
 					<Route path="/customer" render={() => <Customer increaseCart={increaseCart} />} />
 					<Route path="/login" exact strict render={() => <LoginContainer setAuth={setAuth} />} />
+					<Route path="/about" exact strict component={About}/>
 					<Route path="/404" component={NotFound} />
 					<Redirect to="/404" />
 				</Switch>
 			</Box>
-			{/* <Footer /> */}
+			<Footer />
 		</div>
 	);
 }
