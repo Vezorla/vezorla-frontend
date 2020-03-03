@@ -10,7 +10,6 @@ assignees: ''
 _*Extract from [Design Document](https://mysait.sharepoint.com/sites/Capstoners/_layouts/15/Doc.aspx?OR=teams&action=edit&sourcedoc={7397DA88-2A12-4D2F-AEFD-45D5CB7AF287})*_
 
 # Description
-
 * Goal in Context
   * _text_
 * Precondition
@@ -26,10 +25,10 @@ _*Extract from [Design Document](https://mysait.sharepoint.com/sites/Capstoners/
   * _text_
 
 # Actor and System Actions
-
 Actor | System
 -- | --
 --  | _action_.
 _action_ | _action_
+## Sub variations
 
 # Screenshots
