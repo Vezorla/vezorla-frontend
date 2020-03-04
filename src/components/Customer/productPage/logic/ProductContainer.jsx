@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import Product from '../view/Product';
-import Error from '../../../common/Error/Error';
+import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
 /**
  * @file Product Logic Component
  * @author MinhL4m
  * @version 1.0
  */
-
 
 export default class ProductContainer extends Component {
 	//constructor
@@ -17,8 +16,7 @@ export default class ProductContainer extends Component {
 			product: '',
 			max: '1',
 			stage: '',
-			imgs: [],
-			error: ''
+			imgs: []
 		};
 		this.setProduct = this.setProduct.bind(this);
 		this.setMax = this.setMax.bind(this);
@@ -92,17 +90,18 @@ export default class ProductContainer extends Component {
 
 	// fetch data again when the component mount
 	componentDidMount() {
-		this.setStage('loading');
-		this.fetchQuantity();
-		this.fetchProductInfo();
+		(async () => {
+			this.setStage('loading');
+			await this.fetchQuantity();
+			this.fetchProductInfo();
+		})();
 	}
 
 	render() {
-		return (
-			<div>
-				{this.state.error === '' ? '' : <Error />}
-				<Product {...this.state} addCartHandler={this.props.addCartHandler} />
-			</div>
-		);
+		return LoadingHOC(Product)({
+			...this.state,
+			addCartHandler: this.props.addCartHandler,
+			message: 'Something went wrong'
+		});
 	}
 }

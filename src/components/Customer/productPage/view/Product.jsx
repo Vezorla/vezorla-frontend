@@ -9,7 +9,6 @@ import loadingHOC from '../../../common/HOC/LoadingHOC';
  * @version 1.0
  */
 
-
 const ProductDetail = ({ product, imgs, quantity, price, value, max, addCartHandler }) => {
 	return (
 		<div>
@@ -33,7 +32,7 @@ const ProductDetail = ({ product, imgs, quantity, price, value, max, addCartHand
 };
 
 function Product(props) {
-	const ProductComponent = loadingHOC(ProductDetail)(props);
+	const ProductComponent = loadingHOC(ProductDetail)({ ...props, message: 'something wrong' });
 	return ProductComponent;
 }
 

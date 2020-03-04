@@ -67,7 +67,9 @@ export default class ShopContainer extends Component {
 		// this.fetchData('url'+event.target.value);
 	};
 
-	// -----add to cart-----
+	/**
+	 * Handler for adding product to cart
+	 */
 	fetchData = async (url) => {
 		this.setStage('loading');
 		try {

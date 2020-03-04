@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Dialog, DialogTitle, DialogContent, DialogActions, Typography, Button} from '@material-ui/core'
+import { Dialog, DialogTitle, DialogContent, DialogActions, Typography, Button } from '@material-ui/core';
 
 /**
  * @file Error Component
@@ -7,12 +7,11 @@ import {Dialog, DialogTitle, DialogContent, DialogActions, Typography, Button} f
  * @version 1.0
  */
 
-
-function Error() {
-    const [open, setOpen] = useState(true)
-    const handleClose = () => {
-        setOpen(false)
-    }
+function Error({ message }) {
+	const [ open, setOpen ] = useState(true);
+	const handleClose = () => {
+		setOpen(false);
+	};
 
 	return (
 		<div>
@@ -22,7 +21,7 @@ function Error() {
 				</DialogTitle>
 				<DialogContent dividers>
 					<Typography gutterBottom variant="h5">
-						Something went wrong!!! It now you, it us. Please visit later. Thank you for your patient.
+						{message}
 					</Typography>
 				</DialogContent>
 				<DialogActions>

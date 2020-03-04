@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Register from '../view/Register';
 import { Button } from '@material-ui/core';
 import Error from '../../../common/Error/Error';
+import { withRouter } from 'react-router-dom';
 
 /**
  * @file Register Logic Component
@@ -14,7 +15,7 @@ var match = true;
 /**
  * Register Logic class component
  */
-export default class RegisterContainer extends Component {
+class RegisterContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -26,6 +27,10 @@ export default class RegisterContainer extends Component {
 			error: false
 		};
 		this.setEmail = this.setEmail.bind(this);
+		this.setFirstname = this.setFirstname.bind(this);
+		this.setLastname = this.setLastname.bind(this);
+		this.setPassword = this.setPassword.bind(this);
+		this.setRePassword = this.setRePassword.bind(this);
 	}
 
 	setFirstname = (e) => {
@@ -52,22 +57,42 @@ export default class RegisterContainer extends Component {
 		this.setState({ rePassword: e.target.value });
 	};
 
-	//------ on Submit--------
+	/**
+	 * Handler for submitting the registration form
+	 */
 	onClick = async () => {
-		const response = await fetch('url', {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				Content: 'application/json'
-			},
-			body: JSON.stringify({ ...this.state }),
-			credentials: 'include'
-		});
+		//only 2 password match, email valid, and password is not empty then this request is send
+		if (
+			match === true &&
+			this.state.password !== '' &&
+			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+				this.state.email
+			)
+		) {
+			try {
+				const response = await fetch('url', {
+					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						Content: 'application/json'
+					},
+					body: JSON.stringify({ username: this.state.username, password: this.state.password }),
+					credentials: 'include'
+				});
 
-		if (response.status === 200) {
-			//redirect back t login
-		} else {
-			this.setState({ error: true });
+				if (response.status === 200) {
+					const data = await response.json();
+					if (data === true) {
+						this.props.history.push('/login');
+					} else {
+						this.setState({ error: true });
+					}
+				} else {
+					this.setState({ error: true });
+				}
+			} catch (err) {
+				this.setState({ error: true });
+			}
 		}
 	};
 
@@ -77,7 +102,7 @@ export default class RegisterContainer extends Component {
 	render() {
 		return (
 			<div>
-				{this.state.error ? <Error /> : ''}
+				{this.state.error ? <Error message="something wrong" /> : ''}
 				<Register
 					firstname={this.state.firstname}
 					lastname={this.state.lastname}
@@ -98,3 +123,5 @@ export default class RegisterContainer extends Component {
 		);
 	}
 }
+
+export default withRouter(RegisterContainer);

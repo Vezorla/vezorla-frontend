@@ -132,7 +132,6 @@ class CartContainer extends Component {
 	calAll = () => {
 		let subTotal = 0;
 		this.state.list.map((lineItem) => {
-			console.log(subTotal);
 			subTotal += lineItem.price * lineItem.quantity;
 		});
 		this.tax = subTotal * 5 / 100;

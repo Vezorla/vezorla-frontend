@@ -11,6 +11,10 @@ import Login from '../view/Login';
  * Login Logic class component
  */
 export default class LoginContainer extends Component {
+	/**
+	 * Constructor
+	 * @param {setAuth} set authentication (client, admin) 
+	 */
 	constructor({ setAuth }) {
 		super(setAuth);
 		this.state = {
@@ -23,6 +27,7 @@ export default class LoginContainer extends Component {
 		this.setUsername = this.setUsername.bind(this);
 	}
 
+	//----Setter-----
 	setUsername = (usernameVal) => {
 		this.setState({ username: usernameVal });
 	};
@@ -31,27 +36,38 @@ export default class LoginContainer extends Component {
 		this.setState({ password: passwordVal });
 	};
 
-	//TODO: set auth for each case
+	/**
+	 * Handle on log in
+	 * Post request to server to verify the email and password
+	 */
 	onClick = async () => {
-		const response = await fetch('url', {
-			method: 'POST',
-			headers: {
-				Content: 'application/json',
-				Accept: 'application/json'
-			},
-			body: JSON.stringify(this.state),
-			credentials: 'include'
-		});
+		try {
+			const response = await fetch('url', {
+				method: 'POST',
+				headers: {
+					Content: 'application/json',
+					Accept: 'application/json'
+				},
+				body: JSON.stringify(this.state),
+				credentials: 'include'
+			});
 
-		if (response.status === 401) {
-			this.setState({ error: 'Invalid username or password' });
-		} else if (response.status === 200) {
-			const data = await response.json();
-			if (data === 'soemthing') {
-				this.setAuth('do something');
-			} else {
-				this.setAuth('do something');
+			//if 401 (Unauthorized) then error message
+			if (response.status === 401) {
+				this.setState({ error: 'Invalid username or password' });
+			} else if (response.status === 200) {
+				//if 200 (ok)
+				const data = await response.json();
+				//login as admin
+				if (data === 'something') {
+					this.setAuth('do something');
+				} else {
+					//login as client
+					this.setAuth('do something');
+				}
 			}
+		} catch (err) {
+			this.setState({ error: 'SOmething wrong' });
 		}
 	};
 
