@@ -25,12 +25,9 @@ export default function Info({
 	setCountry,
 	setPassword
 }) {
-	useEffect(() => {
-		console.log(info.password);
-	}, []);
 	return (
 		<div>
-			<TextField label="First Name" value={info.firstname} onChange={setFirstname} />
+			<TextField label="First Name" value={info.firstname} onChange={(e) => setFirstname(e)} />
 			<TextField label="Last Name" value={info.lastname} onChange={setLastname} />
 			<EmailInput value={info.email} onChange={setEmail} helperText="Invalid Email" />
 			<PhoneInput value={info.phone} onChange={setPhone} helperText="Invalid Phone Number" />

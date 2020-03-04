@@ -43,54 +43,75 @@ class ShippingInfo extends Component {
 
 	//----setter------
 	setFistname(e) {
-		const target = e.target;
 		this.setState({
-			firstname: target.value
+			info: {
+				...this.state.info,
+				firstname: e.target.value
+			}
 		});
 	}
 	setLastName(e) {
-		const target = e.target;
 		this.setState({
-			lastname: target.value
+			info: {
+				...this.state.info,
+				lastname: e.target.value
+			}
 		});
 	}
 	setPhone(newVal) {
 		this.setState({
-			phone: newVal
+			info: {
+				...this.state.info,
+				phone: newVal
+			}
 		});
 	}
 	setPostalCode(newVal) {
 		this.setState({
-			postalCode: newVal
+			info: {
+				...this.state.info,
+				postalCode: newVal
+			}
 		});
 	}
 	setEmail(newVal) {
 		this.setState({
-			email: newVal
+			info: {
+				...this.state.info,
+				email: newVal
+			}
 		});
 	}
 	setAddress(e) {
-		const target = e.target;
 		this.setState({
-			address: target.value
+			info: {
+				...this.state.info,
+				address: e.target.value
+			}
 		});
 	}
 	setCity(e) {
-		const target = e.target;
 		this.setState({
-			city: target.value
+			info: {
+				...this.state.info,
+				city: e.target.value
+			}
 		});
 	}
 	setProvice(e) {
-		const target = e.target;
 		this.setState({
-			provice: target.value
+			info: {
+				...this.state.info,
+				provice: e.target.value
+			}
 		});
 	}
 	setCountry(e) {
-		const target = e.target;
 		this.setState({
-			country: target.value
+			info: {
+				...this.state.info,
+				country: e.target.value
+			}
 		});
 	}
 
