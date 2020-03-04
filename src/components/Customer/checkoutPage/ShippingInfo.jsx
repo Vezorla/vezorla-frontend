@@ -148,12 +148,12 @@ class ShippingInfo extends Component {
 	};
 
 	//----next button handler---
-	handleNext = async () => {
+	temp = async () => {
 		if (
 			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-				this.state.email
+				this.state.info.email
 			) &&
-			/[A-Z]{1}\d{1}[A-Z]{1}\d{1}[A-Z]{1}\d{1}/g.test(this.state.postalCode)
+			/[A-Z]{1}\d{1}[A-Z]{1}\d{1}[A-Z]{1}\d{1}/g.test(this.state.info.postalCode)
 		) {
 			try {
 				const response = await fetch('url', {
@@ -178,6 +178,10 @@ class ShippingInfo extends Component {
 			}
 		}
 	};
+
+	handleNext() {
+		this.temp();
+	}
 
 	render() {
 		return (

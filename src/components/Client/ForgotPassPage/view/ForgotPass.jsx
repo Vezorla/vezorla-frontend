@@ -12,7 +12,7 @@ export default function ForgotPass({ stage, value, onChange, onClick, helperText
 					onClick={onClick}
 					helperText={helperText}
 					error={error}
-					// setError={setError}
+					setError={setError}
 				/>
 			) : (
 				<DoneForgotPass />
