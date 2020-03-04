@@ -39,9 +39,14 @@ class ShippingInfo extends Component {
 		this.setCity = this.setCity.bind(this);
 		this.setProvice = this.setProvice.bind(this);
 		this.setCountry = this.setCountry.bind(this);
+		this.setError = this.setError.bind(this);
 	}
 
 	//----setter------
+	setError() {
+		this.setState({ error: false });
+	}
+
 	setFistname(e) {
 		this.setState({
 			info: {
@@ -177,7 +182,7 @@ class ShippingInfo extends Component {
 	render() {
 		return (
 			<div>
-				{this.state.error ? <Error message="something wrong" /> : ''}
+				{this.state.error ? <Error message="something wrong" onClick={this.setError} /> : ''}
 				<div>
 					<h1>Shipping Information</h1>
 

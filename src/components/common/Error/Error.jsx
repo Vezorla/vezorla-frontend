@@ -7,10 +7,13 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Typography, Button }
  * @version 1.0
  */
 
-function Error({ message }) {
+function Error({ message, onClick }) {
 	const [ open, setOpen ] = useState(true);
 	const handleClose = () => {
 		setOpen(false);
+		if(onClick !== null || onClick !== undefined ){
+			onClick();
+		}
 	};
 
 	return (

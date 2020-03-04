@@ -7,12 +7,13 @@ import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
 // import Footer from '../common/footer/footer';
 import NotFound from '../common/404/NotFound';
 import LoginContainer from '../login/logic/LoginContainer';
+import RegisterContainer from '../Customer/registerPage/logic/RegisterContainer';
+import ForgotPassContainer from '../Client/ForgotPassPage/logic/ForgotPassContainer';
 
 import Customer from '../Customer/Cutomer';
 import Client from '../Client/Client';
 
 import AuthHOC from '../common/HOC/AuthHOC';
-import RegisterContainer from '../Customer/registerPage/logic/RegisterContainer';
 
 // Function will run everytime go to new path or first access the application
 function usePageViews(setLineItems, currentLineItem) {
@@ -71,6 +72,7 @@ function App() {
 					<Route path="/customer" render={() => <Customer increaseCart={increaseCart} />} />
 					<Route path="/login" exact strict render={() => <LoginContainer setAuth={setAuth} />} />
 					<Route path="/register" exact strict component={RegisterContainer} />
+					<Route path="/forgot" exact strict component={ForgotPassContainer} />
 					<Route path="/404" component={NotFound} />
 					<Redirect to="/404" />
 				</Switch>

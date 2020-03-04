@@ -31,6 +31,10 @@ class RegisterContainer extends Component {
 		this.setLastname = this.setLastname.bind(this);
 		this.setPassword = this.setPassword.bind(this);
 		this.setRePassword = this.setRePassword.bind(this);
+		this.setError = this.setError.bind(this);
+	}
+	setError() {
+		this.setState({ error: false });
 	}
 
 	setFirstname = (e) => {
@@ -102,7 +106,7 @@ class RegisterContainer extends Component {
 	render() {
 		return (
 			<div>
-				{this.state.error ? <Error message="something wrong" /> : ''}
+				{this.state.error ? <Error message="something wrong" onClick={this.setError} /> : ''}
 				<Register
 					firstname={this.state.firstname}
 					lastname={this.state.lastname}
