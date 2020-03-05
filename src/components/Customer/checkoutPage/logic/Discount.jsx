@@ -21,7 +21,9 @@ export default class Discount extends Component {
 		};
 	}
 
-	componentDidMount() {}
+	componentDidMount() {
+		this.fetchData();
+	}
 
 	//fetch discount list
 	fetchData = async () => {
