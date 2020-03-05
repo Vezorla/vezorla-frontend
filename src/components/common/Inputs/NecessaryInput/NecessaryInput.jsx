@@ -24,30 +24,77 @@ export default function Info({
 	setPostalCode,
 	setCountry,
 	setPassword,
-	disabled
+	disabled,
+	className
 }) {
+	let name = className !== null || className !== undefined ? 'Default' : className;
 	return (
 		<div>
-			<TextField label="First Name" value={info.firstname} onChange={(e) => setFirstname(e)} />
-			<TextField label="Last Name" value={info.lastname} onChange={setLastname} />
-			<EmailInput value={info.email} onChange={setEmail} helperText="Invalid Email" />
-			<PhoneInput value={info.phone} onChange={setPhone} helperText="Invalid Phone Number" />
+			<TextField
+				label="First Name"
+				className={`${name}--firstname`}
+				value={info.firstname}
+				onChange={(e) => setFirstname(e)}
+			/>
+			<TextField label="Last Name" className={`${name}--lastname`} value={info.lastname} onChange={setLastname} />
+			<EmailInput
+				className={`${name}--email`}
+				value={info.email}
+				onChange={setEmail}
+				helperText="Invalid Email"
+			/>
+			<PhoneInput
+				className={`${name}--phone`}
+				value={info.phone}
+				onChange={setPhone}
+				helperText="Invalid Phone Number"
+			/>
 
 			{/* ---Address--- */}
-			<TextField disabled={disabled} label="Address" value={info.address} onChange={setAddress} />
-			<TextField disabled={disabled} label="City" value={info.city} onChange={setCity} />
-			<TextField disabled={disabled} label="Provice" value={info.provice} onChange={setProvice} />
+			<TextField
+				className={`${name}--address`}
+				disabled={disabled}
+				label="Address"
+				value={info.address}
+				onChange={setAddress}
+			/>
+			<TextField
+				className={`${name}--city`}
+				disabled={disabled}
+				label="City"
+				value={info.city}
+				onChange={setCity}
+			/>
+			<TextField
+				className={`${name}--provice`}
+				disabled={disabled}
+				label="Provice"
+				value={info.provice}
+				onChange={setProvice}
+			/>
 			<PostalCodeInput
 				disabled={disabled}
 				helperText="Invalid Postal Code"
 				value={info.postalCode}
 				onChange={setPostalCode}
 			/>
-			<TextField disabled={disabled} label="Country" value={info.country} onChange={setCountry} />
+			<TextField
+				className={`${name}--country`}
+				disabled={disabled}
+				label="Country"
+				value={info.country}
+				onChange={setCountry}
+			/>
 
 			{/* --Password-- */}
 			{info.password !== null && info.password !== '' && info.password !== undefined ? (
-				<TextField label="Password" disabled={disabled} value={info.password} onChange={setPassword} />
+				<TextField
+					label="Password"
+					className={`${name}--password`}
+					disabled={disabled}
+					value={info.password}
+					onChange={setPassword}
+				/>
 			) : (
 				''
 			)}
