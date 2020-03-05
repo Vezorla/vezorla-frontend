@@ -60,7 +60,15 @@ export default class CartContainer extends Component {
 		this.fetchData();
 	}
 
-	handleBack = () => {
+	handleBack = async () => {
+		const response = await fetch('url', {
+			method: 'PUT',
+			credentials: 'include',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			}
+		});
 		this.props.setStage(this.props.stage - 1);
 	};
 
