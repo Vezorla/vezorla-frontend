@@ -29,6 +29,13 @@ Actor | System
 -- | --
 --  | _action_.
 _action_ | _action_
+## Extensions
+Actor Step | Branching Action
+-- | --
+_actionNumber_ | _action_
 ## Sub variations
+System Step | Branching Action
+-- | --
+_actionNumber_ | _action_
 
 # Screenshots
