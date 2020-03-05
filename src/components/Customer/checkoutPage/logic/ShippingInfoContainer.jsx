@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import ProcessButtons from '../../common/Stepper/ProcessButtons';
-import NecessaryInput from '../../common/Inputs/NecessaryInput/NecessaryInput';
-import Error from '../../common/Error/Error';
+import ProcessButtons from '../../../common/Stepper/ProcessButtons';
+import NecessaryInput from '../../../common/Inputs/NecessaryInput/NecessaryInput';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Error from '../../../common/Error/Error';
 import { withRouter } from 'react-router-dom';
 /**
  * @file Shipping Component
@@ -40,6 +42,7 @@ class ShippingInfo extends Component {
 		this.setProvice = this.setProvice.bind(this);
 		this.setCountry = this.setCountry.bind(this);
 		this.setError = this.setError.bind(this);
+		this.setPickup = this.setPickup.bind(this);
 	}
 
 	//----setter------
@@ -119,7 +122,21 @@ class ShippingInfo extends Component {
 			}
 		});
 	}
+	setPickup() {
+		this.setState({
+			info: {
+				...this.state.info,
+				pickup: !this.state.info.pickup,
+				postalCode: '',
+				address: '',
+				city: '',
+				provice: '',
+				country: ''
+			}
+		});
+	}
 
+	//----Did Mount-----
 	componentDidMount() {
 		this.fetchData();
 	}
@@ -148,40 +165,37 @@ class ShippingInfo extends Component {
 	};
 
 	//----next button handler---
-	temp = async () => {
-		if (
-			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-				this.state.info.email
-			) &&
-			/[A-Z]{1}\d{1}[A-Z]{1}\d{1}[A-Z]{1}\d{1}/g.test(this.state.info.postalCode)
-		) {
-			try {
-				const response = await fetch('url', {
-					method: 'POST',
-					headers: {
-						Accept: 'application/json',
-						Content: 'application/json'
-					},
-					body: JSON.stringify(...this.state.info),
-					credentials: 'include'
-				});
+	handleNext = async () => {
+		// if (
+		// 	/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+		// 		this.state.info.email
+		// 	) &&
+		// 	!this.state.pickup === /[A-Z]{1}\d{1}[A-Z]{1}\d{1}[A-Z]{1}\d{1}/g.test(this.state.info.postalCode)
+		// ) {
+		// 	try {
+		// 		const response = await fetch('url', {
+		// 			method: 'POST',
+		// 			headers: {
+		// 				Accept: 'application/json',
+		// 				Content: 'application/json'
+		// 			},
+		// 			body: JSON.stringify(...this.state.info),
+		// 			credentials: 'include'
+		// 		});
 
-				if (response.status === 200) {
-					this.props.setStage(this.props.stage + 1);
-				} else if (response.status === 401) {
-					//unauthentical
-				} else {
-					this.setState({ error: true });
-				}
-			} catch (err) {
-				this.setState({ error: true });
-			}
-		}
+		// 		if (response.status === 200) {
+		// 			this.props.setStage(this.props.stage + 1);
+		// 		} else if (response.status === 401) {
+		// 			//unauthentical
+		// 		} else {
+		// 			this.setState({ error: true });
+		// 		}
+		// 	} catch (err) {
+		// 		this.setState({ error: true });
+		// 	}
+		// }
+		this.props.setStage(this.props.stage + 1);
 	};
-
-	handleNext() {
-		this.temp();
-	}
 
 	render() {
 		return (
@@ -190,17 +204,24 @@ class ShippingInfo extends Component {
 				<div>
 					<h1>Shipping Information</h1>
 
-					<NecessaryInput
-						info={this.state.info}
-						setAddress={this.setAddress}
-						setCity={this.setCity}
-						setCountry={this.setCountry}
-						setEmail={this.setEmail}
-						setFirstname={this.setFistname}
-						setLastname={this.setLastName}
-						setPhone={this.setPhone}
-						setPostalCode={this.setPostalCode}
-						setProvice={this.setProvice}
+					<div>
+						<NecessaryInput
+							info={this.state.info}
+							setAddress={this.setAddress}
+							setCity={this.setCity}
+							setCountry={this.setCountry}
+							setEmail={this.setEmail}
+							setFirstname={this.setFistname}
+							setLastname={this.setLastName}
+							setPhone={this.setPhone}
+							setPostalCode={this.setPostalCode}
+							setProvice={this.setProvice}
+							disabled={this.state.info.pickup}
+						/>
+					</div>
+					<FormControlLabel
+						control={<Checkbox checked={this.state.info.pickup} onChange={this.setPickup} value="pickup" />}
+						label="Pickup at # street for free"
 					/>
 					<ProcessButtons
 						stage={this.props.stage}

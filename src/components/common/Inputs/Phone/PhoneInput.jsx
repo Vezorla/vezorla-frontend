@@ -15,7 +15,7 @@ const firstVal = (value) => {
 		: '(' + phoneReceive[1] + ') ' + phoneReceive[2] + (phoneReceive[3] ? '-' + phoneReceive[3] : '');
 };
 
-export default function PhoneInput({ value, className, onChange }) {
+export default function PhoneInput({ value, className, onChange, disabled }) {
 	const [ phoneNumber, setPhoneNumber ] = useState('');
 
 	useEffect(() => {
@@ -37,6 +37,7 @@ export default function PhoneInput({ value, className, onChange }) {
 			label="Phone"
 			value={phoneNumber}
 			onChange={phoneHandler}
+			disabled={disabled}
 		/>
 	);
 }

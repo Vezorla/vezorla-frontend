@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { TextField } from '@material-ui/core';
 import EmailInput from '../../../common/Inputs/Email/EmailInput';
 import PhoneInput from '../../../common/Inputs/Phone/PhoneInput';
@@ -23,7 +23,8 @@ export default function Info({
 	setProvice,
 	setPostalCode,
 	setCountry,
-	setPassword
+	setPassword,
+	disabled
 }) {
 	return (
 		<div>
@@ -31,13 +32,22 @@ export default function Info({
 			<TextField label="Last Name" value={info.lastname} onChange={setLastname} />
 			<EmailInput value={info.email} onChange={setEmail} helperText="Invalid Email" />
 			<PhoneInput value={info.phone} onChange={setPhone} helperText="Invalid Phone Number" />
-			<TextField label="Address" value={info.address} onChange={setAddress} />
-			<TextField label="City" value={info.city} onChange={setCity} />
-			<TextField label="Provice" value={info.provice} onChange={setProvice} />
-			<PostalCodeInput helperText="Invalid Postal Code" value={info.postalCode} onChange={setPostalCode} />
-			<TextField label="Country" value={info.country} onChange={setCountry} />
+
+			{/* ---Address--- */}
+			<TextField disabled={disabled} label="Address" value={info.address} onChange={setAddress} />
+			<TextField disabled={disabled} label="City" value={info.city} onChange={setCity} />
+			<TextField disabled={disabled} label="Provice" value={info.provice} onChange={setProvice} />
+			<PostalCodeInput
+				disabled={disabled}
+				helperText="Invalid Postal Code"
+				value={info.postalCode}
+				onChange={setPostalCode}
+			/>
+			<TextField disabled={disabled} label="Country" value={info.country} onChange={setCountry} />
+
+			{/* --Password-- */}
 			{info.password !== null && info.password !== '' && info.password !== undefined ? (
-				<TextField label="Password" value={info.password} onChange={setPassword} />
+				<TextField label="Password" disabled={disabled} value={info.password} onChange={setPassword} />
 			) : (
 				''
 			)}

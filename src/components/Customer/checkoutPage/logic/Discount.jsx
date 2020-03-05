@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FormControl, FormLabel, FormControlLabel, RadioGroup, Radio } from '@material-ui/core';
-import ProcessButtons from '../../common/Stepper/ProcessButtons';
+import ProcessButtons from '../../../common/Stepper/ProcessButtons';
 
 /**
  * @file Discount Component
@@ -10,14 +10,14 @@ import ProcessButtons from '../../common/Stepper/ProcessButtons';
 
 const dummyData = [
 	{ Id: 12, code: 'avc', description: 'jdnsajdnjsandjknsajdnjsandjsandjnasd' },
-	{ Id: 1, code: 'avc', escription: 'dbsahdbhjsabdhbsahjbdhjsabdhjbasjhdbasdbjhbsadjhbasjhdb' }
+	{ Id: 1, code: 'ava', description: 'dbsahdbhjsabdhbsahjbdhjsabdhjbasjhdbasdbjhbsadjhbasjhdb' }
 ];
 export default class Discount extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			list: [],
-			value: ''
+			value: 'NON'
 		};
 	}
 
@@ -38,7 +38,7 @@ export default class Discount extends Component {
 			if (response.status === 200) {
 				let data = await response.json();
 				if (data !== null && (data !== undefined) & (data.length !== 0)) {
-					this.setStage({ list: data });
+					this.setState({ list: data });
 				}
 			}
 		} catch (err) {}
@@ -74,35 +74,46 @@ export default class Discount extends Component {
 				return null;
 			}
 		})();
-		console.log('here');
 		this.props.setStage(this.props.stage + 1);
 	};
 
 	render() {
 		return (
 			<div>
-				<FormControl component="fieldset">
-					<FormLabel component="legend">Discount</FormLabel>
-					<RadioGroup
-						aria-label="gender"
-						name="gender1"
-						value={this.state.value}
-						onChange={this.changeHandler}
-					>
-						{this.state.list === '' ? (
-							''
-						) : (
-							this.state.list.map((discout) => (
+				{this.state.list.length === 0 ? (
+					<h1>There is no current discount</h1>
+				) : (
+					<div>
+						<FormControl component="fieldset">
+							<FormLabel component="legend">Discount</FormLabel>
+							<RadioGroup
+								aria-label="discount"
+								name="discount"
+								value={this.state.value}
+								onChange={this.changeHandler}
+							>
+								{this.state.list === '' ? (
+									''
+								) : (
+									this.state.list.map((discount) => (
+										<FormControlLabel
+											key={discount.code}
+											value={discount.code}
+											control={<Radio color="primary" />}
+											label={discount.description}
+										/>
+									))
+								)}
 								<FormControlLabel
-									key={discout.code}
-									value={discout.code}
+									key="NON"
+									value="NON"
 									control={<Radio color="primary" />}
-									label={discout.description}
+									label="I am good"
 								/>
-							))
-						)}
-					</RadioGroup>
-				</FormControl>
+							</RadioGroup>
+						</FormControl>
+					</div>
+				)}
 				<ProcessButtons
 					stage={this.props.stage}
 					handleBack={this.handleBack}
