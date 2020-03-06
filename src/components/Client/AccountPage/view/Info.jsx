@@ -1,5 +1,6 @@
 import React from 'react';
 import NecessaryInput from '../../../common/Inputs/NecessaryInput/NecessaryInput';
+import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
 /**
  * @file Info Component 
@@ -7,7 +8,7 @@ import NecessaryInput from '../../../common/Inputs/NecessaryInput/NecessaryInput
  * @version 1.0
  */
 
-export default function Info({
+const InfoComponent = ({
 	info,
 	setFirstname,
 	setLastname,
@@ -20,7 +21,7 @@ export default function Info({
 	setCountry,
 	setPassword,
 	setSubscription
-}) {
+}) => {
 	return (
 		<div>
 			<NecessaryInput
@@ -39,4 +40,10 @@ export default function Info({
 			{/* TODO Subscription + SAVE */}
 		</div>
 	);
-}
+};
+
+const Info = (props) => {
+	return LoadingHOC(InfoComponent)({ ...props, message: 'something went wrong with loading information' });
+};
+
+export default Info;

@@ -27,7 +27,7 @@ export default function Info({
 	disabled,
 	className
 }) {
-	let name = className !== null || className !== undefined ? 'Default' : className;
+	let name = className !== null || className !== undefined ? 'default' : className;
 	return (
 		<div>
 			<TextField

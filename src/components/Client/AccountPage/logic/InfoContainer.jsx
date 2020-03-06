@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import LoadingHOC from '../../../common/HOC/LoadingHOC';
 import Info from '../view/Info';
-import loadingHOC from '../../../common/HOC/LoadingHOC';
+import Button from '@material-ui/core/Button';
+
 export default class InfoContainer extends Component {
 	constructor() {
 		super();
@@ -21,8 +21,8 @@ export default class InfoContainer extends Component {
 			},
 			stage: ''
 		};
-		this.setFistname = this.setFistname.bind(this);
-		this.setLastName = this.setLastName.bind(this);
+		this.setFirstname = this.setFirstname.bind(this);
+		this.setLastname = this.setLastname.bind(this);
 		this.setPhone = this.setPhone.bind(this);
 		this.setPostalCode = this.setPostalCode.bind(this);
 		this.setEmail = this.setEmail.bind(this);
@@ -35,67 +35,92 @@ export default class InfoContainer extends Component {
 	}
 
 	//----setter------
-	setFistname(e) {
-		const target = e.target;
+	setFirstname(e) {
 		this.setState({
-			firstname: target.value
+			info: {
+				...this.state.info,
+				firstname: e.target.value
+			}
 		});
 	}
-	setLastName(e) {
-		const target = e.target;
+	setLastname(e) {
 		this.setState({
-			lastname: target.value
+			info: {
+				...this.state.info,
+				lastname: e.target.value
+			}
 		});
 	}
 	setPhone(newVal) {
 		this.setState({
-			phone: newVal
+			info: {
+				...this.state.info,
+				phone: newVal
+			}
 		});
 	}
 	setPostalCode(newVal) {
 		this.setState({
-			postalCode: newVal
+			info: {
+				...this.state.info,
+				postalCode: newVal
+			}
 		});
 	}
 	setEmail(newVal) {
 		this.setState({
-			email: newVal
+			info: {
+				...this.state.info,
+				email: newVal
+			}
 		});
 	}
 	setAddress(e) {
-		const target = e.target;
 		this.setState({
-			address: target.value
+			info: {
+				...this.state.info,
+				address: e.target.value
+			}
 		});
 	}
 	setCity(e) {
-		const target = e.target;
 		this.setState({
-			city: target.value
+			info: {
+				...this.state.info,
+				city: e.target.value
+			}
 		});
 	}
 	setProvice(e) {
-		const target = e.target;
 		this.setState({
-			provice: target.value
+			info: {
+				...this.state.info,
+				provice: e.target.value
+			}
 		});
 	}
 	setCountry(e) {
-		const target = e.target;
 		this.setState({
-			country: target.value
+			info: {
+				...this.state.info,
+				country: e.target.value
+			}
 		});
 	}
 	setPassword(e) {
-		const target = e.taget;
 		this.setState({
-			password: target.value
+			info: {
+				...this.state.info,
+				password: e.target.value
+			}
 		});
 	}
 	setSubscription(e) {
-		const target = e.target;
 		this.setState({
-			subscription: target.value
+			info: {
+				...this.state.info,
+				subscription: e.target.value
+			}
 		});
 	}
 
@@ -104,7 +129,8 @@ export default class InfoContainer extends Component {
 		try {
 			const response = await fetch('url');
 			if (response.status === 200) {
-				const data = response.json();
+				const data = await response.json();
+
 				if (data.length !== 0 && data !== undefined && data !== null) {
 					this.setState({ info: { ...data } });
 					this.setState({ stage: 'done' });
@@ -117,24 +143,56 @@ export default class InfoContainer extends Component {
 		}
 	};
 
+	onClick = async () => {
+		try {
+			const response = await fetch('url', {
+				methods: 'PUT',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				credentials: 'include',
+				body: JSON.stringify(this.state.info)
+			});
+			if (response.status === 200) {
+				//do something that not decide
+			} else if (response.status === 406) {
+				this.props.setMessage('Input incorrect! Please check again');
+				this.props.setError();
+			} else {
+				this.props.setMessage('Something wrong');
+				this.props.setError();
+			}
+		} catch (err) {
+			this.props.setMessage('Something wrong');
+			this.props.setError();
+		}
+	};
+
 	componentDidMount() {
-		this.fetchData();
+		// this.fetchData();
 	}
 
 	render() {
-		return LoadingHOC(Info)({
-			...this.state,
-			setFirstname: this.setFistname,
-			setLastname: this.setLastName,
-			setEmail: this.setEmail,
-			setAddress: this.setAddress,
-			setCity: this.setCity,
-			setCountry: this.setCountry,
-			setPassword: this.setPassword,
-			setPhone: this.setPhone,
-			setPostalCode: this.setPostalCode,
-			setProvice: this.setProvice,
-			setSubscription: this.setSubscription
-		});
+		return (
+			<div>
+				<Info
+					{...this.state}
+					setFirstname={this.setFirstname}
+					setLastname={this.setLastname}
+					setEmail={this.setEmail}
+					setAddress={this.setAddress}
+					setCity={this.setCity}
+					setCountry={this.setCountry}
+					setPassword={this.setPassword}
+					setPhone={this.setPhone}
+					setPostalCode={this.setPostalCode}
+					setProvice={this.setProvice}
+					setSubscription={this.setSubscription}
+				/>
+				<Button variant="contained" color="primary" onClick={this.onClick}>
+					Save
+				</Button>
+			</div>
+		);
 	}
 }

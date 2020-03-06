@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import LoadingHOC from '../../../common/HOC/LoadingHOC';
 import OrderHistory from '../view/OrderHistory';
 /**
  * @file Order View logic Component 
@@ -35,10 +34,10 @@ export default class OrderHistoryContainer extends Component {
 	};
 
 	componentDidMount() {
-		this.fetchData();
+		// this.fetchData();
 	}
 
 	render() {
-		return LoadingHOC(OrderHistory)(this.state);
+		return <OrderHistory {...this.state} />;
 	}
 }

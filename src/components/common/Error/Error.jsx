@@ -11,7 +11,8 @@ function Error({ message, onClick }) {
 	const [ open, setOpen ] = useState(true);
 	const handleClose = () => {
 		setOpen(false);
-		if(onClick !== null || onClick !== undefined ){
+
+		if (onClick !== null && onClick !== undefined) {
 			onClick();
 		}
 	};
