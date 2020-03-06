@@ -24,7 +24,8 @@ class RegisterContainer extends Component {
 			email: '',
 			password: '',
 			rePassword: '',
-			error: false
+			error: false,
+			message: ''
 		};
 		this.setEmail = this.setEmail.bind(this);
 		this.setFirstname = this.setFirstname.bind(this);
@@ -33,6 +34,8 @@ class RegisterContainer extends Component {
 		this.setRePassword = this.setRePassword.bind(this);
 		this.setError = this.setError.bind(this);
 	}
+
+	//----Setters-------
 	setError() {
 		this.setState({ error: false });
 	}
@@ -61,6 +64,10 @@ class RegisterContainer extends Component {
 		this.setState({ rePassword: e.target.value });
 	};
 
+	setMessage = (newVal) => {
+		this.setState({ message: newVal });
+	};
+
 	/**
 	 * Handler for submitting the registration form
 	 */
@@ -80,7 +87,7 @@ class RegisterContainer extends Component {
 						Accept: 'application/json',
 						Content: 'application/json'
 					},
-					body: JSON.stringify({ username: this.state.username, password: this.state.password }),
+					body: JSON.stringify({ email: this.state.email, password: this.state.password }),
 					credentials: 'include'
 				});
 
@@ -90,9 +97,11 @@ class RegisterContainer extends Component {
 						this.props.history.push('/login');
 					} else {
 						this.setState({ error: true });
+						this.setMessage('something wrong');
 					}
 				} else {
 					this.setState({ error: true });
+					this.setMessage('email already exist');
 				}
 			} catch (err) {
 				this.setState({ error: true });
@@ -106,7 +115,7 @@ class RegisterContainer extends Component {
 	render() {
 		return (
 			<div>
-				{this.state.error ? <Error message="something wrong" onClick={this.setError} /> : ''}
+				{this.state.error ? <Error message={this.state.message} onClick={this.setError} /> : ''}
 				<Register
 					firstname={this.state.firstname}
 					lastname={this.state.lastname}

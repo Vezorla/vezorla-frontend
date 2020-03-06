@@ -8,6 +8,9 @@ import LoadingHOC from '../../../common/HOC/LoadingHOC';
  * @version 1.0
  */
 
+/**
+  * Product Logic Class Component
+  */
 export default class ProductContainer extends Component {
 	//constructor
 	constructor(props) {
@@ -23,7 +26,7 @@ export default class ProductContainer extends Component {
 		this.setStage = this.setStage.bind(this);
 	}
 
-	//setter for state
+	//----Setters----
 	setProduct(productVal) {
 		this.setState({ product: productVal });
 	}
@@ -54,6 +57,7 @@ export default class ProductContainer extends Component {
 		this.setState({ imgs: images });
 	}
 
+	//--- get max quantity for this product----
 	fetchQuantity = async () => {
 		try {
 			const responseQuantity = await fetch(
@@ -68,6 +72,7 @@ export default class ProductContainer extends Component {
 		} catch (err) {}
 	};
 
+	//----get product information----
 	fetchProductInfo = async () => {
 		try {
 			const responseQuantity = await fetch(
@@ -88,7 +93,7 @@ export default class ProductContainer extends Component {
 		}
 	};
 
-	// fetch data again when the component mount
+	// fetch data on mount
 	componentDidMount() {
 		(async () => {
 			this.setStage('loading');

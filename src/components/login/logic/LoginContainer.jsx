@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Login from '../view/Login';
+import { withRouter } from 'react-router-dom';
 
 /**
  * @file Login View Componenet 
@@ -10,13 +11,13 @@ import Login from '../view/Login';
 /**
  * Login Logic class component
  */
-export default class LoginContainer extends Component {
+class LoginContainer extends Component {
 	/**
 	 * Constructor
 	 * @param {setAuth} set authentication (client, admin) 
 	 */
-	constructor({ setAuth }) {
-		super(setAuth);
+	constructor( props) {
+		super(props);
 		this.state = {
 			username: '',
 			password: '',
@@ -60,14 +61,15 @@ export default class LoginContainer extends Component {
 				const data = await response.json();
 				//login as admin
 				if (data === 'something') {
-					this.setAuth('do something');
+					this.props.setAuth('do something');
 				} else {
 					//login as client
-					this.setAuth('do something');
+					this.props.setAuth('do something');
 				}
+				this.props.history.push('/home');
 			}
 		} catch (err) {
-			this.setState({ error: 'SOmething wrong' });
+			this.setState({ error: 'Something wrong' });
 		}
 	};
 
@@ -87,3 +89,5 @@ export default class LoginContainer extends Component {
 		);
 	}
 }
+
+export default withRouter(LoginContainer);

@@ -2,6 +2,12 @@ import React from 'react';
 import ProcessButtons from '../../../common/Stepper/ProcessButtons';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
+/**
+ * @file Review view Component
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 const ReviewComponent = ({ list, info, handleBack, handleNext }) => {
 	return (
 		<div>

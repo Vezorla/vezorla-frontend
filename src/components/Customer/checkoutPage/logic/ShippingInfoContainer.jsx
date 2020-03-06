@@ -166,35 +166,34 @@ class ShippingInfo extends Component {
 
 	//----next button handler---
 	handleNext = async () => {
-		// if (
-		// 	/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-		// 		this.state.info.email
-		// 	) &&
-		// 	!this.state.pickup === /[A-Z]{1}\d{1}[A-Z]{1}\d{1}[A-Z]{1}\d{1}/g.test(this.state.info.postalCode)
-		// ) {
-		// 	try {
-		// 		const response = await fetch('url', {
-		// 			method: 'POST',
-		// 			headers: {
-		// 				Accept: 'application/json',
-		// 				Content: 'application/json'
-		// 			},
-		// 			body: JSON.stringify(...this.state.info),
-		// 			credentials: 'include'
-		// 		});
+		if (
+			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+				this.state.info.email
+			) &&
+			!this.state.pickup === /[A-Z]{1}\d{1}[A-Z]{1}\d{1}[A-Z]{1}\d{1}/g.test(this.state.info.postalCode)
+		) {
+			try {
+				const response = await fetch('url', {
+					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						Content: 'application/json'
+					},
+					body: JSON.stringify(...this.state.info),
+					credentials: 'include'
+				});
 
-		// 		if (response.status === 200) {
-		// 			this.props.setStage(this.props.stage + 1);
-		// 		} else if (response.status === 401) {
-		// 			//unauthentical
-		// 		} else {
-		// 			this.setState({ error: true });
-		// 		}
-		// 	} catch (err) {
-		// 		this.setState({ error: true });
-		// 	}
-		// }
-		this.props.setStage(this.props.stage + 1);
+				if (response.status === 200) {
+					this.props.setStage(this.props.stage + 1);
+				} else if (response.status === 401) {
+					//unauthentical
+				} else {
+					this.setState({ error: true });
+				}
+			} catch (err) {
+				this.setState({ error: true });
+			}
+		}
 	};
 
 	render() {
