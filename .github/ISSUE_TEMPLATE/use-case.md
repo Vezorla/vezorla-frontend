@@ -19,8 +19,10 @@ _*Extract from [Design Document](https://mysait.sharepoint.com/sites/Capstoners/
 * Fail Post Condition
   * _text_
 * Primary & Secondary Actors
-  * Primary Actor: _actor_.
-  * Secondary Actor: _actor_.
+  * Primary Actor(s):
+    * _actor_
+  * Secondary Actor(s):
+    * _actor_
 * Trigger(s)
   * _text_
 
