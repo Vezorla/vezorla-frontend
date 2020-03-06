@@ -16,7 +16,7 @@ class LoginContainer extends Component {
 	 * Constructor
 	 * @param {setAuth} set authentication (client, admin) 
 	 */
-	constructor( props) {
+	constructor(props) {
 		super(props);
 		this.state = {
 			username: '',
@@ -49,7 +49,7 @@ class LoginContainer extends Component {
 					Content: 'application/json',
 					Accept: 'application/json'
 				},
-				body: JSON.stringify(this.state),
+				body: JSON.stringify({...this.state}),
 				credentials: 'include'
 			});
 
@@ -82,7 +82,7 @@ class LoginContainer extends Component {
 				<Login
 					{...this.state}
 					setPassword={this.setPassword}
-					setUsername={this.setPassword}
+					setUsername={this.setUsername}
 					onClick={this.onClick}
 				/>
 			</div>

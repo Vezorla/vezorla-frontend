@@ -26,14 +26,20 @@ export default function Login({ username, password, error, setUsername, setPassw
 				<h2>Sign in to continue</h2>
 			</div>
 			<div>
-				<TextField label="Username" error={error !== ''} autoFocus value={username} onChange={setUsername} />
+				<TextField
+					label="Username"
+					error={error !== ''}
+					autoFocus
+					value={username}
+					onChange={(e) => setUsername(e.target.value)}
+				/>
 				<TextField
 					label="Password"
 					error={error !== ''}
 					helperText={error !== '' ? '' : error}
 					type="password"
 					value={password}
-					onChange={setPassword}
+					onChange={(e) => setPassword(e.target.value)}
 				/>
 			</div>
 			<div>

@@ -173,13 +173,14 @@ class ShippingInfo extends Component {
 			!this.state.pickup === /[A-Z]{1}\d{1}[A-Z]{1}\d{1}[A-Z]{1}\d{1}/g.test(this.state.info.postalCode)
 		) {
 			try {
-				const response = await fetch('url', {
+				console.log(JSON.stringify({ ...this.state.info }));
+				const response = await fetch('http://localhost:8080/api/customer/cart/checkout/shipping', {
 					method: 'POST',
 					headers: {
 						Accept: 'application/json',
-						Content: 'application/json'
+						'Content-Type': 'application/json'
 					},
-					body: JSON.stringify(...this.state.info),
+					body: JSON.stringify({ ...this.state.info }),
 					credentials: 'include'
 				});
 
