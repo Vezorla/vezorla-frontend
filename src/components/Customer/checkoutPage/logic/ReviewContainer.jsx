@@ -18,7 +18,7 @@ export default class CartContainer extends Component {
 				discounted_subtotal: '',
 				taxes: '',
 				shipping: '',
-				Total: ''
+				total: ''
 			},
 			stage: ''
 		};

@@ -28,7 +28,7 @@ export default class Discount extends Component {
 	//fetch discount list
 	fetchData = async () => {
 		try {
-			const response = await fetch(`http://localhost:8080/api/customer/discount`, {
+			const response = await fetch(`http://localhost:8080/api/customer/discounts/get`, {
 				method: 'GET',
 				credentials: 'include',
 				headers: {
@@ -51,7 +51,7 @@ export default class Discount extends Component {
 	};
 
 	handleBack = async () => {
-		const response = await fetch('url', {
+		const response = await fetch('http://localhost:8080/api/customer', {
 			method: 'PUT',
 			credentials: 'include',
 			headers: {
@@ -66,7 +66,7 @@ export default class Discount extends Component {
 	handleNext = () => {
 		(async () => {
 			try {
-				const response = await fetch(`http://localhost:8080/api/customer/discount`, {
+				const response = await fetch(`http://localhost:8080/api/customer/selected_discount/get`, {
 					method: 'PUT',
 					credentials: 'include',
 					headers: {

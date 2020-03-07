@@ -20,7 +20,7 @@ export default function Info({
 	setPhone,
 	setAddress,
 	setCity,
-	setProvice,
+	setProvince,
 	setPostalCode,
 	setCountry,
 	setPassword,
@@ -33,10 +33,10 @@ export default function Info({
 			<TextField
 				label="First Name"
 				className={`${name}--firstname`}
-				value={info.firstname}
+				value={info.firstName}
 				onChange={(e) => setFirstname(e)}
 			/>
-			<TextField label="Last Name" className={`${name}--lastname`} value={info.lastname} onChange={setLastname} />
+			<TextField label="Last Name" className={`${name}--lastname`} value={info.lastName} onChange={setLastname} />
 			<EmailInput
 				className={`${name}--email`}
 				value={info.email}
@@ -45,7 +45,7 @@ export default function Info({
 			/>
 			<PhoneInput
 				className={`${name}--phone`}
-				value={info.phone}
+				value={info.phoneNumber}
 				onChange={setPhone}
 				helperText="Invalid Phone Number"
 			/>
@@ -66,11 +66,11 @@ export default function Info({
 				onChange={setCity}
 			/>
 			<TextField
-				className={`${name}--provice`}
+				className={`${name}--province`}
 				disabled={disabled}
-				label="Provice"
-				value={info.provice}
-				onChange={setProvice}
+				label="Province"
+				value={info.province}
+				onChange={setProvince}
 			/>
 			<PostalCodeInput
 				disabled={disabled}

@@ -18,7 +18,7 @@ const URL = 'http://localhost:8080/api/customer/inventory/products/all';
 /**
  * Shop Logic class component
  */
-export default class ShopContainer extends Component {
+class ShopContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -124,3 +124,5 @@ export default class ShopContainer extends Component {
 		);
 	}
 }
+
+export default ShopContainer;

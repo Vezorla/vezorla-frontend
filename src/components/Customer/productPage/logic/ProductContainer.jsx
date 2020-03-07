@@ -103,10 +103,6 @@ export default class ProductContainer extends Component {
 	}
 
 	render() {
-		return LoadingHOC(Product)({
-			...this.state,
-			addCartHandler: this.props.addCartHandler,
-			message: 'Something went wrong'
-		});
+		return <Product {...this.state} addCartHandler={this.props.addCartHandler} />;
 	}
 }

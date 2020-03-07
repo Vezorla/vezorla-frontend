@@ -18,28 +18,29 @@ class ShippingInfo extends Component {
 		super(props);
 		this.state = {
 			info: {
-				firstname: '',
-				lastname: '',
+				firstName: '',
+				lastName: '',
 				email: '',
-				phone: '',
+				phoneNumber: '',
 				address: '',
 				city: '',
 				postalCode: '',
-				provice: '',
+				province: '',
 				country: '',
 				pickup: false
 			},
-			error: false
+			error: false,
+			message: ''
 		};
 		this.handleNext = this.handleNext.bind(this);
-		this.setFistname = this.setFistname.bind(this);
+		this.setFistName = this.setFistName.bind(this);
 		this.setLastName = this.setLastName.bind(this);
-		this.setPhone = this.setPhone.bind(this);
+		this.setPhoneNumber = this.setPhoneNumber.bind(this);
 		this.setPostalCode = this.setPostalCode.bind(this);
 		this.setEmail = this.setEmail.bind(this);
 		this.setAddress = this.setAddress.bind(this);
 		this.setCity = this.setCity.bind(this);
-		this.setProvice = this.setProvice.bind(this);
+		this.setProvince = this.setProvince.bind(this);
 		this.setCountry = this.setCountry.bind(this);
 		this.setError = this.setError.bind(this);
 		this.setPickup = this.setPickup.bind(this);
@@ -50,11 +51,11 @@ class ShippingInfo extends Component {
 		this.setState({ error: false });
 	}
 
-	setFistname(e) {
+	setFistName(e) {
 		this.setState({
 			info: {
 				...this.state.info,
-				firstname: e.target.value
+				firstName: e.target.value
 			}
 		});
 	}
@@ -62,11 +63,11 @@ class ShippingInfo extends Component {
 		this.setState({
 			info: {
 				...this.state.info,
-				lastname: e.target.value
+				lastName: e.target.value
 			}
 		});
 	}
-	setPhone(newVal) {
+	setPhoneNumber(newVal) {
 		this.setState({
 			info: {
 				...this.state.info,
@@ -106,11 +107,11 @@ class ShippingInfo extends Component {
 			}
 		});
 	}
-	setProvice(e) {
+	setProvince(e) {
 		this.setState({
 			info: {
 				...this.state.info,
-				provice: e.target.value
+				province: e.target.value
 			}
 		});
 	}
@@ -130,7 +131,7 @@ class ShippingInfo extends Component {
 				postalCode: '',
 				address: '',
 				city: '',
-				provice: '',
+				province: '',
 				country: ''
 			}
 		});
@@ -170,10 +171,9 @@ class ShippingInfo extends Component {
 			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
 				this.state.info.email
 			) &&
-			!this.state.pickup === /[A-Z]{1}\d{1}[A-Z]{1}\d{1}[A-Z]{1}\d{1}/g.test(this.state.info.postalCode)
+			!this.state.info.pickup === /[A-Z]{1}\d{1}[A-Z]{1}\d{1}[A-Z]{1}\d{1}/g.test(this.state.info.postalCode)
 		) {
 			try {
-				console.log(JSON.stringify({ ...this.state.info }));
 				const response = await fetch('http://localhost:8080/api/customer/cart/checkout/shipping', {
 					method: 'POST',
 					headers: {
@@ -187,12 +187,14 @@ class ShippingInfo extends Component {
 				if (response.status === 200) {
 					this.props.setStage(this.props.stage + 1);
 				} else if (response.status === 401) {
-					//unauthentical
+					this.props.history.push('/home');
+				} else if (response.status === 406) {
+					this.setState({ error: true, message: 'Missing fields please check again' });
 				} else {
-					this.setState({ error: true });
+					this.setState({ error: true, message: 'Something wrong on Serer side' });
 				}
 			} catch (err) {
-				this.setState({ error: true });
+				this.setState({ error: true, message: 'Something wrong on Serer side' });
 			}
 		}
 	};
@@ -200,7 +202,7 @@ class ShippingInfo extends Component {
 	render() {
 		return (
 			<div>
-				{this.state.error ? <Error message="something wrong" onClick={this.setError} /> : ''}
+				{this.state.error ? <Error message={this.state.message} onClick={this.setError} /> : ''}
 				<div>
 					<h1>Shipping Information</h1>
 
@@ -211,11 +213,11 @@ class ShippingInfo extends Component {
 							setCity={this.setCity}
 							setCountry={this.setCountry}
 							setEmail={this.setEmail}
-							setFirstname={this.setFistname}
+							setFirstname={this.setFistName}
 							setLastname={this.setLastName}
-							setPhone={this.setPhone}
+							setPhone={this.setPhoneNumber}
 							setPostalCode={this.setPostalCode}
-							setProvice={this.setProvice}
+							setProvince={this.setProvince}
 							disabled={this.state.info.pickup}
 						/>
 					</div>
