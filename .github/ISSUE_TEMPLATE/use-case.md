@@ -40,4 +40,4 @@ System Step | Branching Action
 -- | --
 _actionNumber_ | _action_
 
-# Screenshots
+# Prototype
