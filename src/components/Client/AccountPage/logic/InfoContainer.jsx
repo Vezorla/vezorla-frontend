@@ -7,13 +7,13 @@ export default class InfoContainer extends Component {
 		super();
 		this.state = {
 			info: {
-				firstname: '',
-				lastname: '',
+				firstName: '',
+				lastName: '',
 				email: '',
-				phone: '',
+				phoneNumber: '',
 				address: '',
 				city: '',
-				provice: '',
+				province: '',
 				postalCode: '',
 				country: '',
 				password: '',
@@ -28,7 +28,7 @@ export default class InfoContainer extends Component {
 		this.setEmail = this.setEmail.bind(this);
 		this.setAddress = this.setAddress.bind(this);
 		this.setCity = this.setCity.bind(this);
-		this.setProvice = this.setProvice.bind(this);
+		this.setProvince = this.setProvince.bind(this);
 		this.setCountry = this.setCountry.bind(this);
 		this.setPassword = this.setPassword.bind(this);
 		this.setSubscription = this.setSubscription.bind(this);
@@ -39,7 +39,7 @@ export default class InfoContainer extends Component {
 		this.setState({
 			info: {
 				...this.state.info,
-				firstname: e.target.value
+				firstName: e.target.value
 			}
 		});
 	}
@@ -47,7 +47,7 @@ export default class InfoContainer extends Component {
 		this.setState({
 			info: {
 				...this.state.info,
-				lastname: e.target.value
+				lastName: e.target.value
 			}
 		});
 	}
@@ -55,7 +55,7 @@ export default class InfoContainer extends Component {
 		this.setState({
 			info: {
 				...this.state.info,
-				phone: newVal
+				phoneNumber: newVal
 			}
 		});
 	}
@@ -91,11 +91,11 @@ export default class InfoContainer extends Component {
 			}
 		});
 	}
-	setProvice(e) {
+	setProvince(e) {
 		this.setState({
 			info: {
 				...this.state.info,
-				provice: e.target.value
+				province: e.target.value
 			}
 		});
 	}
@@ -186,7 +186,7 @@ export default class InfoContainer extends Component {
 					setPassword={this.setPassword}
 					setPhone={this.setPhone}
 					setPostalCode={this.setPostalCode}
-					setProvice={this.setProvice}
+					setProvince={this.setProvince}
 					setSubscription={this.setSubscription}
 				/>
 				<Button variant="contained" color="primary" onClick={this.onClick}>

@@ -16,7 +16,7 @@ const InfoComponent = ({
 	setPhone,
 	setAddress,
 	setCity,
-	setProvice,
+	setProvince,
 	setPostalCode,
 	setCountry,
 	setPassword,
@@ -35,7 +35,7 @@ const InfoComponent = ({
 				setPassword={setPassword}
 				setPhone={setPhone}
 				setPostalCode={setPostalCode}
-				setProvice={setProvice}
+				setProvince={setProvince}
 			/>
 			{/* TODO Subscription + SAVE */}
 		</div>

@@ -12,7 +12,7 @@ import PostalCodeInput from '../../../common/Inputs/PostalCode/PostalCodeInput';
 
 //Every setter accept event except PostalCode, Email, Phone
 //They accept setter with new value as param
-export default function Info({
+export default function NecessaryInput({
 	info,
 	setFirstname,
 	setLastname,

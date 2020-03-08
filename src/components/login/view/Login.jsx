@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
+import EmailInput from '../../common/Inputs/Email/EmailInput';
 
 /**
  * @file Login View Componenet 
@@ -18,7 +19,7 @@ import { NavLink } from 'react-router-dom';
  * @param {function} onClick - function handle submit username and password
  * @returns Login View Component
  */
-export default function Login({ username, password, error, setUsername, setPassword, onClick }) {
+export default function Login({ email, password, error, setEmail, setPassword, onClick }) {
 	return (
 		<div>
 			<div>
@@ -26,17 +27,11 @@ export default function Login({ username, password, error, setUsername, setPassw
 				<h2>Sign in to continue</h2>
 			</div>
 			<div>
-				<TextField
-					label="Username"
-					error={error !== ''}
-					autoFocus
-					value={username}
-					onChange={(e) => setUsername(e.target.value)}
-				/>
+				<EmailInput helperText="Invalid Email" onChange={setEmail} value={email} />
 				<TextField
 					label="Password"
 					error={error !== ''}
-					helperText={error !== '' ? '' : error}
+					helperText={error === '' ? '' : error}
 					type="password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
