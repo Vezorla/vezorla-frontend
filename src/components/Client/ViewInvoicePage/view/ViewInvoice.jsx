@@ -7,7 +7,7 @@ import InvoiceDetail from '../../../common/Invoice_Purchase/InvoiceDetail';
  * @version 1.0
  */
 
-export default function ViewInvoice({ number, date, list, subtotal, shipping, tax, total_tax, total }) {
+export default function ViewInvoice({ number, date, list, subtotal, shipping, tax, total_tax, total, discount }) {
 	return (
 		<div>
 			<h1>Invoice Number - {number}</h1>
@@ -19,6 +19,7 @@ export default function ViewInvoice({ number, date, list, subtotal, shipping, ta
 				tax={tax}
 				total_tax={total_tax}
 				total={total}
+				discount={discount}
 			/>
 		</div>
 	);
