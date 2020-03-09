@@ -3,8 +3,8 @@ import Box from '@material-ui/core/Box';
 
 import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
 
-// import Header from '../common/header/header';
-// import Footer from '../common/footer/footer';
+import Header from '../common/header/header';
+import Footer from '../common/footer/footer';
 import NotFound from '../common/404/NotFound';
 import LoginContainer from '../login/logic/LoginContainer';
 import RegisterContainer from '../Customer/registerPage/logic/RegisterContainer';
@@ -16,6 +16,8 @@ import Client from '../Client/Client';
 import ClientAuthHOC from '../common/HOC/ClientAuthHOC';
 import AdminAuthHOC from '../common/HOC/AdminAuthHOC';
 import CustomerAuthHOC from '../common/HOC/CustomerAuthHOC';
+
+import About from "../staticPages/About";
 
 // Function will run everytime go to new path or first access the application
 function usePageViews(setLineItems, currentLineItem) {
@@ -70,7 +72,7 @@ function App() {
 
 	return (
 		<div className="App">
-			{/* <Header cart={lineItems} /> */}
+			<Header cart={lineItems} />
 			<Box overflow="scroll" style={{ paddingBottom: '15vh' }}>
 				<Switch>
 					<Route path="/client" render={() => ClientAuthHOC(Client, auth)()} />
@@ -79,11 +81,12 @@ function App() {
 					<Route path="/login" exact strict render={() => CustomerAuthHOC(LoginContainer, auth)(authFunc)} />
 					<Route path="/register" exact strict component={RegisterContainer} />
 					<Route path="/forgot" exact strict render={() => CustomerAuthHOC(ForgotPassContainer, auth)()} />
+					<Route path="/about" exact strict component={About}/>
 					<Route path="/404" component={NotFound} />
 					<Redirect to="/404" />
 				</Switch>
 			</Box>
-			{/* <Footer /> */}
+			<Footer />
 		</div>
 	);
 }

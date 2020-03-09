@@ -5,6 +5,7 @@ import ProductContainer from './productPage/logic/ProductContainer';
 import RegisterContainer from './registerPage/logic/RegisterContainer';
 import CartContainer from './cartPage/logic/CartContainer';
 import CheckoutPage from './checkoutPage/CheckoutPage';
+import About from "../staticPages/About";
 
 /**
  * @file Routing Component for Customer features
@@ -33,6 +34,7 @@ export default function Cutomer({ increaseCart }) {
 			/>
 			<Route path="/customer/cart" exact strict component={CartContainer} />
 			<Route path="/customer/checkout" exact strict component={CheckoutPage} />
+
 			<Redirect to="/404" />
 		</Switch>
 	);

@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#fff",
+      main: "#fff"
     }
   }
 });
@@ -38,7 +38,15 @@ export default function ButtonAppBar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar style={{ backgroundColor: "#D0C50A", position: "fixed", top: 0, marginBottom: "3vh" }}>
+      <AppBar
+        style={{
+          backgroundColor: "#D0C50A",
+          position: "fixed",
+          top: 0,
+          marginBottom: "3vh",
+          paddingTop: "0.2em"
+        }}
+      >
         <Toolbar>
           <IconButton
             edge="start"
