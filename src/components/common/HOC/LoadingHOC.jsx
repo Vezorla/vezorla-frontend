@@ -13,7 +13,7 @@ const returnVal = (props, WrappedComponent) => {
 	if (props.stage === 'loading') {
 		returnVal = <CircularProgress />;
 	} else if (props.stage === 'error') {
-		returnVal = <Error />;
+		returnVal = <Error message={props.message} onClick={null} />;
 	} else {
 		returnVal = <WrappedComponent {...props} />;
 	}

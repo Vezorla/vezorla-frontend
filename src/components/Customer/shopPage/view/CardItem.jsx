@@ -18,7 +18,7 @@ import Grid from '@material-ui/core/Grid';
  */
 function CardItem(props) {
 	const { prodId, name, subdescription, harvestTime, imageMain, oldPrice, price, active } = props.product;
-	const url = '/product/' + prodId;
+	const url = '/customer/product/' + prodId;
 
 	return (
 		<Grid item xs={12} sm={6} md={4}>

@@ -8,7 +8,6 @@ import loadingHOC from '../../../common/HOC/LoadingHOC';
  * @version 1.0
  */
 
-
 function Cart(props) {
 	const lineItemList = () => {
 		return (
@@ -28,7 +27,7 @@ function Cart(props) {
 		return total;
 	};
 
-	const CartComponent = loadingHOC(lineItemList)(props);
+	const CartComponent = loadingHOC(lineItemList)({ ...props, message: 'oh no' });
 	return CartComponent;
 }
 export default Cart;

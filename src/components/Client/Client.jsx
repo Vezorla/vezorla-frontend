@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import ClientContainer from '../Client/AccountPage/logic/ClientContainer';
 
 /**
  * @file Client Component
@@ -7,10 +8,10 @@ import { Switch, Route, Redirect } from 'react-router-dom';
  * @version 1.0
  */
 
-
 export default function Client() {
 	return (
 		<Switch>
+			<Route to="/client/account" component={ClientContainer} />
 			<Redirect to="/login" />
 		</Switch>
 	);

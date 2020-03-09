@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { TextField } from '@material-ui/core';
 import EmailInput from '../../../common/Inputs/Email/EmailInput';
 import PhoneInput from '../../../common/Inputs/Phone/PhoneInput';
@@ -12,7 +12,7 @@ import PostalCodeInput from '../../../common/Inputs/PostalCode/PostalCodeInput';
 
 //Every setter accept event except PostalCode, Email, Phone
 //They accept setter with new value as param
-export default function Info({
+export default function NecessaryInput({
 	info,
 	setFirstname,
 	setLastname,
@@ -20,27 +20,81 @@ export default function Info({
 	setPhone,
 	setAddress,
 	setCity,
-	setProvice,
+	setProvince,
 	setPostalCode,
 	setCountry,
-	setPassword
+	setPassword,
+	disabled,
+	className
 }) {
-	useEffect(() => {
-		console.log(info.password);
-	}, []);
+	let name = className !== null || className !== undefined ? 'default' : className;
 	return (
 		<div>
-			<TextField label="First Name" value={info.firstname} onChange={setFirstname} />
-			<TextField label="Last Name" value={info.lastname} onChange={setLastname} />
-			<EmailInput value={info.email} onChange={setEmail} helperText="Invalid Email" />
-			<PhoneInput value={info.phone} onChange={setPhone} helperText="Invalid Phone Number" />
-			<TextField label="Address" value={info.address} onChange={setAddress} />
-			<TextField label="City" value={info.city} onChange={setCity} />
-			<TextField label="Provice" value={info.provice} onChange={setProvice} />
-			<PostalCodeInput helperText="Invalid Postal Code" value={info.postalCode} onChange={setPostalCode} />
-			<TextField label="Country" value={info.country} onChange={setCountry} />
+			<TextField
+				label="First Name"
+				className={`${name}--firstname`}
+				value={info.firstName}
+				onChange={(e) => setFirstname(e)}
+			/>
+			<TextField label="Last Name" className={`${name}--lastname`} value={info.lastName} onChange={setLastname} />
+			<EmailInput
+				className={`${name}--email`}
+				value={info.email}
+				onChange={setEmail}
+				helperText="Invalid Email"
+			/>
+			<PhoneInput
+				className={`${name}--phone`}
+				value={info.phoneNumber}
+				onChange={setPhone}
+				helperText="Invalid Phone Number"
+			/>
+
+			{/* ---Address--- */}
+			<TextField
+				className={`${name}--address`}
+				disabled={disabled}
+				label="Address"
+				value={info.address}
+				onChange={setAddress}
+			/>
+			<TextField
+				className={`${name}--city`}
+				disabled={disabled}
+				label="City"
+				value={info.city}
+				onChange={setCity}
+			/>
+			<TextField
+				className={`${name}--province`}
+				disabled={disabled}
+				label="Province"
+				value={info.province}
+				onChange={setProvince}
+			/>
+			<PostalCodeInput
+				disabled={disabled}
+				helperText="Invalid Postal Code"
+				value={info.postalCode}
+				onChange={setPostalCode}
+			/>
+			<TextField
+				className={`${name}--country`}
+				disabled={disabled}
+				label="Country"
+				value={info.country}
+				onChange={setCountry}
+			/>
+
+			{/* --Password-- */}
 			{info.password !== null && info.password !== '' && info.password !== undefined ? (
-				<TextField label="Password" value={info.password} onChange={setPassword} />
+				<TextField
+					label="Password"
+					className={`${name}--password`}
+					disabled={disabled}
+					value={info.password}
+					onChange={setPassword}
+				/>
 			) : (
 				''
 			)}

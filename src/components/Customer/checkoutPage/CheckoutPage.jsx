@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Discount from './Discount';
-import Payment from './Payment';
-import CartContainer from './CartContainer'
-import ShippingInfo from './ShippingInfo';
+import Discount from './logic/Discount';
+import Payment from './logic/Payment';
+import ReviewContainer from './logic/ReviewContainer';
+import ShippingInfo from './logic/ShippingInfoContainer';
 import ProcessBar from '../../common/Stepper/ProcessBar';
 
 /**
@@ -10,7 +10,6 @@ import ProcessBar from '../../common/Stepper/ProcessBar';
  * @author MinhL4m
  * @version 1.0
  */
-
 
 export default class CheckoutPage extends Component {
 	constructor(props) {
@@ -33,7 +32,7 @@ export default class CheckoutPage extends Component {
 			case 1:
 				return <Discount stage={this.state.stage} setStage={this.setStage} />;
 			case 2:
-				return <CartContainer stage={this.state.stage} setStage={this.setStage} />;
+				return <ReviewContainer stage={this.state.stage} setStage={this.setStage} />;
 			case 3:
 				return <Payment stage={this.state.stage} setStage={this.setStage} />;
 			default:
