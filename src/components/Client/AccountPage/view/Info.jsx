@@ -1,7 +1,14 @@
 import React from 'react';
 import NecessaryInput from '../../../common/Inputs/NecessaryInput/NecessaryInput';
+import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
-export default function Info({
+/**
+ * @file Info Component 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
+const InfoComponent = ({
 	info,
 	setFirstname,
 	setLastname,
@@ -9,12 +16,12 @@ export default function Info({
 	setPhone,
 	setAddress,
 	setCity,
-	setProvice,
+	setProvince,
 	setPostalCode,
 	setCountry,
 	setPassword,
 	setSubscription
-}) {
+}) => {
 	return (
 		<div>
 			<NecessaryInput
@@ -28,9 +35,15 @@ export default function Info({
 				setPassword={setPassword}
 				setPhone={setPhone}
 				setPostalCode={setPostalCode}
-				setProvice={setProvice}
+				setProvince={setProvince}
 			/>
 			{/* TODO Subscription + SAVE */}
 		</div>
 	);
-}
+};
+
+const Info = (props) => {
+	return LoadingHOC(InfoComponent)({ ...props, message: 'something went wrong with loading information' });
+};
+
+export default Info;

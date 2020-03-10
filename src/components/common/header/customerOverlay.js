@@ -84,7 +84,7 @@ export default function TemporaryDrawer() {
             </NavLink>
           </Box>
           <Box boxShadow={3} padding="5px">
-            <NavLink to="/cart" exact>
+            <NavLink to="/customer/cart" exact>
               <ListItem button key={"Cart"} className={classes.type}>
                 <ListItemIcon>
                   <ShoppingCartIcon className={classes.icon} />
@@ -94,7 +94,7 @@ export default function TemporaryDrawer() {
             </NavLink>
           </Box>
           <Box boxShadow={3} padding="5px">
-            <NavLink to="/shop" exact>
+            <NavLink to="/customer/shop" exact>
               <ListItem button key={"Shop"} className={classes.type}>
                 <ListItemIcon>
                   <StoreIcon className={classes.icon} />
@@ -157,7 +157,7 @@ export default function TemporaryDrawer() {
           </Box>
           <Divider style={{ marginBottom: "15px", marginTop: "15px" }} />
           <Box boxShadow={3} padding="5px">
-            <NavLink to="login">
+            <NavLink to="/login">
               <ListItem button key={"Sign In"} className={classes.type}>
                 <ListItemIcon>
                   <AccountCircleIcon className={classes.icon} />

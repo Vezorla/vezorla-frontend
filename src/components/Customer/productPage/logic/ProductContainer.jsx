@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Product from '../view/Product';
-import Error from '../../../common/Error/Error';
+import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
 /**
  * @file Product Logic Component
@@ -8,7 +8,9 @@ import Error from '../../../common/Error/Error';
  * @version 1.0
  */
 
-
+/**
+  * Product Logic Class Component
+  */
 export default class ProductContainer extends Component {
 	//constructor
 	constructor(props) {
@@ -17,15 +19,14 @@ export default class ProductContainer extends Component {
 			product: '',
 			max: '1',
 			stage: '',
-			imgs: [],
-			error: ''
+			imgs: []
 		};
 		this.setProduct = this.setProduct.bind(this);
 		this.setMax = this.setMax.bind(this);
 		this.setStage = this.setStage.bind(this);
 	}
 
-	//setter for state
+	//----Setters----
 	setProduct(productVal) {
 		this.setState({ product: productVal });
 	}
@@ -56,6 +57,7 @@ export default class ProductContainer extends Component {
 		this.setState({ imgs: images });
 	}
 
+	//--- get max quantity for this product----
 	fetchQuantity = async () => {
 		try {
 			const responseQuantity = await fetch(
@@ -70,6 +72,7 @@ export default class ProductContainer extends Component {
 		} catch (err) {}
 	};
 
+	//----get product information----
 	fetchProductInfo = async () => {
 		try {
 			const responseQuantity = await fetch(
@@ -90,19 +93,16 @@ export default class ProductContainer extends Component {
 		}
 	};
 
-	// fetch data again when the component mount
+	// fetch data on mount
 	componentDidMount() {
-		this.setStage('loading');
-		this.fetchQuantity();
-		this.fetchProductInfo();
+		(async () => {
+			this.setStage('loading');
+			await this.fetchQuantity();
+			this.fetchProductInfo();
+		})();
 	}
 
 	render() {
-		return (
-			<div>
-				{this.state.error === '' ? '' : <Error />}
-				<Product {...this.state} addCartHandler={this.props.addCartHandler} />
-			</div>
-		);
+		return <Product {...this.state} addCartHandler={this.props.addCartHandler} />;
 	}
 }

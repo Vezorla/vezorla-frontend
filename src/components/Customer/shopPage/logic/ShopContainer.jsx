@@ -18,7 +18,7 @@ const URL = 'http://localhost:8080/api/customer/inventory/products/all';
 /**
  * Shop Logic class component
  */
-export default class ShopContainer extends Component {
+class ShopContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -67,7 +67,9 @@ export default class ShopContainer extends Component {
 		// this.fetchData('url'+event.target.value);
 	};
 
-	// -----add to cart-----
+	/**
+	 * Handler for adding product to cart
+	 */
 	fetchData = async (url) => {
 		this.setStage('loading');
 		try {
@@ -122,3 +124,5 @@ export default class ShopContainer extends Component {
 		);
 	}
 }
+
+export default ShopContainer;

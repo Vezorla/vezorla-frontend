@@ -7,19 +7,26 @@ import Header from '../common/header/header';
 import Footer from '../common/footer/footer';
 import NotFound from '../common/404/NotFound';
 import LoginContainer from '../login/logic/LoginContainer';
+import RegisterContainer from '../Customer/registerPage/logic/RegisterContainer';
+import ForgotPassContainer from '../Client/ForgotPassPage/logic/ForgotPassContainer';
 
 import Customer from '../Customer/Cutomer';
 import Client from '../Client/Client';
 
-import AuthHOC from '../common/HOC/AuthHOC';
+import ClientAuthHOC from '../common/HOC/ClientAuthHOC';
+import AdminAuthHOC from '../common/HOC/AdminAuthHOC';
+import CustomerAuthHOC from '../common/HOC/CustomerAuthHOC';
+
 import About from "../staticPages/About";
 import Contact from '../staticPages/Contact/view/Contact';
 
 // Function will run everytime go to new path or first access the application
-function usePageViews(setLineItems, currentLineItem) {
+function usePageViews(setLineItems, currentLineItem, setAuth, auth) {
 	let location = useLocation();
 	React.useEffect(
 		() => {
+			console.log(auth);
+			fetchAuth(setAuth);
 			fetchCartLineItems(setLineItems);
 		},
 		[ location ]
@@ -48,11 +55,29 @@ const fetchCartLineItems = async (setLineItems) => {
 	}
 };
 
+const fetchAuth = async (setAuth) => {
+	try {
+		const response = await fetch('url');
+		if (response.status === 200) {
+			const data = await response.json();
+			setAuth(data);
+		} else {
+			setAuth('customer');
+		}
+	} catch (err) {
+		setAuth('customer');
+	}
+};
+
 //-------App--------------
 function App() {
 	//-------state------
 	const [ lineItems, setLineItems ] = useState(0);
-	const [ auth, setAuth ] = useState('client');
+	const [ auth, setAuth ] = useState('customer');
+
+	const authFunc = {
+		setAuth: setAuth.bind(App)
+	};
 
 	//increate Cart function
 	const increaseCart = (value) => {
@@ -60,17 +85,19 @@ function App() {
 	};
 
 	//set the get cart function up and run
-	usePageViews(setLineItems, lineItems);
+	usePageViews(setLineItems, lineItems, setAuth, auth);
 
 	return (
 		<div className="App">
 			<Header cart={lineItems} />
 			<Box overflow="scroll" style={{ paddingBottom: '15vh' }}>
 				<Switch>
-					<Route path="/client" render={() => AuthHOC(Client, auth)()} />
-					{/* <Route path="/admin" render={() => AuthHOC(Admin, auth)()} /> */}
+					<Route path="/client" render={() => ClientAuthHOC(Client, auth)()} />
+					{/* <Route path="/admin" render={() => AdminAuthHOC(Admin, auth)()} /> */}
 					<Route path="/customer" render={() => <Customer increaseCart={increaseCart} />} />
-					<Route path="/login" exact strict render={() => <LoginContainer setAuth={setAuth} />} />
+					<Route path="/login" exact strict render={() => CustomerAuthHOC(LoginContainer, auth)(authFunc)} />
+					<Route path="/register" exact strict render={() => CustomerAuthHOC(RegisterContainer, auth)()} />
+					<Route path="/forgot" exact strict render={() => CustomerAuthHOC(ForgotPassContainer, auth)()} />
 					<Route path="/contact" exact strict component={Contact} />
 					<Route path="/about" exact strict component={About}/>
 					<Route path="/404" component={NotFound} />

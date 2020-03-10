@@ -13,6 +13,7 @@ import About from "../staticPages/About";
  * @version 1.0
  */
 
+
 /**
  * Return Switch component contains all route for customer 
  * @param {Function} increaseCart - function use to increase line item of header component. line item is state of App component

@@ -8,8 +8,14 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
  * @version 1.0
  */
 
-
-const CardPriceComponent = ({price, value, max, onChange, onClick}) => {
+/**
+ * Card Price View Component
+ * @param {price} - price of the product
+ * @param {value} - user select quantity
+ * @param {onChange} - handler for changing quantity
+ * @param {onClick} - handler for add to cart
+ */
+const CardPriceComponent = ({ price, value, max, onChange, onClick }) => {
 	return (
 		<Card
 			style={{
