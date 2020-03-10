@@ -20,10 +20,12 @@ import CustomerAuthHOC from '../common/HOC/CustomerAuthHOC';
 import About from "../staticPages/About";
 
 // Function will run everytime go to new path or first access the application
-function usePageViews(setLineItems, currentLineItem) {
+function usePageViews(setLineItems, currentLineItem, setAuth, auth) {
 	let location = useLocation();
 	React.useEffect(
 		() => {
+			console.log(auth);
+			fetchAuth(setAuth);
 			fetchCartLineItems(setLineItems);
 		},
 		[ location ]
@@ -52,11 +54,25 @@ const fetchCartLineItems = async (setLineItems) => {
 	}
 };
 
+const fetchAuth = async (setAuth) => {
+	try {
+		const response = await fetch('url');
+		if (response.status === 200) {
+			const data = await response.json();
+			setAuth(data);
+		} else {
+			setAuth('customer');
+		}
+	} catch (err) {
+		setAuth('customer');
+	}
+};
+
 //-------App--------------
 function App() {
 	//-------state------
 	const [ lineItems, setLineItems ] = useState(0);
-	const [ auth, setAuth ] = useState('client');
+	const [ auth, setAuth ] = useState('customer');
 
 	const authFunc = {
 		setAuth: setAuth.bind(App)
@@ -68,7 +84,7 @@ function App() {
 	};
 
 	//set the get cart function up and run
-	usePageViews(setLineItems, lineItems);
+	usePageViews(setLineItems, lineItems, setAuth, auth);
 
 	return (
 		<div className="App">
@@ -79,7 +95,7 @@ function App() {
 					{/* <Route path="/admin" render={() => AdminAuthHOC(Admin, auth)()} /> */}
 					<Route path="/customer" render={() => <Customer increaseCart={increaseCart} />} />
 					<Route path="/login" exact strict render={() => CustomerAuthHOC(LoginContainer, auth)(authFunc)} />
-					<Route path="/register" exact strict component={RegisterContainer} />
+					<Route path="/register" exact strict render={() => CustomerAuthHOC(RegisterContainer, auth)()} />
 					<Route path="/forgot" exact strict render={() => CustomerAuthHOC(ForgotPassContainer, auth)()} />
 					<Route path="/about" exact strict component={About}/>
 					<Route path="/404" component={NotFound} />

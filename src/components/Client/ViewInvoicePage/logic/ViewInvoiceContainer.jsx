@@ -17,6 +17,7 @@ export default class ViewInvoiceContainer extends Component {
 			list: [],
 			subtotal: '',
 			shipping: '',
+			discount:'',
 			tax: '',
 			total_tax: '',
 			total: '',
