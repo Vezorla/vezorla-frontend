@@ -22,7 +22,7 @@ const ProductDetail = ({ product, imgs, price, max, addCartHandler }) => {
 	return (
 		<div>
 			<h1>{product.name}</h1>
-			<Stepper imgs={imgs} />
+			<Stepper imgs={imgs} default={true}/>
 			<CardPriceContainer
 				price={product.price}
 				max={max}

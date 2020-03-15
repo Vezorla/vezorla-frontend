@@ -17,14 +17,16 @@ import ClientAuthHOC from '../common/HOC/ClientAuthHOC';
 import AdminAuthHOC from '../common/HOC/AdminAuthHOC';
 import CustomerAuthHOC from '../common/HOC/CustomerAuthHOC';
 
-import About from "../staticPages/About";
+import About from '../staticPages/About';
+
+//---test-----
+import Product from '../Admin/Product/view/Product';
 
 // Function will run everytime go to new path or first access the application
-function usePageViews(setLineItems, currentLineItem, setAuth, auth) {
+function usePageViews(setLineItems, setAuth) {
 	let location = useLocation();
 	React.useEffect(
 		() => {
-			console.log(auth);
 			fetchAuth(setAuth);
 			fetchCartLineItems(setLineItems);
 		},
@@ -84,20 +86,21 @@ function App() {
 	};
 
 	//set the get cart function up and run
-	usePageViews(setLineItems, lineItems, setAuth, auth);
+	usePageViews(setLineItems, setAuth);
 
 	return (
 		<div className="App">
 			{/* <Header cart={lineItems} /> */}
 			<Box overflow="scroll" style={{ paddingBottom: '15vh' }}>
 				<Switch>
+					<Route path="/" exact strict component={Product} />
 					<Route path="/client" render={() => ClientAuthHOC(Client, auth)()} />
 					{/* <Route path="/admin" render={() => AdminAuthHOC(Admin, auth)()} /> */}
 					<Route path="/customer" render={() => <Customer increaseCart={increaseCart} />} />
 					<Route path="/login" exact strict render={() => CustomerAuthHOC(LoginContainer, auth)(authFunc)} />
 					<Route path="/register" exact strict render={() => CustomerAuthHOC(RegisterContainer, auth)()} />
 					<Route path="/forgot" exact strict render={() => CustomerAuthHOC(ForgotPassContainer, auth)()} />
-					<Route path="/about" exact strict component={About}/>
+					<Route path="/about" exact strict component={About} />
 					<Route path="/404" component={NotFound} />
 					<Redirect to="/404" />
 				</Switch>
