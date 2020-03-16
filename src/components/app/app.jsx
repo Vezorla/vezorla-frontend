@@ -90,10 +90,10 @@ function App() {
 
 	return (
 		<div className="App">
-			{/* <Header cart={lineItems} /> */}
+			<Header cart={lineItems} />
 			<Box overflow="scroll" style={{ paddingBottom: '15vh' }}>
 				<Switch>
-					<Route path="/" exact strict component={Product} />
+					{/* <Route path="/" exact strict component={Product} /> */}
 					<Route path="/client" render={() => ClientAuthHOC(Client, auth)()} />
 					{/* <Route path="/admin" render={() => AdminAuthHOC(Admin, auth)()} /> */}
 					<Route path="/customer" render={() => <Customer increaseCart={increaseCart} />} />

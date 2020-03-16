@@ -9,7 +9,7 @@ import {
 	FormControlLabel,
 	Switch
 } from '@material-ui/core';
-import Stepper from '../../../common/Stepper';
+import Stepper from '../../../common/Stepper/Stepper';
 
 export default function CreateProduct({
 	product,
