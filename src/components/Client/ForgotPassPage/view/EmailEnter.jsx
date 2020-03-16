@@ -1,12 +1,12 @@
 import React from 'react';
 import EmailInput from '../../../common/Inputs/Email/EmailInput';
 import { Button } from '@material-ui/core';
-import Error from '../../../common/Error/Error';
+import PopUp from '../../../common/PopUp/PopUp';
 
 export default function EmailEnter({ value, onChange, onClick, helperText, error, setError }) {
 	return (
 		<div>
-			{error === true ? <Error message="Cant find email" onClick={setError} /> : ''}
+			{error === true ? <PopUp message="Cant find email" onClick={setError} /> : ''}
 			<div>
 				<h1>Forgot Your Password?</h1>
 				<p>Don't worry, just enter the e-mail you registered and we will help you with that!</p>

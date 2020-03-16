@@ -20,11 +20,10 @@ import CustomerAuthHOC from '../common/HOC/CustomerAuthHOC';
 import About from "../staticPages/About";
 
 // Function will run everytime go to new path or first access the application
-function usePageViews(setLineItems, currentLineItem, setAuth, auth) {
+function usePageViews(setLineItems, setAuth ) {
 	let location = useLocation();
 	React.useEffect(
 		() => {
-			console.log(auth);
 			fetchAuth(setAuth);
 			fetchCartLineItems(setLineItems);
 		},
@@ -72,7 +71,7 @@ const fetchAuth = async (setAuth) => {
 function App() {
 	//-------state------
 	const [ lineItems, setLineItems ] = useState(0);
-	const [ auth, setAuth ] = useState('customer');
+	const [ auth, setAuth ] = useState('client');
 
 	const authFunc = {
 		setAuth: setAuth.bind(App)
@@ -84,11 +83,11 @@ function App() {
 	};
 
 	//set the get cart function up and run
-	usePageViews(setLineItems, lineItems, setAuth, auth);
+	// usePageViews(setLineItems, setAuth);
 
 	return (
 		<div className="App">
-			<Header cart={lineItems} />
+			{/* <Header cart={lineItems} /> */}
 			<Box overflow="scroll" style={{ paddingBottom: '15vh' }}>
 				<Switch>
 					<Route path="/client" render={() => ClientAuthHOC(Client, auth)()} />

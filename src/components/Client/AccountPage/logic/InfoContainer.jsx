@@ -17,7 +17,7 @@ export default class InfoContainer extends Component {
 				postalCode: '',
 				country: '',
 				password: '',
-				subscription: ''
+				subscription: false
 			},
 			stage: ''
 		};
@@ -119,7 +119,7 @@ export default class InfoContainer extends Component {
 		this.setState({
 			info: {
 				...this.state.info,
-				subscription: e.target.value
+				subscription: e.target.checked
 			}
 		});
 	}
@@ -188,10 +188,8 @@ export default class InfoContainer extends Component {
 					setPostalCode={this.setPostalCode}
 					setProvince={this.setProvince}
 					setSubscription={this.setSubscription}
+					onClick={this.onClick}
 				/>
-				<Button variant="contained" color="primary" onClick={this.onClick}>
-					Save
-				</Button>
 			</div>
 		);
 	}
