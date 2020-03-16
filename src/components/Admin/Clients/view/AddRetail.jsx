@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextField, Button } from '@material-ui/core';
-import Error from '../../../common/Error/PopUp';
+import PopUp from '../../../common/PopUp/PopUp';
 
 export default function AddRetail(
 	info,
@@ -19,8 +19,8 @@ export default function AddRetail(
 ) {
 	return (
 		<div>
-			{save ? <Error message="Retail saved" onClick={setSave} /> : ''}
-			{error ? <Error message={message} onClick={setError} /> : ''}
+			{save ? <PopUp label="Save" message="Retail saved" onClick={setSave} /> : ''}
+			{error ? <PopUp message={message} onClick={setError} /> : ''}
 			<h1>Register Retail Client</h1>
 			<div>
 				<TextField label="Store Name" value={info.storeName} onChange={setStoreName} />
