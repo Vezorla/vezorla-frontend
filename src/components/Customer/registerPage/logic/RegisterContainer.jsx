@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Register from '../view/Register';
 import { Button } from '@material-ui/core';
-import Error from '../../../common/Error/Error';
+import PopUp from '../../../common/PopUp/PopUp';
 import { withRouter } from 'react-router-dom';
 
 /**
@@ -25,6 +25,7 @@ class RegisterContainer extends Component {
 			password: '',
 			rePassword: '',
 			error: false,
+			success: false,
 			message: ''
 		};
 		this.setEmail = this.setEmail.bind(this);
@@ -33,6 +34,7 @@ class RegisterContainer extends Component {
 		this.setPassword = this.setPassword.bind(this);
 		this.setRePassword = this.setRePassword.bind(this);
 		this.setError = this.setError.bind(this);
+		this.setSuccess = this.setSuccess.bind(this);
 	}
 
 	//----Setters-------
@@ -68,6 +70,10 @@ class RegisterContainer extends Component {
 		this.setState({ message: newVal });
 	};
 
+	setSuccess = () => {
+		this.props.history.push('/login');
+	};
+
 	/**
 	 * Handler for submitting the registration form
 	 */
@@ -87,14 +93,18 @@ class RegisterContainer extends Component {
 						Accept: 'application/json',
 						Content: 'application/json'
 					},
-					body: JSON.stringify({ email: this.state.email, password: this.state.password }),
+					body: JSON.stringify({
+						email: this.state.email,
+						password: this.state.password,
+						repassword: this.state.repassword
+					}),
 					credentials: 'include'
 				});
 
 				if (response.status === 200) {
 					const data = await response.json();
 					if (data === true) {
-						this.props.history.push('/login');
+						this.setState({ success: true });
 					} else {
 						this.setState({ error: true });
 						this.setMessage('something wrong');
@@ -115,7 +125,12 @@ class RegisterContainer extends Component {
 	render() {
 		return (
 			<div>
-				{this.state.error ? <Error message={this.state.message} onClick={this.setError} /> : ''}
+				{this.state.error ? <PopUp message={this.state.message} onClick={this.setError} /> : ''}
+				{this.state.success ? (
+					<PopUp label="Success" message={this.state.message} onClick={this.setSuccess} />
+				) : (
+					''
+				)}
 				<Register
 					firstname={this.state.firstname}
 					lastname={this.state.lastname}

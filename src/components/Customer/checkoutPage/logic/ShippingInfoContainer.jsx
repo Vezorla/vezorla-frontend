@@ -3,7 +3,7 @@ import ProcessButtons from '../../../common/Stepper/ProcessButtons';
 import NecessaryInput from '../../../common/Inputs/NecessaryInput/NecessaryInput';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Error from '../../../common/Error/Error';
+import PopUp from '../../../common/PopUp/PopUp';
 import { withRouter } from 'react-router-dom';
 /**
  * @file Shipping Component
@@ -202,7 +202,7 @@ class ShippingInfo extends Component {
 	render() {
 		return (
 			<div>
-				{this.state.error ? <Error message={this.state.message} onClick={this.setError} /> : ''}
+				{this.state.error ? <PopUp message={this.state.message} onClick={this.setError} /> : ''}
 				<div>
 					<h1>Shipping Information</h1>
 
