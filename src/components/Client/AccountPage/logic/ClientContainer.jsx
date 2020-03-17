@@ -42,12 +42,13 @@ export default class ClientContainer extends Component {
 		this.setState({ message: newVal });
 	};
 
-	handleChange = (newValue) => {
-		this.setValue(newValue);
+	handleChange = (event, newVal) => {
+		this.setValue(newVal);
 	};
 
-	handleChangeIndex = (index) => {
-		this.setValue(index);
+	handleChangeIndex = (newVal) => {
+		console.log('a');
+		this.setValue(newVal);
 	};
 	render() {
 		return (
