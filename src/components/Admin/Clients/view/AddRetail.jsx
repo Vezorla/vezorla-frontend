@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextField, Button } from '@material-ui/core';
 import PopUp from '../../../common/PopUp/PopUp';
+import EmailInput from '../../../common/Inputs/Email/EmailInput';
 
 export default function AddRetail(
 	info,
@@ -15,7 +16,8 @@ export default function AddRetail(
 	setSave,
 	error,
 	setError,
-	message
+	message,
+	match
 ) {
 	return (
 		<div>
@@ -25,13 +27,15 @@ export default function AddRetail(
 			<div>
 				<TextField label="Store Name" value={info.storeName} onChange={setStoreName} />
 				<TextField label="Contact Name" value={info.contactName} onChange={setContactName} />
-				<TextField label="Email" value={info.email} onChange={setEmail} />
+				<EmailInput value={info.email} onChange={setEmail} />
 				<TextField label="Password" type="password" value={info.password} onChange={setPassword} />
 				<TextField
 					label="Confirm Password"
 					type="password"
 					value={info.confirmPassword}
 					onChange={setConfirmPassword}
+					error={!match}
+					helperText={match ? '' : 'Unmatch password'}
 				/>
 				<TextField label="Business Number" value={info.bussNum} onChange={setBussNum} />
 			</div>
