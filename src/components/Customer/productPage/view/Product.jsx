@@ -18,14 +18,13 @@ import loadingHOC from '../../../common/HOC/LoadingHOC';
   * @param {max} - current quantity in storage of this product
   * @param {addCartHandler} - handler for adding to cart 
   */
-const ProductDetail = ({ product, imgs, price, value, max, addCartHandler }) => {
+const ProductDetail = ({ product, imgs, price, max, addCartHandler }) => {
 	return (
 		<div>
 			<h1>{product.name}</h1>
 			<Stepper imgs={imgs} />
 			<CardPriceContainer
-				price={price}
-				value={value}
+				price={product.price}
 				max={max}
 				addCartHandler={addCartHandler}
 				id={product.prodId}

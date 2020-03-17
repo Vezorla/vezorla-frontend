@@ -16,7 +16,17 @@ export default class ProductContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			product: '',
+			product: {
+				prodId: '',
+				name: '',
+				description: '',
+				subdescription: '',
+				harvestTime: '',
+				threshhold: '',
+				price: '',
+				oldPrice: '',
+				active: ''
+			},
 			max: '1',
 			stage: '',
 			imgs: []
@@ -81,7 +91,7 @@ export default class ProductContainer extends Component {
 			if (responseQuantity.status === 200) {
 				const product = await responseQuantity.json();
 				if (product !== null) {
-					this.setProduct(product);
+					this.setProduct({ ...product });
 					this.setImgs(product.imageOne, product.imageTwo, product.imageThree, product.imageMain);
 					this.setStage('done');
 				}

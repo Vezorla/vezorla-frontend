@@ -51,7 +51,7 @@ const CardList = ({ list }) => {
  * @returns if props.stage === 'loading', return Loading Component. If props.stage === 'done', return CardList
  */
 function Shop(props) {
-	return loadingHOC(CardList)({ ...props, message: 'something wrong it not you! it is us' });
+	return loadingHOC(CardList)({ ...props, message: 'Something wrong!!!' });
 }
 
 export default Shop;
