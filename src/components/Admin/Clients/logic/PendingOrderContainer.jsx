@@ -14,7 +14,7 @@ export default class PendingOrderContainer extends Component {
 		this.setState({ stage: 'loading' });
 		try {
 			const response = await fetch('url');
-			if (response === 200) {
+			if (response.status === 200) {
 				const data = await response.json();
 				this.setState({
 					list: data,
@@ -25,11 +25,11 @@ export default class PendingOrderContainer extends Component {
 		} catch (err) {
 			this.setState({ stage: 'error' });
 		}
-    };
-    
-    componentDidMount(){
-        this.fetchData();
-    }
+	};
+
+	componentDidMount() {
+		this.fetchData();
+	}
 
 	render() {
 		return (

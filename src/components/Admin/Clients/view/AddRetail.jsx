@@ -3,7 +3,7 @@ import { TextField, Button } from '@material-ui/core';
 import PopUp from '../../../common/PopUp/PopUp';
 import EmailInput from '../../../common/Inputs/Email/EmailInput';
 
-export default function AddRetail(
+export default function AddRetail({
 	info,
 	setStoreName,
 	setContactName,
@@ -18,7 +18,13 @@ export default function AddRetail(
 	setError,
 	message,
 	match
-) {
+}) {
+	console.log(setStoreName);
+	console.log(setContactName);
+	console.log(setPassword);
+	console.log(setBussNum);
+	console.log(setEmail);
+
 	return (
 		<div>
 			{save ? <PopUp label="Save" message="Retail saved" onClick={setSave} /> : ''}

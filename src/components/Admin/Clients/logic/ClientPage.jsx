@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { AppBar, Tabs, SwipeableViews, Tab } from '@material-ui/core';
+import { AppBar, Tabs, Tab } from '@material-ui/core';
 import AddRetailContainer from './AddRetailContainer';
 import ClientContainer from './ClientContainer';
 import PendingOrderContainer from './PendingOrderContainer';
+import SwipeableViews from 'react-swipeable-views';
 
 function a11yProps(index) {
 	return {
@@ -15,9 +16,22 @@ export default class ClientPage extends Component {
 	constructor() {
 		super();
 		this.state = {
-			pendingOrder: 0
+			pendingOrder: 0,
+			value: 0
 		};
 	}
+
+	setValue = (newVal) => {
+		this.setState({ value: newVal });
+	};
+
+	handleChange = (event, newValue) => {
+		this.setValue(newValue);
+	};
+
+	handleChangeIndex = (index) => {
+		this.setValue(index);
+	};
 
 	render() {
 		return (
