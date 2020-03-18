@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import Product from '../view/Product';
 import PopUp from '../../../common/PopUp/PopUp';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
-export default class CreateProductContainer extends Component {
+class CreateProductContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -22,9 +24,9 @@ export default class CreateProductContainer extends Component {
 			success: false,
 			message: ''
 		};
-    }
-    
-    setIndex = (value) => this.setState({ index: value });
+	}
+
+	setIndex = (value) => this.setState({ index: value });
 
 	setCost = (e) => {
 		this.setState({ info: { ...this.state.info, cost: e.target.value } });
@@ -45,7 +47,7 @@ export default class CreateProductContainer extends Component {
 	setDescription = (e) => {
 		this.setState({ info: { ...this.state.info, description: e.target.value } });
 	};
-    // ---------------Re-deceide how to send img------------------
+	// ---------------Re-deceide how to send img------------------
 	addImg = async (e) => {
 		const file = e.target.files[0];
 		try {
@@ -80,7 +82,6 @@ export default class CreateProductContainer extends Component {
 		}
 	};
 
-
 	setError = () => {
 		this.setState({ error: !this.state.error });
 	};
@@ -110,3 +111,5 @@ export default class CreateProductContainer extends Component {
 		);
 	}
 }
+
+export default withRouter(CreateProductContainer);

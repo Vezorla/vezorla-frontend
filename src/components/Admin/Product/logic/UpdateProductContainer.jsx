@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import PopUp from '../../../common/PopUp/PopUp';
 import Product from '../view/Product';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
-export default class UpdateProductContainer extends Component {
+class UpdateProductContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -46,7 +47,7 @@ export default class UpdateProductContainer extends Component {
 		this.setState({ info: { ...this.state.info, description: e.target.value } });
 	};
 
-     // ---------------Re-deceide how to send img------------------
+	// ---------------Re-deceide how to send img------------------
 	addImg = async (e) => {
 		const file = e.target.files[0];
 		try {
@@ -145,3 +146,5 @@ export default class UpdateProductContainer extends Component {
 		);
 	}
 }
+
+export default withRouter(UpdateProductContainer);
