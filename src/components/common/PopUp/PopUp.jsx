@@ -7,7 +7,7 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Typography, Button }
  * @version 1.0
  */
 
-function Error({ message, onClick }) {
+function PopUp({ message, label = 'Error', onClick }) {
 	const [ open, setOpen ] = useState(true);
 	const handleClose = () => {
 		setOpen(false);
@@ -21,7 +21,7 @@ function Error({ message, onClick }) {
 		<div>
 			<Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
 				<DialogTitle id="customized-dialog-title" onClose={handleClose}>
-					Error
+					{label}
 				</DialogTitle>
 				<DialogContent dividers>
 					<Typography gutterBottom variant="h5">
@@ -37,4 +37,4 @@ function Error({ message, onClick }) {
 		</div>
 	);
 }
-export default Error;
+export default PopUp;

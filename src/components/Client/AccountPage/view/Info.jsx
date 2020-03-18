@@ -1,7 +1,7 @@
 import React from 'react';
 import NecessaryInput from '../../../common/Inputs/NecessaryInput/NecessaryInput';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
-
+import { Button, FormControlLabel, Switch } from '@material-ui/core';
 /**
  * @file Info Component 
  * @author MinhL4m
@@ -20,7 +20,8 @@ const InfoComponent = ({
 	setPostalCode,
 	setCountry,
 	setPassword,
-	setSubscription
+	setSubscription,
+	onClick
 }) => {
 	return (
 		<div>
@@ -38,6 +39,21 @@ const InfoComponent = ({
 				setProvince={setProvince}
 			/>
 			{/* TODO Subscription + SAVE */}
+			<FormControlLabel
+				control={
+					<Switch
+						checked={info.subscription}
+						onChange={setSubscription}
+						color="primary"
+					/>
+				}
+				label="Subscription to mailing list"
+				labelPlacement="start"
+			/>
+
+			<Button variant="contained" color="primary" onClick={onClick}>
+				Save
+			</Button>
 		</div>
 	);
 };
