@@ -30,23 +30,17 @@ const InfoComponent = ({
 				setAddress={setAddress}
 				setCity={setCity}
 				setCountry={setCountry}
-				setEmail={setEmail}
 				setFirstname={setFirstname}
 				setLastname={setLastname}
 				setPassword={setPassword}
 				setPhone={setPhone}
 				setPostalCode={setPostalCode}
 				setProvince={setProvince}
+				disbaledEmail={true}
 			/>
 			{/* TODO Subscription + SAVE */}
 			<FormControlLabel
-				control={
-					<Switch
-						checked={info.subscription}
-						onChange={setSubscription}
-						color="primary"
-					/>
-				}
+				control={<Switch checked={info.subscription} onChange={setSubscription} color="primary" />}
 				label="Subscription to mailing list"
 				labelPlacement="start"
 			/>

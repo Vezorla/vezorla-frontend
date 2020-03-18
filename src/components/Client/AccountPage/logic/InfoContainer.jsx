@@ -25,7 +25,6 @@ export default class InfoContainer extends Component {
 		this.setLastname = this.setLastname.bind(this);
 		this.setPhone = this.setPhone.bind(this);
 		this.setPostalCode = this.setPostalCode.bind(this);
-		this.setEmail = this.setEmail.bind(this);
 		this.setAddress = this.setAddress.bind(this);
 		this.setCity = this.setCity.bind(this);
 		this.setProvince = this.setProvince.bind(this);
@@ -67,14 +66,7 @@ export default class InfoContainer extends Component {
 			}
 		});
 	}
-	setEmail(newVal) {
-		this.setState({
-			info: {
-				...this.state.info,
-				email: newVal
-			}
-		});
-	}
+
 	setAddress(e) {
 		this.setState({
 			info: {
@@ -179,7 +171,6 @@ export default class InfoContainer extends Component {
 					{...this.state}
 					setFirstname={this.setFirstname}
 					setLastname={this.setLastname}
-					setEmail={this.setEmail}
 					setAddress={this.setAddress}
 					setCity={this.setCity}
 					setCountry={this.setCountry}
