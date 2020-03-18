@@ -20,6 +20,7 @@ import CustomerAuthHOC from '../common/HOC/CustomerAuthHOC';
 
 import About from '../staticPages/About';
 
+
 // Function will run everytime go to new path or first access the application
 function usePageViews(setLineItems, setAuth) {
 	let location = useLocation();
@@ -84,8 +85,6 @@ function App() {
 	};
 
 	//set the get cart function up and run
-
-
 	// usePageViews(setLineItems, setAuth);
 
 
@@ -95,6 +94,7 @@ function App() {
 			<Box overflow="scroll" style={{ paddingBottom: '15vh' }}>
 				<Switch>
 					{/* <Route path="/" exact strict component={Product} /> */}
+
 					<Route path="/client" render={() => ClientAuthHOC(Client, auth)()} />
 					<Route path="/admin" render={() => AdminAuthHOC(Admin, auth)()} />
 					<Route path="/customer" render={() => <Customer increaseCart={increaseCart} />} />

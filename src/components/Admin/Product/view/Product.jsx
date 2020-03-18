@@ -22,8 +22,8 @@ export default function CreateProduct({
 	setQuantity,
 	setWarehouse,
 	setDescription,
-	saveProduct,
-	cancelProduct
+	onSave,
+	onCancel
 }) {
 	const onClick = (e) => {
 		e.preventDefault();
@@ -99,10 +99,10 @@ export default function CreateProduct({
 				/>
 			</div>
 			<div>
-				<Button variant="contained" color="primary" onClick={saveProduct}>
+				<Button variant="contained" color="primary" onClick={onSave}>
 					Save
 				</Button>
-				<Button variant="contained" color="primary" onClick={cancelProduct}>
+				<Button variant="contained" color="primary" onClick={onCancel}>
 					Cancel
 				</Button>
 			</div>
