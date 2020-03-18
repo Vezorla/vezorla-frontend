@@ -19,8 +19,6 @@ class RegisterContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
-			firstname: '',
-			lastname: '',
 			email: '',
 			password: '',
 			rePassword: '',
@@ -29,8 +27,6 @@ class RegisterContainer extends Component {
 			message: ''
 		};
 		this.setEmail = this.setEmail.bind(this);
-		this.setFirstname = this.setFirstname.bind(this);
-		this.setLastname = this.setLastname.bind(this);
 		this.setPassword = this.setPassword.bind(this);
 		this.setRePassword = this.setRePassword.bind(this);
 		this.setError = this.setError.bind(this);
@@ -41,14 +37,6 @@ class RegisterContainer extends Component {
 	setError() {
 		this.setState({ error: false });
 	}
-
-	setFirstname = (e) => {
-		this.setState({ firstname: e.target.value });
-	};
-
-	setLastname = (e) => {
-		this.setState({ lastname: e.target.value });
-	};
 
 	setEmail = (emailVal) => {
 		this.setState({ email: emailVal });
@@ -132,14 +120,9 @@ class RegisterContainer extends Component {
 					''
 				)}
 				<Register
-					firstname={this.state.firstname}
-					lastname={this.state.lastname}
-					password={this.state.password}
 					rePassword={this.state.rePassword}
 					email={this.state.email}
 					setEmail={this.setEmail}
-					setFirstname={this.setFirstname}
-					setLastname={this.setLastname}
 					setPassword={this.setPassword}
 					setRePassword={this.setRePassword}
 					match={match}

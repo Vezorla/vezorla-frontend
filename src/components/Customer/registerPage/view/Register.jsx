@@ -23,26 +23,12 @@ import EmailInput from '../../../common/Inputs/Email/EmailInput';
  * @param {function} match - function to check if repassword and password match 
  * @returns Register Component
  */
-export default function Register({
-	firstname,
-	setFirstname,
-	lastname,
-	setLastname,
-	email,
-	setEmail,
-	password,
-	setPassword,
-	rePassword,
-	setRePassword,
-	match
-}) {
+export default function Register({ email, setEmail, password, setPassword, rePassword, setRePassword, match }) {
 	return (
 		<div>
 			<div>
 				<h1>Registration</h1>
 			</div>
-			<TextField label="First Name" value={firstname} onChange={setFirstname} />
-			<TextField label="Last Name" value={lastname} onChange={setLastname} />
 			<EmailInput helperText="Invalid Email" value={email} onChange={setEmail} />
 			<TextField label="Password" type="password" value={password} onChange={setPassword} />
 			<TextField
