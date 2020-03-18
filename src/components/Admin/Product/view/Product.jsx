@@ -16,7 +16,7 @@ export default function CreateProduct({
 	imgs,
 	addImg,
 	delImg,
-	setActive,
+	setIndex,
 	setCost,
 	setPrice,
 	setQuantity,
@@ -34,7 +34,7 @@ export default function CreateProduct({
 		<div>
 			<div>{/* <h1>{product.name}</h1> */}</div>
 			<div>
-				<Stepper imgs={imgs} setActive={setActive} />
+				<Stepper imgs={imgs} setActive={setIndex} />
 				<Button variant="contained" onClick={onClick} size="large">
 					Add Image
 				</Button>
@@ -95,7 +95,7 @@ export default function CreateProduct({
 					control={<Switch color="primary" />}
 					label="Set Product Active"
 					labelPlacement="top"
-					onChange={setActive}
+					onChange={setIndex}
 				/>
 			</div>
 			<div>

@@ -24,8 +24,10 @@ export default function EmailInput({ value, onChange, helperText = 'Email is inv
 			error={!emailValid}
 			helperText={emailValid ? '' : helperText}
 			value={value}
-			onChange={emailHandler}
-			disabled={disabled}
+			onChange={disabled ? () => {} : emailHandler}
+			InputProps={{
+				readOnly: { disabled }
+			}}
 			className={className !== null ? className : ''}
 		/>
 	);

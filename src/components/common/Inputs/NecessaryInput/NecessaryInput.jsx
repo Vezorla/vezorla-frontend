@@ -24,27 +24,29 @@ export default function NecessaryInput({
 	setPostalCode,
 	setCountry,
 	setPassword,
-	disabled,
-	className
+	disabled = false,
+	className = 'default',
+	disbaledEmail = false
 }) {
-	let name = className !== null || className !== undefined ? 'default' : className;
+	
 	return (
 		<div>
 			<TextField
 				label="First Name"
-				className={`${name}--firstname`}
+				className={`${className}--firstname`}
 				value={info.firstName}
 				onChange={(e) => setFirstname(e)}
 			/>
-			<TextField label="Last Name" className={`${name}--lastname`} value={info.lastName} onChange={setLastname} />
+			<TextField label="Last Name" className={`${className}--lastname`} value={info.lastName} onChange={setLastname} />
 			<EmailInput
-				className={`${name}--email`}
+				className={`${className}--email`}
 				value={info.email}
-				onChange={setEmail}
+				onChange={setEmail ? setEmail : (value)=>{}}
 				helperText="Invalid Email"
+				disable={disbaledEmail}
 			/>
 			<PhoneInput
-				className={`${name}--phone`}
+				className={`${className}--phone`}
 				value={info.phoneNumber}
 				onChange={setPhone}
 				helperText="Invalid Phone Number"
@@ -52,21 +54,21 @@ export default function NecessaryInput({
 
 			{/* ---Address--- */}
 			<TextField
-				className={`${name}--address`}
+				className={`${className}--address`}
 				disabled={disabled}
 				label="Address"
 				value={info.address}
 				onChange={setAddress}
 			/>
 			<TextField
-				className={`${name}--city`}
+				className={`${className}--city`}
 				disabled={disabled}
 				label="City"
 				value={info.city}
 				onChange={setCity}
 			/>
 			<TextField
-				className={`${name}--province`}
+				className={`${className}--province`}
 				disabled={disabled}
 				label="Province"
 				value={info.province}
@@ -79,7 +81,7 @@ export default function NecessaryInput({
 				onChange={setPostalCode}
 			/>
 			<TextField
-				className={`${name}--country`}
+				className={`${className}--country`}
 				disabled={disabled}
 				label="Country"
 				value={info.country}
@@ -90,7 +92,7 @@ export default function NecessaryInput({
 			{info.password !== null && info.password !== '' && info.password !== undefined ? (
 				<TextField
 					label="Password"
-					className={`${name}--password`}
+					className={`${className}--password`}
 					disabled={disabled}
 					value={info.password}
 					onChange={setPassword}

@@ -20,7 +20,6 @@ import CustomerAuthHOC from '../common/HOC/CustomerAuthHOC';
 
 import About from '../staticPages/About';
 
-
 // Function will run everytime go to new path or first access the application
 function usePageViews(setLineItems, setAuth) {
 	let location = useLocation();
@@ -86,7 +85,6 @@ function App() {
 
 	//set the get cart function up and run
 	// usePageViews(setLineItems, setAuth);
-
 
 	return (
 		<div className="App">
