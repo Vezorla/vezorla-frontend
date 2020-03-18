@@ -1,6 +1,6 @@
 import React from 'react';
 import { CircularProgress } from '@material-ui/core';
-import Error from '../Error/Error';
+import PopUp from '../PopUp/PopUp';
 
 /**
  * @file HOC loading logic
@@ -13,7 +13,7 @@ const returnVal = (props, WrappedComponent) => {
 	if (props.stage === 'loading') {
 		returnVal = <CircularProgress />;
 	} else if (props.stage === 'error') {
-		returnVal = <Error message={props.message} onClick={null} />;
+		returnVal = <PopUp message={props.message} onClick={null} />;
 	} else {
 		returnVal = <WrappedComponent {...props} />;
 	}

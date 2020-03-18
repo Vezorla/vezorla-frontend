@@ -12,15 +12,13 @@ import ForgotPassContainer from '../Client/ForgotPassPage/logic/ForgotPassContai
 
 import Customer from '../Customer/Cutomer';
 import Client from '../Client/Client';
+import Admin from '../Admin/Admin';
 
 import ClientAuthHOC from '../common/HOC/ClientAuthHOC';
 import AdminAuthHOC from '../common/HOC/AdminAuthHOC';
 import CustomerAuthHOC from '../common/HOC/CustomerAuthHOC';
 
 import About from '../staticPages/About';
-
-//---test-----
-import Product from '../Admin/Product/view/Product';
 
 // Function will run everytime go to new path or first access the application
 function usePageViews(setLineItems, setAuth) {
@@ -74,7 +72,7 @@ const fetchAuth = async (setAuth) => {
 function App() {
 	//-------state------
 	const [ lineItems, setLineItems ] = useState(0);
-	const [ auth, setAuth ] = useState('customer');
+	const [ auth, setAuth ] = useState('admin');
 
 	const authFunc = {
 		setAuth: setAuth.bind(App)
@@ -86,7 +84,10 @@ function App() {
 	};
 
 	//set the get cart function up and run
-	usePageViews(setLineItems, setAuth);
+
+
+	// usePageViews(setLineItems, setAuth);
+
 
 	return (
 		<div className="App">
@@ -95,7 +96,7 @@ function App() {
 				<Switch>
 					{/* <Route path="/" exact strict component={Product} /> */}
 					<Route path="/client" render={() => ClientAuthHOC(Client, auth)()} />
-					{/* <Route path="/admin" render={() => AdminAuthHOC(Admin, auth)()} /> */}
+					<Route path="/admin" render={() => AdminAuthHOC(Admin, auth)()} />
 					<Route path="/customer" render={() => <Customer increaseCart={increaseCart} />} />
 					<Route path="/login" exact strict render={() => CustomerAuthHOC(LoginContainer, auth)(authFunc)} />
 					<Route path="/register" exact strict render={() => CustomerAuthHOC(RegisterContainer, auth)()} />
