@@ -1,9 +1,15 @@
 import React from 'react';
 import NecessaryInput from '../../../common/Inputs/NecessaryInput/NecessaryInput';
-import { Button, FormControlLabel, Switch } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import LoadingHOC from '../../../common/HOC/LoadingHOC';
+import PopUp from '../../../common/PopUp/PopUp'
 
-export default function ClientInfo({
+function ClientInfoComponent({
 	info,
+	message,
+	error,
+	success,
+	reseted,
 	order,
 	value,
 	setFirstname,
@@ -14,15 +20,19 @@ export default function ClientInfo({
 	setProvince,
 	setPostalCode,
 	setCountry,
-	setSubscription,
 	onSave,
-	onCancel,
-	onReset
+	onReset,
+	setError,
+	setReset,
+	goBack
 }) {
 	return (
 		<div>
+			{error?<PopUp label="Error" message={message} onClick={setError}/>:''}
+			{success?<PopUp label="Success" message={message} onClick={goBack}/>:''}
+			{reseted?<PopUp label="Reset" message={message} onClick={setReset}/>:''}
 			<div>
-				<h1>Client ID</h1>
+				<h1>Client ID - {info.type}</h1>
 			</div>
 			<div>
 				<NecessaryInput
@@ -36,11 +46,6 @@ export default function ClientInfo({
 					setPostalCode={setPostalCode}
 					setProvince={setProvince}
 					disbaledEmail={true}
-				/>
-				<FormControlLabel
-					control={<Switch checked={info.subscription} onChange={setSubscription} color="primary" />}
-					label="Subscription to mailing list"
-					labelPlacement="start"
 				/>
 
 				<Button variant="contained" onClick={onReset}>
@@ -63,10 +68,14 @@ export default function ClientInfo({
 				<Button variant="contained" onClick={onSave}>
 					Save
 				</Button>
-				<Button variant="contained" onClick={onCancel}>
+				<Button variant="contained" onClick={goBack}>
 					Cancel
 				</Button>
 			</div>
 		</div>
 	);
+}
+
+export default function ClientInfo(props) {
+	return LoadingHOC(ClientInfoComponent)({ ...props });
 }
