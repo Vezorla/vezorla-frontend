@@ -51,7 +51,7 @@ export default class CreateProductContainer extends Component {
 		try {
 			const response = await fetch('url', {
 				method: 'POST',
-				header: {
+				headers: {
 					// If doesn't work change into img/xyz
 					'Content-Type': 'img/*'
 				},

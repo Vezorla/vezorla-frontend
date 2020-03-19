@@ -121,12 +121,10 @@ export default class InfoContainer extends Component {
 		try {
 			const response = await fetch('url');
 			if (response.status === 200) {
-				const data = await response.json();
-
-				if (data.length !== 0 && data !== undefined && data !== null) {
-					this.setState({ info: { ...data } });
-					this.setState({ stage: 'done' });
-				}
+				const data = await response.json();	
+				this.setState({ info: { ...data } });
+				this.setState({ stage: 'done' });
+				
 			} else if (response.status >= 400) {
 				this.setState({ stage: 'error' });
 			}

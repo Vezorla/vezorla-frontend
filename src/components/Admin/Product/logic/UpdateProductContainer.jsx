@@ -70,7 +70,7 @@ export default class UpdateProductContainer extends Component {
 		try {
 			const response = await fetch('url', {
 				method: 'DELETE',
-				header: {
+				headers: {
 					'Content-Type': 'application-json'
 				},
 				credentials: 'include',
