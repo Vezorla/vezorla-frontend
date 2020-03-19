@@ -15,7 +15,8 @@ export default class CheckoutPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			stage: 0
+			stage: 0,
+			cart: true
 		};
 		this.setStage = this.setStage.bind(this);
 		this._switchCase = this._switchCase.bind(this);
@@ -27,6 +28,16 @@ export default class CheckoutPage extends Component {
 		});
 	}
 
+	fetchCheckCart = async () => {
+		try {
+			const response = await fetch('url');
+			if (response.status === 200) {
+				const data = await response.json();
+				this.setState({ cart: data });
+			}
+		} catch (err) {}
+	};
+
 	_switchCase(stageVal) {
 		switch (stageVal) {
 			case 1:
@@ -36,14 +47,22 @@ export default class CheckoutPage extends Component {
 			case 3:
 				return <Payment stage={this.state.stage} setStage={this.setStage} />;
 			default:
-				return <ShippingInfo stage={this.state.stage} setStage={this.setStage} />;
+				return <ShippingInfo stage={this.state.stage} setStage={this.setStage} auth={this.props.auth} />;
 		}
 	}
 
 	render() {
 		return (
 			<div>
-				{this._switchCase(this.state.stage)} <ProcessBar stage={this.state.stage} steps={this.steps} />
+				{this.state.cart ? (
+					<div>
+						{this._switchCase(this.state.stage)} <ProcessBar stage={this.state.stage} steps={this.steps} />
+					</div>
+				) : (
+					<div>
+						<h1>Your cart is empty please add item then check out</h1>
+					</div>
+				)}
 			</div>
 		);
 	}

@@ -32,19 +32,18 @@ class ShippingInfo extends Component {
 			error: false,
 			message: ''
 		};
-		this.setStageInfo = this.setStageInfo.bind(this);
+		this.setStateInfo = this.setStateInfo.bind(this);
 		this.handleNext = this.handleNext.bind(this);
 		this.setPhoneNumber = this.setPhoneNumber.bind(this);
 		this.setPostalCode = this.setPostalCode.bind(this);
 		this.setEmail = this.setEmail.bind(this);
 		this.setError = this.setError.bind(this);
 		this.setPickup = this.setPickup.bind(this);
-		this.setStageInfo = this.setStageInfo.bind(this);
 	}
 
 	//----setter------
 
-	setStageInfo(field) {
+	setStateInfo(field) {
 		return (e) => {
 			this.setState({
 				info: {
@@ -100,7 +99,9 @@ class ShippingInfo extends Component {
 
 	//----Did Mount-----
 	componentDidMount() {
-		this.fetchData();
+		if(this.props.auth !== 'client'){
+			this.fetchData();
+		}
 	}
 
 	//get customer info onload
@@ -170,15 +171,15 @@ class ShippingInfo extends Component {
 					<div>
 						<NecessaryInput
 							info={this.state.info}
-							setAddress={this.setStageInfo('address')}
-							setCity={this.setStageInfo('city')}
-							setCountry={this.setStageInfo('country')}
+							setAddress={this.setStateInfo('address')}
+							setCity={this.setStateInfo('city')}
+							setCountry={this.setStateInfo('country')}
 							setEmail={this.setEmail}
-							setFirstname={this.setStageInfo('firstName')}
-							setLastname={this.setStageInfo('lastName')}
+							setFirstname={this.setStateInfo('firstName')}
+							setLastname={this.setStateInfo('lastName')}
 							setPhone={this.setPhoneNumber}
 							setPostalCode={this.setPostalCode}
-							setProvince={this.setStageInfo('province')}
+							setProvince={this.setStateInfo('province')}
 							disabled={this.state.info.pickup}
 						/>
 					</div>

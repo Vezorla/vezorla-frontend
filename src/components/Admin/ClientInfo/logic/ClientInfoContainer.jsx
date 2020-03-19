@@ -29,7 +29,7 @@ class ClientInfoContainer extends Component {
 	}
 
 	//----setter------
-	setStageValue(field) {
+	setStateValue(field) {
 		return (e) => {
 			this.setState({ info: { ...this.state.info, [`${field}`]: e.target.value } });
 		};
@@ -140,14 +140,14 @@ class ClientInfoContainer extends Component {
 			<div>
 				<ClientInfo
 					{...this.state}
-					setFirstname={this.setStageValue('firstName')}
-					setLastname={this.setStageValue('lastName')}
+					setFirstname={this.setStateValue('firstName')}
+					setLastname={this.setStateValue('lastName')}
 					setPhone={this.setPhone}
-					setAddress={this.setStageValue('address')}
-					setCity={this.setStageValue('city')}
-					setProvince={this.setStageValue('province')}
+					setAddress={this.setStateValue('address')}
+					setCity={this.setStateValue('city')}
+					setProvince={this.setStateValue('province')}
 					setPostalCode={this.setPostalCode}
-					setCountry={this.setStageValue('country')}
+					setCountry={this.setStateValue('country')}
 					onSave={this.onSave}
 					onReset={this.onReset}
 					setError={this.setPopUp('error')}
