@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import Product from '../view/Product';
 import PopUp from '../../../common/PopUp/PopUp';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
-export default class CreateProductContainer extends Component {
+class CreateProductContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -28,6 +30,7 @@ export default class CreateProductContainer extends Component {
 		this.delImg = this.delImg.bind(this);
 	}
 
+
 	setIndex = (value) => this.setState({ index: value });
 
 	setStageInfo(field) {
@@ -43,6 +46,7 @@ export default class CreateProductContainer extends Component {
 	goBack = () => {
 		this.props.history.push('/admin/inventory');
 	};
+
 
 	// ---------------Re-deceide how to send img------------------
 	addImg = async (e) => {
@@ -100,3 +104,5 @@ export default class CreateProductContainer extends Component {
 		);
 	}
 }
+
+export default withRouter(CreateProductContainer);
