@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import PopUp from '../../../common/PopUp/PopUp';
 import Product from '../view/Product';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
-export default class UpdateProductContainer extends Component {
+class UpdateProductContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -131,3 +132,5 @@ export default class UpdateProductContainer extends Component {
 		);
 	}
 }
+
+export default withRouter(UpdateProductContainer);
