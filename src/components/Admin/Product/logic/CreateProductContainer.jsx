@@ -24,36 +24,37 @@ class CreateProductContainer extends Component {
 			success: false,
 			message: ''
 		};
+		this.setIndex = this.setIndex.bind(this);
+		this.setStageInfo = this.setStageInfo.bind(this);
+		this.addImg = this.addImg.bind(this);
+		this.delImg = this.delImg.bind(this);
 	}
+
 
 	setIndex = (value) => this.setState({ index: value });
 
-	setCost = (e) => {
-		this.setState({ info: { ...this.state.info, cost: e.target.value } });
+	setStageInfo(field) {
+		return (e) => {
+			this.setState({ info: { ...this.state.info, [`${field}`]: e.target.value } });
+		};
+	}
+
+	setError = () => {
+		this.setState({ error: !this.state.error });
 	};
 
-	setPrice = (e) => {
-		this.setState({ info: { ...this.state.info, price: e.target.value } });
+	goBack = () => {
+		this.props.history.push('/admin/inventory');
 	};
 
-	setQuantity = (e) => {
-		this.setState({ info: { ...this.state.info, quantity: e.target.value } });
-	};
 
-	setWarehouse = (e) => {
-		this.setState({ info: { ...this.state.info, warehouse: e.target.value } });
-	};
-
-	setDescription = (e) => {
-		this.setState({ info: { ...this.state.info, description: e.target.value } });
-	};
 	// ---------------Re-deceide how to send img------------------
 	addImg = async (e) => {
 		const file = e.target.files[0];
 		try {
 			const response = await fetch('url', {
 				method: 'POST',
-				header: {
+				headers: {
 					// If doesn't work change into img/xyz
 					'Content-Type': 'img/*'
 				},
@@ -82,14 +83,6 @@ class CreateProductContainer extends Component {
 		}
 	};
 
-	setError = () => {
-		this.setState({ error: !this.state.error });
-	};
-
-	goBack = () => {
-		this.props.history.push('/admin/inventory');
-	};
-
 	render() {
 		return (
 			<div>
@@ -99,11 +92,11 @@ class CreateProductContainer extends Component {
 					...this.state,
 					addImg: this.addImg,
 					delImg: this.delImg,
-					setCost: this.setCost,
-					setPrice: this.setPrice,
-					setQuantity: this.setQuantity,
-					setWarehouse: this.setWarehouse,
-					setDescription: this.setDescription,
+					setCost: this.setStageInfo('cost'),
+					setPrice: this.setStageInfo('price'),
+					setQuantity: this.setStageInfo('price'),
+					setWarehouse: this.setStageInfo('warehouse'),
+					setDescription: this.this.setStageInfo('description'),
 					onSave: this.onSave,
 					onCancel: this.goBack
 				})}

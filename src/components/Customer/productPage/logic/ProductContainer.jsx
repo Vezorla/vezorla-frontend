@@ -31,22 +31,6 @@ export default class ProductContainer extends Component {
 			stage: '',
 			imgs: []
 		};
-		this.setProduct = this.setProduct.bind(this);
-		this.setMax = this.setMax.bind(this);
-		this.setStage = this.setStage.bind(this);
-	}
-
-	//----Setters----
-	setProduct(productVal) {
-		this.setState({ product: productVal });
-	}
-
-	setMax(maxVal) {
-		this.setState({ max: maxVal });
-	}
-
-	setStage(stageVal) {
-		this.setState({ stage: stageVal });
 	}
 
 	setImgs(imageMain, imageOne, imageTwo, imageThree) {
@@ -76,7 +60,7 @@ export default class ProductContainer extends Component {
 			if (responseQuantity.status === 200) {
 				const max = await responseQuantity.json();
 				if (max !== 0 || max !== null) {
-					this.setMax(max);
+					this.setState({ max: max });
 				}
 			}
 		} catch (err) {}
@@ -91,22 +75,22 @@ export default class ProductContainer extends Component {
 			if (responseQuantity.status === 200) {
 				const product = await responseQuantity.json();
 				if (product !== null) {
-					this.setProduct({ ...product });
+					this.setState({ product: { ...product } });
 					this.setImgs(product.imageOne, product.imageTwo, product.imageThree, product.imageMain);
-					this.setStage('done');
+					this.setState({ stage: 'done' });
 				}
 			} else if (responseQuantity.status > 400) {
-				this.setStage('error');
+				this.setState({ stage: 'error' });
 			}
 		} catch (err) {
-			this.setStage('error');
+			this.setState({ stage: 'error' });
 		}
 	};
 
 	// fetch data on mount
 	componentDidMount() {
 		(async () => {
-			this.setStage('loading');
+			this.setState({ stage: 'loading' });
 			await this.fetchQuantity();
 			this.fetchProductInfo();
 		})();

@@ -12,7 +12,6 @@ const InfoComponent = ({
 	info,
 	setFirstname,
 	setLastname,
-	setEmail,
 	setPhone,
 	setAddress,
 	setCity,
@@ -38,14 +37,13 @@ const InfoComponent = ({
 				setProvince={setProvince}
 				disbaledEmail={true}
 			/>
-			{/* TODO Subscription + SAVE */}
 			<FormControlLabel
 				control={<Switch checked={info.subscription} onChange={setSubscription} color="primary" />}
 				label="Subscription to mailing list"
 				labelPlacement="start"
 			/>
 
-			<Button variant="contained" color="primary" onClick={onClick}>
+			<Button variant="contained" onClick={onClick}>
 				Save
 			</Button>
 		</div>

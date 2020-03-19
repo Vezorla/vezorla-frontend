@@ -27,43 +27,16 @@ class ShopContainer extends Component {
 			filter: '',
 			order: ''
 		};
-		this.setFilter = this.setFilter.bind(this);
-		this.setOrder = this.setOrder.bind(this);
-		this.setList = this.setList.bind(this);
-		this.setStage = this.setStage.bind(this);
-		this.fetchData = this.fetchData.bind(this);
-	}
-
-	//-------Setter for state-----
-	setFilter(filterVal) {
-		this.setState({
-			filter: filterVal
-		});
-	}
-	setOrder(orderVal) {
-		this.setState({
-			order: orderVal
-		});
-	}
-	setList(listVal) {
-		this.setState({
-			list: listVal
-		});
-	}
-	setStage(stageVal) {
-		this.setState({
-			stage: stageVal
-		});
 	}
 
 	// -----event handler of filter and order. Use to fetch and set the value display--------
 	handleChangeFilter = (event) => {
-		this.setFilter(event.target.value);
+		this.setState({ filter: event.target.value });
 		// this.fetchData('url'+event.target.value);
 	};
 
 	handleChangeOrder = (event) => {
-		this.setOrder(event.target.value);
+		this.setState({ order: event.target.value });
 		// this.fetchData('url'+event.target.value);
 	};
 
@@ -71,21 +44,21 @@ class ShopContainer extends Component {
 	 * Handler for adding product to cart
 	 */
 	fetchData = async (url) => {
-		this.setStage('loading');
+		this.setState({ stage: 'loading' });
 		try {
 			const response = await fetch(url);
 
 			if (response.status === 200) {
 				const data = await response.json();
 				if (data !== null) {
-					this.setList(data);
-					this.setStage('done');
+					this.setState({ list: data });
+					this.setState({ stage: 'done' });
 				}
 			} else if (response.status >= 400) {
-				this.setStage('error');
+				this.setState({ stage: 'error' });
 			}
 		} catch (err) {
-			this.setStage('error');
+			this.setState({ stage: 'error' });
 		}
 	};
 

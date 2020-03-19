@@ -72,7 +72,7 @@ const fetchAuth = async (setAuth) => {
 function App() {
 	//-------state------
 	const [ lineItems, setLineItems ] = useState(0);
-	const [ auth, setAuth ] = useState('admin');
+	const [ auth, setAuth ] = useState('client');
 
 	const authFunc = {
 		setAuth: setAuth.bind(App)

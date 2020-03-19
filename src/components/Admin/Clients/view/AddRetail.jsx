@@ -19,16 +19,11 @@ export default function AddRetail({
 	message,
 	match
 }) {
-	console.log(setStoreName);
-	console.log(setContactName);
-	console.log(setPassword);
-	console.log(setBussNum);
-	console.log(setEmail);
 
 	return (
 		<div>
 			{save ? <PopUp label="Save" message="Retail saved" onClick={setSave} /> : ''}
-			{error ? <PopUp message={message} onClick={setError} /> : ''}
+			{error ? <PopUp label="Error" message={message} onClick={setError} /> : ''}
 			<h1>Register Retail Client</h1>
 			<div>
 				<TextField label="Store Name" value={info.storeName} onChange={setStoreName} />

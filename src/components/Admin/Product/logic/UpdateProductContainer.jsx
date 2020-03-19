@@ -27,24 +27,18 @@ class UpdateProductContainer extends Component {
 
 	setIndex = (value) => this.setState({ index: value });
 
-	setCost = (e) => {
-		this.setState({ info: { ...this.state.info, cost: e.target.value } });
+	setStageInfo(field) {
+		return (e) => {
+			this.setState({ info: { ...this.state.info, [`${field}`]: e.target.value } });
+		};
+	}
+
+	goBack = () => {
+		this.props.history.push('/admin/inventory');
 	};
 
-	setPrice = (e) => {
-		this.setState({ info: { ...this.state.info, price: e.target.value } });
-	};
-
-	setQuantity = (e) => {
-		this.setState({ info: { ...this.state.info, quantity: e.target.value } });
-	};
-
-	setWarehouse = (e) => {
-		this.setState({ info: { ...this.state.info, warehouse: e.target.value } });
-	};
-
-	setDescription = (e) => {
-		this.setState({ info: { ...this.state.info, description: e.target.value } });
+	setError = () => {
+		this.setState({ error: !this.state.error });
 	};
 
 	// ---------------Re-deceide how to send img------------------
@@ -71,7 +65,7 @@ class UpdateProductContainer extends Component {
 		try {
 			const response = await fetch('url', {
 				method: 'DELETE',
-				header: {
+				headers: {
 					'Content-Type': 'application-json'
 				},
 				credentials: 'include',
@@ -80,10 +74,6 @@ class UpdateProductContainer extends Component {
 		} catch (err) {
 			this.setState({ error: true, message: 'image is not deleted' });
 		}
-	};
-
-	setError = () => {
-		this.setState({ error: !this.state.error });
 	};
 
 	fetchData = async () => {
@@ -98,10 +88,6 @@ class UpdateProductContainer extends Component {
 		} catch (err) {
 			this.setState({ stage: 'error' });
 		}
-	};
-
-	goBack = () => {
-		this.props.history.push('/admin/inventory');
 	};
 
 	onSave = async () => {
@@ -133,11 +119,11 @@ class UpdateProductContainer extends Component {
 					...this.state,
 					addImg: this.addImg,
 					delImg: this.delImg,
-					setCost: this.setCost,
-					setPrice: this.setPrice,
-					setQuantity: this.setQuantity,
-					setWarehouse: this.setWarehouse,
-					setDescription: this.setDescription,
+					setCost: this.setStageInfo('cost'),
+					setPrice: this.setStageInfo('price'),
+					setQuantity: this.setStageInfo('price'),
+					setWarehouse: this.setStageInfo('warehouse'),
+					setDescription: this.this.setStageInfo('description'),
 					onSave: this.onSave,
 					onCancel: this.goBack,
 					setIndex: this.setIndex
