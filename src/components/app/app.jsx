@@ -95,7 +95,7 @@ function App() {
 
 					<Route path="/client" render={() => ClientAuthHOC(Client, auth)()} />
 					<Route path="/admin" render={() => AdminAuthHOC(Admin, auth)()} />
-					<Route path="/customer" render={() => <Customer increaseCart={increaseCart} />} />
+					<Route path="/customer" render={() => <Customer increaseCart={increaseCart} auth={auth} />} />
 					<Route path="/login" exact strict render={() => CustomerAuthHOC(LoginContainer, auth)(authFunc)} />
 					<Route path="/register" exact strict render={() => CustomerAuthHOC(RegisterContainer, auth)()} />
 					<Route path="/forgot" exact strict render={() => CustomerAuthHOC(ForgotPassContainer, auth)()} />
