@@ -13,24 +13,24 @@ export default class AddRetailContainer extends Component {
 				password: '',
 				confirmPassword: '',
 				bussNum: ''
-			}
+			},
+			save: false,
+			error: false,
+			message: ''
 		};
-		this.setStoreName = this.setStoreName.bind(this);
-		this.setContactName = this.setContactName.bind(this);
+		this.setStateValue = this.setStateValue.bind(this);
+		this.setPopUp = this.setPopUp.bind(this);
 		this.setEmail = this.setEmail.bind(this);
 		this.setPassword = this.setPassword.bind(this);
 		this.setConfirmPassword = this.setConfirmPassword.bind(this);
-		this.setBussNum = this.setBussNum.bind(this);
 		this.onSave = this.onSave.bind(this);
 	}
 
-	setStoreName = (e) => {
-		this.setState({ info: { ...this.state.info, storeName: e.target.value } });
-	};
-
-	setContactName = (e) => {
-		this.setState({ info: { ...this.state.info, contactName: e.target.value } });
-	};
+	setStateValue(field) {
+		return (e) => {
+			this.setState({ info: { ...this.state.info, [`${field}`]: e.target.value } });
+		};
+	}
 
 	setEmail = (newVal) => {
 		this.setState({ info: { ...this.state.info, email: newVal } });
@@ -48,9 +48,11 @@ export default class AddRetailContainer extends Component {
 		this.setState({ info: { ...this.state.info, confirmPassword: e.target.value } });
 	};
 
-	setBussNum = (e) => {
-		this.setState({ info: { ...this.state.info, bussNum: e.target.value } });
-	};
+	setPopUp(field) {
+		return (e) => {
+			this.setState({ [`${field}`]: false });
+		};
+	}
 
 	onSave = async () => {
 		if (true) {
@@ -78,13 +80,18 @@ export default class AddRetailContainer extends Component {
 		return (
 			<div>
 				<AddRetail
+					save={this.state.save}
+					error={this.state.error}
+					message={this.state.message}
+					setError={this.setPopUp('error')}
+					setSave={this.setPopUp('save')}
 					info={this.state.info}
-					setBussNum={this.setBussNum}
+					setBussNum={this.setStateValue('bussNum')}
 					setConfirmPassword={this.setConfirmPassword}
-					setContactName={this.setContactName}
+					setContactName={this.setStateValue('contactName')}
 					setEmail={this.setEmail}
 					setPassword={this.setPassword}
-					setStoreName={this.setStoreName}
+					setStoreName={this.setStateValue('storeName')}
 					match={match}
 					onSave={this.onSave}
 				/>

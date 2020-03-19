@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ClientInfo from '../view/ClientInfo';
-import LoadingHOC from '../../../common/HOC/LoadingHOC';
+import { withRouter } from 'react-router';
 
-export default class ClientInfoContainer extends Component {
+class ClientInfoContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -29,22 +29,18 @@ export default class ClientInfoContainer extends Component {
 	}
 
 	//----setter------
-	setFirstname(e) {
-		this.setState({
-			info: {
-				...this.state.info,
-				firstName: e.target.value
-			}
-		});
+	setStageValue(field) {
+		return (e) => {
+			this.setState({ info: { ...this.state.info, [`${field}`]: e.target.value } });
+		};
 	}
-	setLastname(e) {
-		this.setState({
-			info: {
-				...this.state.info,
-				lastName: e.target.value
-			}
-		});
+
+	setPopUp(field) {
+		return (e) => {
+			this.setState({ [`${field}`]: false });
+		};
 	}
+
 	setPhone(newVal) {
 		this.setState({
 			info: {
@@ -60,54 +56,6 @@ export default class ClientInfoContainer extends Component {
 				postalCode: newVal
 			}
 		});
-	}
-
-	setAddress(e) {
-		this.setState({
-			info: {
-				...this.state.info,
-				address: e.target.value
-			}
-		});
-	}
-	setCity(e) {
-		this.setState({
-			info: {
-				...this.state.info,
-				city: e.target.value
-			}
-		});
-	}
-	setProvince(e) {
-		this.setState({
-			info: {
-				...this.state.info,
-				province: e.target.value
-			}
-		});
-	}
-	setCountry(e) {
-		this.setState({
-			info: {
-				...this.state.info,
-				country: e.target.value
-			}
-		});
-	}
-	setPassword(e) {
-		this.setState({
-			info: {
-				...this.state.info,
-				password: e.target.value
-			}
-		});
-	}
-
-	setError() {
-		this.setState({ error: !this.state.error });
-	}
-	setReseted() {
-		this.setState({ reseted: !this.state.reseted });
 	}
 
 	goBack() {
@@ -190,8 +138,25 @@ export default class ClientInfoContainer extends Component {
 	render() {
 		return (
 			<div>
-				<ClientInfo {...this.state} />
+				<ClientInfo
+					{...this.state}
+					setFirstname={this.setStageValue('firstName')}
+					setLastname={this.setStageValue('lastName')}
+					setPhone={this.setPhone}
+					setAddress={this.setStageValue('address')}
+					setCity={this.setStageValue('city')}
+					setProvince={this.setStageValue('province')}
+					setPostalCode={this.setPostalCode}
+					setCountry={this.setStageValue('country')}
+					onSave={this.onSave}
+					onReset={this.onReset}
+					setError={this.setPopUp('error')}
+					setReset={this.setPopUp('reseted')}
+					goBack={this.goBack}
+				/>
 			</div>
 		);
 	}
 }
+
+export default withRouter(ClientInfoContainer);

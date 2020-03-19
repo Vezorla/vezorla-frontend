@@ -12,7 +12,6 @@ const InfoComponent = ({
 	info,
 	setFirstname,
 	setLastname,
-	setEmail,
 	setPhone,
 	setAddress,
 	setCity,

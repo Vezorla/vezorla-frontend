@@ -32,46 +32,38 @@ class ShippingInfo extends Component {
 			error: false,
 			message: ''
 		};
+		this.setStageInfo = this.setStageInfo.bind(this);
 		this.handleNext = this.handleNext.bind(this);
-		this.setFistName = this.setFistName.bind(this);
-		this.setLastName = this.setLastName.bind(this);
 		this.setPhoneNumber = this.setPhoneNumber.bind(this);
 		this.setPostalCode = this.setPostalCode.bind(this);
 		this.setEmail = this.setEmail.bind(this);
-		this.setAddress = this.setAddress.bind(this);
-		this.setCity = this.setCity.bind(this);
-		this.setProvince = this.setProvince.bind(this);
-		this.setCountry = this.setCountry.bind(this);
 		this.setError = this.setError.bind(this);
 		this.setPickup = this.setPickup.bind(this);
+		this.setStageInfo = this.setStageInfo.bind(this);
 	}
 
 	//----setter------
+
+	setStageInfo(field) {
+		return (e) => {
+			this.setState({
+				info: {
+					...this.state.info,
+					[`${field}`]: e.target.value
+				}
+			});
+		};
+	}
+
 	setError() {
 		this.setState({ error: false });
 	}
 
-	setFistName(e) {
-		this.setState({
-			info: {
-				...this.state.info,
-				firstName: e.target.value
-			}
-		});
-	}
-	setLastName(e) {
-		this.setState({
-			info: {
-				...this.state.info,
-				lastName: e.target.value
-			}
-		});
-	}
 	setPhoneNumber(newVal) {
 		this.setState({
 			info: {
 				...this.state.info,
-				phone: newVal
+				phoneNumber: newVal
 			}
 		});
 	}
@@ -91,38 +83,7 @@ class ShippingInfo extends Component {
 			}
 		});
 	}
-	setAddress(e) {
-		this.setState({
-			info: {
-				...this.state.info,
-				address: e.target.value
-			}
-		});
-	}
-	setCity(e) {
-		this.setState({
-			info: {
-				...this.state.info,
-				city: e.target.value
-			}
-		});
-	}
-	setProvince(e) {
-		this.setState({
-			info: {
-				...this.state.info,
-				province: e.target.value
-			}
-		});
-	}
-	setCountry(e) {
-		this.setState({
-			info: {
-				...this.state.info,
-				country: e.target.value
-			}
-		});
-	}
+
 	setPickup() {
 		this.setState({
 			info: {
@@ -209,15 +170,15 @@ class ShippingInfo extends Component {
 					<div>
 						<NecessaryInput
 							info={this.state.info}
-							setAddress={this.setAddress}
-							setCity={this.setCity}
-							setCountry={this.setCountry}
+							setAddress={this.setStageInfo('address')}
+							setCity={this.setStageInfo('city')}
+							setCountry={this.setStageInfo('country')}
 							setEmail={this.setEmail}
-							setFirstname={this.setFistName}
-							setLastname={this.setLastName}
+							setFirstname={this.setStageInfo('firstName')}
+							setLastname={this.setStageInfo('lastName')}
 							setPhone={this.setPhoneNumber}
 							setPostalCode={this.setPostalCode}
-							setProvince={this.setProvince}
+							setProvince={this.setStageInfo('province')}
 							disabled={this.state.info.pickup}
 						/>
 					</div>

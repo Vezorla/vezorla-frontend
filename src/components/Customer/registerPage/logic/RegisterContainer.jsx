@@ -19,9 +19,11 @@ class RegisterContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
-			email: '',
-			password: '',
-			rePassword: '',
+			info: {
+				email: '',
+				password: '',
+				rePassword: ''
+			},
 			error: false,
 			success: false,
 			message: ''
@@ -39,23 +41,19 @@ class RegisterContainer extends Component {
 	}
 
 	setEmail = (emailVal) => {
-		this.setState({ email: emailVal });
+		this.setState({ info: { ...this.state.info, email: emailVal } });
 	};
 
 	setPassword = (e) => {
 		if (this.state.rePassword !== '') {
 			match = e.target.value === this.state.rePassword;
 		}
-		this.setState({ password: e.target.value });
+		this.setState({ info: { ...this.state.info, password: e.target.value } });
 	};
 
 	setRePassword = (e) => {
 		match = this.state.password === e.target.value;
-		this.setState({ rePassword: e.target.value });
-	};
-
-	setMessage = (newVal) => {
-		this.setState({ message: newVal });
+		this.setState({ info: { ...this.state.info, rePassword: e.target.value } });
 	};
 
 	setSuccess = () => {
@@ -82,9 +80,7 @@ class RegisterContainer extends Component {
 						Content: 'application/json'
 					},
 					body: JSON.stringify({
-						email: this.state.email,
-						password: this.state.password,
-						repassword: this.state.repassword
+						...this.state.info
 					}),
 					credentials: 'include'
 				});
@@ -95,11 +91,11 @@ class RegisterContainer extends Component {
 						this.setState({ success: true });
 					} else {
 						this.setState({ error: true });
-						this.setMessage('something wrong');
+						this.setState({ message: 'something wrong' });
 					}
 				} else {
 					this.setState({ error: true });
-					this.setMessage('email already exist');
+					this.setState({ message: 'email already exist' });
 				}
 			} catch (err) {
 				this.setState({ error: true });
