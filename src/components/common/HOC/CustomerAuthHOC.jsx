@@ -11,6 +11,7 @@ const returnVal = (WrapperComponent, auth, props) => {
 	if (auth !== 'customer') {
 		return <Redirect to="/404" />;
 	} else {
+		setTimeout(() => {}, 5000);
 		return <WrapperComponent {...props} />;
 	}
 };

@@ -18,7 +18,7 @@ import ClientAuthHOC from '../common/HOC/ClientAuthHOC';
 import AdminAuthHOC from '../common/HOC/AdminAuthHOC';
 import CustomerAuthHOC from '../common/HOC/CustomerAuthHOC';
 
-import About from "../staticPages/About";
+import About from '../staticPages/About';
 import Contact from '../staticPages/Contact/view/Contact';
 
 // Function will run everytime go to new path or first access the application
@@ -57,11 +57,19 @@ const fetchCartLineItems = async (setLineItems) => {
 
 const fetchAuth = async (setAuth) => {
 	try {
-		const response = await fetch('url');
+		const response = await fetch('http://localhost:8080/api/auth/checkRole', {
+			method: 'GET',
+			credentials: 'include',
+			mode: 'cors'
+		});
 		if (response.status === 200) {
 			const data = await response.json();
-			setAuth(data);
-		} else {
+			if (data.admin === true) {
+				setAuth('admin');
+			} else {
+				setAuth('client');
+			}
+		} else if (response.status >= 400) {
 			setAuth('customer');
 		}
 	} catch (err) {
@@ -73,7 +81,7 @@ const fetchAuth = async (setAuth) => {
 function App() {
 	//-------state------
 	const [ lineItems, setLineItems ] = useState(0);
-	const [ auth, setAuth ] = useState('client');
+	const [ auth, setAuth ] = useState('customer');
 
 	const authFunc = {
 		setAuth: setAuth.bind(App)
@@ -84,12 +92,11 @@ function App() {
 		setLineItems(Number(lineItems) + Number(value));
 	};
 
-	//set the get cart function up and run
-	// usePageViews(setLineItems, setAuth);
+	usePageViews(setLineItems, setAuth);
 
 	return (
 		<div className="App">
-			<Header cart={lineItems} />
+			<Header cart={lineItems} auth={auth} />
 			<Box overflow="scroll" style={{ paddingBottom: '15vh' }}>
 				<Switch>
 					{/* <Route path="/" exact strict component={Product} /> */}
@@ -101,7 +108,7 @@ function App() {
 					<Route path="/register" exact strict render={() => CustomerAuthHOC(RegisterContainer, auth)()} />
 					<Route path="/forgot" exact strict render={() => CustomerAuthHOC(ForgotPassContainer, auth)()} />
 					<Route path="/contact" exact strict component={Contact} />
-					<Route path="/about" exact strict component={About}/>
+					<Route path="/about" exact strict component={About} />
 					<Route path="/404" component={NotFound} />
 					<Redirect to="/404" />
 				</Switch>
