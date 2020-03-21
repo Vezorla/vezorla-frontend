@@ -76,7 +76,7 @@ export default function Contact({
         </CardContent>
         <CardContent className={classes.content}>
           <TextField
-            placeholder="Type your message here. We will receive an e-mail and get back to you as soon as possible."
+            placeholder="Type your message here to send a message. We will get back to you as soon as possible."
             multiline
             rows="6"
             className={classes.input}
