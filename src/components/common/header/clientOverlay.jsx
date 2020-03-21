@@ -126,7 +126,9 @@ export default function TemporaryDrawer() {
               borderRadius: "1.5px"
             }}
           />
-          <Box boxShadow={3} padding="5px">
+
+          {/* May be delaying this for future development */}
+          {/* <Box boxShadow={3} padding="5px">
             <NavLink to="/findus" exact>
               <ListItem button key={"Find us"} className={classes.type}>
                 <ListItemIcon>
@@ -135,7 +137,7 @@ export default function TemporaryDrawer() {
                 <ListItemText primary={"Find Us"} classes={{primary: classes.text}} />
               </ListItem>
             </NavLink>
-          </Box>
+          </Box> */}
           <Box boxShadow={3} padding="5px">
             <NavLink to="/contact" exact>
               <ListItem button key={"Contact Us"} className={classes.type}>
