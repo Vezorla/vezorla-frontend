@@ -11,11 +11,10 @@ class CartContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			list: '',
+			list: [],
 			stage: ''
 		};
 
-		this.setList = this.setList.bind(this);
 		this.onChange = this.onChange.bind(this);
 		this.onDelete = this.onDelete.bind(this);
 	}
@@ -23,15 +22,6 @@ class CartContainer extends Component {
 	timeOutVar = [];
 	tax = 0;
 	total = 0;
-
-	//---Setter for state-----
-	setList = (listVal) => {
-		this.setState({ list: listVal });
-	};
-
-	setStage = (stageVal) => {
-		this.setState({ stage: stageVal });
-	};
 
 	//---function active when user change value of line item
 	onChange = (prodId, newVal) => {
@@ -43,7 +33,7 @@ class CartContainer extends Component {
 			return lineItem;
 		});
 
-		this.setList(tempList);
+		this.setState({ list: tempList });
 		this.timeOutVar.push(
 			setTimeout(() => {
 				this.putData();
@@ -68,7 +58,7 @@ class CartContainer extends Component {
 				if (data === true) {
 					let newList = this.state.list.filter((lineItem) => lineItem.prodId !== prodId);
 
-					this.setList(newList);
+					this.setState({ list: newList });
 				}
 			} else if (response.status > 400) {
 				this.setStage('error');
@@ -80,7 +70,7 @@ class CartContainer extends Component {
 
 	//--- function fetch line item-------
 	fetchData = async () => {
-		this.setStage('loading');
+		this.setState({ stage: 'loading' });
 
 		try {
 			const response = await fetch(`http://localhost:8080/api/customer/cart/view`, {
@@ -95,17 +85,17 @@ class CartContainer extends Component {
 			if (response.status === 200) {
 				const data = await response.json();
 				if (data !== null) {
-					this.setList(data);
-					this.setStage('done');
+					this.setState({ list: data });
+					this.setState({ stage: 'done' });
 				}
 			} else if (response.status > 400) {
-				this.setStage('error');
-				this.setList('');
+				this.setState({ stage: 'error' });
+				this.setState({ list: [] });
 				return null;
 			}
 		} catch (err) {
-			this.setStage('error');
-			this.setList('');
+			this.setState({ stage: 'error' });
+			this.setState({ list: [] });
 			return null;
 		}
 	};
@@ -142,7 +132,7 @@ class CartContainer extends Component {
 	render() {
 		return (
 			<div>
-				{this.state.list !== '' ? (
+				{this.state.list.length > 0 ? (
 					<div>
 						<Cart {...this.state} onDelete={this.onDelete} onChange={this.onChange} />
 						<div>

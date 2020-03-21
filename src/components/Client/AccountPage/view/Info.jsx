@@ -1,7 +1,7 @@
 import React from 'react';
 import NecessaryInput from '../../../common/Inputs/NecessaryInput/NecessaryInput';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
-
+import { Button, FormControlLabel, Switch } from '@material-ui/core';
 /**
  * @file Info Component 
  * @author MinhL4m
@@ -12,7 +12,6 @@ const InfoComponent = ({
 	info,
 	setFirstname,
 	setLastname,
-	setEmail,
 	setPhone,
 	setAddress,
 	setCity,
@@ -20,7 +19,8 @@ const InfoComponent = ({
 	setPostalCode,
 	setCountry,
 	setPassword,
-	setSubscription
+	setSubscription,
+	onClick
 }) => {
 	return (
 		<div>
@@ -29,15 +29,23 @@ const InfoComponent = ({
 				setAddress={setAddress}
 				setCity={setCity}
 				setCountry={setCountry}
-				setEmail={setEmail}
 				setFirstname={setFirstname}
 				setLastname={setLastname}
 				setPassword={setPassword}
 				setPhone={setPhone}
 				setPostalCode={setPostalCode}
 				setProvince={setProvince}
+				disbaledEmail={true}
 			/>
-			{/* TODO Subscription + SAVE */}
+			<FormControlLabel
+				control={<Switch checked={info.subscription} onChange={setSubscription} color="primary" />}
+				label="Subscription to mailing list"
+				labelPlacement="start"
+			/>
+
+			<Button variant="contained" onClick={onClick}>
+				Save
+			</Button>
 		</div>
 	);
 };

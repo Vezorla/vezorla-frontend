@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Register from '../view/Register';
 import { Button } from '@material-ui/core';
-import Error from '../../../common/Error/Error';
+import PopUp from '../../../common/PopUp/PopUp';
 import { withRouter } from 'react-router-dom';
 
 /**
@@ -19,20 +19,20 @@ class RegisterContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
-			firstname: '',
-			lastname: '',
-			email: '',
-			password: '',
-			rePassword: '',
+			info: {
+				email: '',
+				password: '',
+				rePassword: ''
+			},
 			error: false,
+			success: false,
 			message: ''
 		};
 		this.setEmail = this.setEmail.bind(this);
-		this.setFirstname = this.setFirstname.bind(this);
-		this.setLastname = this.setLastname.bind(this);
 		this.setPassword = this.setPassword.bind(this);
 		this.setRePassword = this.setRePassword.bind(this);
 		this.setError = this.setError.bind(this);
+		this.setSuccess = this.setSuccess.bind(this);
 	}
 
 	//----Setters-------
@@ -40,32 +40,24 @@ class RegisterContainer extends Component {
 		this.setState({ error: false });
 	}
 
-	setFirstname = (e) => {
-		this.setState({ firstname: e.target.value });
-	};
-
-	setLastname = (e) => {
-		this.setState({ lastname: e.target.value });
-	};
-
 	setEmail = (emailVal) => {
-		this.setState({ email: emailVal });
+		this.setState({ info: { ...this.state.info, email: emailVal } });
 	};
 
 	setPassword = (e) => {
 		if (this.state.rePassword !== '') {
 			match = e.target.value === this.state.rePassword;
 		}
-		this.setState({ password: e.target.value });
+		this.setState({ info: { ...this.state.info, password: e.target.value } });
 	};
 
 	setRePassword = (e) => {
 		match = this.state.password === e.target.value;
-		this.setState({ rePassword: e.target.value });
+		this.setState({ info: { ...this.state.info, rePassword: e.target.value } });
 	};
 
-	setMessage = (newVal) => {
-		this.setState({ message: newVal });
+	setSuccess = () => {
+		this.props.history.push('/login');
 	};
 
 	/**
@@ -87,21 +79,23 @@ class RegisterContainer extends Component {
 						Accept: 'application/json',
 						Content: 'application/json'
 					},
-					body: JSON.stringify({ email: this.state.email, password: this.state.password }),
+					body: JSON.stringify({
+						...this.state.info
+					}),
 					credentials: 'include'
 				});
 
 				if (response.status === 200) {
 					const data = await response.json();
 					if (data === true) {
-						this.props.history.push('/login');
+						this.setState({ success: true });
 					} else {
 						this.setState({ error: true });
-						this.setMessage('something wrong');
+						this.setState({ message: 'something wrong' });
 					}
 				} else {
 					this.setState({ error: true });
-					this.setMessage('email already exist');
+					this.setState({ message: 'email already exist' });
 				}
 			} catch (err) {
 				this.setState({ error: true });
@@ -115,16 +109,16 @@ class RegisterContainer extends Component {
 	render() {
 		return (
 			<div>
-				{this.state.error ? <Error message={this.state.message} onClick={this.setError} /> : ''}
+				{this.state.error ? <PopUp message={this.state.message} onClick={this.setError} /> : ''}
+				{this.state.success ? (
+					<PopUp label="Success" message={this.state.message} onClick={this.setSuccess} />
+				) : (
+					''
+				)}
 				<Register
-					firstname={this.state.firstname}
-					lastname={this.state.lastname}
-					password={this.state.password}
 					rePassword={this.state.rePassword}
 					email={this.state.email}
 					setEmail={this.setEmail}
-					setFirstname={this.setFirstname}
-					setLastname={this.setLastname}
 					setPassword={this.setPassword}
 					setRePassword={this.setRePassword}
 					match={match}

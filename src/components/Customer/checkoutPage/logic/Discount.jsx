@@ -50,15 +50,7 @@ export default class Discount extends Component {
 		this.setState({ value: e.target.value });
 	};
 
-	handleBack = async () => {
-		const response = await fetch('http://localhost:8080/api/customer', {
-			method: 'PUT',
-			credentials: 'include',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			}
-		});
+	handleBack = () => {
 		this.props.setStage(this.props.stage - 1);
 	};
 

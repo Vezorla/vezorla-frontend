@@ -19,7 +19,7 @@ import EmailInput from '../../common/Inputs/Email/EmailInput';
  * @param {function} onClick - function handle submit username and password
  * @returns Login View Component
  */
-export default function Login({ email, password, error, setEmail, setPassword, onClick }) {
+export default function Login({ email, password, error = '', setEmail, setPassword, onClick }) {
 	return (
 		<div>
 			<div>
@@ -28,15 +28,9 @@ export default function Login({ email, password, error, setEmail, setPassword, o
 			</div>
 			<div>
 				<EmailInput helperText="Invalid Email" onChange={setEmail} value={email} />
-				<TextField
-					label="Password"
-					error={error !== ''}
-					helperText={error === '' ? '' : error}
-					type="password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-				/>
+				<TextField label="Password" type="password" value={password} onChange={setPassword} />
 			</div>
+			<div>{error !== '' ? <p>{error}</p> : ''}</div>
 			<div>
 				<Button variant="contained" onClick={onClick} size="large">
 					Sign in

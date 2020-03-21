@@ -12,6 +12,7 @@ import ForgotPassContainer from '../Client/ForgotPassPage/logic/ForgotPassContai
 
 import Customer from '../Customer/Cutomer';
 import Client from '../Client/Client';
+import Admin from '../Admin/Admin';
 
 import ClientAuthHOC from '../common/HOC/ClientAuthHOC';
 import AdminAuthHOC from '../common/HOC/AdminAuthHOC';
@@ -21,11 +22,10 @@ import About from "../staticPages/About";
 import Contact from '../staticPages/Contact/view/Contact';
 
 // Function will run everytime go to new path or first access the application
-function usePageViews(setLineItems, currentLineItem, setAuth, auth) {
+function usePageViews(setLineItems, setAuth) {
 	let location = useLocation();
 	React.useEffect(
 		() => {
-			console.log(auth);
 			fetchAuth(setAuth);
 			fetchCartLineItems(setLineItems);
 		},
@@ -73,7 +73,7 @@ const fetchAuth = async (setAuth) => {
 function App() {
 	//-------state------
 	const [ lineItems, setLineItems ] = useState(0);
-	const [ auth, setAuth ] = useState('customer');
+	const [ auth, setAuth ] = useState('client');
 
 	const authFunc = {
 		setAuth: setAuth.bind(App)
@@ -85,16 +85,18 @@ function App() {
 	};
 
 	//set the get cart function up and run
-	usePageViews(setLineItems, lineItems, setAuth, auth);
+	// usePageViews(setLineItems, setAuth);
 
 	return (
 		<div className="App">
 			<Header cart={lineItems} />
 			<Box overflow="scroll" style={{ paddingBottom: '15vh' }}>
 				<Switch>
+					{/* <Route path="/" exact strict component={Product} /> */}
+
 					<Route path="/client" render={() => ClientAuthHOC(Client, auth)()} />
-					{/* <Route path="/admin" render={() => AdminAuthHOC(Admin, auth)()} /> */}
-					<Route path="/customer" render={() => <Customer increaseCart={increaseCart} />} />
+					<Route path="/admin" render={() => AdminAuthHOC(Admin, auth)()} />
+					<Route path="/customer" render={() => <Customer increaseCart={increaseCart} auth={auth} />} />
 					<Route path="/login" exact strict render={() => CustomerAuthHOC(LoginContainer, auth)(authFunc)} />
 					<Route path="/register" exact strict render={() => CustomerAuthHOC(RegisterContainer, auth)()} />
 					<Route path="/forgot" exact strict render={() => CustomerAuthHOC(ForgotPassContainer, auth)()} />

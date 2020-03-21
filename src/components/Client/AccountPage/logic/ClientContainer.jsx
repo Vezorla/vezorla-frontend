@@ -6,7 +6,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Error from '../../../common/Error/Error';
+import PopUp from '../../../common/PopUp/PopUp';
 
 /**
  * @file Client Logic Component
@@ -42,17 +42,18 @@ export default class ClientContainer extends Component {
 		this.setState({ message: newVal });
 	};
 
-	handleChange = (event, newValue) => {
-		this.setValue(newValue);
+	handleChange = (event, newVal) => {
+		this.setValue(newVal);
 	};
 
-	handleChangeIndex = (index) => {
-		this.setValue(index);
+	handleChangeIndex = (newVal) => {
+		console.log('a');
+		this.setValue(newVal);
 	};
 	render() {
 		return (
 			<div>
-				{this.state.error ? <Error message={this.state.message} onClick={this.setError} /> : ''}
+				{this.state.error ? <PopUp message={this.state.message} onClick={this.setError} /> : ''}
 				<AppBar position="static" color="default">
 					<Tabs
 						value={this.state.value}

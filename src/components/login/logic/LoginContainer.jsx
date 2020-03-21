@@ -33,8 +33,8 @@ class LoginContainer extends Component {
 		this.setState({ email: emailVal });
 	};
 
-	setPassword = (passwordVal) => {
-		this.setState({ password: passwordVal });
+	setPassword = (e) => {
+		this.setState({ password: e.target.value });
 	};
 
 	/**
@@ -75,7 +75,6 @@ class LoginContainer extends Component {
 					}
 				}
 			} catch (err) {
-				console.log(err);
 				this.setState({ error: 'Something wrong' });
 			}
 		}

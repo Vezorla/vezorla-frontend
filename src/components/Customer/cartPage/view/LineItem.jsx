@@ -10,7 +10,6 @@ import '../style.css';
  * @version 1.0
  */
 
-
 export default function LineItem({ prodId, price, imageMain, name, quantity, onChange, onDelete }) {
 	return (
 		<div className="lineItem">
