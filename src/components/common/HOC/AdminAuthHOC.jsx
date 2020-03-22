@@ -7,15 +7,24 @@ import { Redirect } from 'react-router-dom';
  * @version 1.0
  */
 
-
 const returnVal = (WrapperComponent, auth, props) => {
-	if ( auth !== 'admin') {
+	if (auth !== 'admin') {
 		return <Redirect to="/404" />;
 	} else {
 		return <WrapperComponent {...props} />;
 	}
 };
 
-const AdminAuthHOC = (WrapperComponent, auth) => (props) => returnVal(WrapperComponent, auth, props);
+const AdminAuthHOC = (WrapperComponent, auth) => {
+	return (props) => {
+		if(props.done){
+			return returnVal(WrapperComponent, auth, props);
+		}else{
+			// TODO: add spinner or something
+			return <h1>Loading</h1>
+		}	
+		
+	};
+};
 
 export default AdminAuthHOC;

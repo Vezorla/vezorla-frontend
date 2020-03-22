@@ -22,11 +22,11 @@ import About from '../staticPages/About';
 import Contact from '../staticPages/Contact/view/Contact';
 
 // Function will run everytime go to new path or first access the application
-function usePageViews(setLineItems, setAuth) {
+function usePageViews(setLineItems, setAuth, setDone) {
 	let location = useLocation();
 	React.useEffect(
 		() => {
-			fetchAuth(setAuth);
+			fetchAuth(setAuth, setDone);
 			fetchCartLineItems(setLineItems);
 		},
 		[ location ]
@@ -55,7 +55,7 @@ const fetchCartLineItems = async (setLineItems) => {
 	}
 };
 
-const fetchAuth = async (setAuth) => {
+const fetchAuth = async (setAuth, setDone) => {
 	try {
 		const response = await fetch('http://localhost:8080/api/auth/checkRole', {
 			method: 'GET',
@@ -75,6 +75,7 @@ const fetchAuth = async (setAuth) => {
 	} catch (err) {
 		setAuth('customer');
 	}
+	setDone(true);
 };
 
 //-------App--------------
@@ -82,17 +83,19 @@ function App() {
 	//-------state------
 	const [ lineItems, setLineItems ] = useState(0);
 	const [ auth, setAuth ] = useState('customer');
+	const [ done, setDone ] = useState(false);
 
 	const authFunc = {
 		setAuth: setAuth.bind(App)
 	};
 
 	//increate Cart function
-	const increaseCart = (value) => {
-		setLineItems(Number(lineItems) + Number(value));
+	const increaseCart = () => {
+		console.log('a');
+		fetchCartLineItems(setLineItems);
 	};
 
-	usePageViews(setLineItems, setAuth);
+	usePageViews(setLineItems, setAuth, setDone);
 
 	return (
 		<div className="App">
@@ -101,12 +104,27 @@ function App() {
 				<Switch>
 					{/* <Route path="/" exact strict component={Product} /> */}
 
-					<Route path="/client" render={() => ClientAuthHOC(Client, auth)()} />
-					<Route path="/admin" render={() => AdminAuthHOC(Admin, auth)()} />
+					<Route path="/client" render={() => ClientAuthHOC(Client, auth)({ done: done })} />
+					<Route path="/admin" render={() => AdminAuthHOC(Admin, auth)({ done: done })} />
 					<Route path="/customer" render={() => <Customer increaseCart={increaseCart} auth={auth} />} />
-					<Route path="/login" exact strict render={() => CustomerAuthHOC(LoginContainer, auth)(authFunc)} />
-					<Route path="/register" exact strict render={() => CustomerAuthHOC(RegisterContainer, auth)()} />
-					<Route path="/forgot" exact strict render={() => CustomerAuthHOC(ForgotPassContainer, auth)()} />
+					<Route
+						path="/login"
+						exact
+						strict
+						render={() => CustomerAuthHOC(LoginContainer, auth)({ setAuth: authFunc.setAuth, done: done })}
+					/>
+					<Route
+						path="/register"
+						exact
+						strict
+						render={() => CustomerAuthHOC(RegisterContainer, auth)({ done: done })}
+					/>
+					<Route
+						path="/forgot"
+						exact
+						strict
+						render={() => CustomerAuthHOC(ForgotPassContainer, auth)({ done: done })}
+					/>
 					<Route path="/contact" exact strict component={Contact} />
 					<Route path="/about" exact strict component={About} />
 					<Route path="/404" component={NotFound} />

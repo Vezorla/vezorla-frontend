@@ -15,6 +15,16 @@ const returnVal = (WrapperComponent, auth, props) => {
 	}
 };
 
-const ClientAuthHOC = (WrapperComponent, auth) => (props) => returnVal(WrapperComponent, auth, props);
+const ClientAuthHOC = (WrapperComponent, auth) => {
+	return (props) => {
+		if(props.done){
+			return returnVal(WrapperComponent, auth, props);
+		}else{
+			//TODO: add spinner or something
+			return <h1>Loading</h1>
+		}
+		
+	};
+};
 
 export default ClientAuthHOC;
