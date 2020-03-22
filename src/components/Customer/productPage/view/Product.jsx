@@ -19,16 +19,12 @@ import loadingHOC from '../../../common/HOC/LoadingHOC';
   * @param {addCartHandler} - handler for adding to cart 
   */
 const ProductDetail = ({ product, imgs, price, max, addCartHandler }) => {
+	console.log(addCartHandler);
 	return (
 		<div>
 			<h1>{product.name}</h1>
-			<Stepper imgs={imgs} default={true}/>
-			<CardPriceContainer
-				price={product.price}
-				max={max}
-				addCartHandler={addCartHandler}
-				id={product.prodId}
-			/>
+			<Stepper imgs={imgs} default={true} />
+			<CardPriceContainer price={product.price} max={max} addCartHandler={addCartHandler} id={product.prodId} />
 
 			<section style={{ marginLeft: '8%', marginRight: '8%', color: '#0C3658' }}>
 				<h1 style={{ fontSize: '2em', letterSpacing: '0.09em', textTransform: 'uppercase' }}>Description</h1>

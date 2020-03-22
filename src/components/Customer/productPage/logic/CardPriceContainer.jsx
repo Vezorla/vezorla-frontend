@@ -43,16 +43,13 @@ export default class CardPriceContainer extends Component {
 			if (response.status === 200) {
 				const confirmation = await response.json();
 				if (confirmation !== null && confirmation === true) {
-					this.props.addCartHandler(data);
-				} else {
-					this.setStage('error');
+					console.log(this.props.addCartHandler);
+					this.props.addCartHandler();
 				}
 			} else if (response.status > 400) {
-				this.setStage('error');
+				//pop up error some how
 			}
-		} catch (err) {
-			this.setStage('error');
-		}
+		} catch (err) {}
 	};
 
 	//when add to cart, get new quntity

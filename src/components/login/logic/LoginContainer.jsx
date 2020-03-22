@@ -75,6 +75,7 @@ class LoginContainer extends Component {
 					}
 				}
 			} catch (err) {
+				console.log(err);
 				this.setState({ error: 'Something wrong' });
 			}
 		}

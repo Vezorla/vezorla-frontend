@@ -11,7 +11,8 @@ class CartContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			list: [],
+			inStockList: [],
+			outStockList: [],
 			stage: ''
 		};
 
@@ -50,6 +51,8 @@ class CartContainer extends Component {
 					Accept: 'application/json',
 					'Content-Type': 'application/json'
 				},
+				mode: 'cors',
+				credentials: 'include',
 				body: JSON.stringify(prodId)
 			});
 
@@ -61,19 +64,17 @@ class CartContainer extends Component {
 					this.setState({ list: newList });
 				}
 			} else if (response.status > 400) {
-				this.setStage('error');
+				this.setState({ stage: 'error' });
 			}
 		} catch (err) {
-			this.setStage('error');
+			this.setState({ stage: 'error' });
 		}
 	};
 
 	//--- function fetch line item-------
-	fetchData = async () => {
-		this.setState({ stage: 'loading' });
-
+	fetchInStockData = async () => {
 		try {
-			const response = await fetch(`http://localhost:8080/api/customer/cart/view`, {
+			const response = await fetch(`http://localhost:8080/api/customer/cart/viewInStock`, {
 				method: 'GET',
 				credentials: 'include',
 				headers: {
@@ -85,19 +86,51 @@ class CartContainer extends Component {
 			if (response.status === 200) {
 				const data = await response.json();
 				if (data !== null) {
-					this.setState({ list: data });
+					this.setState({ inStockList: data });
 					this.setState({ stage: 'done' });
 				}
 			} else if (response.status > 400) {
 				this.setState({ stage: 'error' });
-				this.setState({ list: [] });
+				this.setState({ inStockList: [] });
 				return null;
 			}
 		} catch (err) {
 			this.setState({ stage: 'error' });
-			this.setState({ list: [] });
+			this.setState({ inStockList: [] });
 			return null;
 		}
+	};
+
+	fetchOutStockData = async () => {
+		try {
+			const response = await fetch(`http://localhost:8080/api/customer/cart/viewOutStock`, {
+				method: 'GET',
+				credentials: 'include',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				}
+			});
+
+			if (response.status === 200) {
+				const data = await response.json();
+				if (data !== null) {
+					this.setState({ outStockList: data });
+				}
+			} else if (response.status > 400) {
+				this.setState({ outStockList: [] });
+				return null;
+			}
+		} catch (err) {
+			this.setState({ outStockList: [] });
+			return null;
+		}
+	};
+
+	fetchData = async () => {
+		this.setState({ stage: 'loading' });
+		await this.fetchOutStockData();
+		await this.fetchInStockData();
 	};
 
 	// ---put data when user change quantity of line item
@@ -124,8 +157,11 @@ class CartContainer extends Component {
 		this.state.list.map((lineItem) => {
 			subTotal += lineItem.price * lineItem.quantity;
 		});
-		this.tax = subTotal * 5 / 100;
-		this.total = subTotal + this.tax;
+		if (subTotal !== 0) {
+			this.tax = subTotal * 5 / 100;
+			this.total = subTotal + this.tax;
+		}
+
 		return subTotal;
 	};
 

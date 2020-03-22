@@ -46,13 +46,13 @@ class RegisterContainer extends Component {
 
 	setPassword = (e) => {
 		if (this.state.rePassword !== '') {
-			match = e.target.value === this.state.rePassword;
+			match = e.target.value === this.state.info.rePassword;
 		}
 		this.setState({ info: { ...this.state.info, password: e.target.value } });
 	};
 
 	setRePassword = (e) => {
-		match = this.state.password === e.target.value;
+		match = this.state.info.password === e.target.value;
 		this.setState({ info: { ...this.state.info, rePassword: e.target.value } });
 	};
 
@@ -69,11 +69,11 @@ class RegisterContainer extends Component {
 			match === true &&
 			this.state.password !== '' &&
 			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-				this.state.email
+				this.state.info.email
 			)
 		) {
 			try {
-				const response = await fetch('url', {
+				const response = await fetch('http://localhost:8080/api/customer/create-account', {
 					method: 'POST',
 					headers: {
 						Accept: 'application/json',
@@ -82,7 +82,8 @@ class RegisterContainer extends Component {
 					body: JSON.stringify({
 						...this.state.info
 					}),
-					credentials: 'include'
+					credentials: 'include',
+					mode: 'cors'
 				});
 
 				if (response.status === 200) {
