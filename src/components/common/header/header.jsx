@@ -6,6 +6,7 @@ import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import AdminNavBar from './adminOverlay';
 import CustomerNavBar from './customerOverlay';
 import ClientNavBar from './clientOverlay';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -59,13 +60,15 @@ export default function ButtonAppBar(props) {
 					<Typography variant="h6" className={classes.title}>
 						Vezorla
 					</Typography>
-					<IconButton color="#D0C50A">
-						<ThemeProvider theme={theme}>
-							<Badge badgeContent={props.cart} color="primary">
-								<ShoppingCart style={{ color: '#0C3658' }} />
-							</Badge>
-						</ThemeProvider>
-					</IconButton>
+					<Link to="/customer/cart">
+						<IconButton color="#D0C50A">
+							<ThemeProvider theme={theme}>
+								<Badge badgeContent={props.cart} color="primary">
+									<ShoppingCart style={{ color: '#0C3658' }} />
+								</Badge>
+							</ThemeProvider>
+						</IconButton>
+					</Link>
 				</Toolbar>
 			</AppBar>
 		</div>

@@ -59,7 +59,11 @@ export default function TemporaryDrawer() {
 
 	const logout = async () => {
 		try {
-			const response = await fetch('http://localhost:8080/api/auth/logout');
+			const response = await fetch('http://localhost:8080/api/auth/logout', {
+				method: 'DELETE',
+				mode: 'cors',
+				credentials: 'include'
+			});
 			history.push('/');
 		} catch (err) {}
 	};
@@ -178,14 +182,12 @@ export default function TemporaryDrawer() {
 					<Divider style={{ marginBottom: '15px', marginTop: '15px' }} />
 					<Box boxShadow={3} padding="5px">
 						<Button style={{ width: '100%', height: '100%' }} onClick={logout}>
-							{/* <NavLink to="/logout"> */}
 							<ListItem button key={'Log out'} className={classes.type}>
 								<ListItemIcon>
 									<PowerSettingsNew className={classes.icon} />
 								</ListItemIcon>
 								<ListItemText primary={'Logout'} classes={{ primary: classes.text }} />
 							</ListItem>
-							{/* </NavLink> */}
 						</Button>
 					</Box>
 				</Box>
