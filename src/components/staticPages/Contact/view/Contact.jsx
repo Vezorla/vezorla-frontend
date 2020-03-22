@@ -57,6 +57,8 @@ export default function Contact({
 }) {
   const classes = useStyles();
 
+  console.log(setEmail)
+
   return (
     <div style={{ marginTop: "6em" }} className={classes.root}>
       <Typography paragraph={true} variant="h3" align="center" justify="center">
@@ -72,7 +74,7 @@ export default function Contact({
             onChange={setName}
           ></TextField>
           <br></br>
-          <EmailInput className={classes.content}></EmailInput>
+          <EmailInput className={classes.content} value={email} onChange={setEmail}></EmailInput>
         </CardContent>
         <CardContent className={classes.content}>
           <TextField
