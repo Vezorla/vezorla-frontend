@@ -111,9 +111,18 @@ class RegisterContainer extends Component {
 	render() {
 		return (
 			<div>
-				{this.state.error ? <PopUp message={this.state.message} onClick={this.setError} /> : ''}
+				{this.state.error ? (
+					<PopUp message={this.state.message} handleOk={this.setError} onClose={this.setError} />
+				) : (
+					''
+				)}
 				{this.state.success ? (
-					<PopUp label="Success" message={this.state.message} onClick={this.setSuccess} />
+					<PopUp
+						label="Success"
+						message={this.state.message}
+						handleOk={this.setSuccess}
+						onClose={this.setSuccess}
+					/>
 				) : (
 					''
 				)}
