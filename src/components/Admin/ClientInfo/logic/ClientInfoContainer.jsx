@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import ClientInfo from '../view/ClientInfo';
 import { withRouter } from 'react-router';
 
+const FETCH_URL = 'url';
+const SAVE_URL = 'url';
+const RESET_URL = 'url';
+const TOTAL_URL = 'url';
+
 class ClientInfoContainer extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			info: {
 				firstName: '',
@@ -64,7 +69,7 @@ class ClientInfoContainer extends Component {
 
 	onSave = async () => {
 		try {
-			const response = await fetch('url', {
+			const response = await fetch(`${SAVE_URL}/${this.props.clientId}`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
@@ -84,7 +89,7 @@ class ClientInfoContainer extends Component {
 
 	onReset = async () => {
 		try {
-			const response = await fetch('url', {
+			const response = await fetch(`${RESET_URL}/${this.props.clientId}`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
@@ -105,7 +110,7 @@ class ClientInfoContainer extends Component {
 
 	fetchData = async () => {
 		try {
-			const response = await fetch('url');
+			const response = await fetch(`${FETCH_URL}/${this.props.clientId}`);
 			if (response.status === 200) {
 				const data = await response.json();
 				this.setState({ info: { ...data } });
@@ -120,7 +125,7 @@ class ClientInfoContainer extends Component {
 
 	fetchTotal = async () => {
 		try {
-			const response = await fetch('url');
+			const response = await fetch(`${TOTAL_URL}/${this.props.clientId}`);
 			if (response.state === 200) {
 				const data = await response.json();
 				this.setState({ ...this.state, ...data });

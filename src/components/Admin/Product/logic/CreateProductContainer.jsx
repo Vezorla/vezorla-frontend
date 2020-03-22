@@ -5,6 +5,10 @@ import Product from '../view/Product';
 import PopUp from '../../../common/PopUp/PopUp';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
+const DEL_URL = 'url';
+const ADD_URL = 'url';
+const SAVE_URL = 'url';
+
 class CreateProductContainer extends Component {
 	constructor() {
 		super();
@@ -30,7 +34,6 @@ class CreateProductContainer extends Component {
 		this.delImg = this.delImg.bind(this);
 	}
 
-
 	setIndex = (value) => this.setState({ index: value });
 
 	setStageInfo(field) {
@@ -47,17 +50,17 @@ class CreateProductContainer extends Component {
 		this.props.history.push('/admin/inventory');
 	};
 
-
 	// ---------------Re-deceide how to send img------------------
 	addImg = async (e) => {
 		const file = e.target.files[0];
 		try {
-			const response = await fetch('url', {
+			const response = await fetch(ADD_URL, {
 				method: 'POST',
 				headers: {
 					// If doesn't work change into img/xyz
 					'Content-Type': 'img/*'
 				},
+				mode: 'cors',
 				credentials: 'include',
 				body: file
 			});
@@ -70,16 +73,39 @@ class CreateProductContainer extends Component {
 
 	delImg = async (e) => {
 		try {
-			const response = await fetch('url', {
+			const response = await fetch(DEL_URL, {
 				method: 'DELETE',
 				header: {
 					'Content-Type': 'application-json'
 				},
 				credentials: 'include',
+				mode: 'cors',
 				body: JSON.stringify(this.state.index)
 			});
 		} catch (err) {
 			this.setState({ error: true, message: 'image is not deleted' });
+		}
+	};
+
+	onSave = async () => {
+		try {
+			const response = await fetch(SAVE_URL, {
+				method: 'POST',
+				header: {
+					'Content-Type': 'application-json'
+				},
+				credentials: 'include',
+				mode: 'cors',
+				body: JSON.stringify({ ...this.state.info })
+			});
+
+			if (response.status === 200) {
+				this.setState({ success: true, message: 'Product Created' });
+			} else {
+				this.setState({ error: true, message: 'Oppsss' });
+			}
+		} catch (err) {
+			this.setState({ error: true, message: 'Oppsss' });
 		}
 	};
 

@@ -8,6 +8,8 @@ import ViewInvoice from '../view/ViewInvoice';
  * @version 1.0
  */
 
+const URL = 'url';
+
 export default class ViewInvoiceContainer extends Component {
 	constructor(props) {
 		super(props);
@@ -17,7 +19,7 @@ export default class ViewInvoiceContainer extends Component {
 			list: [],
 			subtotal: '',
 			shipping: '',
-			discount:'',
+			discount: '',
 			tax: '',
 			total_tax: '',
 			total: '',
@@ -28,7 +30,7 @@ export default class ViewInvoiceContainer extends Component {
 	fetchData = async () => {
 		this.setState({ stage: 'loading' });
 		try {
-			const response = await fetch(`url${this.props.invoice}`);
+			const response = await fetch(`${URL}/${this.props.invoice}`);
 			if (response.status === 200) {
 				const data = await response.json();
 				this.setState = { info: { ...data } };

@@ -8,6 +8,8 @@ import { withRouter } from 'react-router-dom';
  * @version 1.0
  */
 
+const URL = 'http://localhost:8080/api/auth/login';
+
 /**
  * Login Logic class component
  */
@@ -48,7 +50,7 @@ class LoginContainer extends Component {
 			)
 		) {
 			try {
-				const response = await fetch('http://localhost:8080/api/auth/login', {
+				const response = await fetch(URL, {
 					method: 'POST',
 					headers: {
 						Content: 'application/json',

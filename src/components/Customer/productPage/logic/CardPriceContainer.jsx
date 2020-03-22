@@ -6,6 +6,8 @@ import CardPrice from '../view/CardPrice';
  * @version 1.0
  */
 
+const PUT_URL = 'http://localhost:8080/api/customer/cart/add'
+
 /**
   * Card Price Logic Class Component
   */
@@ -31,7 +33,7 @@ export default class CardPriceContainer extends Component {
 		let data = '';
 
 		try {
-			const response = await fetch(`http://localhost:8080/api/customer/cart/add/${this.props.id}`, {
+			const response = await fetch(`${PUT_URL}/${this.props.id}`, {
 				method: 'PUT',
 				headers: {
 					Accept: 'application/json',

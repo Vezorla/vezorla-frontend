@@ -11,6 +11,7 @@ import { withRouter } from 'react-router-dom';
  */
 
 var match = true;
+const URL = 'http://localhost:8080/api/customer/create-account';
 
 /**
  * Register Logic class component
@@ -73,7 +74,7 @@ class RegisterContainer extends Component {
 			)
 		) {
 			try {
-				const response = await fetch('http://localhost:8080/api/customer/create-account', {
+				const response = await fetch(URL, {
 					method: 'POST',
 					headers: {
 						Accept: 'application/json',

@@ -8,6 +8,9 @@ import LoadingHOC from '../../../common/HOC/LoadingHOC';
  * @version 1.0
  */
 
+const QUANTITY_URL = 'http://localhost:8080/api/customer/inventory/product/quantity';
+const INFO_URL = 'http://localhost:8080/api/customer/inventory/product';
+
 /**
   * Product Logic Class Component
   */
@@ -54,9 +57,7 @@ export default class ProductContainer extends Component {
 	//--- get max quantity for this product----
 	fetchQuantity = async () => {
 		try {
-			const responseQuantity = await fetch(
-				`http://localhost:8080/api/customer/inventory/product/quantity/${this.props.prodId}`
-			);
+			const responseQuantity = await fetch(`${QUANTITY_URL}/${this.props.prodId}`);
 			if (responseQuantity.status === 200) {
 				const max = await responseQuantity.json();
 				if (max !== 0 || max !== null) {
@@ -69,9 +70,7 @@ export default class ProductContainer extends Component {
 	//----get product information----
 	fetchProductInfo = async () => {
 		try {
-			const responseQuantity = await fetch(
-				`http://localhost:8080/api/customer/inventory/product/${this.props.prodId}`
-			);
+			const responseQuantity = await fetch(`${INFO_URL}/${this.props.prodId}`);
 			if (responseQuantity.status === 200) {
 				const product = await responseQuantity.json();
 				if (product !== null) {

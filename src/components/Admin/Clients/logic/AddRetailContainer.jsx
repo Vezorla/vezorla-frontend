@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import AddRetail from '../view/AddRetail';
 let match = true;
 
+const SAVE_URL = 'url'
+
 export default class AddRetailContainer extends Component {
 	constructor() {
 		super();
@@ -57,7 +59,7 @@ export default class AddRetailContainer extends Component {
 	onSave = async () => {
 		if (true) {
 			try {
-				const response = await fetch('url', {
+				const response = await fetch(SAVE_URL, {
 					method: 'POST',
 					header: {
 						'Content-Type': 'application/json'

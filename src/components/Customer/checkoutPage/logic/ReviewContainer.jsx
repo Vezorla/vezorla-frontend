@@ -7,6 +7,8 @@ import Review from '../view/Review';
  * @version 1.0
  */
 
+const GET_URL = 'http://localhost:8080/api/customer/cart/view';
+
 export default class CartContainer extends Component {
 	constructor(props) {
 		super(props);
@@ -28,7 +30,7 @@ export default class CartContainer extends Component {
 		this.setStage('loading');
 
 		try {
-			const response = await fetch(`http://localhost:8080/api/customer/cart/view`, {
+			const response = await fetch(GET_URL, {
 				method: 'GET',
 				credentials: 'include',
 				headers: {

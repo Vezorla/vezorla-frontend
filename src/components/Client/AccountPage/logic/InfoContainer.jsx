@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Info from '../view/Info';
 
+const FETCH_URL = 'url';
+const SAVE_URL = 'url';
+
 export default class InfoContainer extends Component {
 	constructor() {
 		super();
@@ -62,7 +65,7 @@ export default class InfoContainer extends Component {
 	fetchData = async () => {
 		this.setState({ stage: 'loading' });
 		try {
-			const response = await fetch('url');
+			const response = await fetch(FETCH_URL);
 			if (response.status === 200) {
 				const data = await response.json();
 				this.setState({ info: { ...data } });
@@ -77,7 +80,7 @@ export default class InfoContainer extends Component {
 
 	onClick = async () => {
 		try {
-			const response = await fetch('url', {
+			const response = await fetch(SAVE_URL, {
 				methods: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'

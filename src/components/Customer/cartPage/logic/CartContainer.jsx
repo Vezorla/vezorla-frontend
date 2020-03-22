@@ -7,6 +7,11 @@ import Cart from '../view/Cart';
  * @version 1.0
  */
 
+const DEL_URL = 'url';
+const UPDATE_URL = 'url';
+const INSTOCK_URL = 'url';
+const OUTSTOCK_URL = 'url';
+
 class CartContainer extends Component {
 	constructor(props) {
 		super(props);
@@ -45,7 +50,7 @@ class CartContainer extends Component {
 	//-----function delete product----
 	onDelete = async (prodId) => {
 		try {
-			let response = await fetch(`http://url/${prodId}`, {
+			let response = await fetch(`${DEL_URL}/${prodId}`, {
 				method: 'DELETE',
 				headers: {
 					Accept: 'application/json',
@@ -74,7 +79,7 @@ class CartContainer extends Component {
 	//--- function fetch line item-------
 	fetchInStockData = async () => {
 		try {
-			const response = await fetch(`http://localhost:8080/api/customer/cart/viewInStock`, {
+			const response = await fetch(INSTOCK_URL, {
 				method: 'GET',
 				credentials: 'include',
 				headers: {
@@ -103,7 +108,7 @@ class CartContainer extends Component {
 
 	fetchOutStockData = async () => {
 		try {
-			const response = await fetch(`http://localhost:8080/api/customer/cart/viewOutStock`, {
+			const response = await fetch(OUTSTOCK_URL, {
 				method: 'GET',
 				credentials: 'include',
 				headers: {
@@ -136,7 +141,7 @@ class CartContainer extends Component {
 	// ---put data when user change quantity of line item
 	putData = async () => {
 		try {
-			const response = await fetch(`url`, {
+			const response = await fetch(UPDATE_URL, {
 				method: 'PUT',
 				credentials: 'include',
 				headers: {

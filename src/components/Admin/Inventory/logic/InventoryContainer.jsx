@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Inventory from '../view/Inventory';
 
+const URL = 'url';
+
 export default class InventoryContainer extends Component {
 	constructor() {
 		super();
@@ -21,7 +23,7 @@ export default class InventoryContainer extends Component {
 	fetchData = async () => {
 		this.setState({ stage: 'loading' });
 		try {
-			const response = await fetch('url');
+			const response = await fetch(URL);
 			if (response.status === 200) {
 				const data = await response.json();
 				if (data !== null && data.length > 0) {
