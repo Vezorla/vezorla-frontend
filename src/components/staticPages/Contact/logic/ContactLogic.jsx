@@ -11,16 +11,17 @@ export default class ContactLogic extends Component {
         }
 
         this.setMessage = this.setMessage.bind(this);
+        this.setEmail = this.setEmail.bind(this);
         this.setName = this.setName.bind(this);
         this.submitMessage = this.submitMessage.bind(this);
     };
     
-    setMessage = (messageVal) => {
-        this.setState({message: messageVal});
+    setMessage = (e) => {
+        this.setState({message: e.target.value});
     };
 
-    setName = (nameVal) => {
-        this.setState({name: nameVal});
+    setName = (e) => {
+        this.setState({name: e.target.value});
     };
 
     setEmail = (emailVal) => {
@@ -46,6 +47,9 @@ export default class ContactLogic extends Component {
     }
 
     render() {
+
+        // console.log(this.setEmail)
+
         return (
             <div>
                 <Contact

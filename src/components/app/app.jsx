@@ -18,8 +18,10 @@ import ClientAuthHOC from '../common/HOC/ClientAuthHOC';
 import AdminAuthHOC from '../common/HOC/AdminAuthHOC';
 import CustomerAuthHOC from '../common/HOC/CustomerAuthHOC';
 
-import About from '../staticPages/About';
-import Contact from '../staticPages/Contact/view/Contact';
+
+import About from "../staticPages/About";
+import ContactLogic from '../staticPages/Contact/logic/ContactLogic';
+
 
 // Function will run everytime go to new path or first access the application
 function usePageViews(setLineItems, setAuth, setDone) {
@@ -127,6 +129,7 @@ function App() {
 					/>
 					<Route path="/contact" exact strict component={Contact} />
 					<Route path="/about" exact strict component={About} />
+
 					<Route path="/404" component={NotFound} />
 					<Redirect to="/404" />
 				</Switch>
