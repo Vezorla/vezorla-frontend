@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Card,
   CardContent,
@@ -70,9 +70,8 @@ export default function Contact({
             className={classes.input}
             value={name}
             onChange={setName}
-          ></TextField>
-          <br></br>
-          <EmailInput className={classes.content} value={email} onChange={setEmail}></EmailInput>
+          />
+          <EmailInput className={classes.content} value={email} onChange={setEmail} />
         </CardContent>
         <CardContent className={classes.content}>
           <TextField
@@ -83,7 +82,7 @@ export default function Contact({
             label="Message"
             value={message}
             onChange={setMessage}
-          ></TextField>
+          />
         </CardContent>
         <CardContent align="center" className={classes.content}>
           <Button
