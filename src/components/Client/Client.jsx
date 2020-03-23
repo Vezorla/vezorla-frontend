@@ -11,7 +11,7 @@ import ClientContainer from '../Client/AccountPage/logic/ClientContainer';
 export default function Client() {
 	return (
 		<Switch>
-			<Route to="/client/account" component={ClientContainer} />
+			<Route path="/client/account" component={ClientContainer} />
 			<Redirect to="/login" />
 		</Switch>
 	);

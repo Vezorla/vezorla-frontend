@@ -21,7 +21,6 @@ import CustomerAuthHOC from '../common/HOC/CustomerAuthHOC';
 import About from '../staticPages/About';
 import Contact from '../staticPages/Contact/view/Contact';
 
-import Testing from '../test/Testing';
 
 // Function will run everytime go to new path or first access the application
 function usePageViews(setLineItems, setAuth, setDone) {
@@ -104,7 +103,7 @@ function App() {
 			{/* <Header cart={lineItems} auth={auth} /> */}
 			<Box overflow="scroll" style={{ paddingBottom: '15vh' }}>
 				<Switch>
-					<Route path="/" exact strict component={Testing} />
+					{/* <Route path="/" exact strict component={Testing} /> */}
 
 					<Route path="/client" render={() => ClientAuthHOC(Client, auth)({ done: done })} />
 					<Route path="/admin" render={() => AdminAuthHOC(Admin, auth)({ done: done })} />

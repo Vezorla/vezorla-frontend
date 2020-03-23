@@ -13,7 +13,7 @@ const returnVal = (props, WrappedComponent) => {
 	if (props.stage === 'loading') {
 		returnVal = <CircularProgress />;
 	} else if (props.stage === 'error') {
-		returnVal = <PopUp message={props.message} onClose={() => {}} handleOK={() => {}} />;
+		returnVal = <PopUp message={props.message} onClose={() => {}} handleOk={() => {}} />;
 	} else {
 		returnVal = <WrappedComponent {...props} />;
 	}
