@@ -47,13 +47,16 @@ export default class ClientContainer extends Component {
 	};
 
 	handleChangeIndex = (newVal) => {
-		console.log('a');
 		this.setValue(newVal);
 	};
 	render() {
 		return (
 			<div>
-				{this.state.error ? <PopUp message={this.state.message} onClick={this.setError} /> : ''}
+				{this.state.error ? (
+					<PopUp message={this.state.message} onClose={this.setError} handleOk={this.setError} />
+				) : (
+					''
+				)}
 				<AppBar position="static" color="default">
 					<Tabs
 						value={this.state.value}

@@ -2,7 +2,7 @@ import React from 'react';
 import NecessaryInput from '../../../common/Inputs/NecessaryInput/NecessaryInput';
 import { Button } from '@material-ui/core';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
-import PopUp from '../../../common/PopUp/PopUp'
+import PopUp from '../../../common/PopUp/PopUp';
 
 function ClientInfoComponent({
 	info,
@@ -28,9 +28,9 @@ function ClientInfoComponent({
 }) {
 	return (
 		<div>
-			{error?<PopUp label="Error" message={message} onClick={setError}/>:''}
-			{success?<PopUp label="Success" message={message} onClick={goBack}/>:''}
-			{reseted?<PopUp label="Reset" message={message} onClick={setReset}/>:''}
+			{error ? <PopUp label="Error" message={message} onClose={setError} /> : ''}
+			{success ? <PopUp label="Success" message={message} onClose={goBack} handleOk={goBack} /> : ''}
+			{reseted ? <PopUp label="Reset" message={message} onClose={setReset} handleOk={setReset} /> : ''}
 			<div>
 				<h1>Client ID - {info.type}</h1>
 			</div>

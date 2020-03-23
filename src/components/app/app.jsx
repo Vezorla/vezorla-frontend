@@ -23,6 +23,7 @@ import About from "../staticPages/About";
 import ContactLogic from '../staticPages/Contact/logic/ContactLogic';
 
 
+
 // Function will run everytime go to new path or first access the application
 function usePageViews(setLineItems, setAuth, setDone) {
 	let location = useLocation();
@@ -101,10 +102,10 @@ function App() {
 
 	return (
 		<div className="App">
-			<Header cart={lineItems} auth={auth} />
+			{/* <Header cart={lineItems} auth={auth} /> */}
 			<Box overflow="scroll" style={{ paddingBottom: '15vh' }}>
 				<Switch>
-					{/* <Route path="/" exact strict component={Product} /> */}
+					{/* <Route path="/" exact strict component={Testing} /> */}
 
 					<Route path="/client" render={() => ClientAuthHOC(Client, auth)({ done: done })} />
 					<Route path="/admin" render={() => AdminAuthHOC(Admin, auth)({ done: done })} />

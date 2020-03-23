@@ -19,11 +19,10 @@ export default function AddRetail({
 	message,
 	match
 }) {
-
 	return (
 		<div>
-			{save ? <PopUp label="Save" message="Retail saved" onClick={setSave} /> : ''}
-			{error ? <PopUp label="Error" message={message} onClick={setError} /> : ''}
+			{save ? <PopUp label="Save" message="Retail saved" onClose={setSave} handleOk={setSave} /> : ''}
+			{error ? <PopUp label="Error" message={message} onClose={setError} handleOk={setError} /> : ''}
 			<h1>Register Retail Client</h1>
 			<div>
 				<TextField label="Store Name" value={info.storeName} onChange={setStoreName} />

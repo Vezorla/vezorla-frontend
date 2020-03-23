@@ -165,7 +165,11 @@ class ShippingInfo extends Component {
 	render() {
 		return (
 			<div>
-				{this.state.error ? <PopUp message={this.state.message} onClick={this.setError} /> : ''}
+				{this.state.error ? (
+					<PopUp message={this.state.message} handleOk={this.setError} onClose={this.setError} />
+				) : (
+					''
+				)}
 				<div>
 					<h1>Shipping Information</h1>
 

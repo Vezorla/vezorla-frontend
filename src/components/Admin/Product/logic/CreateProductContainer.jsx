@@ -112,8 +112,21 @@ class CreateProductContainer extends Component {
 	render() {
 		return (
 			<div>
-				{this.state.error ? <PopUp label="Error" message={this.state.message} onClick={this.setError} /> : ''}
-				{this.state.success ? <PopUp label="Success" message={this.state.message} onClick={this.goBack} /> : ''}
+				{this.state.error ? (
+					<PopUp
+						label="Error"
+						message={this.state.message}
+						onClose={this.setError}
+						handleOk={this.setError}
+					/>
+				) : (
+					''
+				)}
+				{this.state.success ? (
+					<PopUp label="Success" message={this.state.message} onClose={this.goBack} handleOk={this.goBack} />
+				) : (
+					''
+				)}
 				{LoadingHOC(Product)({
 					...this.state,
 					addImg: this.addImg,
