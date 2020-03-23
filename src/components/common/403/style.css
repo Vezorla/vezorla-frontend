@@ -1,0 +1,38 @@
+#page {
+    width: 100vw;
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#lock1 {
+    animation: lock 1.8s ease-in-out infinite alternate;
+}
+
+#lock2 {
+    animation: lock 1.5s ease-in-out 1s infinite alternate;
+}
+
+#shield {
+    animation: lock 2s ease-in-out 1s infinite alternate;
+}
+
+#text2 {
+    display: none;
+}
+
+
+@keyframes lock {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-1vh);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}

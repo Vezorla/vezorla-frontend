@@ -9,7 +9,7 @@ import { Redirect } from 'react-router-dom';
 
 const returnVal = (WrapperComponent, auth, props) => {
 	if (auth !== 'admin') {
-		return <Redirect to="/404" />;
+		return <Redirect to="/403" />;
 	} else {
 		return <WrapperComponent {...props} />;
 	}
