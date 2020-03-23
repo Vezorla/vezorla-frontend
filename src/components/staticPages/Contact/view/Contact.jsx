@@ -57,8 +57,6 @@ export default function Contact({
 }) {
   const classes = useStyles();
 
-  console.log(setEmail)
-
   return (
     <div style={{ marginTop: "6em" }} className={classes.root}>
       <Typography paragraph={true} variant="h3" align="center" justify="center">
