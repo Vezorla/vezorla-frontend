@@ -1,7 +1,22 @@
 import React, { Component } from 'react';
 import './style.css';
 
+/***
+ * @author Minh Lam
+ * @version 1.0
+ */
+
 export default class NotAuth extends Component {
+
+	componentDidMount(){
+		const text1 = document.querySelector('#text1')
+		const text2 = document.querySelector('#text2')
+
+		setTimeout(()=>{
+			text1.style = "display: none"
+			text2.style = "display:inline-block"
+		}, 5000)
+	}
 
 	render() {
 		return (

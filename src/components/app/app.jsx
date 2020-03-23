@@ -95,7 +95,6 @@ function App() {
 
 	//increate Cart function
 	const increaseCart = () => {
-		console.log('a');
 		fetchCartLineItems(setLineItems);
 	};
 

@@ -6,6 +6,11 @@
     align-items: center;
 }
 
+svg {
+    width: 100%;
+    height: 85%
+}
+
 #lock1 {
     animation: lock 1.8s ease-in-out infinite alternate;
 }
