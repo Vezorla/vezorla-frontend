@@ -19,7 +19,7 @@ import AdminAuthHOC from '../common/HOC/AdminAuthHOC';
 import CustomerAuthHOC from '../common/HOC/CustomerAuthHOC';
 
 import About from "../staticPages/About";
-import Contact from '../staticPages/Contact/view/Contact';
+import ContactLogic from '../staticPages/Contact/logic/ContactLogic';
 
 // Function will run everytime go to new path or first access the application
 function usePageViews(setLineItems, setAuth) {
@@ -100,7 +100,7 @@ function App() {
 					<Route path="/login" exact strict render={() => CustomerAuthHOC(LoginContainer, auth)(authFunc)} />
 					<Route path="/register" exact strict render={() => CustomerAuthHOC(RegisterContainer, auth)()} />
 					<Route path="/forgot" exact strict render={() => CustomerAuthHOC(ForgotPassContainer, auth)()} />
-					<Route path="/contact" exact strict component={Contact} />
+					<Route path="/contact" exact strict component={ContactLogic} />
 					<Route path="/about" exact strict component={About}/>
 					<Route path="/404" component={NotFound} />
 					<Redirect to="/404" />
