@@ -4,6 +4,11 @@ import PopUp from '../../../common/PopUp/PopUp';
 import Product from '../view/Product';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
+const FETCH_URL = 'url';
+const ADD_URL = 'url';
+const DEL_URL = 'url';
+const SAVE_URL = 'url';
+
 class UpdateProductContainer extends Component {
 	constructor() {
 		super();
@@ -45,7 +50,7 @@ class UpdateProductContainer extends Component {
 	addImg = async (e) => {
 		const file = e.target.files[0];
 		try {
-			const response = await fetch('url', {
+			const response = await fetch(ADD_URL, {
 				method: 'POST',
 				header: {
 					// If doesn't work change into img/xyz
@@ -63,7 +68,7 @@ class UpdateProductContainer extends Component {
 
 	delImg = async (e) => {
 		try {
-			const response = await fetch('url', {
+			const response = await fetch(DEL_URL, {
 				method: 'DELETE',
 				headers: {
 					'Content-Type': 'application-json'
@@ -79,7 +84,7 @@ class UpdateProductContainer extends Component {
 	fetchData = async () => {
 		this.setState({ stage: 'loading' });
 		try {
-			const response = await fetch('url');
+			const response = await fetch(FETCH_URL);
 			if (response.status === 200) {
 				const data = await response.json();
 				this.addImgs(data);
@@ -92,7 +97,7 @@ class UpdateProductContainer extends Component {
 
 	onSave = async () => {
 		try {
-			const response = await fetch('url', {
+			const response = await fetch(SAVE_URL, {
 				method: 'POST',
 				header: {
 					'Content-Type': 'application/json'

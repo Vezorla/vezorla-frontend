@@ -6,6 +6,8 @@ import CardPrice from '../view/CardPrice';
  * @version 1.0
  */
 
+const PUT_URL = 'http://localhost:8080/api/customer/cart/add'
+
 /**
   * Card Price Logic Class Component
   */
@@ -31,7 +33,7 @@ export default class CardPriceContainer extends Component {
 		let data = '';
 
 		try {
-			const response = await fetch(`http://localhost:8080/api/customer/cart/add/${this.props.id}`, {
+			const response = await fetch(`${PUT_URL}/${this.props.id}`, {
 				method: 'PUT',
 				headers: {
 					Accept: 'application/json',
@@ -43,16 +45,13 @@ export default class CardPriceContainer extends Component {
 			if (response.status === 200) {
 				const confirmation = await response.json();
 				if (confirmation !== null && confirmation === true) {
-					this.props.addCartHandler(data);
-				} else {
-					this.setStage('error');
+					console.log(this.props.addCartHandler);
+					this.props.addCartHandler();
 				}
 			} else if (response.status > 400) {
-				this.setStage('error');
+				//pop up error some how
 			}
-		} catch (err) {
-			this.setStage('error');
-		}
+		} catch (err) {}
 	};
 
 	//when add to cart, get new quntity

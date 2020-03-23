@@ -5,6 +5,7 @@ import OrderHistory from '../view/OrderHistory';
  * @author MinhL4m
  * @version 1.0
  */
+const URL = 'url';
 
 export default class OrderHistoryContainer extends Component {
 	constructor() {
@@ -18,7 +19,7 @@ export default class OrderHistoryContainer extends Component {
 	fetchData = async () => {
 		this.setState({ stage: 'loading' });
 		try {
-			const response = await fetch('url');
+			const response = await fetch(URL);
 			if (response.status === 200) {
 				const data = await response.json();
 				if (data !== null && data.length !== 0 && data !== undefined) {

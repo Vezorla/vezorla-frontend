@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Client from '../view/Client';
 
+const URL = 'url';
+
 export default class ClientContainer extends Component {
 	constructor() {
 		super();
@@ -13,7 +15,7 @@ export default class ClientContainer extends Component {
 	fetchData = async () => {
 		this.setState({ stage: 'loading' });
 		try {
-			const response = await fetch('url');
+			const response = await fetch(URL);
 			if (response.status === 200) {
 				const data = await response.json();
 				this.setState({

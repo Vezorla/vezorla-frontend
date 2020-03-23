@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ForgotPass from '../view/ForgotPass';
 
+const URL = 'url';
+
 export default class ForgotPassContainer extends Component {
 	constructor() {
 		super();
@@ -24,7 +26,7 @@ export default class ForgotPassContainer extends Component {
 
 	onClick() {
 		try {
-			const response = fetch('url', {
+			const response = fetch(URL, {
 				headers: {
 					'Content-Type': 'application/json'
 				},

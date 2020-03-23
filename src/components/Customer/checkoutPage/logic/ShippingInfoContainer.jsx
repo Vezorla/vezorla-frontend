@@ -11,7 +11,8 @@ import { withRouter } from 'react-router-dom';
  * @version 1.0
  */
 
-//TODO add toggle for pickup, make the shipping stop when false, and give it some time so the server can process then make fetch request to get discount
+const GET_URL = 'http://localhost:8080/api/customer/info';
+const POST_URL = 'http://localhost:8080/api/customer/cart/checkout/shipping';
 
 class ShippingInfo extends Component {
 	constructor(props) {
@@ -99,7 +100,7 @@ class ShippingInfo extends Component {
 
 	//----Did Mount-----
 	componentDidMount() {
-		if(this.props.auth !== 'client'){
+		if (this.props.auth !== 'client') {
 			this.fetchData();
 		}
 	}
@@ -107,7 +108,7 @@ class ShippingInfo extends Component {
 	//get customer info onload
 	fetchData = async () => {
 		try {
-			const response = await fetch(`http://localhost:8080/api/customer/info`, {
+			const response = await fetch(GET_URL, {
 				method: 'GET',
 				credentials: 'include',
 				headers: {
@@ -136,7 +137,7 @@ class ShippingInfo extends Component {
 			!this.state.info.pickup === /[A-Z]{1}\d{1}[A-Z]{1}\d{1}[A-Z]{1}\d{1}/g.test(this.state.info.postalCode)
 		) {
 			try {
-				const response = await fetch('http://localhost:8080/api/customer/cart/checkout/shipping', {
+				const response = await fetch(POST_URL, {
 					method: 'POST',
 					headers: {
 						Accept: 'application/json',

@@ -3,6 +3,8 @@ import WeekSale from '../view/WeekSale';
 import OtherInfo from '../view/OtherInfo';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
+const URL = 'url';
+
 const Dashboard = ({ props }) => {
 	return (
 		<div>
@@ -31,7 +33,7 @@ export default class DashboardContainer extends Component {
 	fetchInfo = async () => {
 		this.setState({ stage: 'loading' });
 		try {
-			const response = await fetch('url');
+			const response = await fetch(URL);
 			if (response === 200) {
 				const data = await response.json();
 				if (data !== null) {

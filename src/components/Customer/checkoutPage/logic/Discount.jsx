@@ -12,6 +12,10 @@ const dummyData = [
 	{ Id: 12, code: 'avc', description: 'jdnsajdnjsandjknsajdnjsandjsandjnasd' },
 	{ Id: 1, code: 'ava', description: 'dbsahdbhjsabdhbsahjbdhjsabdhjbasjhdbasdbjhbsadjhbasjhdb' }
 ];
+
+const GET_URL = 'http://localhost:8080/api/customer/discounts/get';
+const PUT_URL = 'http://localhost:8080/api/customer/selected_discount/get';
+
 export default class Discount extends Component {
 	constructor(props) {
 		super(props);
@@ -28,7 +32,7 @@ export default class Discount extends Component {
 	//fetch discount list
 	fetchData = async () => {
 		try {
-			const response = await fetch(`http://localhost:8080/api/customer/discounts/get`, {
+			const response = await fetch(GET_URL, {
 				method: 'GET',
 				credentials: 'include',
 				headers: {
@@ -58,7 +62,7 @@ export default class Discount extends Component {
 	handleNext = () => {
 		(async () => {
 			try {
-				const response = await fetch(`http://localhost:8080/api/customer/selected_discount/get`, {
+				const response = await fetch(PUT_URL, {
 					method: 'PUT',
 					credentials: 'include',
 					headers: {

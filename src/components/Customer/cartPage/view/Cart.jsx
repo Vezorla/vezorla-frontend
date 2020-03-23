@@ -12,22 +12,34 @@ function Cart(props) {
 	const lineItemList = () => {
 		return (
 			<div>
-				{props.list.map((lineItem) => (
-					<LineItem key={lineItem.prodId} onDelete={props.onDelete} onChange={props.onChange} {...lineItem} />
-				))}
+				{props.outStockList.length === 0 ? (
+					<div>
+						<h1>Out of Stock Item</h1>
+						{props.outStockList.map((lineItem) => (
+							<div>
+								<p>lineItem.name</p>
+							</div>
+						))}
+					</div>
+				) : (
+					''
+				)}
+				<div>
+					<h1>In Stock Item</h1>
+					{props.inStockList.map((lineItem) => (
+						<LineItem
+							key={lineItem.prodId}
+							onDelete={props.onDelete}
+							onChange={props.onChange}
+							{...lineItem}
+						/>
+					))}
+				</div>
 			</div>
 		);
 	};
 
-	const subTotal = () => {
-		var total = 0;
-		props.list.map((lineItem) => {
-			total += lineItem.price * lineItem.quantity;
-		});
-		return total;
-	};
-
-	const CartComponent = loadingHOC(lineItemList)({ ...props, message: 'oh no' });
+	const CartComponent = loadingHOC(lineItemList)({ ...props, message: 'Cannot get Cart' });
 	return CartComponent;
 }
 export default Cart;

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PendingOrder from '../view/PendingOrder';
 
+const URL = 'url';
+
 export default class PendingOrderContainer extends Component {
 	constructor() {
 		super();
@@ -13,7 +15,7 @@ export default class PendingOrderContainer extends Component {
 	fetchData = async () => {
 		this.setState({ stage: 'loading' });
 		try {
-			const response = await fetch('url');
+			const response = await fetch(URL);
 			if (response.status === 200) {
 				const data = await response.json();
 				this.setState({
