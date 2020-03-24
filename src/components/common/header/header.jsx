@@ -49,6 +49,7 @@ export default function ButtonAppBar(props) {
 					backgroundColor: '#D0C50A',
 					position: 'fixed',
 					top: 0,
+					left: 0,
 					marginBottom: '3vh',
 					paddingTop: '0.2em'
 				}}

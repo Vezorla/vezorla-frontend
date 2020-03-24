@@ -6,6 +6,7 @@ import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
 import Header from '../common/header/header';
 import Footer from '../common/footer/footer';
 import NotFound from '../common/404/NotFound';
+import NotAuth from '../common/403/NotAuth'
 import LoginContainer from '../login/logic/LoginContainer';
 import RegisterContainer from '../Customer/registerPage/logic/RegisterContainer';
 import ForgotPassContainer from '../Client/ForgotPassPage/logic/ForgotPassContainer';
@@ -94,7 +95,6 @@ function App() {
 
 	//increate Cart function
 	const increaseCart = () => {
-		console.log('a');
 		fetchCartLineItems(setLineItems);
 	};
 
@@ -102,7 +102,7 @@ function App() {
 
 	return (
 		<div className="App">
-			{/* <Header cart={lineItems} auth={auth} /> */}
+			<Header cart={lineItems} auth={auth} />
 			<Box overflow="scroll" style={{ paddingBottom: '15vh' }}>
 				<Switch>
 					{/* <Route path="/" exact strict component={Testing} /> */}
@@ -128,9 +128,9 @@ function App() {
 						strict
 						render={() => CustomerAuthHOC(ForgotPassContainer, auth)({ done: done })}
 					/>
-					<Route path="/contact" exact strict component={Contact} />
+					<Route path="/contact" exact strict component={ContactLogic} />
 					<Route path="/about" exact strict component={About} />
-
+					<Route path="/403" component={NotAuth}/>
 					<Route path="/404" component={NotFound} />
 					<Redirect to="/404" />
 				</Switch>

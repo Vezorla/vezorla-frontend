@@ -173,7 +173,8 @@ class CartContainer extends Component {
 	render() {
 		return (
 			<div>
-				{this.state.list.length > 0 ? (
+				{/* Todo need to change this fit the new backend design */}
+				{this.state.inStockList.length > 0 || this.state.outStockList > 0 ? (
 					<div>
 						<Cart {...this.state} onDelete={this.onDelete} onChange={this.onChange} />
 						<div>
