@@ -17,7 +17,7 @@ function Cart(props) {
 						<h1>Out of Stock Item</h1>
 						{props.outStockList.map((lineItem) => (
 							<div>
-								<p>lineItem.name</p>
+								<p>{lineItem.name} out of stock by {lineItem.by}</p>
 							</div>
 						))}
 					</div>

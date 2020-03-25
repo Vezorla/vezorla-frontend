@@ -37,7 +37,7 @@ export default function LineItem({ prodID, price, imageMain, name, quantity, onC
 				/>
 			</div>
 			<div className="lineItem--price">
-				<p>${quantity * price}</p>
+				<p>${(quantity * price).toFixed(2)}</p>
 			</div>
 			<div className="lineItem--delete">
 				<IconButton edge="end" aria-label="delete">

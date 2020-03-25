@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Cart from '../view/Cart';
+import PopUp from '../../../common/PopUp/PopUp';
+import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 /**
  * @file Cart Logic Component
@@ -18,7 +21,9 @@ class CartContainer extends Component {
 		this.state = {
 			inStockList: [],
 			outStockList: [],
-			stage: ''
+			stage: '',
+			error: '',
+			message: ''
 		};
 
 		this.onChange = this.onChange.bind(this);
@@ -56,10 +61,10 @@ class CartContainer extends Component {
 					this.setState({ inStockList: [ ...temp ] });
 				}
 			} else if (response.status >= 400) {
-				this.setState({ stage: 'error' });
+				this.setState({ error: true, message: 'something wrong, we cannot change this item right now' });
 			}
 		} catch (err) {
-			this.setState({ stage: 'error' });
+			this.setState({ error: true, message: 'something wrong, we cannot change this item right now' });
 		}
 	};
 
@@ -86,10 +91,10 @@ class CartContainer extends Component {
 					this.setState({ inStockList: newList });
 				}
 			} else if (response.status >= 400) {
-				this.setState({ stage: 'error' });
+				this.setState({ error: true, message: 'something wrong, we cannot delete this item right now' });
 			}
 		} catch (err) {
-			this.setState({ stage: 'error' });
+			this.setState({ error: true, message: 'something wrong, we cannot delete this item right now' });
 		}
 	};
 
@@ -163,11 +168,12 @@ class CartContainer extends Component {
 		let subTotal = 0;
 		this.state.inStockList.map((lineItem) => {
 			subTotal += lineItem.price * lineItem.quantity;
+			subTotal = Number(subTotal).toFixed(2);
 		});
 		if (subTotal !== 0) {
-			this.tax = subTotal * 5 / 100;
-			this.tax = this.tax.toFixed(2);
-			this.total = subTotal + Number(this.tax);
+			this.tax = Number(subTotal) * 5 / 100;
+			this.tax = Number(this.tax).toFixed(2);
+			this.total = Number(subTotal) + Number(this.tax);
 		}
 
 		return subTotal;
@@ -176,6 +182,19 @@ class CartContainer extends Component {
 	render() {
 		return (
 			<div>
+				{this.state.error ? (
+					<PopUp
+						message={this.state.message}
+						onClose={() => {
+							this.setState({ error: false });
+						}}
+						handleOk={() => {
+							this.setState({ error: false });
+						}}
+					/>
+				) : (
+					''
+				)}
 				{this.state.inStockList.length > 0 || this.state.outStockList.length > 0 ? (
 					<div>
 						<Cart {...this.state} onDelete={this.onDelete} onChange={this.onChange} />
@@ -188,6 +207,9 @@ class CartContainer extends Component {
 						) : (
 							''
 						)}
+						<Link to="/customer/checkout">
+							<Button variant='contained'>Checkout</Button>
+						</Link>
 					</div>
 				) : (
 					<p>Add something</p>
