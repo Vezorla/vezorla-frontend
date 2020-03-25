@@ -61,7 +61,7 @@ const fetchCartLineItems = async (setLineItems) => {
 
 const fetchAuth = async (setAuth, setDone) => {
 	try {
-		const response = await fetch('http://localhost:8080/api/auth/checkRole', {
+		const response = await fetch('http://localhost:8080/api/auth/check-role', {
 			method: 'GET',
 			credentials: 'include',
 			mode: 'cors'

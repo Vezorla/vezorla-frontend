@@ -8,7 +8,7 @@ import LoadingHOC from '../../../common/HOC/LoadingHOC';
  * @version 1.0
  */
 
-const ReviewComponent = ({ list, info, handleBack, handleNext }) => {
+const ReviewComponent = ({ inStockList, outStockList, info, handleBack, handleNext }) => {
 	return (
 		<div>
 			<tabel>
@@ -18,7 +18,7 @@ const ReviewComponent = ({ list, info, handleBack, handleNext }) => {
 					<th>Price</th>
 					<th>Extended Price</th>
 				</tr>
-				{list.map((lineItem) => (
+				{inStockList.map((lineItem) => (
 					<tr>
 						<td>{lineItem.name}</td>
 						<td>{lineItem.quantity}</td>
@@ -34,6 +34,9 @@ const ReviewComponent = ({ list, info, handleBack, handleNext }) => {
 				<p>Tax: {info.taxes}</p>
 				<p>Shipping: {info.shipping}</p>
 				<p>Total: {info.total}</p>
+			</div>
+			<div>
+
 			</div>
 			<ProcessButtons handleBack={handleBack} handleNext={handleNext} complete={true} hasNext={true} />
 		</div>

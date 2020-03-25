@@ -74,8 +74,8 @@ export default class ProductContainer extends Component {
 			if (responseQuantity.status === 200) {
 				const product = await responseQuantity.json();
 				if (product !== null) {
-					this.setState({ product: { ...product } });
-					this.setImgs(product.imageOne, product.imageTwo, product.imageThree, product.imageMain);
+					this.setState({ product: { ...product[0] } });
+					this.setImgs(product[0].imageOne, product[0].imageTwo, product[0].imageThree, product[0].imageMain);
 					this.setState({ stage: 'done' });
 				}
 			} else if (responseQuantity.status > 400) {
