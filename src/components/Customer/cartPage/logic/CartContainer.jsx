@@ -22,7 +22,7 @@ class CartContainer extends Component {
 			inStockList: [],
 			outStockList: [],
 			stage: '',
-			error: '',
+			error: false,
 			message: ''
 		};
 
@@ -59,6 +59,8 @@ class CartContainer extends Component {
 						return lineItem;
 					});
 					this.setState({ inStockList: [ ...temp ] });
+				}else{
+					this.setState({ error: true, message: 'something wrong, we cannot change this item right now' });
 				}
 			} else if (response.status >= 400) {
 				this.setState({ error: true, message: 'something wrong, we cannot change this item right now' });
@@ -200,16 +202,18 @@ class CartContainer extends Component {
 						<Cart {...this.state} onDelete={this.onDelete} onChange={this.onChange} />
 						{this.state.inStockList.length > 0 ? (
 							<div>
-								<p>Subtotal: ${this.calAll()}</p>
-								<p>Tax: ${this.tax}</p>
-								<p>Total: ${this.total}</p>
+								<div>
+									<p>Subtotal: ${this.calAll()}</p>
+									<p>Tax: ${this.tax}</p>
+									<p>Total: ${this.total}</p>
+								</div>
+								<Link to="/customer/checkout">
+									<Button variant="contained">Checkout</Button>
+								</Link>
 							</div>
 						) : (
 							''
 						)}
-						<Link to="/customer/checkout">
-							<Button variant='contained'>Checkout</Button>
-						</Link>
 					</div>
 				) : (
 					<p>Add something</p>

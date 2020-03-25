@@ -100,9 +100,7 @@ class ShippingInfo extends Component {
 
 	//----Did Mount-----
 	componentDidMount() {
-		if (this.props.auth !== 'client') {
-			this.fetchData();
-		}
+		this.fetchData();
 	}
 
 	//get customer info onload
@@ -123,7 +121,7 @@ class ShippingInfo extends Component {
 					this.setState({ info: { ...data } });
 				}
 			} else if (response.state === 401) {
-				this.props.history.push('/login');
+				this.props.history.push('/home');
 			}
 		} catch (err) {}
 	};
@@ -186,6 +184,7 @@ class ShippingInfo extends Component {
 							setPostalCode={this.setPostalCode}
 							setProvince={this.setStateInfo('province')}
 							disabled={this.state.info.pickup}
+							disbaledEmail={this.state.info.email !== ''}
 						/>
 					</div>
 					<FormControlLabel
