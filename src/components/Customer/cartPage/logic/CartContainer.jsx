@@ -23,7 +23,8 @@ class CartContainer extends Component {
 			outStockList: [],
 			stage: '',
 			error: false,
-			message: ''
+			message: '',
+			done: false
 		};
 
 		this.onChange = this.onChange.bind(this);
@@ -59,7 +60,7 @@ class CartContainer extends Component {
 						return lineItem;
 					});
 					this.setState({ inStockList: [ ...temp ] });
-				}else{
+				} else {
 					this.setState({ error: true, message: 'something wrong, we cannot change this item right now' });
 				}
 			} else if (response.status >= 400) {
@@ -116,7 +117,7 @@ class CartContainer extends Component {
 				const data = await response.json();
 				if (data !== null) {
 					this.setState({ inStockList: data });
-					this.setState({ stage: 'done' });
+					this.setState({ stage: 'done', done: 'done' });
 				}
 			} else if (response.status > 400) {
 				this.setState({ stage: 'error' });
@@ -170,19 +171,20 @@ class CartContainer extends Component {
 		let subTotal = 0;
 		this.state.inStockList.map((lineItem) => {
 			subTotal += lineItem.price * lineItem.quantity;
-			subTotal = Number(subTotal).toFixed(2);
 		});
 		if (subTotal !== 0) {
+			subTotal = subTotal.toFixed(2);
 			this.tax = Number(subTotal) * 5 / 100;
 			this.tax = Number(this.tax).toFixed(2);
 			this.total = Number(subTotal) + Number(this.tax);
+			this.total = this.total.toFixed(2);
 		}
 
 		return subTotal;
 	};
 
 	render() {
-		return (
+		return this.state.done ? (
 			<div>
 				{this.state.error ? (
 					<PopUp
@@ -219,6 +221,8 @@ class CartContainer extends Component {
 					<p>Add something</p>
 				)}
 			</div>
+		) : (
+			''
 		);
 	}
 }

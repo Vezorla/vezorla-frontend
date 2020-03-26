@@ -15,13 +15,16 @@ const firstVal = (value) => {
 		: '(' + phoneReceive[1] + ') ' + phoneReceive[2] + (phoneReceive[3] ? '-' + phoneReceive[3] : '');
 };
 
-export default function PhoneInput({ value, className, onChange, disabled }) {
+export default function PhoneInput({ value, className, onChange, disabled, required = false }) {
 	const [ phoneNumber, setPhoneNumber ] = useState('');
 
-	useEffect(() => {
-		let initVal = firstVal(value);
-		setPhoneNumber(initVal);
-	}, [value]);
+	useEffect(
+		() => {
+			let initVal = firstVal(value);
+			setPhoneNumber(initVal);
+		},
+		[ value ]
+	);
 
 	const phoneHandler = (e) => {
 		const inputVal = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
@@ -38,6 +41,7 @@ export default function PhoneInput({ value, className, onChange, disabled }) {
 			value={phoneNumber}
 			onChange={phoneHandler}
 			disabled={disabled}
+			required={required}
 		/>
 	);
 }

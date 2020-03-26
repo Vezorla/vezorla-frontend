@@ -26,7 +26,8 @@ export default function NecessaryInput({
 	setPassword,
 	disabled = false,
 	className = 'default',
-	disbaledEmail = false
+	disbaledEmail = false,
+	required = false
 }) {
 	return (
 		<div>
@@ -35,12 +36,14 @@ export default function NecessaryInput({
 				className={`${className}--firstname`}
 				value={info.firstName}
 				onChange={(e) => setFirstname(e)}
+				required={required}
 			/>
 			<TextField
 				label="Last Name"
 				className={`${className}--lastname`}
 				value={info.lastName}
 				onChange={setLastname}
+				required={required}
 			/>
 			<EmailInput
 				className={`${className}--email`}
@@ -48,13 +51,14 @@ export default function NecessaryInput({
 				onChange={setEmail ? setEmail : (value) => {}}
 				helperText="Invalid Email"
 				disabled={disbaledEmail}
-				
+				required={required}
 			/>
 			<PhoneInput
 				className={`${className}--phone`}
 				value={info.phoneNum}
 				onChange={setPhone}
 				helperText="Invalid Phone Number"
+				required={required}
 			/>
 
 			{/* ---Address--- */}
@@ -84,6 +88,7 @@ export default function NecessaryInput({
 				helperText="Invalid Postal Code"
 				value={info.postalCode}
 				onChange={setPostalCode}
+				required={required}
 			/>
 			<TextField
 				className={`${className}--country`}

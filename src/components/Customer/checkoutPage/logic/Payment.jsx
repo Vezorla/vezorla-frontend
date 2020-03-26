@@ -1,23 +1,22 @@
 import { PayPalButton } from 'react-paypal-button-v2';
 import React, { Component } from 'react';
 
-export default class Example extends Component {
+const URL = 'http://localhost:8080/api/customer/payment/success';
+
+export default class Payment extends Component {
 	render() {
 		return (
 			<PayPalButton
-				amount="0.01"
-				// shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
-				onSuccess={(details, data) => {
-					alert('Transaction completed by ' + details.payer.name.given_name);
-
-					// OPTIONAL: Call your server to save the transaction
-					return fetch('/paypal-transaction-complete', {
-						method: 'post',
-						body: JSON.stringify({
-							orderID: data.orderID
-						})
+				amount={this.props.total}
+				options={{ currency: 'CAD', disableFunding: 'card', clientId: 'sb' }}
+				onSuccess={() => {
+					this.props.setDone();
+					return fetch(URL, {
+						method: 'PUT',
+						body: JSON.stringify(true)
 					});
 				}}
+				catchError={this.props.setError}
 			/>
 		);
 	}

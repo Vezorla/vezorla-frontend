@@ -21,7 +21,7 @@ export default class CheckoutPage extends Component {
 		this.setStage = this.setStage.bind(this);
 		this._switchCase = this._switchCase.bind(this);
 	}
-	steps = [ 'Shipping Information', 'Discount', 'Review', 'Payment' ];
+	steps = [ 'Shipping Information', 'Discount', 'Review & Pay' ];
 	setStage(newStage) {
 		this.setState({
 			stage: newStage
@@ -44,8 +44,6 @@ export default class CheckoutPage extends Component {
 				return <Discount stage={this.state.stage} setStage={this.setStage} />;
 			case 2:
 				return <ReviewContainer stage={this.state.stage} setStage={this.setStage} />;
-			case 3:
-				return <Payment stage={this.state.stage} setStage={this.setStage} />;
 			default:
 				return <ShippingInfo stage={this.state.stage} setStage={this.setStage} auth={this.props.auth} />;
 		}

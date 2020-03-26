@@ -17,7 +17,9 @@ function Cart(props) {
 						<h1>Out of Stock Item</h1>
 						{props.outStockList.map((lineItem) => (
 							<div>
-								<p>{lineItem.name} out of stock by {lineItem.by}</p>
+								<p>
+									{lineItem.name} out of stock by {lineItem.by}
+								</p>
 							</div>
 						))}
 					</div>
@@ -28,14 +30,19 @@ function Cart(props) {
 					<h1>In Stock Item</h1>
 					{props.inStockList.length !== 0 ? (
 						<div>
-							{props.inStockList.map((lineItem) => (
-								<LineItem
-									key={lineItem.prodID}
-									onDelete={props.onDelete}
-									onChange={props.onChange}
-									{...lineItem}
-								/>
-							))}
+							{props.inStockList.map(
+								(lineItem) =>
+									lineItem.quantity > 0 ? (
+										<LineItem
+											key={lineItem.prodID}
+											onDelete={props.onDelete}
+											onChange={props.onChange}
+											{...lineItem}
+										/>
+									) : (
+										''
+									)
+							)}
 						</div>
 					) : (
 						<h1>Sorry for this inconvenience</h1>

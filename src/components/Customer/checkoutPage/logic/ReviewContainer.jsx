@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Review from '../view/Review';
+import PopUp from '../../../common/PopUp/PopUp';
+import { withRouter } from 'react-router';
 
 /**
  * @file Cart Component
@@ -9,7 +11,7 @@ import Review from '../view/Review';
 
 const GET_URL = 'http://localhost:8080/api/customer/cart/review';
 
-export default class CartContainer extends Component {
+class ReviewContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -22,7 +24,9 @@ export default class CartContainer extends Component {
 				shipping: '',
 				Total: ''
 			},
-			stage: ''
+			stage: '',
+			done: false,
+			error: false
 		};
 	}
 
@@ -48,13 +52,13 @@ export default class CartContainer extends Component {
 					this.setState({ stage: 'done' });
 				}
 			} else if (response.status > 400) {
-				this.setState({ stage: 'error', list:[] });
-				
+				this.setState({ stage: 'error', list: [] });
+
 				return null;
 			}
 		} catch (err) {
-			this.setState({ stage: 'error', list:[] });
-		
+			this.setState({ stage: 'error', list: [] });
+
 			return null;
 		}
 	};
@@ -67,11 +71,37 @@ export default class CartContainer extends Component {
 		this.props.setStage(this.props.stage - 1);
 	};
 
-	handleNext = () => {
-		this.props.setStage(this.props.stage + 1);
-	};
-
 	render() {
-		return <Review {...this.state} handleNext={this.handleNext} handleBack={this.handleBack} />;
+		return (
+			<div>
+				{this.state.error ? (
+					<PopUp
+						message="Something wrong!"
+						onClose={() => this.setState({ error: false })}
+						handleOk={() => this.setState({ error: false })}
+					/>
+				) : (
+					''
+				)}
+				{this.state.done ? (
+					<PopUp
+						label="Thank You"
+						message="Thank you! I hope you enjoy our products!"
+						onClose={() => this.props.history.push('/')}
+						handleOk={() => this.props.history.push('/')}
+					/>
+				) : (
+					''
+				)}
+				<Review
+					{...this.state}
+					setDone={() => this.setState({ done: true })}
+					setError={() => this.setState({ error: true })}
+					handleNext={this.handleNext}
+					handleBack={this.handleBack}
+				/>
+			</div>
+		);
 	}
 }
+export default withRouter(ReviewContainer);
