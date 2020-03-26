@@ -6,7 +6,7 @@ import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
 import Header from '../common/header/header';
 import Footer from '../common/footer/footer';
 import NotFound from '../common/404/NotFound';
-import NotAuth from '../common/403/NotAuth'
+import NotAuth from '../common/403/NotAuth';
 import LoginContainer from '../login/logic/LoginContainer';
 import RegisterContainer from '../Customer/registerPage/logic/RegisterContainer';
 import ForgotPassContainer from '../Client/ForgotPassPage/logic/ForgotPassContainer';
@@ -19,11 +19,8 @@ import ClientAuthHOC from '../common/HOC/ClientAuthHOC';
 import AdminAuthHOC from '../common/HOC/AdminAuthHOC';
 import CustomerAuthHOC from '../common/HOC/CustomerAuthHOC';
 
-
-import About from "../staticPages/About";
+import About from '../staticPages/About';
 import ContactLogic from '../staticPages/Contact/logic/ContactLogic';
-
-
 
 // Function will run everytime go to new path or first access the application
 function usePageViews(setLineItems, setAuth, setDone) {
@@ -130,7 +127,7 @@ function App() {
 					/>
 					<Route path="/contact" exact strict component={ContactLogic} />
 					<Route path="/about" exact strict component={About} />
-					<Route path="/403" component={NotAuth}/>
+					<Route path="/403" component={NotAuth} />
 					<Route path="/404" component={NotFound} />
 					<Redirect to="/404" />
 				</Switch>
