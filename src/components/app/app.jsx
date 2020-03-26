@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import Box from '@material-ui/core/Box';
-
 import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
 
 import Header from '../common/header/header';
@@ -18,7 +16,6 @@ import Admin from '../Admin/Admin';
 import ClientAuthHOC from '../common/HOC/ClientAuthHOC';
 import AdminAuthHOC from '../common/HOC/AdminAuthHOC';
 import CustomerAuthHOC from '../common/HOC/CustomerAuthHOC';
-
 
 import About from "../staticPages/About";
 import ContactLogic from '../staticPages/Contact/logic/ContactLogic';
@@ -59,7 +56,7 @@ const fetchCartLineItems = async (setLineItems) => {
 
 const fetchAuth = async (setAuth, setDone) => {
 	try {
-		const response = await fetch('http://localhost:8080/api/auth/checkRole', {
+		const response = await fetch('http://localhost:8080/api/auth/check-role', {
 			method: 'GET',
 			credentials: 'include',
 			mode: 'cors'
@@ -91,7 +88,6 @@ function App() {
 		setAuth: setAuth.bind(App)
 	};
 
-	//increate Cart function
 	const increaseCart = () => {
 		fetchCartLineItems(setLineItems);
 	};
@@ -101,7 +97,6 @@ function App() {
 	return (
 		<div className="App">
 			<Header cart={lineItems} auth={auth} />
-			<Box overflow="scroll" style={{ paddingBottom: '15vh' }}>
 				<Switch>
 					{/* <Route path="/" exact strict component={Testing} /> */}
 
@@ -132,7 +127,6 @@ function App() {
 					<Route path="/404" component={NotFound} />
 					<Redirect to="/404" />
 				</Switch>
-			</Box>
 			<Footer />
 		</div>
 	);

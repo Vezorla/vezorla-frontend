@@ -47,16 +47,7 @@ export default function ButtonAppBar(props) {
 
 	return (
 		<div className={classes.root}>
-			<AppBar className={classes.appBar} position={"fixed"}
-				/*style={{
-					backgroundColor: '#D0C50A',
-					position: 'fixed',
-					top: 0,
-					left: 0,
-					marginBottom: '3vh',
-					paddingTop: '0.2em'
-				}}*/
-			>
+			<AppBar className={classes.appBar} position={"fixed"}>
 				<Toolbar>
 					<IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
 						<NavBar auth={props.auth} />
@@ -66,15 +57,16 @@ export default function ButtonAppBar(props) {
 					</Typography>
 					<Link to="/customer/cart">
 						<IconButton color="#D0C50A">
-							<ThemeProvider theme={theme}>
+							{/*<ThemeProvider theme={theme}>*/}
 								<Badge badgeContent={props.cart} color="primary">
 									<ShoppingCart style={{ color: '#0C3658' }} />
 								</Badge>
-							</ThemeProvider>
+							{/*</ThemeProvider>*/}
 						</IconButton>
 					</Link>
 				</Toolbar>
 			</AppBar>
+			{/* Second static app bar as a shim */}
 			<AppBar position={"fixed"} />
 			<Toolbar />
 		</div>
