@@ -22,7 +22,7 @@ class ShippingInfo extends Component {
 				firstName: '',
 				lastName: '',
 				email: '',
-				phoneNumber: '',
+				phoneNum: '',
 				address: '',
 				city: '',
 				postalCode: '',
@@ -31,7 +31,8 @@ class ShippingInfo extends Component {
 				pickup: false
 			},
 			error: false,
-			message: ''
+			message: '',
+			disbaledEmail: false
 		};
 		this.setStateInfo = this.setStateInfo.bind(this);
 		this.handleNext = this.handleNext.bind(this);
@@ -63,7 +64,7 @@ class ShippingInfo extends Component {
 		this.setState({
 			info: {
 				...this.state.info,
-				phoneNumber: newVal
+				phoneNum: newVal
 			}
 		});
 	}
@@ -118,7 +119,7 @@ class ShippingInfo extends Component {
 			if (response.status === 200) {
 				const data = await response.json();
 				if (data !== null) {
-					this.setState({ info: { ...data } });
+					this.setState({ disabledEmail: true, info: { ...data } });
 				}
 			} else if (response.state === 401) {
 				this.props.history.push('/home');
@@ -132,7 +133,7 @@ class ShippingInfo extends Component {
 			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
 				this.state.info.email
 			) &&
-			!this.state.info.pickup === /[A-Z]{1}\d{1}[A-Z]{1}\d{1}[A-Z]{1}\d{1}/g.test(this.state.info.postalCode)
+		 /[A-Z]{1}\d{1}[A-Z]{1}\d{1}[A-Z]{1}\d{1}/g.test(this.state.info.postalCode)
 		) {
 			try {
 				const response = await fetch(POST_URL, {
@@ -184,7 +185,7 @@ class ShippingInfo extends Component {
 							setPostalCode={this.setPostalCode}
 							setProvince={this.setStateInfo('province')}
 							disabled={this.state.info.pickup}
-							disbaledEmail={this.state.info.email !== ''}
+							disbaledEmail={this.state.info.disbaledEmail}
 						/>
 					</div>
 					<FormControlLabel

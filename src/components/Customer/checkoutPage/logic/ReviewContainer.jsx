@@ -7,33 +7,33 @@ import Review from '../view/Review';
  * @version 1.0
  */
 
-const GET_URL = 'http://localhost:8080/api/customer/cart/view';
+const GET_URL = 'http://localhost:8080/api/customer/cart/review';
 
 export default class CartContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			inStockList: [],
-			outStockList: [],
+			list: [],
 			info: {
 				subtotal: '',
 				discount: '',
 				discounted_subtotal: '',
 				taxes: '',
 				shipping: '',
-				total: ''
+				Total: ''
 			},
 			stage: ''
 		};
 	}
 
 	fetchData = async () => {
-		this.setStage('loading');
+		this.setState({ stage: 'loading' });
 
 		try {
 			const response = await fetch(GET_URL, {
 				method: 'GET',
 				credentials: 'include',
+				mode: 'cors',
 				headers: {
 					Accept: 'application/json',
 					'Content-Type': 'application/json'
@@ -43,18 +43,18 @@ export default class CartContainer extends Component {
 			if (response.status === 200) {
 				const data = await response.json();
 				if (data !== null) {
-					this.setStatge({ list: data[0] });
+					this.setState({ list: data[0] });
 					this.setState({ info: { ...data[1] } });
-					this.setStage('done');
+					this.setState({ stage: 'done' });
 				}
 			} else if (response.status > 400) {
-				this.setStage('error');
-				this.setList('');
+				this.setState({ stage: 'error', list:[] });
+				
 				return null;
 			}
 		} catch (err) {
-			this.setStage('error');
-			this.setList('');
+			this.setState({ stage: 'error', list:[] });
+		
 			return null;
 		}
 	};

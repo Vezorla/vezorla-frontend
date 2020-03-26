@@ -21,7 +21,7 @@ export default class Discount extends Component {
 		super(props);
 		this.state = {
 			list: [],
-			value: 'NON'
+			value: 'NS'
 		};
 	}
 
@@ -111,8 +111,8 @@ export default class Discount extends Component {
 									))
 								)}
 								<FormControlLabel
-									key="NON"
-									value="NON"
+									key="NS"
+									value="NS"
 									control={<Radio color="primary" />}
 									label="I am good"
 								/>

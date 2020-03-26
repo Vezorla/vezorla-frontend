@@ -52,7 +52,7 @@ export default function NecessaryInput({
 			/>
 			<PhoneInput
 				className={`${className}--phone`}
-				value={info.phoneNumber}
+				value={info.phoneNum}
 				onChange={setPhone}
 				helperText="Invalid Phone Number"
 			/>
@@ -80,7 +80,7 @@ export default function NecessaryInput({
 				onChange={setProvince}
 			/>
 			<PostalCodeInput
-				disabled={disabled}
+				// disabled={disabled}
 				helperText="Invalid Postal Code"
 				value={info.postalCode}
 				onChange={setPostalCode}
