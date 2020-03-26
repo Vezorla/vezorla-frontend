@@ -12,7 +12,7 @@ export default class InfoContainer extends Component {
 				firstName: '',
 				lastName: '',
 				email: '',
-				phoneNumber: '',
+				phoneNum: '',
 				address: '',
 				city: '',
 				province: '',
@@ -21,7 +21,9 @@ export default class InfoContainer extends Component {
 				password: '',
 				subscription: false
 			},
-			stage: ''
+			stage: '',
+			error: false,
+			message: ''
 		};
 
 		this.setPhone = this.setPhone.bind(this);
@@ -41,7 +43,7 @@ export default class InfoContainer extends Component {
 		this.setState({
 			info: {
 				...this.state.info,
-				phoneNumber: newVal
+				phoneNum: newVal
 			}
 		});
 	}

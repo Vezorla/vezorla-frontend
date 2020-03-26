@@ -100,6 +100,7 @@ function App() {
 	return (
 		<div className="App">
 			<Header cart={lineItems} auth={auth} />
+			<div style={{ width: '100vw', height: '5em' }} />
 			<Box overflow="scroll" style={{ paddingBottom: '15vh' }}>
 				<Switch>
 					{/* <Route path="/" exact strict component={Testing} /> */}
