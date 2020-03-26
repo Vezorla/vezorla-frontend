@@ -25,7 +25,7 @@ class ShippingInfo extends Component {
 				phoneNum: '',
 				address: '',
 				city: '',
-				postalCode: '',
+				postalCode: 'T1T1T1',
 				province: '',
 				country: '',
 				pickup: false
@@ -128,7 +128,7 @@ class ShippingInfo extends Component {
 							phoneNum: data.phoneNum || '',
 							address: data.address || '',
 							city: data.city || '',
-							postalCode: data.postalCode || '',
+							postalCode: data.postalCode.replace(/\s/g, '') || '',
 							province: data.province || '',
 							country: data.country || '',
 							pickup: false
@@ -143,6 +143,15 @@ class ShippingInfo extends Component {
 
 	//----next button handler---
 	handleNext = async () => {
+		console.log(
+			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+				this.state.info.email
+			) &&
+				/[A-Z]{1}\d{1}[A-Z]{1}\d{1}[A-Z]{1}\d{1}/g.test(this.state.info.postalCode) &&
+				this.state.info.lastName !== '' &&
+				this.state.info.firstName !== '' &&
+				this.state.info.phoneNum !== ''
+		);
 		if (
 			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
 				this.state.info.email
