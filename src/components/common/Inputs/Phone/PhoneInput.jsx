@@ -21,7 +21,7 @@ export default function PhoneInput({ value, className, onChange, disabled }) {
 	useEffect(() => {
 		let initVal = firstVal(value);
 		setPhoneNumber(initVal);
-	}, []);
+	}, [value]);
 
 	const phoneHandler = (e) => {
 		const inputVal = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);

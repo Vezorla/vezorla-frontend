@@ -90,7 +90,6 @@ class ShippingInfo extends Component {
 			info: {
 				...this.state.info,
 				pickup: !this.state.info.pickup,
-				postalCode: '',
 				address: '',
 				city: '',
 				province: '',
