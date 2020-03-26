@@ -23,8 +23,6 @@ import CustomerAuthHOC from '../common/HOC/CustomerAuthHOC';
 import About from "../staticPages/About";
 import ContactLogic from '../staticPages/Contact/logic/ContactLogic';
 
-
-
 // Function will run everytime go to new path or first access the application
 function usePageViews(setLineItems, setAuth, setDone) {
 	let location = useLocation();
