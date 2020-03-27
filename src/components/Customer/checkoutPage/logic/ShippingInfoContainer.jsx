@@ -25,7 +25,7 @@ class ShippingInfo extends Component {
 				phoneNum: '',
 				address: '',
 				city: '',
-				postalCode: 'T1T1T1',
+				postalCode: '',
 				province: '',
 				country: '',
 				pickup: false
