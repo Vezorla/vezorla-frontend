@@ -12,7 +12,8 @@ import { withRouter } from 'react-router-dom';
  */
 
 const GET_URL = 'http://localhost:8080/api/customer/info';
-const POST_URL = 'http://localhost:8080/api/customer/cart/checkout/shipping';
+const POST_NONAUTH_URL = 'http://localhost:8080/api/customer/cart/checkout/shipping';
+const POST_AUTH_URL = 'http://localhost:8080/api/client/cart/checkout/shipping';
 
 class ShippingInfo extends Component {
 	constructor(props) {
@@ -25,7 +26,7 @@ class ShippingInfo extends Component {
 				phoneNum: '',
 				address: '',
 				city: '',
-				postalCode: 'T1T1T1',
+				postalCode: '',
 				province: '',
 				country: '',
 				pickup: false
@@ -143,15 +144,6 @@ class ShippingInfo extends Component {
 
 	//----next button handler---
 	handleNext = async () => {
-		console.log(
-			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-				this.state.info.email
-			) &&
-				/[A-Z]{1}\d{1}[A-Z]{1}\d{1}[A-Z]{1}\d{1}/g.test(this.state.info.postalCode) &&
-				this.state.info.lastName !== '' &&
-				this.state.info.firstName !== '' &&
-				this.state.info.phoneNum !== ''
-		);
 		if (
 			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
 				this.state.info.email
@@ -161,28 +153,54 @@ class ShippingInfo extends Component {
 			this.state.info.firstName !== '' &&
 			this.state.info.phoneNum !== ''
 		) {
-			try {
-				const response = await fetch(POST_URL, {
-					method: 'POST',
-					headers: {
-						Accept: 'application/json',
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({ ...this.state.info }),
-					credentials: 'include'
-				});
+			if (this.props.auth === 'client') {
+				try {
+					const response = await fetch(POST_AUTH_URL, {
+						method: 'POST',
+						headers: {
+							Accept: 'application/json',
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({ ...this.state.info }),
+						credentials: 'include'
+					});
 
-				if (response.status === 200) {
-					this.props.setStage(this.props.stage + 1);
-				} else if (response.status === 401) {
-					this.props.history.push('/home');
-				} else if (response.status === 406) {
-					this.setState({ error: true, message: 'Missing fields please check again' });
-				} else {
+					if (response.status === 200) {
+						this.props.setStage(this.props.stage + 1);
+					} else if (response.status === 401) {
+						this.props.history.push('/home');
+					} else if (response.status === 406) {
+						this.setState({ error: true, message: 'Missing fields please check again' });
+					} else {
+						this.setState({ error: true, message: 'Something wrong on Serer side' });
+					}
+				} catch (err) {
 					this.setState({ error: true, message: 'Something wrong on Serer side' });
 				}
-			} catch (err) {
-				this.setState({ error: true, message: 'Something wrong on Serer side' });
+			} else {
+				try {
+					const response = await fetch(POST_NONAUTH_URL, {
+						method: 'POST',
+						headers: {
+							Accept: 'application/json',
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({ ...this.state.info }),
+						credentials: 'include'
+					});
+
+					if (response.status === 200) {
+						this.props.setStage(this.props.stage + 1);
+					} else if (response.status === 401) {
+						this.props.history.push('/home');
+					} else if (response.status === 406) {
+						this.setState({ error: true, message: 'Missing fields please check again' });
+					} else {
+						this.setState({ error: true, message: 'Something wrong on Serer side' });
+					}
+				} catch (err) {
+					this.setState({ error: true, message: 'Something wrong on Serer side' });
+				}
 			}
 		} else {
 			this.setState({ filled: false });
