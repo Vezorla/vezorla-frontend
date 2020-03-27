@@ -12,8 +12,7 @@ import { withRouter } from 'react-router-dom';
  */
 
 const GET_URL = 'http://localhost:8080/api/customer/info';
-const POST_NONAUTH_URL = 'http://localhost:8080/api/customer/cart/checkout/shipping';
-const POST_AUTH_URL = 'http://localhost:8080/api/client/cart/checkout/shipping';
+const POST_URL = 'http://localhost:8080/api/customer/cart/checkout/shipping';
 
 class ShippingInfo extends Component {
 	constructor(props) {
@@ -26,7 +25,7 @@ class ShippingInfo extends Component {
 				phoneNum: '',
 				address: '',
 				city: '',
-				postalCode: '',
+				postalCode: 'T1T1T1',
 				province: '',
 				country: '',
 				pickup: false
@@ -153,54 +152,28 @@ class ShippingInfo extends Component {
 			this.state.info.firstName !== '' &&
 			this.state.info.phoneNum !== ''
 		) {
-			if (this.props.auth === 'client') {
-				try {
-					const response = await fetch(POST_AUTH_URL, {
-						method: 'POST',
-						headers: {
-							Accept: 'application/json',
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify({ ...this.state.info }),
-						credentials: 'include'
-					});
+			try {
+				const response = await fetch(POST_URL, {
+					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ ...this.state.info }),
+					credentials: 'include'
+				});
 
-					if (response.status === 200) {
-						this.props.setStage(this.props.stage + 1);
-					} else if (response.status === 401) {
-						this.props.history.push('/home');
-					} else if (response.status === 406) {
-						this.setState({ error: true, message: 'Missing fields please check again' });
-					} else {
-						this.setState({ error: true, message: 'Something wrong on Serer side' });
-					}
-				} catch (err) {
+				if (response.status === 200) {
+					this.props.setStage(this.props.stage + 1);
+				} else if (response.status === 401) {
+					this.props.history.push('/home');
+				} else if (response.status === 406) {
+					this.setState({ error: true, message: 'Missing fields please check again' });
+				} else {
 					this.setState({ error: true, message: 'Something wrong on Serer side' });
 				}
-			} else {
-				try {
-					const response = await fetch(POST_NONAUTH_URL, {
-						method: 'POST',
-						headers: {
-							Accept: 'application/json',
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify({ ...this.state.info }),
-						credentials: 'include'
-					});
-
-					if (response.status === 200) {
-						this.props.setStage(this.props.stage + 1);
-					} else if (response.status === 401) {
-						this.props.history.push('/home');
-					} else if (response.status === 406) {
-						this.setState({ error: true, message: 'Missing fields please check again' });
-					} else {
-						this.setState({ error: true, message: 'Something wrong on Serer side' });
-					}
-				} catch (err) {
-					this.setState({ error: true, message: 'Something wrong on Serer side' });
-				}
+			} catch (err) {
+				this.setState({ error: true, message: 'Something wrong on Serer side' });
 			}
 		} else {
 			this.setState({ filled: false });
