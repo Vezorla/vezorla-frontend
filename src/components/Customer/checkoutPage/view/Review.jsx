@@ -9,7 +9,7 @@ import Payment from '../logic/Payment';
  * @version 1.0
  */
 
-const ReviewComponent = ({ list, info, handleBack, setDone, setError }) => {
+const ReviewComponent = ({ list, info, handleBack, setDone, setError, setLoading }) => {
 	return (
 		<div>
 			<tabel>
@@ -39,13 +39,13 @@ const ReviewComponent = ({ list, info, handleBack, setDone, setError }) => {
 			<div />
 			<ProcessButtons handleBack={handleBack} complete={true} hasNext={true} />
 			<div>
-				<Payment total={info.Total} setDone={setDone} setError={setError} />
+				<Payment total={info.Total} setDone={setDone} setError={setError} setLoading={setLoading} />
 			</div>
 		</div>
 	);
 };
 
-export default function Review({ list, info, setDone, setError, handleBack, stage }) {
+export default function Review({ list, info, setDone, setError, handleBack, stage, setLoading }) {
 	return LoadingHOC(ReviewComponent)({
 		list,
 		info,
@@ -53,6 +53,7 @@ export default function Review({ list, info, setDone, setError, handleBack, stag
 		stage,
 		setDone,
 		setError,
-		message: 'Something wrong I already feel it'
+		message: 'Something wrong I already feel it',
+		setLoading
 	});
 }

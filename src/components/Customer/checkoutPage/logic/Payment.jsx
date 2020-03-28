@@ -10,10 +10,19 @@ export default class Payment extends Component {
 				amount={this.props.total}
 				options={{ currency: 'CAD', disableFunding: 'card', clientId: 'sb' }}
 				onSuccess={() => {
-					this.props.setDone();
+					this.props.setLoading(true);
 					return fetch(URL, {
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						credentials: 'include',
+						mode: 'cors',
 						method: 'PUT',
 						body: JSON.stringify(true)
+					}).then((response) => {
+						this.props.setLoading(false);
+						if (response.status === 200) this.props.setDone();
+						else if (response.status >= 400) this.props.setError();
 					});
 				}}
 				catchError={this.props.setError}

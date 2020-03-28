@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Review from '../view/Review';
 import PopUp from '../../../common/PopUp/PopUp';
+import { CircularProgress } from '@material-ui/core';
 import { withRouter } from 'react-router';
 
 /**
@@ -26,7 +27,8 @@ class ReviewContainer extends Component {
 			},
 			stage: '',
 			done: false,
-			error: false
+			error: false,
+			loading: false
 		};
 	}
 
@@ -74,32 +76,41 @@ class ReviewContainer extends Component {
 	render() {
 		return (
 			<div>
-				{this.state.error ? (
-					<PopUp
-						message="Something wrong!"
-						onClose={() => this.setState({ error: false })}
-						handleOk={() => this.setState({ error: false })}
-					/>
+				{this.state.loading ? (
+					<CircularProgress />
 				) : (
-					''
+					<div>
+						{this.state.error ? (
+							<PopUp
+								message="Something wrong!"
+								onClose={() => this.setState({ error: false })}
+								handleOk={() => this.setState({ error: false })}
+							/>
+						) : (
+							''
+						)}
+						{this.state.done ? (
+							<PopUp
+								label="Thank You"
+								message="Thank you! I hope you enjoy our products!"
+								onClose={() => this.props.history.push('/')}
+								handleOk={() => this.props.history.push('/')}
+							/>
+						) : (
+							''
+						)}
+						<Review
+							{...this.state}
+							setDone={() => this.setState({ done: true })}
+							setError={() => this.setState({ error: true })}
+							handleNext={this.handleNext}
+							handleBack={this.handleBack}
+							setLoading={(value) => {
+								this.setState({ loading: value });
+							}}
+						/>
+					</div>
 				)}
-				{this.state.done ? (
-					<PopUp
-						label="Thank You"
-						message="Thank you! I hope you enjoy our products!"
-						onClose={() => this.props.history.push('/')}
-						handleOk={() => this.props.history.push('/')}
-					/>
-				) : (
-					''
-				)}
-				<Review
-					{...this.state}
-					setDone={() => this.setState({ done: true })}
-					setError={() => this.setState({ error: true })}
-					handleNext={this.handleNext}
-					handleBack={this.handleBack}
-				/>
 			</div>
 		);
 	}

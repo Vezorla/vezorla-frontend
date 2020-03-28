@@ -25,7 +25,7 @@ class ShippingInfo extends Component {
 				phoneNum: '',
 				address: '',
 				city: '',
-				postalCode: 'T1T1T1',
+				postalCode: '',
 				province: '',
 				country: '',
 				pickup: false
@@ -135,10 +135,12 @@ class ShippingInfo extends Component {
 						}
 					});
 				}
-			} else if (response.state === 401) {
+			} else if (response.status === 424) {
 				this.props.history.push('/home');
 			}
-		} catch (err) {}
+		} catch (err) {
+			
+		}
 	};
 
 	//----next button handler---
@@ -165,7 +167,7 @@ class ShippingInfo extends Component {
 
 				if (response.status === 200) {
 					this.props.setStage(this.props.stage + 1);
-				} else if (response.status === 401) {
+				} else if (response.status === 401 || response.status === 500) {
 					this.props.history.push('/home');
 				} else if (response.status === 406) {
 					this.setState({ error: true, message: 'Missing fields please check again' });

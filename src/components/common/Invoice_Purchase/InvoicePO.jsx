@@ -26,14 +26,14 @@ const Email = ({ email }) => {
 	);
 };
 
-export default function InvoicePO({ title, number, vendor, email, total, date, url }) {
+export default function InvoicePO({ title, number, vendor = '', email = '', total, date, url }) {
 	return (
 		<div>
 			<h1>
 				{title} - {number}
 			</h1>
-			{vendor !== null ? <Vendor vendor={vendor} /> : ''}
-			{email !== null ? <Email email={email} /> : ''}
+			{vendor !== '' ? <Vendor vendor={vendor} /> : ''}
+			{email !== '' ? <Email email={email} /> : ''}
 			<div>
 				<h2>Date Placed</h2>
 				<p>{date}</p>

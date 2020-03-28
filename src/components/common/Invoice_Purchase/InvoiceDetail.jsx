@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function InvoiceDetail({ list, subtotal, shipping, tax, total_tax, total, discount }) {
+export default function InvoiceDetail({ list, subtotal, taxes, total, discount }) {
 	const ItemList = list.map((item) => (
 		<tr>
 			<td>{item.description}</td>
@@ -27,20 +27,12 @@ export default function InvoiceDetail({ list, subtotal, shipping, tax, total_tax
 					<p>{subtotal}</p>
 				</div>
 				<div>
-					<p>SHIPPING</p>
-					<p>{shipping}</p>
-				</div>
-				<div>
 					<p>DISCOUNT</p>
 					<p>{discount}</p>
 				</div>
 				<div>
 					<p>TAX RATE</p>
-					<p>{tax}</p>
-				</div>
-				<div>
-					<p>TOTAL TAX</p>
-					<p>{total_tax}</p>
+					<p>{taxes}</p>
 				</div>
 				<div>
 					<p>INVOICE TOTAL</p>
