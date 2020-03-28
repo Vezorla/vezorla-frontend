@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Review from '../view/Review';
+import PopUp from '../../../common/PopUp/PopUp';
+import { CircularProgress } from '@material-ui/core';
+import { withRouter } from 'react-router';
 
 /**
  * @file Cart Component
@@ -7,9 +10,9 @@ import Review from '../view/Review';
  * @version 1.0
  */
 
-const GET_URL = 'http://localhost:8080/api/customer/cart/view';
+const GET_URL = 'http://localhost:8080/api/customer/cart/review';
 
-export default class CartContainer extends Component {
+class ReviewContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -20,19 +23,23 @@ export default class CartContainer extends Component {
 				discounted_subtotal: '',
 				taxes: '',
 				shipping: '',
-				total: ''
+				Total: ''
 			},
-			stage: ''
+			stage: '',
+			done: false,
+			error: false,
+			loading: false
 		};
 	}
 
 	fetchData = async () => {
-		this.setStage('loading');
+		this.setState({ stage: 'loading' });
 
 		try {
 			const response = await fetch(GET_URL, {
 				method: 'GET',
 				credentials: 'include',
+				mode: 'cors',
 				headers: {
 					Accept: 'application/json',
 					'Content-Type': 'application/json'
@@ -42,18 +49,18 @@ export default class CartContainer extends Component {
 			if (response.status === 200) {
 				const data = await response.json();
 				if (data !== null) {
-					this.setStatge({ list: data[0] });
+					this.setState({ list: data[0] });
 					this.setState({ info: { ...data[1] } });
-					this.setStage('done');
+					this.setState({ stage: 'done' });
 				}
 			} else if (response.status > 400) {
-				this.setStage('error');
-				this.setList('');
+				this.setState({ stage: 'error', list: [] });
+
 				return null;
 			}
 		} catch (err) {
-			this.setStage('error');
-			this.setList('');
+			this.setState({ stage: 'error', list: [] });
+
 			return null;
 		}
 	};
@@ -66,11 +73,46 @@ export default class CartContainer extends Component {
 		this.props.setStage(this.props.stage - 1);
 	};
 
-	handleNext = () => {
-		this.props.setStage(this.props.stage + 1);
-	};
-
 	render() {
-		return <Review {...this.state} handleNext={this.handleNext} handleBack={this.handleBack} />;
+		return (
+			<div>
+				{this.state.loading ? (
+					<CircularProgress />
+				) : (
+					<div>
+						{this.state.error ? (
+							<PopUp
+								message="Something wrong!"
+								onClose={() => this.setState({ error: false })}
+								handleOk={() => this.setState({ error: false })}
+							/>
+						) : (
+							''
+						)}
+						{this.state.done ? (
+							<PopUp
+								label="Thank You"
+								message="Thank you! I hope you enjoy our products!"
+								onClose={() => this.props.history.push('/')}
+								handleOk={() => this.props.history.push('/')}
+							/>
+						) : (
+							''
+						)}
+						<Review
+							{...this.state}
+							setDone={() => this.setState({ done: true })}
+							setError={() => this.setState({ error: true })}
+							handleNext={this.handleNext}
+							handleBack={this.handleBack}
+							setLoading={(value) => {
+								this.setState({ loading: value });
+							}}
+						/>
+					</div>
+				)}
+			</div>
+		);
 	}
 }
+export default withRouter(ReviewContainer);

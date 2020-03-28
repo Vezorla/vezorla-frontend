@@ -15,7 +15,8 @@ export default function EmailInput({
 	onChange,
 	helperText = 'Email is invalid',
 	disabled = false,
-	className = ''
+	className = '',
+	required=false
 }) {
 	const emailHandler = (e) => {
 		const regrex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -25,7 +26,7 @@ export default function EmailInput({
 
 	return (
 		<TextField
-			required
+			required={required}
 			label="Email"
 			error={!emailValid}
 			helperText={emailValid ? '' : helperText}

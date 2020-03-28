@@ -11,7 +11,7 @@ import { withRouter } from 'react-router-dom';
  */
 
 var match = true;
-const URL = 'http://localhost:8080/api/customer/create-account';
+const URL = 'http://localhost:8080/api/client/create-account';
 
 /**
  * Register Logic class component

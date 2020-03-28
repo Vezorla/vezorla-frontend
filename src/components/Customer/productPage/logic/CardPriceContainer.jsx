@@ -6,7 +6,7 @@ import CardPrice from '../view/CardPrice';
  * @version 1.0
  */
 
-const PUT_URL = 'http://localhost:8080/api/customer/cart/add'
+const PUT_URL = 'http://localhost:8080/api/customer/cart/add';
 
 /**
   * Card Price Logic Class Component
@@ -33,6 +33,7 @@ export default class CardPriceContainer extends Component {
 		let data = '';
 
 		try {
+			console.log( typeof this.state.value);
 			const response = await fetch(`${PUT_URL}/${this.props.id}`, {
 				method: 'PUT',
 				headers: {
@@ -40,12 +41,12 @@ export default class CardPriceContainer extends Component {
 					'Content-Type': 'application/json'
 				},
 				credentials: 'include',
+				mode: 'cors',
 				body: JSON.stringify(this.state.value)
 			});
 			if (response.status === 200) {
 				const confirmation = await response.json();
-				if (confirmation !== null && confirmation === true) {
-					console.log(this.props.addCartHandler);
+				if (confirmation.added !== null && confirmation.added === true) {
 					this.props.addCartHandler();
 				}
 			} else if (response.status > 400) {

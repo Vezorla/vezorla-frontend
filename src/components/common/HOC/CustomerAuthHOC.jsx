@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-
+import { CircularProgress } from '@material-ui/core';
 /**
  * @file HOC authetication logic
  * @author MinhL4m
@@ -21,7 +21,7 @@ const CustomerAuthHOC = (WrapperComponent, auth) => {
 			return returnVal(WrapperComponent, auth, props);
 		} else {
 			//TODO: add spinner or something
-			return <h1>Loading</h1>;
+			return <CircularProgress/>;
 		}
 	};
 };

@@ -7,7 +7,7 @@ import {ThemeProvider} from '@material-ui/core';
 import Header from '../common/header/header';
 import Footer from '../common/footer/footer';
 import NotFound from '../common/404/NotFound';
-import NotAuth from '../common/403/NotAuth'
+import NotAuth from '../common/403/NotAuth';
 import LoginContainer from '../login/logic/LoginContainer';
 import RegisterContainer from '../Customer/registerPage/logic/RegisterContainer';
 import ForgotPassContainer from '../Client/ForgotPassPage/logic/ForgotPassContainer';
@@ -20,7 +20,7 @@ import ClientAuthHOC from '../common/HOC/ClientAuthHOC';
 import AdminAuthHOC from '../common/HOC/AdminAuthHOC';
 import CustomerAuthHOC from '../common/HOC/CustomerAuthHOC';
 
-import About from "../staticPages/About";
+import About from '../staticPages/About';
 import ContactLogic from '../staticPages/Contact/logic/ContactLogic';
 
 // Function will run every time it goes to a new path or at first access of the application

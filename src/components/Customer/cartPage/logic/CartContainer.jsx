@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Cart from '../view/Cart';
+import PopUp from '../../../common/PopUp/PopUp';
+import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 /**
  * @file Cart Logic Component
@@ -7,10 +10,10 @@ import Cart from '../view/Cart';
  * @version 1.0
  */
 
-const DEL_URL = 'url';
-const UPDATE_URL = 'url';
-const INSTOCK_URL = 'url';
-const OUTSTOCK_URL = 'url';
+const DEL_URL = 'http://localhost:8080/api/customer/cart/remove';
+const UPDATE_URL = 'http://localhost:8080/api/customer/cart/update';
+const INSTOCK_URL = 'http://localhost:8080/api/customer/cart/view';
+const OUTSTOCK_URL = 'http://localhost:8080/api/customer/cart/view/out_of_stock';
 
 class CartContainer extends Component {
 	constructor(props) {
@@ -18,7 +21,10 @@ class CartContainer extends Component {
 		this.state = {
 			inStockList: [],
 			outStockList: [],
-			stage: ''
+			stage: '',
+			error: false,
+			message: '',
+			done: false
 		};
 
 		this.onChange = this.onChange.bind(this);
@@ -30,21 +36,39 @@ class CartContainer extends Component {
 	total = 0;
 
 	//---function active when user change value of line item
-	onChange = (prodId, newVal) => {
-		this.timeOutVar.forEach((timeout) => clearTimeout(timeout));
-		let tempList = this.state.list.map((lineItem) => {
-			if (lineItem.prodId === prodId) {
-				lineItem.quantity = newVal;
-			}
-			return lineItem;
-		});
+	onChange = async (prodId, newVal) => {
+		try {
+			let response = await fetch(`${UPDATE_URL}/${prodId}/${newVal}`, {
+				method: 'PUT',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				},
+				mode: 'cors',
+				credentials: 'include'
+			});
 
-		this.setState({ list: tempList });
-		this.timeOutVar.push(
-			setTimeout(() => {
-				this.putData();
-			}, 5000)
-		);
+			if (response.status === 200) {
+				let data = await response.json();
+
+				if (data === true) {
+					this.props.changeCartHandler();
+					const temp = this.state.inStockList.map((lineItem) => {
+						if (lineItem.prodID === prodId) {
+							lineItem.quantity = newVal;
+						}
+						return lineItem;
+					});
+					this.setState({ inStockList: [ ...temp ] });
+				} else {
+					this.setState({ error: true, message: 'something wrong, we cannot change this item right now' });
+				}
+			} else if (response.status >= 400) {
+				this.setState({ error: true, message: 'something wrong, we cannot change this item right now' });
+			}
+		} catch (err) {
+			this.setState({ error: true, message: 'something wrong, we cannot change this item right now' });
+		}
 	};
 
 	//-----function delete product----
@@ -63,16 +87,17 @@ class CartContainer extends Component {
 
 			if (response.status === 200) {
 				let data = await response.json();
-				if (data === true) {
-					let newList = this.state.list.filter((lineItem) => lineItem.prodId !== prodId);
 
-					this.setState({ list: newList });
+				if (data === true) {
+					this.props.changeCartHandler();
+					let newList = this.state.inStockList.filter((lineItem) => lineItem.prodID !== prodId);
+					this.setState({ inStockList: newList });
 				}
-			} else if (response.status > 400) {
-				this.setState({ stage: 'error' });
+			} else if (response.status >= 400) {
+				this.setState({ error: true, message: 'something wrong, we cannot delete this item right now' });
 			}
 		} catch (err) {
-			this.setState({ stage: 'error' });
+			this.setState({ error: true, message: 'something wrong, we cannot delete this item right now' });
 		}
 	};
 
@@ -92,7 +117,7 @@ class CartContainer extends Component {
 				const data = await response.json();
 				if (data !== null) {
 					this.setState({ inStockList: data });
-					this.setState({ stage: 'done' });
+					this.setState({ stage: 'done', done: 'done' });
 				}
 			} else if (response.status > 400) {
 				this.setState({ stage: 'error' });
@@ -138,55 +163,66 @@ class CartContainer extends Component {
 		await this.fetchInStockData();
 	};
 
-	// ---put data when user change quantity of line item
-	putData = async () => {
-		try {
-			const response = await fetch(UPDATE_URL, {
-				method: 'PUT',
-				credentials: 'include',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(this.state.list)
-			});
-		} catch (err) {}
-	};
-
 	componentDidMount() {
 		this.fetchData();
 	}
 
 	calAll = () => {
 		let subTotal = 0;
-		this.state.list.map((lineItem) => {
+		this.state.inStockList.map((lineItem) => {
 			subTotal += lineItem.price * lineItem.quantity;
 		});
 		if (subTotal !== 0) {
-			this.tax = subTotal * 5 / 100;
-			this.total = subTotal + this.tax;
+			subTotal = subTotal.toFixed(2);
+			this.tax = Number(subTotal) * 5 / 100;
+			this.tax = Number(this.tax).toFixed(2);
+			this.total = Number(subTotal) + Number(this.tax);
+			this.total = this.total.toFixed(2);
 		}
 
 		return subTotal;
 	};
 
 	render() {
-		return (
+		return this.state.done ? (
 			<div>
-				{/* Todo need to change this fit the new backend design */}
-				{this.state.inStockList.length > 0 || this.state.outStockList > 0 ? (
+				{this.state.error ? (
+					<PopUp
+						message={this.state.message}
+						onClose={() => {
+							this.setState({ error: false });
+						}}
+						handleOk={() => {
+							this.setState({ error: false });
+						}}
+					/>
+				) : (
+					''
+				)}
+				{this.state.inStockList.length > 0 || this.state.outStockList.length > 0 ? (
 					<div>
 						<Cart {...this.state} onDelete={this.onDelete} onChange={this.onChange} />
-						<div>
-							<p>Subtotal: {this.calAll()}</p>
-							<p>Tax: {this.tax}</p>
-							<p>Total: {this.total}</p>
-						</div>
+						{this.state.inStockList.length > 0 ? (
+							<div>
+								<div>
+									<p>Subtotal: ${this.calAll()}</p>
+									<p>Tax: ${this.tax}</p>
+									<p>Total: ${this.total}</p>
+								</div>
+								<Link to="/customer/checkout">
+									<Button variant="contained">Checkout</Button>
+								</Link>
+							</div>
+						) : (
+							''
+						)}
 					</div>
 				) : (
 					<p>Add something</p>
 				)}
 			</div>
+		) : (
+			''
 		);
 	}
 }

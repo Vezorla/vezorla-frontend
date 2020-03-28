@@ -8,20 +8,18 @@ import ViewInvoice from '../view/ViewInvoice';
  * @version 1.0
  */
 
-const URL = 'url';
+const URL = 'http://localhost:8080/api/client/invoce';
 
 export default class ViewInvoiceContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			number: '',
+			invoiceNum: '',
 			date: '',
 			list: [],
 			subtotal: '',
-			shipping: '',
 			discount: '',
-			tax: '',
-			total_tax: '',
+			taxes: '',
 			total: '',
 			stage: ''
 		};
@@ -30,10 +28,18 @@ export default class ViewInvoiceContainer extends Component {
 	fetchData = async () => {
 		this.setState({ stage: 'loading' });
 		try {
-			const response = await fetch(`${URL}/${this.props.invoice}`);
+			const response = await fetch(`${URL}/${this.props.invoiceNum}`);
 			if (response.status === 200) {
 				const data = await response.json();
-				this.setState = { info: { ...data } };
+				this.setState = {
+					invoiceNum: data.invoiceNum,
+					date: data.date,
+					list: [ ...data.lineItems ],
+					discount: data.discount,
+					subtotal: data.subtotal,
+					taxes: data.subtotal,
+					total: data.total
+				};
 				this.setState({ stage: 'done' });
 				// need to catch 418 to redirect
 			} else if (response.status >= 400) {

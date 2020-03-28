@@ -7,7 +7,7 @@ import SettingContainer from './Setting/logic/SettingContainer';
 export default function Admin() {
 	return (
 		<Switch>
-			<Route path="/admin/setting" exact strict component={SettingContainer} />
+			<Route path="/admin/settings" exact strict component={SettingContainer} />
 			<Route path="/admin/client" exact strict component={ClientPage} />
 			<Route
 				path="/admin/client/:clientid"
@@ -15,8 +15,7 @@ export default function Admin() {
 				strict
 				render={({ match }) => <ClientInfoContainer clientId={match.params.productid} />}
 			/>
-
-			<Redirect path="/login" />
+			<Redirect path="/admin/403" />
 		</Switch>
 	);
 }

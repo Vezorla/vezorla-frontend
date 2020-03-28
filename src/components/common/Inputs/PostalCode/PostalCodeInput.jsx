@@ -19,7 +19,7 @@ const firstVal = (value) => {
 		: postalCodeReceive[1].toUpperCase() + ' ' + postalCodeReceive[2].toUpperCase();
 };
 
-export default function PostalCodeInput({ value, className, onChange, helperText, disabled }) {
+export default function PostalCodeInput({ value, className, onChange, helperText, disabled, required = false }) {
 	const [ postalCode, setPostalCode ] = useState('');
 
 	useEffect(
@@ -48,7 +48,7 @@ export default function PostalCodeInput({ value, className, onChange, helperText
 
 	return (
 		<TextField
-			required
+			required={required}
 			className={className !== null ? className : ''}
 			label="Postal Code"
 			error={!postalCodeValid}
