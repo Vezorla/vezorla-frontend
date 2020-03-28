@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, AppBar, Toolbar, Typography, Badge, createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { makeStyles, AppBar, Toolbar, Typography, Badge } from '@material-ui/core';
 
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
@@ -12,9 +12,6 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1
 	},
-	appBar: {
-		backgroundColor: '#D0C50A'
-	},
 	menuButton: {
 		marginRight: theme.spacing(2)
 	},
@@ -22,14 +19,6 @@ const useStyles = makeStyles((theme) => ({
 		flexGrow: 1
 	}
 }));
-
-const theme = createMuiTheme({
-	palette: {
-		primary: {
-			main: '#fff'
-		}
-	}
-});
 
 function NavBar({ auth = 'customer' }) {
 	switch (auth) {
@@ -47,7 +36,7 @@ export default function ButtonAppBar(props) {
 
 	return (
 		<div className={classes.root}>
-			<AppBar className={classes.appBar} position={"fixed"}>
+			<AppBar position={"fixed"}>
 				<Toolbar>
 					<IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
 						<NavBar auth={props.auth} />
