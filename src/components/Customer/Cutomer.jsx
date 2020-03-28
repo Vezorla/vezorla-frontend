@@ -31,7 +31,7 @@ export default function Cutomer({ increaseCart, auth }) {
 					<ProductContainer prodId={match.params.productid} addCartHandler={increaseCart} />
 				)}
 			/>
-			<Route path="/customer/cart" exact strict component={CartContainer} />
+			<Route path="/customer/cart" exact strict render={()=><CartContainer changeCartHandler={increaseCart}/>} />
 			<Route path="/customer/checkout" exact strict render={() => <CheckoutPage auth={auth} />} />
 
 			<Redirect to="/404" />

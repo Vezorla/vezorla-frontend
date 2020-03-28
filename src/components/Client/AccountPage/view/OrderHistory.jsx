@@ -11,15 +11,15 @@ import LoadingHOC from '../../../common/HOC/LoadingHOC';
 const OrderHistoryComponent = ({ list }) => {
 	return (
 		<div>
-			{list !== null && list.lengt > 0 ? (
+			{list !== null && list.length > 0 ? (
 				<div>
 					{list.map((invoice) => (
 						<InvoicePO
 							title="Invoice Number"
-							number={invoice.id}
+							number={invoice.invoiceNum}
 							total={invoice.total}
-							data={invoice.total}
-							url={`url/${invoice.id}`}
+							date={invoice.date}
+							url={`/api/client/invoice/${invoice.invoiceNum}`}
 						/>
 					))}
 				</div>

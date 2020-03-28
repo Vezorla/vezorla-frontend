@@ -22,7 +22,7 @@ class ShippingInfo extends Component {
 				firstName: '',
 				lastName: '',
 				email: '',
-				phoneNumber: '',
+				phoneNum: '',
 				address: '',
 				city: '',
 				postalCode: '',
@@ -31,7 +31,9 @@ class ShippingInfo extends Component {
 				pickup: false
 			},
 			error: false,
-			message: ''
+			message: '',
+			disbaledEmail: false,
+			filled: true
 		};
 		this.setStateInfo = this.setStateInfo.bind(this);
 		this.handleNext = this.handleNext.bind(this);
@@ -63,7 +65,7 @@ class ShippingInfo extends Component {
 		this.setState({
 			info: {
 				...this.state.info,
-				phoneNumber: newVal
+				phoneNum: newVal
 			}
 		});
 	}
@@ -89,7 +91,6 @@ class ShippingInfo extends Component {
 			info: {
 				...this.state.info,
 				pickup: !this.state.info.pickup,
-				postalCode: '',
 				address: '',
 				city: '',
 				province: '',
@@ -100,9 +101,7 @@ class ShippingInfo extends Component {
 
 	//----Did Mount-----
 	componentDidMount() {
-		if (this.props.auth !== 'client') {
-			this.fetchData();
-		}
+		this.fetchData();
 	}
 
 	//get customer info onload
@@ -120,12 +119,28 @@ class ShippingInfo extends Component {
 			if (response.status === 200) {
 				const data = await response.json();
 				if (data !== null) {
-					this.setState({ info: { ...data } });
+					this.setState({
+						disabledEmail: true,
+						info: {
+							firstName: data.firstName || '',
+							lastName: data.lastName || '',
+							email: data.email || '',
+							phoneNum: data.phoneNum || '',
+							address: data.address || '',
+							city: data.city || '',
+							postalCode: data.postalCode.replace(/\s/g, '') || '',
+							province: data.province || '',
+							country: data.country || '',
+							pickup: false
+						}
+					});
 				}
-			} else if (response.state === 401) {
-				this.props.history.push('/login');
+			} else if (response.status === 424) {
+				this.props.history.push('/home');
 			}
-		} catch (err) {}
+		} catch (err) {
+			
+		}
 	};
 
 	//----next button handler---
@@ -134,7 +149,10 @@ class ShippingInfo extends Component {
 			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
 				this.state.info.email
 			) &&
-			!this.state.info.pickup === /[A-Z]{1}\d{1}[A-Z]{1}\d{1}[A-Z]{1}\d{1}/g.test(this.state.info.postalCode)
+			/[A-Z]{1}\d{1}[A-Z]{1}\d{1}[A-Z]{1}\d{1}/g.test(this.state.info.postalCode) &&
+			this.state.info.lastName !== '' &&
+			this.state.info.firstName !== '' &&
+			this.state.info.phoneNum !== ''
 		) {
 			try {
 				const response = await fetch(POST_URL, {
@@ -149,7 +167,7 @@ class ShippingInfo extends Component {
 
 				if (response.status === 200) {
 					this.props.setStage(this.props.stage + 1);
-				} else if (response.status === 401) {
+				} else if (response.status === 401 || response.status === 500) {
 					this.props.history.push('/home');
 				} else if (response.status === 406) {
 					this.setState({ error: true, message: 'Missing fields please check again' });
@@ -159,6 +177,8 @@ class ShippingInfo extends Component {
 			} catch (err) {
 				this.setState({ error: true, message: 'Something wrong on Serer side' });
 			}
+		} else {
+			this.setState({ filled: false });
 		}
 	};
 
@@ -186,12 +206,15 @@ class ShippingInfo extends Component {
 							setPostalCode={this.setPostalCode}
 							setProvince={this.setStateInfo('province')}
 							disabled={this.state.info.pickup}
+							disbaledEmail={this.state.info.disbaledEmail}
+							required={true}
 						/>
 					</div>
 					<FormControlLabel
 						control={<Checkbox checked={this.state.info.pickup} onChange={this.setPickup} value="pickup" />}
 						label="Pickup at # street for free"
 					/>
+					{!this.state.filled ? <p>All * fields need to be fielded!</p> : ''}
 					<ProcessButtons
 						stage={this.props.stage}
 						handleBack={null}

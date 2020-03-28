@@ -7,6 +7,25 @@ const MESSAGE =
 	'Make sure to write correctly the email, as it is your username to enter the system and teh main method for communication with the system';
 const UPDATE_URL = 'url';
 
+const monthNames = [
+	'January',
+	'February',
+	'March',
+	'April',
+	'May',
+	'June',
+	'July',
+	'August',
+	'September',
+	'October',
+	'November',
+	'December'
+];
+let dateObj = new Date();
+let month = monthNames[dateObj.getMonth()];
+let day = String(dateObj.getDate()).padStart(2, '0');
+let year = dateObj.getFullYear();
+
 class SettingContainer extends Component {
 	constructor() {
 		super();
@@ -17,7 +36,8 @@ class SettingContainer extends Component {
 				gstNum: ''
 			},
 			update: false,
-			error: false
+			error: false,
+			backup: false
 		};
 	}
 
@@ -51,6 +71,23 @@ class SettingContainer extends Component {
 	render() {
 		return (
 			<div>
+				{this.state.backup ? (
+					<PopUp
+						message={`Do you want to create backup on ${month + ' ' + day + ',' + year}?`}
+						handleOk={() => {
+							this.onBackUp();
+						}}
+						onClose={() => {
+							this.setState({ backup: false });
+						}}
+						handleCancel={() => {
+							this.setState({ backup: false });
+						}}
+						label="Backup"
+					/>
+				) : (
+					''
+				)}
 				{this.state.error ? (
 					<PopUp
 						message="Setting is not updated"
@@ -87,7 +124,7 @@ class SettingContainer extends Component {
 					setGTSNum={this.setStateValue('gstNum')}
 					setPassword={this.setStateValue('password')}
 					onBackUp={() => {
-						this.props.history.push('/admin/backup');
+						this.setState({ backup: true });
 					}}
 				/>
 			</div>

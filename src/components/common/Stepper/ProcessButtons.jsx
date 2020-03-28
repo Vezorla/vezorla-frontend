@@ -15,9 +15,9 @@ function ProcessButtons(props) {
 					Back
 				</Button>
 
-				<Button variant="contained" color="primary" onClick={props.handleNext} disabled={!props.complete}>
+				{props.handleNext?<Button variant="contained" color="primary" onClick={props.handleNext} disabled={!props.complete}>
 					{props.hasNext ? 'Next' : 'Submit'}
-				</Button>
+				</Button>:''}
 			</div>
 		</div>
 	);

@@ -23,30 +23,17 @@ class ShopContainer extends Component {
 		super(props);
 		this.state = {
 			list: [],
-			stage: '',
-			filter: '',
-			order: ''
+			stage: ''
 		};
 	}
-
-	// -----event handler of filter and order. Use to fetch and set the value display--------
-	handleChangeFilter = (event) => {
-		this.setState({ filter: event.target.value });
-		// this.fetchData('url'+event.target.value);
-	};
-
-	handleChangeOrder = (event) => {
-		this.setState({ order: event.target.value });
-		// this.fetchData('url'+event.target.value);
-	};
 
 	/**
 	 * Handler for adding product to cart
 	 */
-	fetchData = async (url) => {
+	fetchData = async () => {
 		this.setState({ stage: 'loading' });
 		try {
-			const response = await fetch(url);
+			const response = await fetch(URL);
 
 			if (response.status === 200) {
 				const data = await response.json();
@@ -64,7 +51,7 @@ class ShopContainer extends Component {
 
 	// ------fetch on load-------
 	componentDidMount() {
-		this.fetchData(URL);
+		this.fetchData();
 	}
 
 	/**
@@ -73,25 +60,6 @@ class ShopContainer extends Component {
 	render() {
 		return (
 			<div>
-				<Grid className="shop--filter" container xs={12} justify="space-around">
-					<Grid item>
-						<DropDown
-							label={'Filter'}
-							selections={filterItem}
-							value={this.state.filter}
-							onChange={this.handleChangeFilter}
-						/>
-					</Grid>
-					<Grid item>
-						<DropDown
-							label={'Order'}
-							selections={orderItem}
-							value={this.state.order}
-							onChange={this.handleChangeOrder}
-						/>
-					</Grid>
-				</Grid>
-
 				<Shop list={this.state.list} stage={this.state.stage} />
 			</div>
 		);

@@ -1,6 +1,7 @@
 import React from 'react';
 import ProcessButtons from '../../../common/Stepper/ProcessButtons';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
+import Payment from '../logic/Payment';
 
 /**
  * @file Review view Component
@@ -8,7 +9,7 @@ import LoadingHOC from '../../../common/HOC/LoadingHOC';
  * @version 1.0
  */
 
-const ReviewComponent = ({ list, info, handleBack, handleNext }) => {
+const ReviewComponent = ({ list, info, handleBack, setDone, setError, setLoading }) => {
 	return (
 		<div>
 			<tabel>
@@ -33,20 +34,26 @@ const ReviewComponent = ({ list, info, handleBack, handleNext }) => {
 				<p>Discounted Subtotal: {info.discounted_subtotal}</p>
 				<p>Tax: {info.taxes}</p>
 				<p>Shipping: {info.shipping}</p>
-				<p>Total: {info.total}</p>
+				<p>Total: {info.Total}</p>
 			</div>
-			<ProcessButtons handleBack={handleBack} handleNext={handleNext} complete={true} hasNext={true} />
+			<div />
+			<ProcessButtons handleBack={handleBack} complete={true} hasNext={true} />
+			<div>
+				<Payment total={info.Total} setDone={setDone} setError={setError} setLoading={setLoading} />
+			</div>
 		</div>
 	);
 };
 
-export default function Review({ list, info, handleBack, handleNext, stage }) {
+export default function Review({ list, info, setDone, setError, handleBack, stage, setLoading }) {
 	return LoadingHOC(ReviewComponent)({
 		list,
 		info,
 		handleBack,
-		handleNext,
 		stage,
-		message: 'Something wrong I already feel it'
+		setDone,
+		setError,
+		message: 'Something wrong I already feel it',
+		setLoading
 	});
 }

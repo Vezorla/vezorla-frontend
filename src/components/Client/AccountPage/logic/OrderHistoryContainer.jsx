@@ -5,7 +5,7 @@ import OrderHistory from '../view/OrderHistory';
  * @author MinhL4m
  * @version 1.0
  */
-const URL = 'url';
+const URL = 'http://localhost:8080/api/client/order_history';
 
 export default class OrderHistoryContainer extends Component {
 	constructor() {
@@ -23,7 +23,7 @@ export default class OrderHistoryContainer extends Component {
 			if (response.status === 200) {
 				const data = await response.json();
 				if (data !== null && data.length !== 0 && data !== undefined) {
-					this.setState({ list: data });
+					this.setState({ list: [...data.invoices] });
 					this.setState({ stage: 'done' });
 				}
 			} else if (response.state >= 400) {

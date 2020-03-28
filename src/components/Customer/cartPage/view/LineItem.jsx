@@ -10,7 +10,7 @@ import '../style.css';
  * @version 1.0
  */
 
-export default function LineItem({ prodId, price, imageMain, name, quantity, onChange, onDelete }) {
+export default function LineItem({ prodID, price, imageMain, name, quantity, onChange, onDelete }) {
 	return (
 		<div className="lineItem">
 			<div className="lineItem--img">
@@ -28,7 +28,7 @@ export default function LineItem({ prodId, price, imageMain, name, quantity, onC
 					InputLabelProps={{
 						shrink: true
 					}}
-					onChange={(e) => onChange(prodId, e.target.value)}
+					onChange={(e) => onChange(prodID, e.target.value)}
 					inputProps={{
 						min: 1
 					}}
@@ -37,11 +37,11 @@ export default function LineItem({ prodId, price, imageMain, name, quantity, onC
 				/>
 			</div>
 			<div className="lineItem--price">
-				<p>{quantity * price}</p>
+				<p>${(quantity * price).toFixed(2)}</p>
 			</div>
 			<div className="lineItem--delete">
 				<IconButton edge="end" aria-label="delete">
-					<DeleteIcon onClick={() => onDelete(prodId)} />
+					<DeleteIcon onClick={() => onDelete(prodID)} />
 				</IconButton>
 			</div>
 		</div>
