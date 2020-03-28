@@ -9,6 +9,13 @@ const theme = createMuiTheme({
       main: '#0C3658'
     }
   },
+  typography: {
+    fontFamily: [
+      'Open Sans',
+      'Roboto',
+      'sans-serif',
+    ].join(','),
+  },
 });
 
 theme.overrides = {
