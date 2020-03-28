@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Info from '../view/Info';
 
-const FETCH_URL = 'url';
-const SAVE_URL = 'url';
+const FETCH_URL = 'http://localhost:8080/api/customer/info';
+const SAVE_URL = 'http://localhost:8080/api/client/';
 
 export default class InfoContainer extends Component {
 	constructor() {
@@ -67,7 +67,11 @@ export default class InfoContainer extends Component {
 	fetchData = async () => {
 		this.setState({ stage: 'loading' });
 		try {
-			const response = await fetch(FETCH_URL);
+			const response = await fetch(FETCH_URL, {
+				method: 'GET',
+				mode: 'cors',
+				credentials: 'include'
+			});
 			if (response.status === 200) {
 				const data = await response.json();
 				this.setState({ info: { ...data } });
@@ -88,6 +92,7 @@ export default class InfoContainer extends Component {
 					'Content-Type': 'application/json'
 				},
 				credentials: 'include',
+				mode: 'cors',
 				body: JSON.stringify(this.state.info)
 			});
 			if (response.status === 200) {
@@ -106,7 +111,7 @@ export default class InfoContainer extends Component {
 	};
 
 	componentDidMount() {
-		// this.fetchData();
+		this.fetchData();
 	}
 
 	render() {
