@@ -20,6 +20,27 @@ import EmailInput from '../../common/Inputs/Email/EmailInput';
  * @returns Login View Component
  */
 export default function Login({ email, password, error = '', setEmail, setPassword, onClick }) {
+	React.useEffect(() => {
+		const btn = document.querySelector('.login-btn');
+		const pass = document.querySelector('.pass');
+		const email = document.querySelector('.email');
+
+		function enter(e) {
+			if (e.keyCode === 13) {
+				e.preventDefault();
+
+				btn.click();
+			}
+		}
+
+		pass.addEventListener('keyup', enter);
+		email.addEventListener('keyup', enter);
+		return () => {
+			pass.removeEventListener('keyup', enter);
+			email.removeEventListener('keyup', enter);
+		};
+	}, []);
+
 	return (
 		<div>
 			<div>
@@ -27,16 +48,16 @@ export default function Login({ email, password, error = '', setEmail, setPasswo
 				<h2>Sign in to continue</h2>
 			</div>
 			<div>
-				<EmailInput helperText="Invalid Email" onChange={setEmail} value={email} />
-				<TextField label="Password" type="password" value={password} onChange={setPassword} />
+				<EmailInput className="email" helperText="Invalid Email" onChange={setEmail} value={email} />
+				<TextField className="pass" label="Password" type="password" value={password} onChange={setPassword} />
 			</div>
 			<div>{error !== '' ? <p>{error}</p> : ''}</div>
 			<div>
-				<Button variant="contained" onClick={onClick} size="large">
+				<Button className="login-btn" variant="contained" onClick={onClick} size="large">
 					Sign in
 				</Button>
 				<NavLink to="/register" exact>
-					<Button variant="contained" size="small">
+					<Button  variant="contained" size="small">
 						Create Account
 					</Button>
 				</NavLink>
