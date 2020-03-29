@@ -5,6 +5,12 @@ import Product from '../view/Product';
 import PopUp from '../../../common/PopUp/PopUp';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
+/**
+ * @file Create Product Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 const DEL_URL = 'url';
 const ADD_URL = 'url';
 const SAVE_URL = 'url';

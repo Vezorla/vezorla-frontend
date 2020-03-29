@@ -3,6 +3,12 @@ import { Button, DropDown } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
+/**
+ * @file Inventory View Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 const filterItem = [ { label: 'a', value: 'a' }, { label: 'b', value: 'b' } ];
 
 const Card = ({ img, prodId, quantity, profit, warehouse }) => {

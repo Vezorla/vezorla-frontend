@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import Client from '../view/Client';
 
+/**
+ * @file Client List  Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 const URL = 'url';
 
 export default class ClientContainer extends Component {

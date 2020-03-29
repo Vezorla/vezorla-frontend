@@ -4,6 +4,12 @@ import { Button } from '@material-ui/core';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 import PopUp from '../../../common/PopUp/PopUp';
 
+/**
+ * @file Client Info View Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 function ClientInfoComponent({
 	info,
 	message,

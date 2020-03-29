@@ -11,6 +11,12 @@ import {
 } from '@material-ui/core';
 import Stepper from '../../../common/Stepper/Stepper';
 
+/**
+ * @file  View Product Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 export default function CreateProduct({
 	product,
 	imgs,

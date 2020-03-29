@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import AddRetail from '../view/AddRetail';
 let match = true;
 
+/**
+ * @file Add Retail Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 const SAVE_URL = 'url'
 
 export default class AddRetailContainer extends Component {

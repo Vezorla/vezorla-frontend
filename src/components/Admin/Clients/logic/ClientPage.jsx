@@ -5,6 +5,12 @@ import ClientContainer from './ClientContainer';
 import PendingOrderContainer from './PendingOrderContainer';
 import SwipeableViews from 'react-swipeable-views';
 
+/**
+ * @file Client Page Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 function a11yProps(index) {
 	return {
 		id: `full-width-tab-${index}`,

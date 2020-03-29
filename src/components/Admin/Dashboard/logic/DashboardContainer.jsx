@@ -3,6 +3,12 @@ import WeekSale from '../view/WeekSale';
 import OtherInfo from '../view/OtherInfo';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
+/**
+ * @file Dashboard Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 const URL = 'url';
 
 const Dashboard = ({ props }) => {

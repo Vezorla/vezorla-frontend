@@ -3,6 +3,12 @@ import EmailInput from '../../../common/Inputs/Email/EmailInput';
 import { Button } from '@material-ui/core';
 import PopUp from '../../../common/PopUp/PopUp';
 
+/**
+ * @file Email Input Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 export default function EmailEnter({ value, onChange, onClick, helperText, error, setError }) {
 	return (
 		<div>

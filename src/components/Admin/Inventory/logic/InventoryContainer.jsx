@@ -3,6 +3,12 @@ import Inventory from '../view/Inventory';
 
 const URL = 'url';
 
+/**
+ * @file Inventory Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 export default class InventoryContainer extends Component {
 	constructor() {
 		super();

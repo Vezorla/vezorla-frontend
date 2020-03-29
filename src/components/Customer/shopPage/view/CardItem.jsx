@@ -16,12 +16,12 @@ import Grid from '@material-ui/core/Grid';
  * @param {Object} props - props of this functional component
  * @returns CardItem View
  */
-function CardItem(props) {
-	const { prodId, name, subdescription, harvestTime, imageMain, oldPrice, price, active } = props.product;
+function CardItem({ product, xs = 12, sm = 6, md = 4 }) {
+	const { prodId, name, subdescription, harvestTime, imageMain, oldPrice, price } = product;
 	const url = '/customer/product/' + prodId;
 
 	return (
-		<Grid item xs={12} sm={6} md={4}>
+		<Grid item xs={xs} sm={sm} md={md}>
 			<Link to={url}>
 				<Card
 					key={prodId}

@@ -1,5 +1,12 @@
 import React from 'react';
 
+
+/**
+ * @file WeekSale View Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 export default function WeekSale({ orderNum, orderVal, productSold, percentCompare }) {
 	return (
 		<div>

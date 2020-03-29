@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import PendingOrder from '../view/PendingOrder';
 
+/**
+ * @file Pending Order List Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 const URL = 'url';
 
 export default class PendingOrderContainer extends Component {

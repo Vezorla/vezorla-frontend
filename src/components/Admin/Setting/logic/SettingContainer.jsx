@@ -3,6 +3,12 @@ import { withRouter } from 'react-router-dom';
 import PopUp from '../../../common/PopUp/PopUp';
 import Setting from '../view/Setting';
 
+/**
+ * @file Setting Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 const MESSAGE =
 	'Make sure to write correctly the email, as it is your username to enter the system and teh main method for communication with the system';
 const UPDATE_URL = 'url';
