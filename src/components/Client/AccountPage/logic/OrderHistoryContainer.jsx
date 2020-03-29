@@ -19,14 +19,18 @@ export default class OrderHistoryContainer extends Component {
 	fetchData = async () => {
 		this.setState({ stage: 'loading' });
 		try {
-			const response = await fetch(URL);
+			const response = await fetch(URL, {
+				credentials: 'include',
+				method: 'GET',
+				mode: 'cors'
+			});
 			if (response.status === 200) {
 				const data = await response.json();
 				if (data !== null && data.length !== 0 && data !== undefined) {
-					this.setState({ list: [...data.invoices] });
+					this.setState({ list: [ ...data.invoices ] });
 					this.setState({ stage: 'done' });
 				}
-			} else if (response.state >= 400) {
+			} else if (response.status >= 400) {
 				this.setState({ stage: 'error' });
 			}
 		} catch (err) {
@@ -35,7 +39,7 @@ export default class OrderHistoryContainer extends Component {
 	};
 
 	componentDidMount() {
-		// this.fetchData();
+		this.fetchData();
 	}
 
 	render() {

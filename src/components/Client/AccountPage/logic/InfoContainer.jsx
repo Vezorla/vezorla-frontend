@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Info from '../view/Info';
+import PopUp from '../../../common/PopUp/PopUp';
 
 const FETCH_URL = 'http://localhost:8080/api/customer/info';
-const SAVE_URL = 'http://localhost:8080/api/client/';
+const SAVE_URL = 'http://localhost:8080/api/client/account/update';
 
 export default class InfoContainer extends Component {
 	constructor() {
@@ -23,7 +24,8 @@ export default class InfoContainer extends Component {
 			},
 			stage: '',
 			error: false,
-			message: ''
+			message: '',
+			success: false
 		};
 
 		this.setPhone = this.setPhone.bind(this);
@@ -74,7 +76,7 @@ export default class InfoContainer extends Component {
 			});
 			if (response.status === 200) {
 				const data = await response.json();
-				this.setState({ info: { ...data } });
+				this.setState({ info: { ...this.state.info, ...data } });
 				this.setState({ stage: 'done' });
 			} else if (response.status >= 400) {
 				this.setState({ stage: 'error' });
@@ -87,16 +89,29 @@ export default class InfoContainer extends Component {
 	onClick = async () => {
 		try {
 			const response = await fetch(SAVE_URL, {
-				methods: 'PUT',
+				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				credentials: 'include',
 				mode: 'cors',
-				body: JSON.stringify(this.state.info)
+				body: JSON.stringify({
+					firstName: this.state.info.firstName,
+					lastName: this.state.info.lastName,
+					email: this.state.info.email,
+					phoneNum: this.state.info.phoneNum,
+					address: this.state.info.address,
+					city: this.state.info.city,
+					province: this.state.info.province,
+					postalCode: this.state.info.postalCode,
+					country: this.state.info.country,
+					password: this.state.info.password,
+					isSubscript: this.state.info.subscription
+				})
 			});
 			if (response.status === 200) {
-				//do something that not decide
+				this.props.setMessage('You account is updated');
+				this.props.setSuccess();
 			} else if (response.status === 406) {
 				this.props.setMessage('Input incorrect! Please check again');
 				this.props.setError();
@@ -107,6 +122,7 @@ export default class InfoContainer extends Component {
 		} catch (err) {
 			this.props.setMessage('Something wrong');
 			this.props.setError();
+			console.log(err);
 		}
 	};
 

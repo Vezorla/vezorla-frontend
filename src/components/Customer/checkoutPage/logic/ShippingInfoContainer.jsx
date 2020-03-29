@@ -13,6 +13,7 @@ import { withRouter } from 'react-router-dom';
 
 const GET_URL = 'http://localhost:8080/api/customer/info';
 const POST_URL = 'http://localhost:8080/api/customer/cart/checkout/shipping';
+const CHECK_URL = 'url';
 
 class ShippingInfo extends Component {
 	constructor(props) {
@@ -107,39 +108,49 @@ class ShippingInfo extends Component {
 	//get customer info onload
 	fetchData = async () => {
 		try {
-			const response = await fetch(GET_URL, {
+			const responseCheck = await fetch(CHECK_URL, {
 				method: 'GET',
 				credentials: 'include',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json'
-				}
+				mode: 'cors'
 			});
 
-			if (response.status === 200) {
-				const data = await response.json();
-				if (data !== null) {
-					this.setState({
-						disabledEmail: true,
-						info: {
-							firstName: data.firstName || '',
-							lastName: data.lastName || '',
-							email: data.email || '',
-							phoneNum: data.phoneNum || '',
-							address: data.address || '',
-							city: data.city || '',
-							postalCode: data.postalCode.replace(/\s/g, '') || '',
-							province: data.province || '',
-							country: data.country || '',
-							pickup: false
+			if (responseCheck.status === 200) {
+				try {
+					const response = await fetch(GET_URL, {
+						method: 'GET',
+						credentials: 'include',
+						headers: {
+							Accept: 'application/json',
+							'Content-Type': 'application/json'
 						}
 					});
-				}
-			} else if (response.status === 424) {
+
+					if (response.status === 200) {
+						const data = await response.json();
+						if (data !== null) {
+							this.setState({
+								disabledEmail: true,
+								info: {
+									firstName: data.firstName || '',
+									lastName: data.lastName || '',
+									email: data.email || '',
+									phoneNum: data.phoneNum || '',
+									address: data.address || '',
+									city: data.city || '',
+									postalCode: data.postalCode.replace(/\s/g, '') || '',
+									province: data.province || '',
+									country: data.country || '',
+									pickup: false
+								}
+							});
+						}
+					}
+				} catch (err) {}
+			} else if (responseCheck.status >= 400) {
 				this.props.history.push('/home');
 			}
 		} catch (err) {
-			
+			this.props.history.push('/home');
 		}
 	};
 

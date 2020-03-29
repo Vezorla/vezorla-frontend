@@ -31,13 +31,14 @@ function Cart(props) {
 					{props.inStockList.length !== 0 ? (
 						<div>
 							{props.inStockList.map(
-								(lineItem) =>
+								(lineItem, index) =>
 									lineItem.quantity > 0 ? (
 										<LineItem
 											key={lineItem.prodID}
 											onDelete={props.onDelete}
 											onChange={props.onChange}
 											{...lineItem}
+											max={props.quantity[index]}
 										/>
 									) : (
 										''

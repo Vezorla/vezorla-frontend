@@ -16,10 +16,10 @@ const OrderHistoryComponent = ({ list }) => {
 					{list.map((invoice) => (
 						<InvoicePO
 							title="Invoice Number"
-							number={invoice.invoiceNum}
+							invoiceNum={invoice.invoiceNum}
 							total={invoice.total}
 							date={invoice.date}
-							url={`/api/client/invoice/${invoice.invoiceNum}`}
+							url={`/client/invoice/${invoice.invoiceNum}`}
 						/>
 					))}
 				</div>

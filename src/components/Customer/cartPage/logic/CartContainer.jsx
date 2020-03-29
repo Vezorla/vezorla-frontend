@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Cart from '../view/Cart';
 import PopUp from '../../../common/PopUp/PopUp';
 import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 
 /**
  * @file Cart Logic Component
@@ -21,6 +21,7 @@ class CartContainer extends Component {
 		this.state = {
 			inStockList: [],
 			outStockList: [],
+			quantity: [],
 			stage: '',
 			error: false,
 			message: '',
@@ -53,18 +54,23 @@ class CartContainer extends Component {
 
 				if (data === true) {
 					this.props.changeCartHandler();
-					const temp = this.state.inStockList.map((lineItem) => {
-						if (lineItem.prodID === prodId) {
-							lineItem.quantity = newVal;
-						}
-						return lineItem;
+					this.setState({
+						inStockList: [
+							...this.state.inStockList.map((lineItem) => {
+								if (lineItem.prodID === prodId) {
+									lineItem.quantity = newVal;
+								}
+								return lineItem;
+							})
+						]
 					});
-					this.setState({ inStockList: [ ...temp ] });
 				} else {
-					this.setState({ error: true, message: 'something wrong, we cannot change this item right now' });
+					this.setState({
+						...this.state,
+						error: true,
+						message: 'Ooops, seem like you reach the maximum stock of this product'
+					});
 				}
-			} else if (response.status >= 400) {
-				this.setState({ error: true, message: 'something wrong, we cannot change this item right now' });
 			}
 		} catch (err) {
 			this.setState({ error: true, message: 'something wrong, we cannot change this item right now' });
@@ -190,10 +196,10 @@ class CartContainer extends Component {
 					<PopUp
 						message={this.state.message}
 						onClose={() => {
-							this.setState({ error: false });
+							this.setState({ ...this.state, error: false });
 						}}
 						handleOk={() => {
-							this.setState({ error: false });
+							this.setState({ ...this.state, error: false });
 						}}
 					/>
 				) : (
@@ -201,9 +207,15 @@ class CartContainer extends Component {
 				)}
 				{this.state.inStockList.length > 0 || this.state.outStockList.length > 0 ? (
 					<div>
-						<Cart {...this.state} onDelete={this.onDelete} onChange={this.onChange} />
+						<Cart
+							key="cart"
+							{...this.state}
+							onDelete={this.onDelete}
+							onChange={this.onChange}
+							quantity={this.state.quantity}
+						/>
 						{this.state.inStockList.length > 0 ? (
-							<div>
+							<div key="price">
 								<div>
 									<p>Subtotal: ${this.calAll()}</p>
 									<p>Tax: ${this.tax}</p>
