@@ -18,7 +18,6 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import ExploreIcon from '@material-ui/icons/Explore';
 import StoreIcon from '@material-ui/icons/Storefront';
 import { NavLink, useHistory } from 'react-router-dom';
 
@@ -59,7 +58,7 @@ export default function TemporaryDrawer() {
 
 	const logout = async () => {
 		try {
-			const response = await fetch('http://localhost:8080/api/auth/logout', {
+			await fetch('http://localhost:8080/api/auth/logout', {
 				method: 'DELETE',
 				mode: 'cors',
 				credentials: 'include'

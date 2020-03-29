@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import InfoContainer from './InfoContainer';
 import OrderHistoryContainer from './OrderHistoryContainer';
 import SwipeableViews from 'react-swipeable-views';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -27,8 +26,8 @@ export default class ClientContainer extends Component {
 		this.state = {
 			value: 0,
 			error: false,
-			message: '', 
-			success: false,
+			message: '',
+			success: false
 		};
 	}
 
@@ -39,8 +38,8 @@ export default class ClientContainer extends Component {
 		this.setState({ error: !this.state.error });
 	};
 	setSuccess = () => {
-		this.setState({success : !this.state.success})
-	}
+		this.setState({ success: !this.state.success });
+	};
 
 	setMessage = (newVal) => {
 		this.setState({ message: newVal });
@@ -62,7 +61,12 @@ export default class ClientContainer extends Component {
 					''
 				)}
 				{this.state.success ? (
-					<PopUp message={this.state.message} label='Success' onClose={this.setSuccess} handleOk={this.setSuccess} />
+					<PopUp
+						message={this.state.message}
+						label="Success"
+						onClose={this.setSuccess}
+						handleOk={this.setSuccess}
+					/>
 				) : (
 					''
 				)}

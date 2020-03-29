@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Product from '../view/Product';
-import LoadingHOC from '../../../common/HOC/LoadingHOC';
+
 
 /**
  * @file Product Logic Component

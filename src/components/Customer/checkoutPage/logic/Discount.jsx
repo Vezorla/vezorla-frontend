@@ -8,11 +8,6 @@ import ProcessButtons from '../../../common/Stepper/ProcessButtons';
  * @version 1.0
  */
 
-const dummyData = [
-	{ Id: 12, code: 'avc', description: 'jdnsajdnjsandjknsajdnjsandjsandjnasd' },
-	{ Id: 1, code: 'ava', description: 'dbsahdbhjsabdhbsahjbdhjsabdhjbasjhdbasdbjhbsadjhbasjhdb' }
-];
-
 const GET_URL = 'http://localhost:8080/api/customer/discounts/get';
 const PUT_URL = 'http://localhost:8080/api/customer/selected_discount/get';
 
