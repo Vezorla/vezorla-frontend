@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, CardMedia, Card } from '@material-ui/core';
+import { Button, Card } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 /**

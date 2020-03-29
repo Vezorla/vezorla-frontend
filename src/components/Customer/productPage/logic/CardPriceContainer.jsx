@@ -30,7 +30,6 @@ export default class CardPriceContainer extends Component {
 
 	// Handler for add to card btn
 	onClick = async () => {
-		let data = '';
 
 		try {
 			console.log( typeof this.state.value);

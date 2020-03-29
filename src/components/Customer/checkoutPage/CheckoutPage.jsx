@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Discount from './logic/Discount';
-import Payment from './logic/Payment';
 import ReviewContainer from './logic/ReviewContainer';
 import ShippingInfo from './logic/ShippingInfoContainer';
 import ProcessBar from '../../common/Stepper/ProcessBar';

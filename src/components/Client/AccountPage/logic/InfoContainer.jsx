@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Info from '../view/Info';
-import PopUp from '../../../common/PopUp/PopUp';
 
 const FETCH_URL = 'http://localhost:8080/api/customer/info';
 const SAVE_URL = 'http://localhost:8080/api/client/account/update';
