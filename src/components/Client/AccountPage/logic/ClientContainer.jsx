@@ -27,7 +27,8 @@ export default class ClientContainer extends Component {
 		this.state = {
 			value: 0,
 			error: false,
-			message: ''
+			message: '', 
+			success: false,
 		};
 	}
 
@@ -37,6 +38,9 @@ export default class ClientContainer extends Component {
 	setError = () => {
 		this.setState({ error: !this.state.error });
 	};
+	setSuccess = () => {
+		this.setState({success : !this.state.success})
+	}
 
 	setMessage = (newVal) => {
 		this.setState({ message: newVal });
@@ -57,6 +61,11 @@ export default class ClientContainer extends Component {
 				) : (
 					''
 				)}
+				{this.state.success ? (
+					<PopUp message={this.state.message} label='Success' onClose={this.setSuccess} handleOk={this.setSuccess} />
+				) : (
+					''
+				)}
 				<AppBar position="static" color="default">
 					<Tabs
 						value={this.state.value}
@@ -71,7 +80,7 @@ export default class ClientContainer extends Component {
 					</Tabs>
 				</AppBar>
 				<SwipeableViews index={this.state.value} onChangeIndex={this.handleChangeIndex}>
-					<InfoContainer setError={this.setError} setMessage={this.setMessage} />
+					<InfoContainer setError={this.setError} setMessage={this.setMessage} setSuccess={this.setSuccess} />
 					<OrderHistoryContainer />
 				</SwipeableViews>
 			</div>

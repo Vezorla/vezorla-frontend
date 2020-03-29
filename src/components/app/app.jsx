@@ -11,7 +11,7 @@ import LoginContainer from '../login/logic/LoginContainer';
 import RegisterContainer from '../Customer/registerPage/logic/RegisterContainer';
 import ForgotPassContainer from '../Client/ForgotPassPage/logic/ForgotPassContainer';
 
-import Customer from '../Customer/Cutomer';
+import Customer from '../Customer/Customer';
 import Client from '../Client/Client';
 import Admin from '../Admin/Admin';
 
@@ -107,7 +107,10 @@ function App() {
 
 					<Route path="/client" render={() => ClientAuthHOC(Client, auth)({ done: done })} />
 					<Route path="/admin" render={() => AdminAuthHOC(Admin, auth)({ done: done })} />
-					<Route path="/customer" render={() => <Customer increaseCart={increaseCart} auth={auth} />} />
+					<Route
+						path="/customer"
+						render={() => <Customer key="customer" increaseCart={increaseCart} auth={auth} />}
+					/>
 					<Route
 						path="/login"
 						exact

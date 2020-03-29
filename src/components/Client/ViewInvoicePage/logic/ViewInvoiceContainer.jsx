@@ -8,7 +8,7 @@ import ViewInvoice from '../view/ViewInvoice';
  * @version 1.0
  */
 
-const URL = 'http://localhost:8080/api/client/invoce';
+const URL = 'http://localhost:8080/api/client/invoice';
 
 export default class ViewInvoiceContainer extends Component {
 	constructor(props) {
@@ -21,7 +21,8 @@ export default class ViewInvoiceContainer extends Component {
 			discount: '',
 			taxes: '',
 			total: '',
-			stage: ''
+			stage: '',
+			message: ''
 		};
 	}
 
@@ -31,22 +32,22 @@ export default class ViewInvoiceContainer extends Component {
 			const response = await fetch(`${URL}/${this.props.invoiceNum}`);
 			if (response.status === 200) {
 				const data = await response.json();
-				this.setState = {
+				this.setState({
 					invoiceNum: data.invoiceNum,
 					date: data.date,
 					list: [ ...data.lineItems ],
 					discount: data.discount,
 					subtotal: data.subtotal,
 					taxes: data.subtotal,
-					total: data.total
-				};
-				this.setState({ stage: 'done' });
+					total: data.total,
+					stage: 'done'
+				});
 				// need to catch 418 to redirect
 			} else if (response.status >= 400) {
-				this.setState({ stage: 'error' });
+				this.setState({ stage: 'error', message: 'Something wrong' });
 			}
 		} catch (err) {
-			this.setState({ stage: 'error' });
+			this.setState({ stage: 'error', message: 'Something wrong' });
 		}
 	};
 

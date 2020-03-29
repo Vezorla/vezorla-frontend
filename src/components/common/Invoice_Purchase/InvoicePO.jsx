@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
+import { Button, CardMedia, Card } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 /**
@@ -26,27 +26,32 @@ const Email = ({ email }) => {
 	);
 };
 
-export default function InvoicePO({ title, number, vendor = '', email = '', total, date, url }) {
+export default function InvoicePO({ title, invoiceNum, vendor = '', email = '', total, date, url }) {
 	return (
-		<div>
-			<h1>
-				{title} - {number}
-			</h1>
-			{vendor !== '' ? <Vendor vendor={vendor} /> : ''}
-			{email !== '' ? <Email email={email} /> : ''}
-			<div>
-				<h2>Date Placed</h2>
-				<p>{date}</p>
-			</div>
-			<div>
-				<h2>Purchase Total</h2>
-				<p>{total}</p>
-			</div>
-			<Link to={url}>
+		<Link to={url}>
+			<Card
+				key={invoiceNum}
+				justifyContent="center"
+				disableUnderline={true}
+				style={{ border: '1px solid black', marginTop: '3em', paddingBottom: '10px', color: '#0C3658' }}
+			>
+				<h1>
+					{title} - {invoiceNum}
+				</h1>
+				{vendor !== '' ? <Vendor vendor={vendor} /> : ''}
+				{email !== '' ? <Email email={email} /> : ''}
+				<div>
+					<h2>Date Placed</h2>
+					<p>{date}</p>
+				</div>
+				<div>
+					<h2>Purchase Total</h2>
+					<p>{total}</p>
+				</div>
 				<Button variant="contained" size="large">
 					View
 				</Button>
-			</Link>
-		</div>
+			</Card>
+		</Link>
 	);
 }

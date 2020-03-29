@@ -1,25 +1,23 @@
 import React from 'react';
 
 export default function InvoiceDetail({ list, subtotal, taxes, total, discount }) {
-	const ItemList = list.map((item) => (
-		<tr>
-			<td>{item.description}</td>
-			<td>{item.quantity}</td>
-			<td>{item.price}</td>
-			<td>{item.total}</td>
-		</tr>
-	));
-
 	return (
 		<div>
 			<table>
 				<tr>
-					<th>Description</th>
+					<th>Name</th>
 					<th>QTy</th>
-					<th>Unit Price</th>
+					<th>Price</th>
 					<th>Total</th>
 				</tr>
-				<ItemList />
+				{list.map((item) => (
+					<tr>
+						<td>{item.name}</td>
+						<td>{item.qty}</td>
+						<td>{item.price}</td>
+						<td>{item.extendedPrice}</td>
+					</tr>
+				))}
 			</table>
 			<div>
 				<div>

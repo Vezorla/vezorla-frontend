@@ -17,7 +17,7 @@ import About from '../staticPages/About';
  * Return Switch component contains all route for customer 
  * @param {Function} increaseCart - function use to increase line item of header component. line item is state of App component
  */
-export default function Cutomer({ increaseCart, auth }) {
+function Customer({ increaseCart, auth }) {
 	return (
 		<Switch>
 			<Route path="/customer/shop" exact strict component={ShopContainer} />
@@ -31,10 +31,19 @@ export default function Cutomer({ increaseCart, auth }) {
 					<ProductContainer prodId={match.params.productid} addCartHandler={increaseCart} />
 				)}
 			/>
-			<Route path="/customer/cart" exact strict render={()=><CartContainer changeCartHandler={increaseCart}/>} />
+			<Route
+				path="/customer/cart"
+				exact
+				strict
+				key="cartPath"
+				render={() => <CartContainer key="cart" changeCartHandler={increaseCart} />}
+			/>
 			<Route path="/customer/checkout" exact strict render={() => <CheckoutPage auth={auth} />} />
 
 			<Redirect to="/404" />
 		</Switch>
 	);
 }
+
+
+export default Customer
