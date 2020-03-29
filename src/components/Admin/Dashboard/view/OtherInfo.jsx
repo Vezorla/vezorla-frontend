@@ -1,6 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * @file Other Info View Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 export default function NewClient({ newClient, highSell, lowSell, lowStock, pendingOrder }) {
 	return (
 		<div>

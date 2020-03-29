@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import ForgotPass from '../view/ForgotPass';
 
+/**
+ * @file Forgot Password logic Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 const URL = 'url';
 
 export default class ForgotPassContainer extends Component {

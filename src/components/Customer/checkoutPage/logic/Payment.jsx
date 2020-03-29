@@ -1,6 +1,11 @@
 import { PayPalButton } from 'react-paypal-button-v2';
 import React, { Component } from 'react';
 
+/**
+ * @file PayPal Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
 const URL = 'http://localhost:8080/api/customer/payment/success';
 
 export default class Payment extends Component {

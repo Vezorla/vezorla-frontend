@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Typography, Button } from '@material-ui/core';
 
 /**
- * @file Error Component
+ * @file PopUp Component
  * @author MinhL4m
  * @version 1.0
  */

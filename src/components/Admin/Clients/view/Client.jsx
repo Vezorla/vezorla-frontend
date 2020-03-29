@@ -1,6 +1,12 @@
 import React from 'react';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
+/**
+ * @file Client List View Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 const ClientCard = ({ clientId, name, email }) => {
 	return (
 		<div>
