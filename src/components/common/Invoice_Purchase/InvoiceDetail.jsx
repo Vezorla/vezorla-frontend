@@ -1,5 +1,11 @@
 import React from 'react';
 
+/**
+ * @file Invoice Detail Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 export default function InvoiceDetail({ list, subtotal, taxes, total, discount }) {
 	return (
 		<div>

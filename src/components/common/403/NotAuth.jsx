@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './style.css';
 
-/***
- * @author Minh Lam
+/**
+ * @file 403 Page Componenet 
+ * @author MinhL4m
  * @version 1.0
  */
 

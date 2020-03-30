@@ -1,6 +1,12 @@
 import React from 'react';
 import { TextField, Button } from '@material-ui/core';
 
+/**
+ * @file Setting View Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 export default function Setting({ info, setPassword, setGTSNum, onUpdate, onBackUp }) {
 	return (
 		<div>

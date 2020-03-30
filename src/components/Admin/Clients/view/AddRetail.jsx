@@ -3,6 +3,12 @@ import { TextField, Button } from '@material-ui/core';
 import PopUp from '../../../common/PopUp/PopUp';
 import EmailInput from '../../../common/Inputs/Email/EmailInput';
 
+/**
+ * @file Add Retail View Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 export default function AddRetail({
 	info,
 	setStoreName,

@@ -59,7 +59,7 @@ export default function TemporaryDrawer() {
 
 	const logout = async () => {
 		try {
-			const response = await fetch('http://localhost:8080/api/auth/logout', {
+			await fetch('http://localhost:8080/api/auth/logout', {
 				method: 'DELETE',
 				mode: 'cors',
 				credentials: 'include'

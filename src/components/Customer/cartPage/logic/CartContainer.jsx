@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Cart from '../view/Cart';
 import PopUp from '../../../common/PopUp/PopUp';
 import { Link } from 'react-router-dom';
-import { Button, TextField } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 /**
  * @file Cart Logic Component
@@ -177,6 +177,7 @@ class CartContainer extends Component {
 		let subTotal = 0;
 		this.state.inStockList.map((lineItem) => {
 			subTotal += lineItem.price * lineItem.quantity;
+			return lineItem;
 		});
 		if (subTotal !== 0) {
 			subTotal = subTotal.toFixed(2);

@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
+/**
+ * @file Pending Order View Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 const OrderCard = ({ clientId, date, total }) => {
 	return (
 		<div>

@@ -11,17 +11,28 @@ import {
 } from '@material-ui/core';
 import Stepper from '../../../common/Stepper/Stepper';
 
-export default function CreateProduct({
-	product,
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+
+/**
+ * @file  View Product Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
+export default function Product({
+	info,
 	imgs,
 	addImg,
 	delImg,
 	setIndex,
-	setCost,
+	setName,
 	setPrice,
-	setQuantity,
-	setWarehouse,
+	setThreshold,
+	setHarvestTime,
 	setDescription,
+	setSubDescription,
+	setActive,
 	onSave,
 	onCancel
 }) {
@@ -32,7 +43,6 @@ export default function CreateProduct({
 	};
 	return (
 		<div>
-			<div>{/* <h1>{product.name}</h1> */}</div>
 			<div>
 				<Stepper imgs={imgs} setActive={setIndex} />
 				<Button variant="contained" onClick={onClick} size="large">
@@ -44,58 +54,67 @@ export default function CreateProduct({
 				<input className="addImg" type="file" onChange={addImg} style={{ visibility: 'hidden' }} />
 			</div>
 			<div>
+				<TextField label="Name*" value={info.name} placeholder="Enter Name" onChange={setName} />
 				<FormControl>
-					<InputLabel htmlFor="standard-adornment-amount-1">Product Cost</InputLabel>
-					<Input
-						id="standard-adornment-amount-1"
-						value={product.cost}
-						onChange={setCost}
-						startAdornment={<InputAdornment position="start">$</InputAdornment>}
-						type="number"
-					/>
-				</FormControl>
-				<FormControl>
-					<InputLabel htmlFor="standard-adornment-amount-2">Sale Price</InputLabel>
+					<InputLabel htmlFor="standard-adornment-amount-2">Sale Price*</InputLabel>
 					<Input
 						id="standard-adornment-amount-2"
-						value={product.price}
+						value={info.price}
 						onChange={setPrice}
 						startAdornment={<InputAdornment position="start">$</InputAdornment>}
 						type="number"
+						inputProps={{
+							min: 1
+						}}
 					/>
 				</FormControl>
 				<TextField
 					id="standard-basic"
-					label="Quantity"
+					label="Threshold*"
 					type="number"
-					value={product.quantity}
-					placeholder="Enter Quantity"
+					value={info.threshold}
+					placeholder="Enter Threshold"
 					inputProps={{
-						min: 1
+						min: 0
 					}}
 					InputLabelProps={{
 						shrink: true
 					}}
-					onChange={setQuantity}
+					onChange={setThreshold}
 				/>
-				<TextField label="Warehouse" value={product.warehouse} onChange={setWarehouse} />
+				<MuiPickersUtilsProvider utils={DateFnsUtils}>
+					<KeyboardDatePicker
+						margin="normal"
+						id="date-picker-dialog"
+						label="Harvest Time"
+						format="MM/dd/yyyy"
+						value={info.harvestTime}
+						onChange={setHarvestTime}
+						KeyboardButtonProps={{
+							'aria-label': 'change date'
+						}}
+					/>
+				</MuiPickersUtilsProvider>
+			</div>
+			<div>
+				<TextField label="Description" multiline rows="10" value={info.description} onChange={setDescription} />
 			</div>
 			<div>
 				<TextField
-					label="Description"
+					label="SubDescription"
 					multiline
 					rows="10"
-					value={product.description}
-					onChange={setDescription}
+					value={info.subdescription}
+					onChange={setSubDescription}
 				/>
 			</div>
 			<div>
 				<FormControlLabel
-					value="active"
+					checked={info.active}
 					control={<Switch color="primary" />}
 					label="Set Product Active"
 					labelPlacement="top"
-					onChange={setIndex}
+					onChange={setActive}
 				/>
 			</div>
 			<div>

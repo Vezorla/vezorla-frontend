@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import ClientInfo from '../view/ClientInfo';
 import { withRouter } from 'react-router';
 
+/**
+ * @file Client Info Componenet 
+ * @author MinhL4m
+ * @version 1.0
+ */
+
 const FETCH_URL = 'url';
 const SAVE_URL = 'url';
 const RESET_URL = 'url';
