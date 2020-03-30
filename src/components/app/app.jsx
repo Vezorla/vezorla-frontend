@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import {Switch, Route, Redirect, useLocation} from 'react-router-dom';
-
-import theme from './theme';
 import {ThemeProvider} from '@material-ui/core';
-
+import theme from './theme';
 import Header from '../common/header/header';
 import Footer from '../common/footer/footer';
 import NotFound from '../common/404/NotFound';
@@ -11,17 +9,15 @@ import NotAuth from '../common/403/NotAuth';
 import LoginContainer from '../login/logic/LoginContainer';
 import RegisterContainer from '../Customer/registerPage/logic/RegisterContainer';
 import ForgotPassContainer from '../Client/ForgotPassPage/logic/ForgotPassContainer';
-
 import Customer from '../Customer/Customer';
 import Client from '../Client/Client';
 import Admin from '../Admin/Admin';
-
 import ClientAuthHOC from '../common/HOC/ClientAuthHOC';
 import AdminAuthHOC from '../common/HOC/AdminAuthHOC';
 import CustomerAuthHOC from '../common/HOC/CustomerAuthHOC';
-
 import About from '../staticPages/About';
 import ContactLogic from '../staticPages/Contact/logic/ContactLogic';
+import HomeContainer from "../Home/Home-container";
 
 // Function will run every time it goes to a new path or at first access of the application
 function usePageViews(setLineItems, setAuth, setDone) {
@@ -103,10 +99,10 @@ function App() {
         <Header cart={lineItems} auth={auth}/>
         <Switch>
           {/* <Route path="/" exact strict component={Testing} /> */}
-
           <Route path="/client" render={() => ClientAuthHOC(Client, auth)({done: done})}/>
           <Route path="/admin" render={() => AdminAuthHOC(Admin, auth)({done: done})}/>
           <Route path="/customer" render={() => <Customer increaseCart={increaseCart} auth={auth}/>}/>
+          <Route path="/" exact strict component={HomeContainer}/>
           <Route
             path="/login"
             exact
