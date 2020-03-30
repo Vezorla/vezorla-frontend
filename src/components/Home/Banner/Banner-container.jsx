@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import Banner from "./Banner-view";
 
-const BANNER_TEXT_URL = "http:localhost:8080/api/customer/banner";
+const BANNER_TEXT_URL = "http://localhost:8080/api/customer/banner";
 
 export default class BannerContainer extends Component {
   constructor(props) {
