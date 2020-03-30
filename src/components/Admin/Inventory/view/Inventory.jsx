@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, DropDown } from '@material-ui/core';
+import { Button, Grid, CardMedia } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
@@ -9,43 +9,72 @@ import LoadingHOC from '../../../common/HOC/LoadingHOC';
  * @version 1.0
  */
 
-const filterItem = [ { label: 'a', value: 'a' }, { label: 'b', value: 'b' } ];
-
 const Card = ({ img, prodId, quantity, profit, warehouse }) => {
+	const URL = '/admin/inventory/';
 	return (
-		<div>
-			<div>
-				<div>
-					<p>Quantity</p>
+		<Grid item xs={12} sm={6} md={4}>
+			<Link to={`${URL}/${prodId}`}>
+				<Card
+					key={prodId}
+					justifyContent="center"
+					disableUnderline={true}
+					style={{ border: '1px solid black', marginTop: '3em', paddingBottom: '10px', color: '#0C3658' }}
+				>
+					<h1 style={{ textAlign: 'center' }}>{prodId}</h1>
+					<CardMedia
+						component="img"
+						alt={img}
+						height="140"
+						image={img}
+						title="props.name"
+						style={{
+							width: '70%',
+							margin: 'auto',
+							marginTop: '2em',
+							marginBottom: '2em',
+							height: '40%',
+							border: '3px solid black',
+							borderRadius: '10px',
+							boxShadow: '0px 3px 5px black'
+						}}
+					/>
+					<h2 style={{ textAlign: 'center' }}>{profit}</h2>
 					<p>{quantity}</p>
-				</div>
-				<div>
-					<p>Profit</p>
-					<p>${profit}</p>
-				</div>
-				<div>
-					<p>Warehoust</p>
-					<p>{warehouse}</p>
-				</div>
-				<Link to={`/admin/inventory/${prodId}`}>
-					<Button variant="contained" size="small">
-						View
-					</Button>
-				</Link>
-			</div>
-			<div>
-				<img src={img} />
-			</div>
-		</div>
+
+					<div
+						className="card--price"
+						style={{
+							paddingBottom: '1.5em',
+							display: 'flex',
+							justifyContent: 'center'
+						}}
+					>
+						<p>{warehouse}</p>
+						<Button
+							size="large"
+							variant="outlined"
+							style={{
+								marginLeft: 'auto',
+								marginRight: 'auto',
+								width: '100%',
+								borderRadius: '0',
+								borderLeft: 'none',
+								borderRight: 'none',
+								borderColor: '#000'
+							}}
+						>
+							View
+						</Button>
+					</div>
+				</Card>
+			</Link>
+		</Grid>
 	);
 };
 
-const InventoryComponent = ({ list, filter, onFilterChange }) => {
+const InventoryComponent = ({ list }) => {
 	return (
 		<div>
-			<div>
-				<DropDown label={'Filter'} selections={filterItem} value={filter} onChange={onFilterChange} />
-			</div>
 			<div>
 				<Link to="/admin/inventory/create">
 					<Button variant="contained" size="large">
@@ -53,7 +82,9 @@ const InventoryComponent = ({ list, filter, onFilterChange }) => {
 					</Button>
 				</Link>
 			</div>
-			{list.map((item) => <Card {...item} />)}
+			<Grid container xs={12} spacing={3}>
+				{list.map((item) => <Card {...item} />)}
+			</Grid>
 		</div>
 	);
 };
