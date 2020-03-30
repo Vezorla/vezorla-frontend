@@ -16,13 +16,9 @@ export default class BannerContainer extends Component {
   }
 
   fetchData = async () => {
-    const response = await fetch(BANNER_TEXT_URL, {
-      method: "GET",
-      mode: "cors"
-    });
+    const response = await fetch(BANNER_TEXT_URL);
     if (response.status === 200) {
       const data = await response.json();
-      // console.log(data);
       this.setState({text: data.text});
     }
   };
