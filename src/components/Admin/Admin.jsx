@@ -12,7 +12,7 @@ export default function Admin() {
     <Switch>
       <Route path="/admin/dashboard" exact strict component={DashboardContainer}/>
       <Route path="/admin/settings" exact strict component={SettingContainer}/>
-      <Route path="/admin/client" exact strict component={ClientPage}/>
+      <Route path="/admin/clients" exact strict component={ClientPage}/>
       <Route path="/admin/inventory/create" exact strict component={CreateProductContainer}/>
       <Route
         path="/admin/client/:clientid"
