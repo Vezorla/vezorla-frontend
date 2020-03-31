@@ -4,7 +4,7 @@ import ClientPage from './Clients/logic/ClientPage';
 import ClientInfoContainer from './ClientInfo/logic/ClientInfoContainer';
 import SettingContainer from './Setting/logic/SettingContainer';
 import CreateProductContainer from './Product/logic/CreateProductContainer';
-import PurchaseContainer from "./Purchase/Purchase-container";
+import PurchaseOrderContainer from "./PurchaseOrder/PurchaseOrder-container";
 
 export default function Admin() {
   return (
@@ -18,7 +18,7 @@ export default function Admin() {
         strict
         render={({match}) => <ClientInfoContainer clientId={match.params.productid}/>}
       />
-      <Route path="/admin/purchases" exact strict component={PurchaseContainer}/>
+      <Route path="/admin/purchase-orders" exact strict component={PurchaseOrderContainer}/>
       <Redirect to="/admin/403"/>
     </Switch>
   );

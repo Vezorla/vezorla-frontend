@@ -5,12 +5,12 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-export default function Purchase() {
+export default function PurchaseOrder() {
   const classes = useStyles();
 
   return (
     <Container disableGutters>
-
+      boh
     </Container>
   );
 }
