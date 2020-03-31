@@ -7,8 +7,9 @@ import SubscriptionMailingContainer from "./SubscriptionMailing/SubscriptionMail
 
 const useStyles = makeStyles(theme => ({
   coverImg: {
+    margin: "0.5rem 0",
     width: "100%",
-    height: "50vh"
+    height: "auto"
   }
 }));
 
