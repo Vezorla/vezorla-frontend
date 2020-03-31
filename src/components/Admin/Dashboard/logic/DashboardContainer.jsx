@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import WeekSale from '../view/WeekSale';
 import OtherInfo from '../view/OtherInfo';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
+import {withRouter} from "react-router-dom";
 
 /**
  * @file Dashboard Componenet 
@@ -20,7 +21,7 @@ const Dashboard = ({ props }) => {
 	);
 };
 
-export default class DashboardContainer extends Component {
+class DashboardContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -58,3 +59,5 @@ export default class DashboardContainer extends Component {
 		return LoadingHOC(Dashboard)(this.state);
 	}
 }
+
+export default withRouter(DashboardContainer);

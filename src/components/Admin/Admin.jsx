@@ -5,10 +5,12 @@ import ClientInfoContainer from './ClientInfo/logic/ClientInfoContainer';
 import SettingContainer from './Setting/logic/SettingContainer';
 import CreateProductContainer from './Product/logic/CreateProductContainer';
 import PurchaseOrderContainer from "./PurchaseOrder/PurchaseOrder-container";
+import DashboardContainer from "./Dashboard/logic/DashboardContainer";
 
 export default function Admin() {
   return (
     <Switch>
+      <Route path="/admin/dashboard" exact strict component={DashboardContainer}/>
       <Route path="/admin/settings" exact strict component={SettingContainer}/>
       <Route path="/admin/client" exact strict component={ClientPage}/>
       <Route path="/admin/inventory/create" exact strict component={CreateProductContainer}/>
