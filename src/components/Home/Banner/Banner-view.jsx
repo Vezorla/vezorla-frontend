@@ -1,12 +1,11 @@
 import React from "react";
-import {Typography, makeStyles, useTheme} from "@material-ui/core";
-
-// const theme = useTheme();
+import {Typography, makeStyles} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.primary.light,
-    width: "100%"
+    padding: "0.5rem",
+    maxWidth: "100%"
   }
 }));
 
