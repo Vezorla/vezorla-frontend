@@ -16,8 +16,8 @@ class PurchaseOrderAddContainer extends Component {
           qty: "",
           cost: "",
           bestBefore: new Date(),
-          prodId: "1",
-          warehouseNum: "1"
+          prodId: "",
+          warehouseNum: ""
         },
       ],
       save: false,
@@ -51,7 +51,6 @@ class PurchaseOrderAddContainer extends Component {
           Content: "application/json"
         },
         credentials: "include",
-        // TODO: compose request JSON
         body: JSON.stringify(
           {
             po: {

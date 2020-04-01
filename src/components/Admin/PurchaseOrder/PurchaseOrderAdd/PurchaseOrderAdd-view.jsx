@@ -14,22 +14,37 @@ import {
 import {KeyboardDatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 
-const useStyles = makeStyles(theme => ({
-  container: {
+const useStyles = makeStyles({
+  containerMain: {
     marginTop: "0.5rem"
   },
-  input: {
-    width: "100%"
+  containerButtons: {
+    display: "flex",
+    justifyContent: "space-evenly",
+    margin: "2rem 0"
   }
-}));
+});
 
-export default function PurchaseOrderAdd({po, lots, setDateReceived, setWarehouse, setProduct, setProductQuantity, setProductCost, setProductBestBeforeDate, handleSave, handleCancel}) {
+export default function PurchaseOrderAdd(
+  {
+    po,
+    lots,
+    setDateReceived,
+    setWarehouse,
+    setProduct,
+    setProductQuantity,
+    setProductCost,
+    setProductBestBeforeDate,
+    handleSave,
+    handleCancel
+  }) {
+
   const classes = useStyles();
 
   return (
     <Container
       disableGutters
-      className={classes.container}
+      className={classes.containerMain}
     >
       <Typography
         align={"center"}
@@ -46,6 +61,7 @@ export default function PurchaseOrderAdd({po, lots, setDateReceived, setWarehous
         </Typography>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker
+            fullWidth
             margin="normal"
             id="date-picker-po-received"
             label="Date received"
@@ -55,17 +71,18 @@ export default function PurchaseOrderAdd({po, lots, setDateReceived, setWarehous
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
-            className={classes.input}
           />
         </MuiPickersUtilsProvider>
-        <FormControl required>
+        <FormControl
+          fullWidth
+          margin="normal"
+        >
           <InputLabel id="label-warehouse">Warehouse</InputLabel>
           <Select
             labelId="label-warehouse"
             id="select-warehouse"
             value={lots[0].warehouseNum}
             onChange={setWarehouse}
-            className={classes.input}
           >
             <MenuItem value="">
               <em>Select one</em>
@@ -74,14 +91,16 @@ export default function PurchaseOrderAdd({po, lots, setDateReceived, setWarehous
             <MenuItem value={2}>Warehouse 2</MenuItem>
           </Select>
         </FormControl>
-        <FormControl required>
+        <FormControl
+          fullWidth
+          margin="normal"
+        >
           <InputLabel id="label-product">Product</InputLabel>
           <Select
             labelId="label-product"
             id="select-product"
             value={lots[0].prodId}
             onChange={setProduct}
-            className={classes.input}
           >
             <MenuItem value="">
               <em>Select one</em>
@@ -90,21 +109,26 @@ export default function PurchaseOrderAdd({po, lots, setDateReceived, setWarehous
             <MenuItem value={2}>Product ID 2</MenuItem>
           </Select>
         </FormControl>
-        <FormControl required>
+        <FormControl
+          fullWidth
+          margin="normal"
+        >
           <TextField
             id="quantity-textfield"
             label="Quantity"
             type="number"
             value={lots[0].qty}
             placeholder="0"
-            inputProps={{
+            InputProps={{
               min: 1
             }}
             onChange={setProductQuantity}
-            className={classes.input}
           />
         </FormControl>
-        <FormControl required>
+        <FormControl
+          fullWidth
+          margin="normal"
+        >
           <TextField
             id="cost-textfield"
             label="Cost"
@@ -112,31 +136,30 @@ export default function PurchaseOrderAdd({po, lots, setDateReceived, setWarehous
             value={lots[0].cost}
             placeholder="0.00"
             InputProps={{
-              min: 0,
+              min: 0.00,
               startAdornment: <InputAdornment position="start">$</InputAdornment>,
             }}
             onChange={setProductCost}
-            className={classes.input}
           />
         </FormControl>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker
+            fullWidth
             margin="normal"
             id="date-picker-product-best-before-date"
-            label="Best before date product"
+            label="Date best before"
             format="MMM/dd/yyyy"
             value={lots[0].bestBefore}
             onChange={setProductBestBeforeDate}
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
-            className={classes.input}
           />
         </MuiPickersUtilsProvider>
       </Container>
       <Container
         disableGutters
-        className={classes.container}
+        className={classes.containerButtons}
       >
         <Button
           variant="contained"
