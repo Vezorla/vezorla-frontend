@@ -12,9 +12,9 @@ import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
 const FETCH_URL = 'http://localhost:8080/api/admin/inventory/product';
 const ADD_URL = 'http://localhost:8080/api/admin/img/upload';
-const DEL_URL = 'http://localhost:8080/api/admin';
 const SAVE_URL = 'http://localhost:8080/api/admin/inventory/update ';
-
+const IMG_URL = 'http://localhost:8080/api/admin/img/get';
+var tempImg = [];
 class UpdateProductContainer extends Component {
 	constructor(props) {
 		super(props);
@@ -30,16 +30,14 @@ class UpdateProductContainer extends Component {
 				active: true
 			},
 			imgs: [],
-			index: 0,
 			stage: '',
 			error: false,
 			success: false,
-			message: ''
+			message: '',
+			added: false
 		};
-		this.setIndex = this.setIndex.bind(this);
 		this.setStateInfo = this.setStateInfo.bind(this);
 		this.addImg = this.addImg.bind(this);
-		this.delImg = this.delImg.bind(this);
 		this.setHarvestTime = this.setHarvestTime.bind(this);
 		this.setActive = this.setActive.bind(this);
 		this.formatDate = this.formatDate.bind(this);
@@ -47,8 +45,6 @@ class UpdateProductContainer extends Component {
 		this.setThreshold = this.setThreshold.bind(this);
 		this.goBack = this.goBack.bind(this);
 	}
-
-	setIndex = (value) => this.setState({ index: value });
 
 	setStateInfo(field) {
 		return (e) => {
@@ -74,10 +70,6 @@ class UpdateProductContainer extends Component {
 		this.setState({ info: { ...this.state.info, active: e.target.checked } });
 	}
 
-	setError = () => {
-		this.setState({ error: !this.state.error });
-	};
-
 	goBack = () => {
 		this.props.history.push('/admin/inventory');
 	};
@@ -94,53 +86,50 @@ class UpdateProductContainer extends Component {
 		return [ year, month, day ].join('-');
 	}
 
-	componentDidMount() {
-		this.fetchData();
-		(async () => {
-			const resposne1 = await fetch('http://localhost:8080/api/admin/img/get/4');
-			const response2 = await resposne1.json();
-			console.log(response2);
+	setImgs(imageMain, imageOne, imageTwo, imageThree) {
+		let images = [];
+		if (imageOne != null) {
+			images.push(imageOne);
+		}
+		if (imageTwo != null) {
+			images.push(imageTwo);
+		}
+		if (imageThree != null) {
+			images.push(imageThree);
+		}
+		if (imageMain != null) {
+			images.push(imageMain);
+		}
 
-			this.setState({ imgs: [ `data:image/jpeg;base64,${response2.picByte}` ] });
-		})();
+		tempImg = [ ...images ];
 	}
 
-	// ---------------Re-deceide how to send img------------------
+	componentDidMount() {
+		this.fetchData();
+	}
+
 	addImg = async (e) => {
 		const file = e.target.files[0];
-		const formData = new FormData();
 
-		formData.append('imgFile', file);
-		try {
-			const response = await fetch(ADD_URL, {
-				method: 'POST',
-				// headers: {
-				// 	// If doesn't work change into img/xyz
-				// 	'Content-Type':'multipart/form-data'
-				// },
-				credentials: 'include',
-				mode: 'cors',
-				body: formData
-			});
+		if (file.type === 'image/png' || file.type === 'image/jpeg') {
+			const formData = new FormData();
 
-			if (response.status === 200) {
-				// this.fetchData();
-			}
-		} catch (err) {}
-	};
+			formData.append('imgFile', file);
+			try {
+				const response = await fetch(`${ADD_URL}/${this.props.prodId}`, {
+					method: 'POST',
+					credentials: 'include',
+					mode: 'cors',
+					body: formData
+				});
 
-	delImg = async (e) => {
-		try {
-			await fetch(DEL_URL, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application-json'
-				},
-				credentials: 'include',
-				body: JSON.stringify(this.state.index)
-			});
-		} catch (err) {
-			this.setState({ error: true, message: 'image is not deleted' });
+				if (response.status === 200) {
+					this.fetchData();
+					this.setState({ added: true, message: 'Image has been added' });
+				}
+			} catch (err) {}
+		} else {
+			this.setState({ error: true, message: 'This type of file is not supported' });
 		}
 	};
 
@@ -151,7 +140,19 @@ class UpdateProductContainer extends Component {
 			const response = await fetch(`${FETCH_URL}/${this.props.prodId}`);
 			if (response.status === 200) {
 				const data = await response.json();
-				// this.addImgs(data);
+
+				this.setImgs(data[0].imageOne, data[0].imageTwo, data[0].imageThree, data[0].imageMain);
+
+				for (let index in tempImg) {
+					const responseImg = await fetch(`${IMG_URL}/${tempImg[index]}`, {
+						credentials: 'include',
+						mode: 'cors',
+						method: 'GET'
+					});
+					const img = await responseImg.json();
+					tempImg[index] = `data:image/jpeg;base64,${img.picByte}`;
+				}
+
 				this.setState({
 					info: {
 						prodId: this.props.prodId,
@@ -164,6 +165,7 @@ class UpdateProductContainer extends Component {
 						threshold: data[0].threshold || 0,
 						active: data.active || true
 					},
+					imgs: [ ...tempImg ],
 					stage: 'done'
 				});
 			} else if (response.status >= 400) {
@@ -220,13 +222,25 @@ class UpdateProductContainer extends Component {
 	render() {
 		return (
 			<div>
-				<div className="test" />
+				<div className="test">
+					<input type="file" name="as" id="as" />
+				</div>
 				{this.state.error ? (
 					<PopUp
 						label="Error"
 						message={this.state.message}
-						onClose={this.setError}
-						handleOk={this.setError}
+						onClose={() => this.setState({ error: false })}
+						handleOk={() => this.setState({ error: false })}
+					/>
+				) : (
+					''
+				)}
+				{this.state.added ? (
+					<PopUp
+						label="Image Added"
+						message={this.state.message}
+						onClose={() => this.setState({ added: false })}
+						handleOk={() => this.setState({ added: false })}
 					/>
 				) : (
 					''
@@ -239,14 +253,12 @@ class UpdateProductContainer extends Component {
 				{LoadingHOC(Product)({
 					...this.state,
 					addImg: this.addImg,
-					delImg: this.delImg,
 					setName: this.setStateInfo('name'),
 					setPrice: this.setPrice,
 					setThreshold: this.setThreshold,
 					setSubDescription: this.setStateInfo('subdescription'),
 					setDescription: this.setStateInfo('description'),
 					setHarvestTime: this.setHarvestTime,
-					setIndex: this.setIndex,
 					setActive: this.setActive,
 					onSave: this.onSave,
 					onCancel: this.goBack

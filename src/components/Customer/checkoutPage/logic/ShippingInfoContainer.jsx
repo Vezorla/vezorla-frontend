@@ -33,7 +33,7 @@ class ShippingInfo extends Component {
 			},
 			error: false,
 			message: '',
-			disbaledEmail: false,
+			disabledEmail: false,
 			filled: true
 		};
 		this.setStateInfo = this.setStateInfo.bind(this);
@@ -127,7 +127,7 @@ class ShippingInfo extends Component {
 
 					if (response.status === 200) {
 						const data = await response.json();
-						if (data !== null) {
+						if (data.email !== '') {
 							this.setState({
 								disabledEmail: true,
 								info: {
@@ -137,7 +137,7 @@ class ShippingInfo extends Component {
 									phoneNum: data.phoneNum || '',
 									address: data.address || '',
 									city: data.city || '',
-									postalCode: data.postalCode.replace(/\s/g, '') || '',
+									postalCode: data.postalCode || '',
 									province: data.province || '',
 									country: data.country || '',
 									pickup: false
@@ -145,7 +145,8 @@ class ShippingInfo extends Component {
 							});
 						}
 					}
-				} catch (err) {}
+				} catch (err) {
+				}
 			} else if (responseCheck.status >= 400) {
 				this.props.history.push('/home');
 			}
@@ -217,7 +218,7 @@ class ShippingInfo extends Component {
 							setPostalCode={this.setPostalCode}
 							setProvince={this.setStateInfo('province')}
 							disabled={this.state.info.pickup}
-							disbaledEmail={this.state.info.disbaledEmail}
+							disabledEmail={this.state.disabledEmail}
 							required={true}
 						/>
 					</div>

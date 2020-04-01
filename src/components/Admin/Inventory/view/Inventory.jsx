@@ -9,7 +9,7 @@ import LoadingHOC from '../../../common/HOC/LoadingHOC';
  * @version 1.0
  */
 
-const CardComponent = ({ prodId, imageMain, name, qty, price }) => {
+const CardComponent = ({ prodId, name, qty, price, img }) => {
 	const URL = '/admin/inventory';
 	return (
 		<Grid item xs={12} sm={6} md={4}>
@@ -23,9 +23,9 @@ const CardComponent = ({ prodId, imageMain, name, qty, price }) => {
 					<h1 style={{ textAlign: 'center' }}>{name}</h1>
 					<CardMedia
 						component="img"
-						alt={imageMain}
+						alt={img}
 						height="140"
-						image={imageMain}
+						image={`data:image/jpeg;base64,${img}`}
 						title="props.name"
 						style={{
 							width: '70%',
@@ -72,7 +72,7 @@ const CardComponent = ({ prodId, imageMain, name, qty, price }) => {
 	);
 };
 
-const InventoryComponent = ({ list = [] }) => {
+const InventoryComponent = ({ list = [], imgs = [] }) => {
 	return (
 		<div>
 			<h1>Inventory</h1>
@@ -84,7 +84,7 @@ const InventoryComponent = ({ list = [] }) => {
 				</Link>
 			</div>
 			<Grid container xs={12} spacing={3}>
-				{list.map((item) => <CardComponent {...item} />)}
+				{list.map((item, index) => <CardComponent {...item} img={imgs[index]} />)}
 			</Grid>
 		</div>
 	);

@@ -19,7 +19,6 @@ import loadingHOC from '../../../common/HOC/LoadingHOC';
   * @param {addCartHandler} - handler for adding to cart 
   */
 const ProductDetail = ({ product, imgs, price, max, addCartHandler }) => {
-	console.log(addCartHandler);
 	return (
 		<div>
 			<h1>{product.name}</h1>

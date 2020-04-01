@@ -26,7 +26,7 @@ export default function NecessaryInput({
 	setPassword,
 	disabled = false,
 	className = 'default',
-	disbaledEmail = false,
+	disabledEmail = false,
 	required = false
 }) {
 	return (
@@ -50,7 +50,7 @@ export default function NecessaryInput({
 				value={info.email}
 				onChange={setEmail ? setEmail : (value) => {}}
 				helperText="Invalid Email"
-				disabled={disbaledEmail}
+				disabled={disabledEmail}
 				required={required}
 			/>
 			<PhoneInput
