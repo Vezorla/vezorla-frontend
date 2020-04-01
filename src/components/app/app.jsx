@@ -127,7 +127,7 @@ function App() {
           <Route path="/404" component={NotFound}/>
           <Redirect to="/404"/>
         </Switch>
-        <Footer/>
+        {/*<Footer/>*/}
       </div>
     </ThemeProvider>
   );
