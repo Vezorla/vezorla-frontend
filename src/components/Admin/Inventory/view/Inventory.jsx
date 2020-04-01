@@ -20,7 +20,6 @@ const CardComponent = ({ prodId, name, qty, price, img }) => {
 					disableUnderline={true}
 					style={{ border: '1px solid black', marginTop: '3em', paddingBottom: '10px', color: '#0C3658' }}
 				>
-					<h1 style={{ textAlign: 'center' }}>{name}</h1>
 					<CardMedia
 						component="img"
 						alt={img}
