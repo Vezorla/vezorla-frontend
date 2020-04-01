@@ -1,11 +1,12 @@
 import React from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
+import DashboardContainer from "./Dashboard/logic/DashboardContainer";
 import ClientPage from './Clients/logic/ClientPage';
 import ClientInfoContainer from './ClientInfo/logic/ClientInfoContainer';
 import SettingContainer from './Setting/logic/SettingContainer';
 import CreateProductContainer from './Product/logic/CreateProductContainer';
 import PurchaseOrderContainer from "./PurchaseOrder/PurchaseOrder-container";
-import DashboardContainer from "./Dashboard/logic/DashboardContainer";
+import PurchaseOrderAddContainer from "./PurchaseOrder/PurchaseOrderAdd/PurchaseOrderAdd-container";
 
 export default function Admin() {
   return (
@@ -21,6 +22,7 @@ export default function Admin() {
         render={({match}) => <ClientInfoContainer clientId={match.params.productid}/>}
       />
       <Route path="/admin/purchase-orders" exact strict component={PurchaseOrderContainer}/>
+      <Route path="/admin/purchase-orders/add" exact strict component={PurchaseOrderAddContainer}/>
       <Redirect to="/admin/403"/>
     </Switch>
   );
