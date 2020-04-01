@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField } from '@material-ui/core';
+import { TextField, Typography } from '@material-ui/core';
 import EmailInput from '../../../common/Inputs/Email/EmailInput';
 
 /**
@@ -27,7 +27,9 @@ export default function Register({ email, setEmail, password, setPassword, rePas
 	return (
 		<div>
 			<div>
-				<h1>Registration</h1>
+				<Typography variant="h3" component="h4">
+					Registration
+				</Typography>
 			</div>
 			<EmailInput helperText="Invalid Email" value={email} onChange={setEmail} />
 			<TextField label="Password" type="password" value={password} onChange={setPassword} />

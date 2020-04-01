@@ -22,10 +22,10 @@ export default function Admin() {
 			<Route path="/admin/inventory" exact strict component={InventoryContainer} />
 			<Route path="/admin/inventory/create" exact strict component={CreateProductContainer} />
 			<Route
-				path="/admin/client/:clientid"
+				path="/admin/clients/:email"
 				exact
 				strict
-				render={({ match }) => <ClientInfoContainer clientId={match.params.clientId} />}
+				render={({ match }) => <ClientInfoContainer email={match.params.email} />}
 			/>
 			<Route
 				path="/admin/inventory/:prodId"

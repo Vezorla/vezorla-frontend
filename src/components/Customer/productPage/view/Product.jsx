@@ -2,6 +2,7 @@ import React from 'react';
 import CardPriceContainer from '../logic/CardPriceContainer';
 import Stepper from '../../../common/Stepper/Stepper';
 import loadingHOC from '../../../common/HOC/LoadingHOC';
+import { Typography } from '@material-ui/core';
 
 /**
  * @file Product View Component
@@ -21,7 +22,9 @@ import loadingHOC from '../../../common/HOC/LoadingHOC';
 const ProductDetail = ({ product, imgs, price, max, addCartHandler }) => {
 	return (
 		<div>
-			<h1>{product.name}</h1>
+			<Typography variant="h3" component="h4">
+				{product.name}
+			</Typography>
 			<Stepper imgs={imgs} default={true} />
 			<CardPriceContainer price={product.price} max={max} addCartHandler={addCartHandler} id={product.prodId} />
 

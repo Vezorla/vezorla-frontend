@@ -7,7 +7,8 @@ import {
 	Input,
 	InputAdornment,
 	FormControlLabel,
-	Switch
+	Switch,
+	Typography
 } from '@material-ui/core';
 import Stepper from '../../../common/Stepper/Stepper';
 
@@ -41,13 +42,22 @@ export default function Product({
 	};
 	return (
 		<div>
-			<div>
-				<Stepper imgs={imgs} default={true} />
-				<Button variant="contained" onClick={onClick} size="large">
-					Add Image
-				</Button>
-				<input className="addImg" type="file" onChange={addImg} style={{ visibility: 'hidden' }} />
-			</div>
+			<Typography variant="h2" component="h2">
+				Create Product
+			</Typography>
+			{addImg !== null && addImg !== undefined ? (
+				<div>
+					<Stepper imgs={imgs} default={true} />
+					<Button variant="contained" onClick={onClick} size="large">
+						Add Image
+					</Button>
+					<input className="addImg" type="file" onChange={addImg} style={{ visibility: 'hidden' }} />
+				</div>
+			) : (
+				<Typography variant="h6" component="h3">
+					Remember to add image after create by using update
+				</Typography>
+			)}
 			<div>
 				<TextField label="Name*" value={info.name} placeholder="Enter Name" onChange={setName} />
 				<FormControl>

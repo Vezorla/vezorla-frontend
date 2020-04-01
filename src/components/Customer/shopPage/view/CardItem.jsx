@@ -1,9 +1,6 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import Button from '@material-ui/core/Button';
+import { Card, Button, CardMedia, Grid, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import CardMedia from '@material-ui/core/CardMedia';
-import Grid from '@material-ui/core/Grid';
 
 /**
  * @file CardItem View Component
@@ -17,7 +14,7 @@ import Grid from '@material-ui/core/Grid';
  * @returns CardItem View
  */
 function CardItem({ product, xs = 12, sm = 6, md = 4, img = '' }) {
-	const { prodId, name, subdescription, harvestTime, oldPrice, price } = product;
+	const { prodId, name, harvestTime, price } = product;
 	const url = '/customer/product/' + prodId;
 
 	return (
@@ -29,7 +26,6 @@ function CardItem({ product, xs = 12, sm = 6, md = 4, img = '' }) {
 					disableUnderline={true}
 					style={{ border: '1px solid black', marginTop: '3em', paddingBottom: '10px', color: '#0C3658' }}
 				>
-					<h1 style={{ textAlign: 'center' }}>{name}</h1>
 					<CardMedia
 						component="img"
 						alt={name}
@@ -47,8 +43,15 @@ function CardItem({ product, xs = 12, sm = 6, md = 4, img = '' }) {
 							boxShadow: '0px 3px 5px black'
 						}}
 					/>
-					<h2 style={{ textAlign: 'center' }}>{subdescription}</h2>
-					<p>{harvestTime}</p>
+					<Typography variant="h5" component="h4">
+						{name}
+					</Typography>
+					<Typography variant="h5" component="h4">
+						Harvest Time:{harvestTime}
+					</Typography>
+					<Typography variant="h5" component="h4">
+						${price}
+					</Typography>
 
 					<div
 						className="card--price"
@@ -58,8 +61,6 @@ function CardItem({ product, xs = 12, sm = 6, md = 4, img = '' }) {
 							justifyContent: 'center'
 						}}
 					>
-						<p>{oldPrice}</p>
-						<p>{price}</p>
 						<Button
 							size="large"
 							variant="outlined"

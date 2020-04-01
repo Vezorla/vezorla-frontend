@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ProcessButtons from '../../../common/Stepper/ProcessButtons';
 import NecessaryInput from '../../../common/Inputs/NecessaryInput/NecessaryInput';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+
+import { FormControlLabel, Checkbox, Typography } from '@material-ui/core';
 import PopUp from '../../../common/PopUp/PopUp';
 import { withRouter } from 'react-router-dom';
 /**
@@ -145,8 +145,7 @@ class ShippingInfo extends Component {
 							});
 						}
 					}
-				} catch (err) {
-				}
+				} catch (err) {}
 			} else if (responseCheck.status >= 400) {
 				this.props.history.push('/home');
 			}
@@ -203,7 +202,9 @@ class ShippingInfo extends Component {
 					''
 				)}
 				<div>
-					<h1>Shipping Information</h1>
+					<Typography variant="h4" component="h4">
+						Shipping Information
+					</Typography>
 
 					<div>
 						<NecessaryInput

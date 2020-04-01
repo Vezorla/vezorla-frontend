@@ -47,7 +47,7 @@ export default function NecessaryInput({
 			/>
 			<EmailInput
 				className={`${className}--email`}
-				value={info.email}
+				value={info.email || ''}
 				onChange={setEmail ? setEmail : (value) => {}}
 				helperText="Invalid Email"
 				disabled={disabledEmail}
@@ -55,7 +55,7 @@ export default function NecessaryInput({
 			/>
 			<PhoneInput
 				className={`${className}--phone`}
-				value={info.phoneNum}
+				value={info.phoneNum || ''}
 				onChange={setPhone}
 				helperText="Invalid Phone Number"
 				required={required}
@@ -86,7 +86,7 @@ export default function NecessaryInput({
 			<PostalCodeInput
 				// disabled={disabled}
 				helperText="Invalid Postal Code"
-				value={info.postalCode}
+				value={info.postalCode || ''}
 				onChange={setPostalCode}
 				required={required}
 			/>
