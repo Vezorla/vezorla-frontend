@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Cart from '../view/Cart';
 import PopUp from '../../../common/PopUp/PopUp';
 import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 
 /**
  * @file Cart Logic Component
@@ -234,9 +234,15 @@ class CartContainer extends Component {
 						{this.state.inStockList.length > 0 ? (
 							<div key="price">
 								<div>
-									<p>Subtotal: ${this.calAll()}</p>
-									<p>Tax: ${this.tax}</p>
-									<p>Total: ${this.total}</p>
+									<Typography variant="h6" component="h5">
+										Subtotal: ${this.calAll()}
+									</Typography>
+									<Typography variant="h6" component="h5">
+										Tax: ${this.tax}
+									</Typography>
+									<Typography variant="h6" component="h5">
+										Total: ${this.total}
+									</Typography>
 								</div>
 								<Link to="/customer/checkout">
 									<Button variant="contained">Checkout</Button>
@@ -247,7 +253,9 @@ class CartContainer extends Component {
 						)}
 					</div>
 				) : (
-					<p>Add something</p>
+					<Typography variant="h4" component="h4">
+						Add Something
+					</Typography>
 				)}
 			</div>
 		) : (

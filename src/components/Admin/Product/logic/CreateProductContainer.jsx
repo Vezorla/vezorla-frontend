@@ -28,7 +28,6 @@ class CreateProductContainer extends Component {
 				threshold: 0,
 				active: true
 			},
-			imgs: [],
 
 			stage: '',
 			error: false,
@@ -37,7 +36,6 @@ class CreateProductContainer extends Component {
 			added: false
 		};
 		this.setStateInfo = this.setStateInfo.bind(this);
-		this.addImg = this.addImg.bind(this);
 		this.setHarvestTime = this.setHarvestTime.bind(this);
 		this.setActive = this.setActive.bind(this);
 		this.formatDate = this.formatDate.bind(this);
@@ -76,26 +74,6 @@ class CreateProductContainer extends Component {
 
 	goBack = () => {
 		this.props.history.push('/admin/inventory');
-	};
-
-	addImg = async (e) => {
-		const file = e.target.files[0];
-		const formData = new FormData();
-
-		formData.append('imgFile', file);
-		try {
-			const response = await fetch(`${ADD_URL}`, {
-				method: 'POST',
-				credentials: 'include',
-				mode: 'cors',
-				body: formData
-			});
-
-			if (response.status === 200) {
-				// this.fetchData();
-				this.setState({ added: true, message:'Image has been added' });
-			}
-		} catch (err) {}
 	};
 
 	onSave = async () => {
@@ -170,19 +148,8 @@ class CreateProductContainer extends Component {
 				) : (
 					''
 				)}
-				{this.state.added ? (
-					<PopUp
-						label="Image Added"
-						message={this.state.message}
-						onClose={() => this.setState({ added: false })}
-						handleOk={() => this.setState({ added: false })}
-					/>
-				) : (
-					''
-				)}
 				{LoadingHOC(Product)({
 					...this.state,
-					addImg: this.addImg,
 
 					setName: this.setStateInfo('name'),
 					setPrice: this.setPrice,

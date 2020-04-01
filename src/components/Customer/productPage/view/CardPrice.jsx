@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, TextField, CardActions, Button } from '@material-ui/core';
+import { Card, CardContent, TextField, CardActions, Button, Typography } from '@material-ui/core';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 /**
@@ -31,7 +31,9 @@ const CardPriceComponent = ({ price, value, max, onChange, onClick }) => {
 		>
 			<CardContent>
 				<form className="someclass" noValidate autoComplete="off">
-					<h1>${price}</h1>
+					<Typography variant="h4" component="h4">
+						${price}
+					</Typography>
 					<TextField
 						id="standard-basic"
 						label="Quantity"

@@ -1,7 +1,6 @@
 import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import TextField from '@material-ui/core/TextField';
+import { TextField, IconButton, Typography } from '@material-ui/core';
 import '../style.css';
 
 /**
@@ -18,7 +17,9 @@ class LineItem extends React.PureComponent {
 					<img className="productImg" src={`data:image/jpeg;base64,${this.props.img}`} alt="Product" />
 				</div>
 				<div className="lineItem--name">
-					<p>{this.props.name}</p>
+					<Typography variant="h6" component="h4">
+						{this.props.name}
+					</Typography>
 				</div>
 				<div className="lineItem--quantity">
 					<TextField
@@ -39,7 +40,9 @@ class LineItem extends React.PureComponent {
 					/>
 				</div>
 				<div className="lineItem--price">
-					<p>${(this.props.quantity * this.props.price).toFixed(2)}</p>
+					<Typography variant="h6" component="h4">
+						${(this.props.quantity * this.props.price).toFixed(2)}
+					</Typography>
 				</div>
 				<div className="lineItem--delete">
 					<IconButton edge="end" aria-label="delete" onClick={() => this.props.onDelete(this.props.prodID)}>

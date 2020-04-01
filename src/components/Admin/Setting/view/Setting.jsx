@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, Typography } from '@material-ui/core';
 import { FilePond, registerPlugin } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
 
@@ -13,7 +13,9 @@ export default function Setting({ info, setPassword, onUpdate, onBackUp, onUploa
 	return (
 		<div>
 			<div>
-				<h1>General Setting</h1>
+				<Typography variant="h4" component="h4">
+					General Setting
+				</Typography>
 				<TextField label="E-Mail" value={info.email} disabled />
 				<TextField label="Password" value={info.password} onChange={setPassword} type="password" />
 				<Button variant="contained" onClick={onUpdate}>
@@ -21,14 +23,19 @@ export default function Setting({ info, setPassword, onUpdate, onBackUp, onUploa
 				</Button>
 			</div>
 			<div>
-				<h1>Download Backup</h1>
+				<Typography variant="h4" component="h4">
+					Download Backup
+				</Typography>
+
 				<Button onClick={onBackUp} variant="contained">
 					Database Backup
 				</Button>
 			</div>
 			<div>
-				<h1>Upload Backup</h1>
-				<FilePond files={info.file} maxFiles={1} onupdatefiles={setFile} style={{padding: '3rem 0'}} />
+				<Typography variant="h4" component="h4">
+					Upload Backup
+				</Typography>
+				<FilePond files={info.file} maxFiles={1} onupdatefiles={setFile} style={{ padding: '3rem 0' }} />
 				<Button variant="contained" onClick={onUpload}>
 					Update
 				</Button>

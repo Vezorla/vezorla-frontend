@@ -2,7 +2,7 @@ import React from 'react';
 import ProcessButtons from '../../../common/Stepper/ProcessButtons';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 import Payment from '../logic/Payment';
-
+import { Typography } from '@material-ui/core';
 /**
  * @file Review view Component
  * @author MinhL4m
@@ -14,27 +14,71 @@ const ReviewComponent = ({ list, info, handleBack, setDone, setError, setLoading
 		<div>
 			<tabel>
 				<tr>
-					<th>Name</th>
-					<th>Quantity</th>
-					<th>Price</th>
-					<th>Extended Price</th>
+					<th>
+						<Typography variant="h5" component="h6">
+							Name
+						</Typography>
+					</th>
+					<th>
+						<Typography variant="h5" component="h6">
+							Quantity
+						</Typography>
+					</th>
+					<th>
+						<Typography variant="h5" component="h6">
+							Price
+						</Typography>
+					</th>
+					<th>
+						<Typography variant="h5" component="h6">
+							Extended Price
+						</Typography>
+					</th>
 				</tr>
 				{list.map((lineItem) => (
 					<tr>
-						<td>{lineItem.name}</td>
-						<td>{lineItem.quantity}</td>
-						<td>{lineItem.price}</td>
-						<td>{lineItem.extendedPrice}</td>
+						<td>
+							<Typography variant="h6" component="h6">
+								{lineItem.name}
+							</Typography>
+						</td>
+						<td>
+							<Typography variant="h6" component="h6">
+								{lineItem.quantity}
+							</Typography>
+						</td>
+						<td>
+							<Typography variant="h6" component="h6">
+								{lineItem.price}
+							</Typography>
+						</td>
+						<td>
+							<Typography variant="h6" component="h6">
+								{lineItem.extendedPrice}
+							</Typography>
+						</td>
 					</tr>
 				))}
 			</tabel>
 			<div>
-				<p>Subtotal: {info.subtotal}</p>
-				<p>Discount: {info.discount}</p>
-				<p>Discounted Subtotal: {info.discounted_subtotal}</p>
-				<p>Tax: {info.taxes}</p>
-				<p>Shipping: {info.shipping}</p>
-				<p>Total: {info.Total}</p>
+				<Typography variant="h6" component="h5">
+					Subtotal: ${info.subtotal}
+				</Typography>
+				<Typography variant="h6" component="h5">
+					Discount: ${info.discount}
+				</Typography>
+				<Typography variant="h6" component="h5">
+					Discounted Subtotal: ${info.discounted_subtotal}
+				</Typography>
+				<Typography variant="h6" component="h5">
+					Tax: ${info.taxes}
+				</Typography>
+				<Typography variant="h6" component="h5">
+					Shipping: ${info.shipping}
+				</Typography>
+				<Typography variant="h6" component="h5">
+					Total: ${info.Total}
+				</Typography>
 			</div>
 			<div />
 			<ProcessButtons handleBack={handleBack} complete={true} hasNext={true} />
