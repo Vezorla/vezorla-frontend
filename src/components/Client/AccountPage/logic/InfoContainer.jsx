@@ -81,7 +81,20 @@ export default class InfoContainer extends Component {
 			});
 			if (response.status === 200) {
 				const data = await response.json();
-				this.setState({ info: { ...this.state.info, ...data } });
+				this.setState({
+					info: {
+						firstName: data.firstName || '',
+						lastName: data.lastName || '',
+						email: data.email || '',
+						phoneNum: data.phoneNum || '',
+						address: data.address || '',
+						city: data.city || '',
+						province: data.province || '',
+						postalCode: data.postalCode || '',
+						country: data.country || '',
+						subscription: data.subscription || false
+					}
+				});
 				this.setState({ stage: 'done' });
 			} else if (response.status >= 400) {
 				this.setState({ stage: 'error' });

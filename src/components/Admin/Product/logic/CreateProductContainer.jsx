@@ -12,12 +12,12 @@ import LoadingHOC from '../../../common/HOC/LoadingHOC';
  */
 
 const DEL_URL = 'url';
-const ADD_URL = 'url';
+const ADD_URL = 'http://locahost:8080/api/admin/img/upload';
 const SAVE_URL = 'http://localhost:8080/api/admin/inventory/create';
 
 class CreateProductContainer extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			info: {
 				name: '',
@@ -44,6 +44,7 @@ class CreateProductContainer extends Component {
 		this.formatDate = this.formatDate.bind(this);
 		this.setPrice = this.setPrice.bind(this);
 		this.setThreshold = this.setThreshold.bind(this);
+		this.goBack = this.goBack.bind(this);
 	}
 
 	setIndex = (value) => this.setState({ index: value });
@@ -83,6 +84,7 @@ class CreateProductContainer extends Component {
 	// ---------------Re-deceide how to send img------------------
 	addImg = async (e) => {
 		const file = e.target.files[0];
+		//write a check func to check if this file is img
 		try {
 			const response = await fetch(ADD_URL, {
 				method: 'POST',

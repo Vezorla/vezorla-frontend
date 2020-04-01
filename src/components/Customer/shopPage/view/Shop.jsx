@@ -29,12 +29,12 @@ const useStyle = makeStyles((theme) => ({
  * create multiple CardItem component from list
  * @param {array} list - list of product
  */
-const CardList = ({ list }) => {
+const CardList = ({ list, imgs }) => {
 	const classes = useStyle();
 
 	// create a list of cards
-	const returnList = list.map((product) => {
-		return <CardItem key={product.prodId} product={product} />;
+	const returnList = list.map((product, index) => {
+		return <CardItem key={product.prodId} product={product} img={imgs[index]} />;
 	});
 
 	//return the list with grid wrapper

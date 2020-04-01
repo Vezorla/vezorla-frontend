@@ -16,8 +16,8 @@ import Grid from '@material-ui/core/Grid';
  * @param {Object} props - props of this functional component
  * @returns CardItem View
  */
-function CardItem({ product, xs = 12, sm = 6, md = 4 }) {
-	const { prodId, name, subdescription, harvestTime, imageMain, oldPrice, price } = product;
+function CardItem({ product, xs = 12, sm = 6, md = 4, img = '' }) {
+	const { prodId, name, subdescription, harvestTime, oldPrice, price } = product;
 	const url = '/customer/product/' + prodId;
 
 	return (
@@ -34,7 +34,7 @@ function CardItem({ product, xs = 12, sm = 6, md = 4 }) {
 						component="img"
 						alt={name}
 						height="140"
-						image={imageMain}
+						image={`data:image/jpeg;base64,${img}`}
 						title="props.name"
 						style={{
 							width: '70%',
