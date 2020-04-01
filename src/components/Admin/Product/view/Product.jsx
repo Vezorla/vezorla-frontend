@@ -24,8 +24,6 @@ export default function Product({
 	info,
 	imgs,
 	addImg,
-	delImg,
-	setIndex,
 	setName,
 	setPrice,
 	setThreshold,
@@ -44,12 +42,9 @@ export default function Product({
 	return (
 		<div>
 			<div>
-				<Stepper imgs={imgs} setActive={setIndex} />
+				<Stepper imgs={imgs} default={true} />
 				<Button variant="contained" onClick={onClick} size="large">
 					Add Image
-				</Button>
-				<Button variant="contained" onClick={delImg} size="large">
-					Delete Image
 				</Button>
 				<input className="addImg" type="file" onChange={addImg} style={{ visibility: 'hidden' }} />
 			</div>

@@ -15,7 +15,7 @@ class LineItem extends React.PureComponent {
 		return (
 			<div className="lineItem">
 				<div className="lineItem--img">
-					<img className="productImg" src={this.props.imageMain} alt="Product" />
+					<img className="productImg" src={`data:image/jpeg;base64,${this.props.img}`} alt="Product" />
 				</div>
 				<div className="lineItem--name">
 					<p>{this.props.name}</p>
@@ -43,7 +43,7 @@ class LineItem extends React.PureComponent {
 				</div>
 				<div className="lineItem--delete">
 					<IconButton edge="end" aria-label="delete" onClick={() => this.props.onDelete(this.props.prodID)}>
-						<DeleteIcon  />
+						<DeleteIcon />
 					</IconButton>
 				</div>
 			</div>

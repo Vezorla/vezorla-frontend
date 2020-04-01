@@ -14,6 +14,7 @@ const DEL_URL = 'http://localhost:8080/api/customer/cart/remove';
 const UPDATE_URL = 'http://localhost:8080/api/customer/cart/update';
 const INSTOCK_URL = 'http://localhost:8080/api/customer/cart/view';
 const OUTSTOCK_URL = 'http://localhost:8080/api/customer/cart/view/out_of_stock';
+const IMG_URL = 'http://localhost:8080/api/admin/img/get';
 
 class CartContainer extends Component {
 	constructor(props) {
@@ -22,6 +23,7 @@ class CartContainer extends Component {
 			inStockList: [],
 			outStockList: [],
 			quantity: [],
+			img: [],
 			stage: '',
 			error: false,
 			message: '',
@@ -122,8 +124,22 @@ class CartContainer extends Component {
 			if (response.status === 200) {
 				const data = await response.json();
 				if (data !== null) {
+					let tempImgs = [];
+					for (let temp of data) {
+						tempImgs.push(temp.imageMain);
+					}
 					this.setState({ inStockList: data });
-					this.setState({ stage: 'done', done: 'done' });
+					for (let index in tempImgs) {
+						const response = await fetch(`${IMG_URL}/${tempImgs[index]}`, {
+							method: 'GET',
+							credentials: 'include',
+							mode: 'cors'
+						});
+						const data = await response.json();
+						tempImgs[index] = data.picByte;
+					}
+
+					this.setState({ stage: 'done', done: 'done', imgs: [ ...tempImgs ] });
 				}
 			} else if (response.status > 400) {
 				this.setState({ stage: 'error' });

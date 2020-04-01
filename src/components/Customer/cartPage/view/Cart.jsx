@@ -38,6 +38,7 @@ function Cart(props) {
 											onDelete={props.onDelete}
 											onChange={props.onChange}
 											{...lineItem}
+											img={props.imgs[index]}
 											max={props.quantity[index]}
 										/>
 									) : (
