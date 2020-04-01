@@ -222,9 +222,6 @@ class UpdateProductContainer extends Component {
 	render() {
 		return (
 			<div>
-				<div className="test">
-					<input type="file" name="as" id="as" />
-				</div>
 				{this.state.error ? (
 					<PopUp
 						label="Error"
