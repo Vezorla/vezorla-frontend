@@ -115,12 +115,12 @@ export default function TemporaryDrawer() {
 						</NavLink>
 					</Box>
 					<Box boxShadow={3} padding="5px">
-						<NavLink to="/admin/purchases" exact>
-							<ListItem button key={'Purchases'} className={classes.type}>
+						<NavLink to="/admin/purchase-orders" exact>
+							<ListItem button key={'Purchase Orders'} className={classes.type}>
 								<ListItemIcon>
 									<StoreIcon className={classes.icon} />
 								</ListItemIcon>
-								<ListItemText primary={'Purchases'} classes={{ primary: classes.text }} />
+								<ListItemText primary={'Purchase Orders'} classes={{ primary: classes.text }} />
 							</ListItem>
 						</NavLink>
 					</Box>

@@ -69,11 +69,11 @@ class LoginContainer extends Component {
 					//login as admin
 					if (data.admin === true) {
 						this.props.setAuth('admin');
-						this.props.history.push('/dashboard');
+						this.props.history.push('/admin/dashboard');
 					} else {
 						//login as client
 						this.props.setAuth('client');
-						this.props.history.push('/home');
+						this.props.history.push('/');
 					}
 				}
 			} catch (err) {
