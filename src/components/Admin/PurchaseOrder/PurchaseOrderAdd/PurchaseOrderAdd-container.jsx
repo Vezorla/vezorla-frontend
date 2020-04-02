@@ -2,12 +2,16 @@ import React, {Component} from "react";
 import PurchaseOrderAdd from "./PurchaseOrderAdd-view";
 import {withRouter} from "react-router";
 
+const GET_PO_NUM_URL = "http://localhost:8080/api/admin/purchase_order/next";
+const GET_WAREHOUSES_URL = "http://localhost:8080/api/admin/warehouse/all/po";
+const GET_PRODUCTS_URL = "http://localhost:8080/api/admin/inventory/all/po";
 const SAVE_PURCHASE_ORDER_URL = "http://localhost:8080/api/admin/receive_purchase_order";
 
 class PurchaseOrderAddContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      nextPO: "",
       po: {
         received: new Date()
       },
@@ -29,6 +33,18 @@ class PurchaseOrderAddContainer extends Component {
     this.handleSave = this.handleSave.bind(this);
     this.formatDate = this.formatDate.bind(this);
   }
+
+  componentDidMount() {
+    this.getPoNum();
+  }
+
+  getPoNum = async () => {
+    const response = await fetch(GET_PO_NUM_URL);
+    if (response.status === 200) {
+      const data = await response.json();
+      this.setState({nextPO: data.nextPO});
+    }
+  };
 
   setDateReceived(value) {
     this.setState({po: {...this.state.po, received: value}});

@@ -40,6 +40,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function PurchaseOrderAdd(
   {
+    nextPO,
     po,
     lots,
     setDateReceived,
@@ -62,7 +63,7 @@ export default function PurchaseOrderAdd(
         align="center"
         variant={"h6"}
       >
-        PO number: XXXX
+        PO number: {nextPO}
       </Typography>
       <Container
         className={classes.containerLot}
