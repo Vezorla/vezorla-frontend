@@ -55,7 +55,15 @@ export default function Login({ email, password, error = '', setEmail, setPasswo
 				<EmailInput className="email" helperText="Invalid Email" onChange={setEmail} value={email} />
 				<TextField className="pass" label="Password" type="password" value={password} onChange={setPassword} />
 			</div>
-			<div>{error !== '' ? <p>{error}</p> : ''}</div>
+			<div>
+				{error !== '' ? (
+					<Typography variant="h8" component="h8" style={{ color: 'red' }}>
+						{error}
+					</Typography>
+				) : (
+					''
+				)}
+			</div>
 			<div>
 				<Button className="login-btn" variant="contained" onClick={onClick} size="large">
 					Sign in
@@ -64,6 +72,11 @@ export default function Login({ email, password, error = '', setEmail, setPasswo
 					<Button variant="contained" size="small">
 						Create Account
 					</Button>
+				</NavLink>
+				<NavLink to="/forgot" exact>
+					<Typography variant="h6" component="h6">
+						Forgot Password? Don't worry we back you up.
+					</Typography>
 				</NavLink>
 			</div>
 		</div>
