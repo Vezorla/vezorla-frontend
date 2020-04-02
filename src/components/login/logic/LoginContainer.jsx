@@ -62,7 +62,7 @@ class LoginContainer extends Component {
 
 				//if 401 (Unauthorized) then error message
 				if (response.status === 401) {
-					this.setState({ error: 'Invalid username or password' });
+					this.setState({ error: 'Invalid username or password', password: '' });
 				} else if (response.status === 200) {
 					//if 200 (ok)
 					const data = await response.json();
@@ -77,8 +77,7 @@ class LoginContainer extends Component {
 					}
 				}
 			} catch (err) {
-				console.log(err);
-				this.setState({ error: 'Something wrong' });
+				this.setState({ error: 'Something wrong', password: '' });
 			}
 		}
 	};

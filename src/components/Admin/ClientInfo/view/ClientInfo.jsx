@@ -16,8 +16,6 @@ function ClientInfoComponent({
 	error,
 	success,
 	reseted,
-	order,
-	value,
 	setFirstname,
 	setLastname,
 	setPhone,
@@ -39,9 +37,8 @@ function ClientInfoComponent({
 			{reseted ? <PopUp label="Reset" message={message} onClose={setReset} handleOk={setReset} /> : ''}
 			<div>
 				<Typography variant="h4" component="h2">
-					Client ID - {info.type}
+					Client ID - {info.accountType === 'C' ? 'Client' : 'Admin'}
 				</Typography>
-			
 			</div>
 			<div>
 				<NecessaryInput
@@ -54,23 +51,12 @@ function ClientInfoComponent({
 					setPhone={setPhone}
 					setPostalCode={setPostalCode}
 					setProvince={setProvince}
-					disbaledEmail={true}
+					disabledEmail={true}
 				/>
 
 				<Button variant="contained" onClick={onReset}>
 					Reset Password
 				</Button>
-			</div>
-
-			<div>
-				<div>
-					<p>Order Total</p>
-					<p>{order}</p>
-				</div>
-				<div>
-					<p>Total Value</p>
-					<p>${value}</p>
-				</div>
 			</div>
 
 			<div>
