@@ -14,18 +14,27 @@ const theme = createMuiTheme({
       'Open Sans',
       'sans-serif',
     ].join(','),
-  },
-});
-
-theme.overrides = {
-  ...theme.overrides,
-  MuiTextField: {
-    ...theme.MuiTextField,
-    root: {
-      ...theme.root,
-      color: theme.palette.secondary.main
+    button: {
+      fontWeight: "bold"
     }
   },
-};
+  overrides: {
+    MuiInputBase: {
+      root: {
+        color: "#0C3658"
+      }
+    },
+    MuiFormLabel: {
+      root: {
+        color: "#0C3658"
+      }
+    },
+    MuiTypography: {
+      root: {
+        color: "#0C3658"
+      }
+    }
+  }
+});
 
 export default theme;
