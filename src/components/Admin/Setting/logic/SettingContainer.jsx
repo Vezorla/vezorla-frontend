@@ -110,13 +110,18 @@ class SettingContainer extends Component {
 	};
 
 	onUpload = async () => {
-		if (this.state.file.length > 0 && this.state.file[0].type === 'application/x-zip-compressed') {
+		if (
+			this.state.file[0].name.slice(this.state.file[0].name.length - 3, this.state.file[0].name.length) === 'sql'
+		) {
+			const formData = new FormData();
+			formData.append('file', this.state.file[0]);
 			try {
 				const response = await fetch(UPLOAD_URL, {
 					method: 'POST',
 					credentials: 'include',
+					
 					mode: 'cors',
-					body: this.state.file
+					body: formData
 				});
 				if (response.status === 200) {
 					this.setState({ success: true, message: 'Restore Backup Successfully' });
@@ -124,10 +129,11 @@ class SettingContainer extends Component {
 					this.setState({ error: true, message: 'Something wrong' });
 				}
 			} catch (err) {
+				console.log(err.message);
 				this.setState({ error: true, message: 'Something wrong' });
 			}
 		} else {
-			this.setState({ error: true, message: 'Type of file is not correct! Please use .zip file' });
+			this.setState({ error: true, message: 'Please use sql file' });
 		}
 	};
 
