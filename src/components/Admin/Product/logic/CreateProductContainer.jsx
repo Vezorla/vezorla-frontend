@@ -11,8 +11,7 @@ import LoadingHOC from '../../../common/HOC/LoadingHOC';
  * @version 1.0
  */
 
-const DEL_URL = 'url';
-const ADD_URL = 'http://locahost:8080/api/admin/img/upload';
+const ADD_URL = 'http://localhost:8080/api/admin/img/upload';
 const SAVE_URL = 'http://localhost:8080/api/admin/inventory/create';
 
 class CreateProductContainer extends Component {
@@ -42,6 +41,7 @@ class CreateProductContainer extends Component {
 		this.setPrice = this.setPrice.bind(this);
 		this.setThreshold = this.setThreshold.bind(this);
 		this.goBack = this.goBack.bind(this);
+		this.addImg = this.addImg.bind(this);
 	}
 
 	setStateInfo(field) {
@@ -68,12 +68,33 @@ class CreateProductContainer extends Component {
 		this.setState({ info: { ...this.state.info, active: e.target.checked } });
 	}
 
-	setError = () => {
-		this.setState({ error: !this.state.error });
-	};
-
 	goBack = () => {
 		this.props.history.push('/admin/inventory');
+	};
+
+	addImg = async (e) => {
+		const file = e.target.files[0];
+		if (file.type === 'image/png' || file.type === 'image/jpeg') {
+			const formData = new FormData();
+
+			formData.append('imgFile', file);
+			try {
+				const response = await fetch(`${ADD_URL}`, {
+					method: 'POST',
+					credentials: 'include',
+					mode: 'cors',
+					body: formData
+				});
+
+				if (response.status === 200) {
+					this.setState({ added: true, message: 'Image has been added' });
+				}
+			} catch (err) {
+				console.log(err);
+			}
+		} else {
+			this.setState({ error: true, message: 'This type of file is not supported' });
+		}
 	};
 
 	onSave = async () => {
@@ -137,8 +158,8 @@ class CreateProductContainer extends Component {
 					<PopUp
 						label="Error"
 						message={this.state.message}
-						onClose={this.setError}
-						handleOk={this.setError}
+						onClose={() => this.setState({ error: false })}
+						handleOk={() => this.setState({ error: false })}
 					/>
 				) : (
 					''
@@ -148,9 +169,19 @@ class CreateProductContainer extends Component {
 				) : (
 					''
 				)}
+				{this.state.added ? (
+					<PopUp
+						label="Success"
+						message={this.state.message}
+						onClose={() => this.setState({ added: false })}
+						handleOk={() => this.setState({ added: false })}
+					/>
+				) : (
+					''
+				)}
 				{LoadingHOC(Product)({
 					...this.state,
-
+					create: true,
 					setName: this.setStateInfo('name'),
 					setPrice: this.setPrice,
 					setThreshold: this.setThreshold,
@@ -159,7 +190,8 @@ class CreateProductContainer extends Component {
 					setHarvestTime: this.setHarvestTime,
 					setActive: this.setActive,
 					onSave: this.onSave,
-					onCancel: this.goBack
+					onCancel: this.goBack,
+					addImg: this.addImg
 				})}
 			</div>
 		);

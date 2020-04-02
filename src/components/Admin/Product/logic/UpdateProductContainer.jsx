@@ -11,7 +11,7 @@ import LoadingHOC from '../../../common/HOC/LoadingHOC';
  */
 
 const FETCH_URL = 'http://localhost:8080/api/admin/inventory/product';
-const ADD_URL = 'http://localhost:8080/api/admin/img/upload';
+const ADD_URL = 'http://localhost:8080/api/admin/img//upload?prodId';
 const SAVE_URL = 'http://localhost:8080/api/admin/inventory/update ';
 const IMG_URL = 'http://localhost:8080/api/admin/img/get';
 var tempImg = [];
@@ -116,7 +116,7 @@ class UpdateProductContainer extends Component {
 
 			formData.append('imgFile', file);
 			try {
-				const response = await fetch(`${ADD_URL}/${this.props.prodId}`, {
+				const response = await fetch(`${ADD_URL}=${this.props.prodId}`, {
 					method: 'POST',
 					credentials: 'include',
 					mode: 'cors',

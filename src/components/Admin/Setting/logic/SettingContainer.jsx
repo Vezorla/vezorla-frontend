@@ -12,8 +12,8 @@ import Setting from '../view/Setting';
 const MESSAGE =
 	'Make sure to write correctly the email, as it is your username to enter the system and teh main method for communication with the system';
 const UPDATE_URL = 'http://localhost:8080/api/client/account/update';
-const BACKUP_URL = 'url';
-const UPLOAD_URL = 'url';
+const BACKUP_URL = 'http://localhost:8080/api/admin/backup/export';
+const UPLOAD_URL = 'http://localhost:8080/api/admin/backup/restore';
 const EMAIL_URL = 'http://localhost:8080/api/admin/email';
 
 const monthNames = [
@@ -95,7 +95,7 @@ class SettingContainer extends Component {
 		try {
 			const response = await fetch(BACKUP_URL, {
 				method: 'GET',
-				credentials: 'included',
+				credentials: 'include',
 				mode: 'cors'
 			});
 			if (response.status === 200) {
@@ -104,6 +104,7 @@ class SettingContainer extends Component {
 				this.setState({ error: true, message: 'Something wrong' });
 			}
 		} catch (err) {
+			console.log(err);
 			this.setState({ error: true, message: 'Something wrong' });
 		}
 	};

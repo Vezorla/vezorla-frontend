@@ -33,7 +33,8 @@ export default function Product({
 	setSubDescription,
 	setActive,
 	onSave,
-	onCancel
+	onCancel,
+	create
 }) {
 	const onClick = (e) => {
 		e.preventDefault();
@@ -42,22 +43,29 @@ export default function Product({
 	};
 	return (
 		<div>
-			<Typography variant="h2" component="h2">
-				Create Product
-			</Typography>
-			{addImg !== null && addImg !== undefined ? (
-				<div>
-					<Stepper imgs={imgs} default={true} />
-					<Button variant="contained" onClick={onClick} size="large">
-						Add Image
-					</Button>
-					<input className="addImg" type="file" onChange={addImg} style={{ visibility: 'hidden' }} />
-				</div>
+			{create ? (
+				<Typography variant="h2" component="h2">
+					Create Product
+				</Typography>
 			) : (
-				<Typography variant="h6" component="h3">
-					Remember to add image after create by using update
+				<Typography variant="h2" component="h2">
+					Update Product
 				</Typography>
 			)}
+
+			<div>
+				{create ? (
+					<Typography variant="h6" component="h6">
+						Add one image only. If you want to add more, please use Update Product feature.
+					</Typography>
+				) : (
+					<Stepper imgs={imgs} default={true} />
+				)}
+				<Button variant="contained" onClick={onClick} size="large">
+					Add Image
+				</Button>
+				<input className="addImg" type="file" onChange={addImg} style={{ visibility: 'hidden' }} />
+			</div>
 			<div>
 				<TextField label="Name*" value={info.name} placeholder="Enter Name" onChange={setName} />
 				<FormControl>
