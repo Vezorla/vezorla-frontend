@@ -12,11 +12,14 @@ class PurchaseOrderAddContainer extends Component {
     super(props);
     this.state = {
       nextPO: "",
+      warehouses: [],
+      products: [],
       po: {
         received: new Date()
       },
       lots: [
         {
+          num: 1,
           qty: "",
           cost: "",
           bestBefore: new Date(),
@@ -36,6 +39,8 @@ class PurchaseOrderAddContainer extends Component {
 
   componentDidMount() {
     this.getPoNum();
+    this.getWarehouseList();
+    this.getProductList();
   }
 
   getPoNum = async () => {
@@ -43,6 +48,22 @@ class PurchaseOrderAddContainer extends Component {
     if (response.status === 200) {
       const data = await response.json();
       this.setState({nextPO: data.nextPO});
+    }
+  };
+
+  getWarehouseList = async () => {
+    const response = await fetch(GET_WAREHOUSES_URL);
+    if (response.status === 200) {
+      const data = await response.json();
+      this.setState({warehouses: data.warehouses});
+    }
+  };
+
+  getProductList = async () => {
+    const response = await fetch(GET_PRODUCTS_URL);
+    if (response.status === 200) {
+      const data = await response.json();
+      this.setState({products: data.products});
     }
   };
 
@@ -57,48 +78,60 @@ class PurchaseOrderAddContainer extends Component {
   };
 
   handleSave = async () => {
-    let dateReceived = this.formatDate(this.state.po.received);
-    let dateBestBefore = this.formatDate(this.state.lots[0].bestBefore);
+    // TODO: Save all lots
+    if (
+      this.state.lots[0].prodId !== "" &&
+      this.state.lots[0].warehouseNum !== "" &&
+      this.state.lots[0].qty > 0 &&
+      this.state.lots[0].cost >= 0
+    ) {
+      let dateReceived = this.formatDate(this.state.po.received);
+      let dateBestBefore = this.formatDate(this.state.lots[0].bestBefore);
 
-    try {
-      const response = await fetch(SAVE_PURCHASE_ORDER_URL, {
-        method: "POST",
-        headers: {
-          Content: "application/json"
-        },
-        credentials: "include",
-        body: JSON.stringify(
-          {
-            po: {
-              received: dateReceived
-            },
-            lots: [
-              {
-                qty: this.state.lots[0].qty,
-                cost: this.state.lots[0].cost,
-                bestBefore: dateBestBefore,
-                prodId: this.state.lots[0].prodId,
-                warehouseNum: this.state.lots[0].warehouseNum
-              }
-            ]
+      try {
+        const response = await fetch(SAVE_PURCHASE_ORDER_URL, {
+          method: "POST",
+          headers: {
+            Content: "application/json"
+          },
+          credentials: "include",
+          body: JSON.stringify(
+            {
+              po: {
+                received: dateReceived
+              },
+              lots: [
+                {
+                  qty: this.state.lots[0].qty,
+                  cost: this.state.lots[0].cost,
+                  bestBefore: dateBestBefore,
+                  prodId: this.state.lots[0].prodId,
+                  warehouseNum: this.state.lots[0].warehouseNum
+                }
+              ]
+            }
+          )
+        });
+        if (response.status === 200) {
+          const data = await response.json();
+          if (data === true) {
+            // TODO: Show success on adding Purchase Order
           }
-        )
-      });
-      if (response.status === 200) {
-        const data = await response.json();
-        if (data === true) {
-          // TODO: Show success on adding Purchase Order
         }
+      } catch (e) {
+        this.setState({error: "Adding Purchase Order failed. Try again please."})
       }
-    } catch (e) {
-      this.setState({error: "Adding Purchase Order failed. Try again please."})
+    } else {
+      // TODO: Show error message
     }
   };
 
-  // TODO: handleCancel
+  handleCancel = () => {
+    this.props.history.push("/admin/purchase-orders");
+  };
 
   formatDate(date) {
-    var d = new Date(date),
+    let d = new Date(date),
       month = '' + (d.getMonth() + 1),
       day = '' + d.getDate(),
       year = d.getFullYear();

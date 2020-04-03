@@ -41,6 +41,8 @@ const useStyles = makeStyles(theme => ({
 export default function PurchaseOrderAdd(
   {
     nextPO,
+    warehouses,
+    products,
     po,
     lots,
     setDateReceived,
@@ -73,7 +75,7 @@ export default function PurchaseOrderAdd(
           variant="body1"
           className={classes.lotNum}
         >
-          Lot 1
+          Lot {lots[0].num}
         </Typography>
         <Container
           className={classes.containerForm}
@@ -106,8 +108,13 @@ export default function PurchaseOrderAdd(
               <MenuItem value="">
                 <em>Select one</em>
               </MenuItem>
-              <MenuItem value={1}>Warehouse 1</MenuItem>
-              <MenuItem value={2}>Warehouse 2</MenuItem>
+              {warehouses.map((warehouse) => (
+                <MenuItem
+                  key={warehouse.warehouseNum}
+                  value={warehouse.warehouseNum}>
+                  {warehouse.city} {warehouse.address}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
           <FormControl
@@ -124,8 +131,13 @@ export default function PurchaseOrderAdd(
               <MenuItem value="">
                 <em>Select one</em>
               </MenuItem>
-              <MenuItem value={1}>Product ID 1</MenuItem>
-              <MenuItem value={2}>Product ID 2</MenuItem>
+              {products.map((product) => (
+                <MenuItem
+                  key={product.prodId}
+                  value={product.prodId}>
+                  {product.name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
           <FormControl
