@@ -1,14 +1,21 @@
 import React from 'react';
-import { Card, Button } from '@material-ui/core';
+import { Card, Button, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-const URL = 'https://localhost:8080/api/admin/invoices';
+/**
+ * @author MinhL4m
+ * @version 1.0
+ */
 
-export default function Sales({ invoices }) {
+const URL = '/admin/sales';
+
+export default function Sales({ list = [] }) {
 	return (
 		<div>
-			<h1>Sales</h1>
-			{invoices.map((invoice) => (
+			<Typography variant="h2" component="h2">
+				Sales
+			</Typography>
+			{list.map((invoice) => (
 				<Link to={`${URL}/${invoice.invoiceNum}`}>
 					<Card
 						key={invoice.invoiceNum}
@@ -16,16 +23,20 @@ export default function Sales({ invoices }) {
 						disableUnderline={true}
 						style={{ border: '1px solid black', marginTop: '3em', paddingBottom: '10px', color: '#0C3658' }}
 					>
-						<h1>Invoice - {invoice.invoiceNum}</h1>
-						<p>${invoice.email}</p>
-						<div>
-							<h2>Date Placed</h2>
-							<p>{invoice.date}</p>
-						</div>
-						<div>
-							<h2>Purchase Total</h2>
-							<p>{invoice.total}</p>
-						</div>
+						<Typography variant="h4" component="h4">
+							Invoice - {invoice.invoiceNum}
+						</Typography>
+
+						<Typography variant="h5" component="h5">
+							Email: {invoice.email}
+						</Typography>
+						<Typography variant="h5" component="h5">
+							Date Placed: {invoice.date}
+						</Typography>
+						<Typography variant="h5" component="h5">
+							Total: {invoice.total}
+						</Typography>
+
 						<Button variant="contained" size="large">
 							View
 						</Button>

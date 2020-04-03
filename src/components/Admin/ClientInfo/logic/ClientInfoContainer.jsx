@@ -9,9 +9,8 @@ import { withRouter } from 'react-router';
  */
 
 const FETCH_URL = 'http://localhost:8080/api/admin/client';
-const SAVE_URL = 'url';
-const RESET_URL = 'url';
-const TOTAL_URL = 'url';
+const SAVE_URL = 'http://localhost:8080/api/client/account/update';
+const RESET_URL = 'http://localhost:8080/api/client/account/forgot-password';
 
 class ClientInfoContainer extends Component {
 	constructor(props) {
@@ -37,6 +36,11 @@ class ClientInfoContainer extends Component {
 			order: 0,
 			value: 0
 		};
+		this.goBack = this.goBack.bind(this);
+		this.setPopUp = this.setPopUp.bind(this);
+		this.setStateValue = this.setStateValue.bind(this);
+		this.setPhone = this.setPhone.bind(this);
+		this.setPostalCode = this.setPostalCode.bind(this);
 	}
 
 	//----setter------
@@ -70,12 +74,12 @@ class ClientInfoContainer extends Component {
 	}
 
 	goBack() {
-		this.props.history('/admin/client');
+		this.props.history.push('/admin/clients');
 	}
 
 	onSave = async () => {
 		try {
-			const response = await fetch(`${SAVE_URL}/${this.props.email}`, {
+			const response = await fetch(`${SAVE_URL}`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
@@ -95,12 +99,13 @@ class ClientInfoContainer extends Component {
 
 	onReset = async () => {
 		try {
-			const response = await fetch(`${RESET_URL}/${this.props.email}`, {
+			const response = await fetch(`${RESET_URL}`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				credentials: 'include',
+				mode: 'cors',
 				body: JSON.stringify(this.state.info.email)
 			});
 			if (response.status === 200) {
@@ -129,20 +134,8 @@ class ClientInfoContainer extends Component {
 		}
 	};
 
-	fetchTotal = async () => {
-		try {
-			const response = await fetch(`${TOTAL_URL}/${this.props.clientId}`);
-			if (response.state === 200) {
-				const data = await response.json();
-				this.setState({ ...this.state, ...data });
-			} else {
-			}
-		} catch (err) {}
-	};
-
 	componentDidMount() {
 		this.setState({ stage: 'loading' });
-		this.fetchTotal();
 		this.fetchData();
 	}
 
