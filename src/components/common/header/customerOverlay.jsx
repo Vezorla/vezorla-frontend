@@ -20,12 +20,9 @@ import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import ExploreIcon from "@material-ui/icons/Explore";
 import StoreIcon from "@material-ui/icons/Storefront";
 import {NavLink} from 'react-router-dom';
-import theme from "../../app/theme";
+import globalStyles from "../../../assets/styles/styles";
 
 const useStyles = makeStyles({
-  paper: {
-    backgroundColor: "#0C3658"
-  },
   list: {
     width: "60vw",
     backgroundColor: "#0C3658",
@@ -43,7 +40,6 @@ const useStyles = makeStyles({
     color: "#D0C50A"
   },
   text: {
-    color: theme.palette.primary.main,
     letterSpacing: ".11em",
     fontWeight: "500"
   }
@@ -51,6 +47,7 @@ const useStyles = makeStyles({
 
 export default function TemporaryDrawer() {
   const classes = useStyles();
+  const classesGlobal = globalStyles();
   const [state, setState] = React.useState({
     left: false
   });
@@ -76,17 +73,17 @@ export default function TemporaryDrawer() {
       <List className={classes.boxSpacing}>
         <Box>
           <Box boxShadow={3} padding="5px">
-            <NavLink to="/" exact>
+            <NavLink to="/" exact className={classesGlobal.link}>
               <ListItem button key={"Home"} className={classes.type}>
                 <ListItemIcon>
                   <HomeIcon className={classes.icon} />
                 </ListItemIcon>
-                <ListItemText primary={"Home"} classes={{primary: classes.text}} />
+                <ListItemText primary={"Home"} />
               </ListItem>
             </NavLink>
           </Box>
           <Box boxShadow={3} padding="5px">
-            <NavLink to="/customer/cart" exact>
+            <NavLink to="/customer/cart" exact className={classesGlobal.link}>
               <ListItem button key={"Cart"} className={classes.type}>
                 <ListItemIcon>
                   <ShoppingCartIcon className={classes.icon} />
@@ -96,7 +93,7 @@ export default function TemporaryDrawer() {
             </NavLink>
           </Box>
           <Box boxShadow={3} padding="5px">
-            <NavLink to="/customer/shop" exact>
+            <NavLink to="/customer/shop" exact className={classesGlobal.link}>
               <ListItem button key={"Shop"} className={classes.type}>
                 <ListItemIcon>
                   <StoreIcon className={classes.icon} />
@@ -105,20 +102,9 @@ export default function TemporaryDrawer() {
               </ListItem>
             </NavLink>
           </Box>
-          <Divider
-            style={{
-              marginBottom: "15px",
-              marginTop: "15px",
-              backgroundColor: "#D0C50A",
-              width: "90%",
-              marginLeft: "auto",
-              marginRight: "auto",
-              height: "3px",
-              borderRadius: "1.5px"
-            }}
-          />
+          <Divider/>
           <Box boxShadow={3} padding="5px">
-            <NavLink to="/findus" exact>
+            <NavLink to="/findus" exact className={classesGlobal.link}>
               <ListItem button key={"Find us"} className={classes.type}>
                 <ListItemIcon>
                   <ExploreIcon className={classes.icon} />
@@ -128,7 +114,7 @@ export default function TemporaryDrawer() {
             </NavLink>
           </Box>
           <Box boxShadow={3} padding="5px">
-            <NavLink to="/contact" exact>
+            <NavLink to="/contact" exact className={classesGlobal.link}>
               <ListItem button key={"Contact Us"} className={classes.type}>
                 <ListItemIcon>
                   <MailOutlineIcon className={classes.icon} />
@@ -137,18 +123,9 @@ export default function TemporaryDrawer() {
               </ListItem>
             </NavLink>
           </Box>
-          <Divider
-            style={{
-              marginBottom: "15px",
-              marginTop: "15px",
-              backgroundColor: "#D0C50A",
-              width: "90%",
-              marginLeft: "auto",
-              marginRight: "auto"
-            }}
-          />
+          <Divider/>
           <Box boxShadow={3} padding="5px">
-            <NavLink to="/about" exact>
+            <NavLink to="/about" exact className={classesGlobal.link}>
               <ListItem button key={"About Us"} className={classes.type}>
                 <ListItemIcon>
                   <BookmarkIcon className={classes.icon} />
@@ -157,9 +134,9 @@ export default function TemporaryDrawer() {
               </ListItem>
             </NavLink>
           </Box>
-          <Divider style={{ marginBottom: "15px", marginTop: "15px" }} />
+          <Divider/>
           <Box boxShadow={3} padding="5px">
-            <NavLink to="/login">
+            <NavLink to="/login" className={classesGlobal.link}>
               <ListItem button key={"Sign In"} className={classes.type}>
                 <ListItemIcon>
                   <AccountCircleIcon className={classes.icon} />
@@ -176,10 +153,9 @@ export default function TemporaryDrawer() {
   return (
     <div>
       <Button onClick={toggleDrawer("left", true)}>
-        <MenuIcon style={{ color: "#0C3658" }} />
+        <MenuIcon color={"secondary"} />
       </Button>
       <Drawer
-        classes={{ paper: classes.paper }}
         open={state.left}
         onClose={toggleDrawer("left", false)}
       >
