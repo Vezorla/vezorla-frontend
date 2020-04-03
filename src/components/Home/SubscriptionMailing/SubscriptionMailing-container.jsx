@@ -15,8 +15,8 @@ export default class SubscriptionMailingContainer extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  setEmail = (input) => {
-    this.setState({email: input})
+  setEmail = (value) => {
+    this.setState({email: value})
   };
 
   handleClick = async () => {
