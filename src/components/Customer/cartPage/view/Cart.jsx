@@ -1,7 +1,7 @@
 import React from 'react';
 import LineItem from './LineItem';
 import loadingHOC from '../../../common/HOC/LoadingHOC';
-
+import { Typography } from '@material-ui/core';
 /**
  * @file Cart View Component
  * @author MinhL4m
@@ -14,12 +14,14 @@ function Cart(props) {
 			<div>
 				{props.outStockList.length !== 0 ? (
 					<div>
-						<h1>Out of Stock Item</h1>
+						<Typography variant="h4" component="h4">
+							Out of Stock Item
+						</Typography>
 						{props.outStockList.map((lineItem) => (
 							<div>
-								<p>
+								<Typography variant="h6" component="h4">
 									{lineItem.name} out of stock by {lineItem.by}
-								</p>
+								</Typography>
 							</div>
 						))}
 					</div>
@@ -27,7 +29,9 @@ function Cart(props) {
 					''
 				)}
 				<div>
-					<h1>In Stock Item</h1>
+					<Typography variant="h4" component="h4">
+						In Stock Item
+					</Typography>
 					{props.inStockList.length !== 0 ? (
 						<div>
 							{props.inStockList.map(
@@ -38,6 +42,7 @@ function Cart(props) {
 											onDelete={props.onDelete}
 											onChange={props.onChange}
 											{...lineItem}
+											img={props.imgs[index]}
 											max={props.quantity[index]}
 										/>
 									) : (
@@ -46,7 +51,9 @@ function Cart(props) {
 							)}
 						</div>
 					) : (
-						<h1>Sorry for this inconvenience</h1>
+						<Typography variant="h4" component="h4">
+							Sorry for this inconvenience
+						</Typography>
 					)}
 				</div>
 			</div>

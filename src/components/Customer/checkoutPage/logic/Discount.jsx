@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormControl, FormLabel, FormControlLabel, RadioGroup, Radio } from '@material-ui/core';
+import { FormControl, FormLabel, FormControlLabel, RadioGroup, Radio, Typography } from '@material-ui/core';
 import ProcessButtons from '../../../common/Stepper/ProcessButtons';
 
 /**
@@ -82,7 +82,9 @@ export default class Discount extends Component {
 		return (
 			<div>
 				{this.state.list.length === 0 ? (
-					<h1>There is no current discount</h1>
+					<Typography variant="h4" component="h4">
+						There is no current discount
+					</Typography>
 				) : (
 					<div>
 						<FormControl component="fieldset">

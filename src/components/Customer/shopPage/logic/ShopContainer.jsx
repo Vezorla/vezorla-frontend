@@ -9,6 +9,7 @@ import Shop from '../view/Shop';
  */
 
 const URL = 'http://localhost:8080/api/customer/inventory/products/all';
+const IMG_URL = 'http://localhost:8080/api/admin/img/get';
 
 /**
  * Shop Logic class component
@@ -18,7 +19,8 @@ class ShopContainer extends Component {
 		super(props);
 		this.state = {
 			list: [],
-			stage: ''
+			stage: '',
+			imgs: []
 		};
 	}
 
@@ -33,8 +35,24 @@ class ShopContainer extends Component {
 			if (response.status === 200) {
 				const data = await response.json();
 				if (data !== null) {
+					let tempImgs = [];
+					for (let temp of data) {
+						tempImgs.push(temp.imageMain);
+					}
+
 					this.setState({ list: data });
-					this.setState({ stage: 'done' });
+
+					for (let index in tempImgs) {
+						const response = await fetch(`${IMG_URL}/${tempImgs[index]}`, {
+							method: 'GET',
+							credentials: 'include',
+							mode: 'cors'
+						});
+						const data = await response.json();
+						tempImgs[index] = data.picByte;
+					}
+
+					this.setState({ imgs: [ ...tempImgs ], stage: 'done' });
 				}
 			} else if (response.status >= 400) {
 				this.setState({ stage: 'error' });
@@ -55,7 +73,7 @@ class ShopContainer extends Component {
 	render() {
 		return (
 			<div>
-				<Shop list={this.state.list} stage={this.state.stage} />
+				<Shop list={this.state.list} stage={this.state.stage} imgs={this.state.imgs} />
 			</div>
 		);
 	}

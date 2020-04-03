@@ -7,7 +7,8 @@ import {
 	Input,
 	InputAdornment,
 	FormControlLabel,
-	Switch
+	Switch,
+	Typography
 } from '@material-ui/core';
 import Stepper from '../../../common/Stepper/Stepper';
 
@@ -23,9 +24,8 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/picker
 export default function Product({
 	info,
 	imgs,
+	imageName,
 	addImg,
-	delImg,
-	setIndex,
 	setName,
 	setPrice,
 	setThreshold,
@@ -34,7 +34,8 @@ export default function Product({
 	setSubDescription,
 	setActive,
 	onSave,
-	onCancel
+	onCancel,
+	create
 }) {
 	const onClick = (e) => {
 		e.preventDefault();
@@ -43,14 +44,30 @@ export default function Product({
 	};
 	return (
 		<div>
+			{create ? (
+				<Typography variant="h2" component="h2">
+					Create Product
+				</Typography>
+			) : (
+				<Typography variant="h2" component="h2">
+					Update Product
+				</Typography>
+			)}
+
 			<div>
-				<Stepper imgs={imgs} setActive={setIndex} />
+				{create ? (
+					<Typography variant="h6" component="h6">
+						Add one image only. If you want to add more, please use Update Product feature.
+					</Typography>
+				) : (
+					<Stepper imgs={imgs} default={true} />
+				)}
 				<Button variant="contained" onClick={onClick} size="large">
 					Add Image
 				</Button>
-				<Button variant="contained" onClick={delImg} size="large">
-					Delete Image
-				</Button>
+				<Typography variant="subtitle1">
+					{imageName !== undefined && imageName !== '' ? `Image ${imageName} is added` : ''}
+				</Typography>
 				<input className="addImg" type="file" onChange={addImg} style={{ visibility: 'hidden' }} />
 			</div>
 			<div>

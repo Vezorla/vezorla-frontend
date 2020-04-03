@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import EmailInput from '../../common/Inputs/Email/EmailInput';
 
@@ -44,22 +44,39 @@ export default function Login({ email, password, error = '', setEmail, setPasswo
 	return (
 		<div>
 			<div>
-				<h1>Welcome</h1>
-				<h2>Sign in to continue</h2>
+				<Typography variant="h4" component="h4">
+					Welcome
+				</Typography>
+				<Typography variant="h4" component="h4">
+					Sign in to continue
+				</Typography>
 			</div>
 			<div>
 				<EmailInput className="email" helperText="Invalid Email" onChange={setEmail} value={email} />
 				<TextField className="pass" label="Password" type="password" value={password} onChange={setPassword} />
 			</div>
-			<div>{error !== '' ? <p>{error}</p> : ''}</div>
+			<div>
+				{error !== '' ? (
+					<Typography variant="h8" component="h8" style={{ color: 'red' }}>
+						{error}
+					</Typography>
+				) : (
+					''
+				)}
+			</div>
 			<div>
 				<Button className="login-btn" variant="contained" onClick={onClick} size="large">
 					Sign in
 				</Button>
 				<NavLink to="/register" exact>
-					<Button  variant="contained" size="small">
+					<Button variant="contained" size="small">
 						Create Account
 					</Button>
+				</NavLink>
+				<NavLink to="/forgot" exact>
+					<Typography variant="h6" component="h6">
+						Forgot Password? Don't worry we back you up.
+					</Typography>
 				</NavLink>
 			</div>
 		</div>

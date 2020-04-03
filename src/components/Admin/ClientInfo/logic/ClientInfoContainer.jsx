@@ -8,7 +8,7 @@ import { withRouter } from 'react-router';
  * @version 1.0
  */
 
-const FETCH_URL = 'url';
+const FETCH_URL = 'http://localhost:8080/api/admin/client';
 const SAVE_URL = 'url';
 const RESET_URL = 'url';
 const TOTAL_URL = 'url';
@@ -75,7 +75,7 @@ class ClientInfoContainer extends Component {
 
 	onSave = async () => {
 		try {
-			const response = await fetch(`${SAVE_URL}/${this.props.clientId}`, {
+			const response = await fetch(`${SAVE_URL}/${this.props.email}`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
@@ -95,7 +95,7 @@ class ClientInfoContainer extends Component {
 
 	onReset = async () => {
 		try {
-			const response = await fetch(`${RESET_URL}/${this.props.clientId}`, {
+			const response = await fetch(`${RESET_URL}/${this.props.email}`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
@@ -116,16 +116,16 @@ class ClientInfoContainer extends Component {
 
 	fetchData = async () => {
 		try {
-			const response = await fetch(`${FETCH_URL}/${this.props.clientId}`);
+			const response = await fetch(`${FETCH_URL}/${this.props.email}`);
 			if (response.status === 200) {
 				const data = await response.json();
 				this.setState({ info: { ...data } });
 				this.setState({ stage: 'done' });
 			} else if (response.status >= 400) {
-				this.setState({ stage: 'error' });
+				this.setState({ stage: 'error', message: 'something wrong' });
 			}
 		} catch (err) {
-			this.setState({ stage: 'error' });
+			this.setState({ stage: 'error', message: 'something wrong' });
 		}
 	};
 

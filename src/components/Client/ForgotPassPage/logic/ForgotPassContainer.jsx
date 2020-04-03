@@ -7,7 +7,7 @@ import ForgotPass from '../view/ForgotPass';
  * @version 1.0
  */
 
-const URL = 'url';
+const URL = 'http://localhost:8080/api/client/account/forgot-password';
 
 export default class ForgotPassContainer extends Component {
 	constructor() {
@@ -33,6 +33,7 @@ export default class ForgotPassContainer extends Component {
 	onClick() {
 		try {
 			const response = fetch(URL, {
+				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
 				},
@@ -43,12 +44,12 @@ export default class ForgotPassContainer extends Component {
 			if (response.status === 200) {
 				this.setState({ stage: true });
 			} else if (response.status === 406) {
-				this.setState({ error: true });
+				this.setState({ error: true, email: '' });
 			} else {
-				this.setState({ error: true });
+				this.setState({ error: true, email: '' });
 			}
 		} catch (err) {
-			this.setState({ error: true });
+			this.setState({ error: true, email: '' });
 		}
 	}
 
@@ -56,6 +57,7 @@ export default class ForgotPassContainer extends Component {
 		return (
 			<div>
 				<ForgotPass
+					value={this.state.email}
 					helperText="invalid email"
 					onChange={this.onChange}
 					onClick={this.onClick}

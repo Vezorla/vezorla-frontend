@@ -1,6 +1,6 @@
 import React from 'react';
 import NecessaryInput from '../../../common/Inputs/NecessaryInput/NecessaryInput';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 import PopUp from '../../../common/PopUp/PopUp';
 
@@ -16,8 +16,6 @@ function ClientInfoComponent({
 	error,
 	success,
 	reseted,
-	order,
-	value,
 	setFirstname,
 	setLastname,
 	setPhone,
@@ -38,7 +36,9 @@ function ClientInfoComponent({
 			{success ? <PopUp label="Success" message={message} onClose={goBack} handleOk={goBack} /> : ''}
 			{reseted ? <PopUp label="Reset" message={message} onClose={setReset} handleOk={setReset} /> : ''}
 			<div>
-				<h1>Client ID - {info.type}</h1>
+				<Typography variant="h4" component="h2">
+					Client ID - {info.accountType === 'C' ? 'Client' : 'Admin'}
+				</Typography>
 			</div>
 			<div>
 				<NecessaryInput
@@ -51,23 +51,12 @@ function ClientInfoComponent({
 					setPhone={setPhone}
 					setPostalCode={setPostalCode}
 					setProvince={setProvince}
-					disbaledEmail={true}
+					disabledEmail={true}
 				/>
 
 				<Button variant="contained" onClick={onReset}>
 					Reset Password
 				</Button>
-			</div>
-
-			<div>
-				<div>
-					<p>Order Total</p>
-					<p>{order}</p>
-				</div>
-				<div>
-					<p>Total Value</p>
-					<p>${value}</p>
-				</div>
 			</div>
 
 			<div>

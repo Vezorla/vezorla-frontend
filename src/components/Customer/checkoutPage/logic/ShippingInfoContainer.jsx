@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ProcessButtons from '../../../common/Stepper/ProcessButtons';
 import NecessaryInput from '../../../common/Inputs/NecessaryInput/NecessaryInput';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+
+import { FormControlLabel, Checkbox, Typography } from '@material-ui/core';
 import PopUp from '../../../common/PopUp/PopUp';
 import { withRouter } from 'react-router-dom';
 /**
@@ -33,7 +33,7 @@ class ShippingInfo extends Component {
 			},
 			error: false,
 			message: '',
-			disbaledEmail: false,
+			disabledEmail: false,
 			filled: true
 		};
 		this.setStateInfo = this.setStateInfo.bind(this);
@@ -127,9 +127,9 @@ class ShippingInfo extends Component {
 
 					if (response.status === 200) {
 						const data = await response.json();
-						if (data !== null) {
+						if (data.email !== '') {
 							this.setState({
-								disabledEmail: true,
+								disabledEmail: this.props.auth === 'client',
 								info: {
 									firstName: data.firstName || '',
 									lastName: data.lastName || '',
@@ -137,7 +137,7 @@ class ShippingInfo extends Component {
 									phoneNum: data.phoneNum || '',
 									address: data.address || '',
 									city: data.city || '',
-									postalCode: data.postalCode.replace(/\s/g, '') || '',
+									postalCode: data.postalCode || '',
 									province: data.province || '',
 									country: data.country || '',
 									pickup: false
@@ -202,7 +202,9 @@ class ShippingInfo extends Component {
 					''
 				)}
 				<div>
-					<h1>Shipping Information</h1>
+					<Typography variant="h4" component="h4">
+						Shipping Information
+					</Typography>
 
 					<div>
 						<NecessaryInput
@@ -217,7 +219,7 @@ class ShippingInfo extends Component {
 							setPostalCode={this.setPostalCode}
 							setProvince={this.setStateInfo('province')}
 							disabled={this.state.info.pickup}
-							disbaledEmail={this.state.info.disbaledEmail}
+							disabledEmail={this.state.disabledEmail}
 							required={true}
 						/>
 					</div>

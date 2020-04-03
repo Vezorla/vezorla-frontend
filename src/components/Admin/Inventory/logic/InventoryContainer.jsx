@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Inventory from '../view/Inventory';
 
-const URL = 'url';
-
+const URL = 'http://localhost:8080/api/admin/inventory/all';
+const IMG_URL = 'http://localhost:8080/api/admin/img/get';
 /**
  * @file Inventory Componenet 
  * @author MinhL4m
@@ -13,18 +13,12 @@ export default class InventoryContainer extends Component {
 	constructor() {
 		super();
 		this.state = {
-			filter: '',
 			list: [],
 			stage: '',
-			message: ''
+			message: '',
+			imgs: []
 		};
 	}
-
-	onFilterChange = (e) => {
-		this.setState({
-			filter: e.target.value
-		});
-	};
 
 	fetchData = async () => {
 		this.setState({ stage: 'loading' });
@@ -32,15 +26,35 @@ export default class InventoryContainer extends Component {
 			const response = await fetch(URL);
 			if (response.status === 200) {
 				const data = await response.json();
-				if (data !== null && data.length > 0) {
-					this.setState({ list: data, stage: 'done' });
+
+				let tempImgs = [];
+				for (let index in data.products) {
+
+					const responseImg = await fetch(`${IMG_URL}/${data.products[index].imageMain}`, {
+						method: 'GET',
+						credentials: 'include',
+						mode: 'cors'
+					});
+					const img = await responseImg.json();
+					tempImgs[index] = img.picByte;
 				}
+
+				this.setState({ list: [ ...data.products ], stage: 'done', imgs: [ ...tempImgs ] });
 			} else {
+				this.setState({ stage: 'done' });
 			}
-		} catch (err) {}
+		} catch (err) {
+			console.log(err);
+			this.setState({ stage: 'done' });
+		}
 	};
 
+	componentDidMount() {
+		this.fetchData();
+	}
+
 	render() {
-		return <Inventory {...this.state} onFilterChange={this.onFilterChange} />;
+		return <Inventory {...this.state} />;
+		// return <div />;
 	}
 }

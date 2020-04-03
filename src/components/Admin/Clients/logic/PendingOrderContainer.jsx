@@ -36,7 +36,7 @@ export default class PendingOrderContainer extends Component {
 	};
 
 	componentDidMount() {
-		this.fetchData();
+		// this.fetchData();
 	}
 
 	render() {

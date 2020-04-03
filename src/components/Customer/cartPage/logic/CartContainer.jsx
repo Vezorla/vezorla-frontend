@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Cart from '../view/Cart';
 import PopUp from '../../../common/PopUp/PopUp';
 import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 
 /**
  * @file Cart Logic Component
@@ -14,6 +14,7 @@ const DEL_URL = 'http://localhost:8080/api/customer/cart/remove';
 const UPDATE_URL = 'http://localhost:8080/api/customer/cart/update';
 const INSTOCK_URL = 'http://localhost:8080/api/customer/cart/view';
 const OUTSTOCK_URL = 'http://localhost:8080/api/customer/cart/view/out_of_stock';
+const IMG_URL = 'http://localhost:8080/api/admin/img/get';
 
 class CartContainer extends Component {
 	constructor(props) {
@@ -22,6 +23,7 @@ class CartContainer extends Component {
 			inStockList: [],
 			outStockList: [],
 			quantity: [],
+			img: [],
 			stage: '',
 			error: false,
 			message: '',
@@ -122,8 +124,22 @@ class CartContainer extends Component {
 			if (response.status === 200) {
 				const data = await response.json();
 				if (data !== null) {
+					let tempImgs = [];
+					for (let temp of data) {
+						tempImgs.push(temp.imageMain);
+					}
 					this.setState({ inStockList: data });
-					this.setState({ stage: 'done', done: 'done' });
+					for (let index in tempImgs) {
+						const response = await fetch(`${IMG_URL}/${tempImgs[index]}`, {
+							method: 'GET',
+							credentials: 'include',
+							mode: 'cors'
+						});
+						const data = await response.json();
+						tempImgs[index] = data.picByte;
+					}
+
+					this.setState({ stage: 'done', done: 'done', imgs: [ ...tempImgs ] });
 				}
 			} else if (response.status > 400) {
 				this.setState({ stage: 'error' });
@@ -218,9 +234,15 @@ class CartContainer extends Component {
 						{this.state.inStockList.length > 0 ? (
 							<div key="price">
 								<div>
-									<p>Subtotal: ${this.calAll()}</p>
-									<p>Tax: ${this.tax}</p>
-									<p>Total: ${this.total}</p>
+									<Typography variant="h6" component="h5">
+										Subtotal: ${this.calAll()}
+									</Typography>
+									<Typography variant="h6" component="h5">
+										Tax: ${this.tax}
+									</Typography>
+									<Typography variant="h6" component="h5">
+										Total: ${this.total}
+									</Typography>
 								</div>
 								<Link to="/customer/checkout">
 									<Button variant="contained">Checkout</Button>
@@ -231,7 +253,9 @@ class CartContainer extends Component {
 						)}
 					</div>
 				) : (
-					<p>Add something</p>
+					<Typography variant="h4" component="h4">
+						Add Something
+					</Typography>
 				)}
 			</div>
 		) : (

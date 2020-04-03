@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Grid, CardMedia } from '@material-ui/core';
+import { Button, Grid, CardMedia, Card, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
@@ -9,23 +9,22 @@ import LoadingHOC from '../../../common/HOC/LoadingHOC';
  * @version 1.0
  */
 
-const Card = ({ img, prodId, quantity, profit, warehouse }) => {
-	const URL = '/admin/inventory/';
+const CardComponent = ({ prodId, name, qty, price, img }) => {
+	const URL = '/admin/inventory';
 	return (
 		<Grid item xs={12} sm={6} md={4}>
-			<Link to={`${URL}/${prodId}`}>
+			<Link to={`${URL}/${prodId}`} style={{ textDecoration: 'none' }}>
 				<Card
-					key={prodId}
+					key={name}
 					justifyContent="center"
 					disableUnderline={true}
 					style={{ border: '1px solid black', marginTop: '3em', paddingBottom: '10px', color: '#0C3658' }}
 				>
-					<h1 style={{ textAlign: 'center' }}>{prodId}</h1>
 					<CardMedia
 						component="img"
 						alt={img}
 						height="140"
-						image={img}
+						image={`data:image/jpeg;base64,${img}`}
 						title="props.name"
 						style={{
 							width: '70%',
@@ -38,8 +37,15 @@ const Card = ({ img, prodId, quantity, profit, warehouse }) => {
 							boxShadow: '0px 3px 5px black'
 						}}
 					/>
-					<h2 style={{ textAlign: 'center' }}>{profit}</h2>
-					<p>{quantity}</p>
+					<Typography variant="h5" component="h4">
+						Name: {name}
+					</Typography>
+					<Typography variant="h5" component="h4">
+						Quantity: {qty}
+					</Typography>
+					<Typography variant="h5" component="h4">
+						Price: ${price}
+					</Typography>
 
 					<div
 						className="card--price"
@@ -49,7 +55,6 @@ const Card = ({ img, prodId, quantity, profit, warehouse }) => {
 							justifyContent: 'center'
 						}}
 					>
-						<p>{warehouse}</p>
 						<Button
 							size="large"
 							variant="outlined"
@@ -72,9 +77,10 @@ const Card = ({ img, prodId, quantity, profit, warehouse }) => {
 	);
 };
 
-const InventoryComponent = ({ list }) => {
+const InventoryComponent = ({ list = [], imgs = [] }) => {
 	return (
 		<div>
+			<h1>Inventory</h1>
 			<div>
 				<Link to="/admin/inventory/create">
 					<Button variant="contained" size="large">
@@ -83,7 +89,7 @@ const InventoryComponent = ({ list }) => {
 				</Link>
 			</div>
 			<Grid container xs={12} spacing={3}>
-				{list.map((item) => <Card {...item} />)}
+				{list.map((item, index) => <CardComponent {...item} img={imgs[index]} />)}
 			</Grid>
 		</div>
 	);
@@ -93,4 +99,4 @@ const Inventory = (props) => {
 	return LoadingHOC(InventoryComponent)(props);
 };
 
-export default Inventory;
+export default InventoryComponent;

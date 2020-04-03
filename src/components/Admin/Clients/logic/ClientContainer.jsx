@@ -7,7 +7,7 @@ import Client from '../view/Client';
  * @version 1.0
  */
 
-const URL = 'url';
+const URL = 'http://localhost:8080/api/admin/clients';
 
 export default class ClientContainer extends Component {
 	constructor() {
@@ -21,16 +21,21 @@ export default class ClientContainer extends Component {
 	fetchData = async () => {
 		this.setState({ stage: 'loading' });
 		try {
-			const response = await fetch(URL);
+			const response = await fetch(URL, {
+				method: 'GET',
+				credentials: 'include',
+				mode: 'cors'
+			});
 			if (response.status === 200) {
 				const data = await response.json();
 				this.setState({
-					list: data,
+					list: [ ...data.clients ],
 					stage: 'done'
 				});
 			} else {
 			}
 		} catch (err) {
+			console.log(err);
 			this.setState({ stage: 'error' });
 		}
 	};
