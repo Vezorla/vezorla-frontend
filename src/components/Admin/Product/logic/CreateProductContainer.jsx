@@ -32,7 +32,8 @@ class CreateProductContainer extends Component {
 			error: false,
 			success: false,
 			message: '',
-			added: false
+			added: false,
+			imageName: ''
 		};
 		this.setStateInfo = this.setStateInfo.bind(this);
 		this.setHarvestTime = this.setHarvestTime.bind(this);
@@ -87,7 +88,7 @@ class CreateProductContainer extends Component {
 				});
 
 				if (response.status === 200) {
-					this.setState({ added: true, message: 'Image has been added' });
+					this.setState({ added: true, message: 'Image has been added', imageName: file.name });
 				}
 			} catch (err) {
 				console.log(err);

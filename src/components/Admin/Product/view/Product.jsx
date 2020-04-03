@@ -24,6 +24,7 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/picker
 export default function Product({
 	info,
 	imgs,
+	imageName,
 	addImg,
 	setName,
 	setPrice,
@@ -64,6 +65,9 @@ export default function Product({
 				<Button variant="contained" onClick={onClick} size="large">
 					Add Image
 				</Button>
+				<Typography variant="subtitle1">
+					{imageName !== undefined && imageName !== '' ? `Image ${imageName} is added` : ''}
+				</Typography>
 				<input className="addImg" type="file" onChange={addImg} style={{ visibility: 'hidden' }} />
 			</div>
 			<div>
