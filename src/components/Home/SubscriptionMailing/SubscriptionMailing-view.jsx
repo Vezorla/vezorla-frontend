@@ -26,7 +26,7 @@ export default function SubscriptionMailing({email, message, setEmail, handleCli
       <Typography
         align={"center"}
         color={"secondary"}
-        variant={"h6"}
+        variant={"body1"}
         className={classes.title}
       >
         Get notified about promotions and news

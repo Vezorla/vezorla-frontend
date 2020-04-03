@@ -1,12 +1,15 @@
 import {createMuiTheme} from "@material-ui/core";
 
+const colorMain = "#D0C50A";
+const colorSecondary = "#0C3658";
+
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#D0C50A'
+      main: colorMain
     },
     secondary: {
-      main: '#0C3658'
+      main: colorSecondary
     }
   },
   typography: {
@@ -14,18 +17,27 @@ const theme = createMuiTheme({
       'Open Sans',
       'sans-serif',
     ].join(','),
-  },
-});
-
-theme.overrides = {
-  ...theme.overrides,
-  MuiTextField: {
-    ...theme.MuiTextField,
-    root: {
-      ...theme.root,
-      color: theme.palette.secondary.main
+    button: {
+      fontWeight: "bold"
     }
   },
-};
+  overrides: {
+    MuiInputBase: {
+      root: {
+        color: colorSecondary
+      }
+    },
+    MuiFormLabel: {
+      root: {
+        color: colorSecondary
+      }
+    },
+    MuiTypography: {
+      root: {
+        color: colorSecondary
+      }
+    }
+  }
+});
 
 export default theme;
