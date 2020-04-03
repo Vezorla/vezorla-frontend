@@ -10,7 +10,6 @@ import SalesContainer from './Sales/logic/SalesContainer';
 import InventoryContainer from './Inventory/logic/InventoryContainer';
 
 import PurchaseOrderContainer from './PurchaseOrder/PurchaseOrder-container';
-import DashboardContainer from './Dashboard/logic/DashboardContainer';
 import SaleInfoContainer from './SaleInfo/logic/SaleInfoContainer';
 import PurchaseOrderAddContainer from "./PurchaseOrder/PurchaseOrderAdd/PurchaseOrderAdd-container";
 /**
