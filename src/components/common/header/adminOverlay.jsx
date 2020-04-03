@@ -21,6 +21,7 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import ExploreIcon from '@material-ui/icons/Explore';
 import StoreIcon from '@material-ui/icons/Storefront';
 import { NavLink, useHistory } from 'react-router-dom';
+import theme from "../../app/theme";
 
 const useStyles = makeStyles({
 	paper: {
@@ -43,6 +44,7 @@ const useStyles = makeStyles({
 		color: '#D0C50A'
 	},
 	text: {
+		color: theme.palette.primary.main,
 		letterSpacing: '.11em',
 		fontWeight: '500'
 	}
