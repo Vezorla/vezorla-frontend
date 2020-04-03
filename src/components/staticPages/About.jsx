@@ -1,6 +1,7 @@
 import React from "react";
-import {Typography, makeStyles, Grid} from "@material-ui/core";
+import {Typography, makeStyles, Grid, Container} from "@material-ui/core";
 import topImg from "../../assets/images/VezorlaCover.JPG";
+import globalStyles from "../../assets/styles/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,22 +37,23 @@ const useStyles = makeStyles(theme => ({
 
 export default function About() {
   const classes = useStyles();
+  const classesGlobal = globalStyles();
 
   return (
-    <div className={classes.root}>
+    <Container
+      className={classesGlobal.containerMain}
+    >
       <Grid container xs={12}>
         <Grid item xs={12}>
           <Typography
             align="center"
             justify="center"
             paragraph={true}
-            variant="h2"
+            variant="h4"
           >
             About Us
           </Typography>
         </Grid>
-        <Grid item xs={12} style={{height: "3em"}}/>
-
         <Grid item xs={12}>
           <Grid item xs={12} sm={12} justify="center"/>
           <Grid
@@ -64,7 +66,7 @@ export default function About() {
           </Grid>
         </Grid>
 
-        <Grid item xs={12} s={12} style={{overflow: "scroll"}}>
+        <Grid item xs={12} s={12}>
           <Typography paragraph={true}>
             I grew up in a traditional Andalusian family, surrounded by olive
             trees and the smell of olive oil in my mom's kitchen. Olive Oil is
@@ -117,13 +119,12 @@ export default function About() {
           align="center"
           justify="center"
         >
-          <Typography paragraph={true} variant="h4">
+          <Typography paragraph={true} variant="h5">
             Our Process
           </Typography>
         </Grid>
-        <Grid xs={12} s={12} style={{height: "4em"}}/>
         <Grid xs={12} s={12} style={{}}>
-          <Typography paragraph={true} variant="h5">
+          <Typography paragraph={true} variant="h6">
             My Family's Role
           </Typography>
           <Typography paragraph={true}>
@@ -146,7 +147,7 @@ export default function About() {
           </Typography>
         </Grid>
         <Grid xs={12} s={12} style={{marginTop: "5em"}}>
-          <Typography paragraph={true} variant="h5">
+          <Typography paragraph={true} variant="h6">
             My Role
           </Typography>
           <Typography paragraph={true}>
@@ -166,8 +167,7 @@ export default function About() {
             Directs marketing "From the field to your table".<br/><br/>
           </Typography>
         </Grid>
-        <Grid xs={12} s={12} style={{height: "4em"}}/>
       </Grid>
-    </div>
+    </Container>
   );
 }
