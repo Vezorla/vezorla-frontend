@@ -1,12 +1,15 @@
 import {createMuiTheme} from "@material-ui/core";
 
+const colorMain = "#D0C50A";
+const colorSecondary = "#0C3658";
+
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#D0C50A'
+      main: colorMain
     },
     secondary: {
-      main: '#0C3658'
+      main: colorSecondary
     }
   },
   typography: {
@@ -21,17 +24,17 @@ const theme = createMuiTheme({
   overrides: {
     MuiInputBase: {
       root: {
-        color: "#0C3658"
+        color: colorSecondary
       }
     },
     MuiFormLabel: {
       root: {
-        color: "#0C3658"
+        color: colorSecondary
       }
     },
     MuiTypography: {
       root: {
-        color: "#0C3658"
+        color: colorSecondary
       }
     }
   }
