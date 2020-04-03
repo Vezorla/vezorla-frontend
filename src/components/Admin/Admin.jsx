@@ -12,6 +12,12 @@ import SalesContainer from './Sales/logic/SalesContainer';
 import InventoryContainer from './Inventory/logic/InventoryContainer';
 import PurchaseOrderContainer from './PurchaseOrder/PurchaseOrder-container';
 import DashboardContainer from './Dashboard/logic/DashboardContainer';
+import SaleInfoContainer from './SaleInfo/logic/SaleInfoContainer';
+
+/**
+ * @author MinhL4m
+ * @version 1.0
+ */
 
 export default function Admin() {
 	return (
@@ -32,6 +38,12 @@ export default function Admin() {
 				exact
 				strict
 				render={({ match }) => <UpdateProductContainer prodId={match.params.prodId} />}
+			/>
+			<Route
+				path="/admin/sales/:saleId"
+				exact
+				strict
+				render={({ match }) => <SaleInfoContainer saleId={match.params.saleId} />}
 			/>
 			<Route path="/admin/sales" exact strict component={SalesContainer} />
 			<Route path="/admin/purchase-orders" exact strict component={PurchaseOrderContainer} />

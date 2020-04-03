@@ -37,7 +37,7 @@ const CardPriceComponent = ({ price, value, max, onChange, onClick }) => {
 					<TextField
 						id="standard-basic"
 						label="Quantity"
-						helperText={value > max || value < 0 ? max === 0 ? 'Out of stock' : 'Invalid quantity' : ' '}
+						helperText={value > max || value < 0 ? max === 0 ? 'Out of stock' : 'Quantity is exceed what in stock' : ' '}
 						type="number"
 						value={max === 0 ? 0 : value}
 						placeholder="Enter Quantity"

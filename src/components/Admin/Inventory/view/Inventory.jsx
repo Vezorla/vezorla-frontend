@@ -78,9 +78,13 @@ const CardComponent = ({ prodId, name, qty, price, img }) => {
 };
 
 const InventoryComponent = ({ list = [], imgs = [] }) => {
+	console.log(list);
 	return (
 		<div>
-			<h1>Inventory</h1>
+			<Typography variant="h2" component="h2">
+				Inventory
+			</Typography>
+
 			<div>
 				<Link to="/admin/inventory/create">
 					<Button variant="contained" size="large">
@@ -99,4 +103,4 @@ const Inventory = (props) => {
 	return LoadingHOC(InventoryComponent)(props);
 };
 
-export default InventoryComponent;
+export default Inventory;
