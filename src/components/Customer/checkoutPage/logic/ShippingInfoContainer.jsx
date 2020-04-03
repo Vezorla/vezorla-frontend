@@ -129,7 +129,7 @@ class ShippingInfo extends Component {
 						const data = await response.json();
 						if (data.email !== '') {
 							this.setState({
-								disabledEmail: true,
+								disabledEmail: this.props.auth === 'client',
 								info: {
 									firstName: data.firstName || '',
 									lastName: data.lastName || '',

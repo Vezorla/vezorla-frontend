@@ -8,7 +8,7 @@ import { withRouter } from 'react-router';
  * @version 1.0
  */
 
-const FETCH_URL = 'url';
+const FETCH_URL = 'http://localhost:8080/api/admin/client';
 const SAVE_URL = 'url';
 const RESET_URL = 'url';
 const TOTAL_URL = 'url';
