@@ -7,7 +7,7 @@ import ForgotPass from '../view/ForgotPass';
  * @version 1.0
  */
 
-const URL = 'http://localhost:8080/api/client/account/forgot-password';
+const URL = 'http://localhost:8080/api/auth/forgot-password';
 
 export default class ForgotPassContainer extends Component {
 	constructor() {
