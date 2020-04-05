@@ -1,6 +1,7 @@
 import React from "react";
-import { Typography, makeStyles, Grid } from "@material-ui/core";
+import {Typography, makeStyles, Grid, Container} from "@material-ui/core";
 import topImg from "../../assets/images/VezorlaCover.JPG";
+import globalStyles from "../../assets/styles/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,35 +37,36 @@ const useStyles = makeStyles(theme => ({
 
 export default function About() {
   const classes = useStyles();
+  const classesGlobal = globalStyles();
 
   return (
-    <div className={classes.root}>
+    <Container
+      className={classesGlobal.containerMain}
+    >
       <Grid container xs={12}>
         <Grid item xs={12}>
           <Typography
             align="center"
             justify="center"
             paragraph={true}
-            variant="h2"
+            variant="h4"
           >
             About Us
           </Typography>
         </Grid>
-        <Grid item xs={12} style={{ height: "3em" }}></Grid>
-
         <Grid item xs={12}>
-          <Grid item xs={12} sm={12} justify="center"></Grid>
+          <Grid item xs={12} sm={12} justify="center"/>
           <Grid
             item
             xs={5}
             sm={2}
-            style={{ height: "7.5em", paddingRight: "" }}
+            style={{height: "7.5em", paddingRight: ""}}
           >
             <div className={classes.media}>&nbsp;</div>
           </Grid>
         </Grid>
 
-        <Grid item xs={12} s={12} style={{ overflow: "scroll" }}>
+        <Grid item xs={12} s={12}>
           <Typography paragraph={true}>
             I grew up in a traditional Andalusian family, surrounded by olive
             trees and the smell of olive oil in my mom's kitchen. Olive Oil is
@@ -113,25 +115,24 @@ export default function About() {
         <Grid
           xs={12}
           s={12}
-          style={{ marginTop: "5em" }}
+          style={{marginTop: "5em"}}
           align="center"
           justify="center"
         >
-          <Typography paragraph={true} variant="h4">
+          <Typography paragraph={true} variant="h5">
             Our Process
           </Typography>
         </Grid>
-        <Grid xs={12} s={12} style={{ height: "4em" }}></Grid>
         <Grid xs={12} s={12} style={{}}>
-          <Typography paragraph={true} variant="h5">
+          <Typography paragraph={true} variant="h6">
             My Family's Role
           </Typography>
           <Typography paragraph={true}>
-            Careful olive tree cultivation<br></br>
-            &rarr; Proper Pruning<br></br>
-            &rarr; Pest Treatment<br></br>
-            &rarr; All Products are Eco - Friendly<br></br>
-            <br></br>
+            Careful olive tree cultivation<br/>
+            &rarr; Proper Pruning<br/>
+            &rarr; Pest Treatment<br/>
+            &rarr; All Products are Eco - Friendly<br/>
+            <br/>
             <Typography paragraph={true}>
               Harvesting of olives at their optimal time of maturity and their
               transport to the olive mill as quickly as possible under the best
@@ -145,29 +146,28 @@ export default function About() {
             </Typography>
           </Typography>
         </Grid>
-        <Grid xs={12} s={12} style={{ marginTop: "5em" }}>
-          <Typography paragraph={true} variant="h5">
+        <Grid xs={12} s={12} style={{marginTop: "5em"}}>
+          <Typography paragraph={true} variant="h6">
             My Role
           </Typography>
           <Typography paragraph={true}>
             Vezorla assumes the cost of the production destined to Calgary
             customers. Arranges to bring the olives to a private mill to cold press them.
-            <br></br><br></br>
+            <br/><br/>
             Vezorla delegates the supervision of the crushing to her uncle
             Andres Guirado, consummate pressing of olives in the olive mill in
             order to obtain the best extra virgin oil under the most suitable
             conditions which permit the oil to conserve all of the aromas and
             flavours of the fresh olives and all of the healthy properties
             (polyphenols, vitamins, etc...)
-            <br></br><br></br>  <br></br>
+            <br/><br/><br/>
             Sends a sample to a certified lab to get tested and certified as
-            Extra Virgin.<br></br><br></br>
-            Imports the Extra Virgin Olive Oil exclusively to Calgary.<br></br><br></br>
-            Directs marketing "From the field to your table".<br></br><br></br>
+            Extra Virgin.<br/><br/>
+            Imports the Extra Virgin Olive Oil exclusively to Calgary.<br/><br/>
+            Directs marketing "From the field to your table".<br/><br/>
           </Typography>
         </Grid>
-        <Grid xs={12} s={12} style={{ height: "4em" }}></Grid>
       </Grid>
-    </div>
+    </Container>
   );
 }

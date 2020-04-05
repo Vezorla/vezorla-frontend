@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import SubscriptionMailing from "./SubscriptionMailing-view";
 
 // TODO: API call to add email to subscription mailing list
-const SUBSCRIPTION_URL = "";
+const SUBSCRIPTION_URL = "http://localhost:8080/api/customer/subscribe";
 
 export default class SubscriptionMailingContainer extends Component {
   constructor(props) {
@@ -12,26 +12,33 @@ export default class SubscriptionMailingContainer extends Component {
       message: ""
     };
     this.setEmail = this.setEmail.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSubscribe = this.handleSubscribe.bind(this);
   }
 
   setEmail = (value) => {
     this.setState({email: value})
   };
 
-  handleClick = async () => {
-    try {
-      const response = await fetch(SUBSCRIPTION_URL, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          Content: "application/json"
-        },
-        body: JSON.stringify({email: this.state.email})
-      });
-      // TODO: manage response statuses
-    } catch (e) {
-      this.setState({error: "Subscription failed. Try again please."})
+  handleSubscribe = async () => {
+    if (this.state.email !== "") {
+      try {
+        const response = await fetch(SUBSCRIPTION_URL, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            Content: "application/json"
+          },
+          body: JSON.stringify(this.state.email)
+        });
+        if (response.status === 200) {
+          const data = await response.json();
+          if (data === true) {
+            // TODO: Show success on subscribing to mailing list
+          }
+        }
+      } catch (e) {
+        this.setState({error: "Subscription failed. Try again please."})
+      }
     }
   };
 
@@ -40,7 +47,7 @@ export default class SubscriptionMailingContainer extends Component {
       <SubscriptionMailing
         {...this.state}
         setEmail={this.setEmail}
-        handleClick={this.handleClick}
+        handleSubscribe={this.handleSubscribe}
       />
     );
   }

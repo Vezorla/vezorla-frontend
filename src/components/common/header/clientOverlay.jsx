@@ -20,7 +20,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import StoreIcon from '@material-ui/icons/Storefront';
 import { NavLink, useHistory } from 'react-router-dom';
-import theme from "../../app/theme";
+import theme from "../../../assets/styles/theme";
 
 const useStyles = makeStyles({
 	paper: {
