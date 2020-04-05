@@ -34,7 +34,6 @@ export default function EmailInput({
 			onChange={disabled ? () => {} : emailHandler}
 			disabled={disabled}
 			className={className}
-			color={"secondary"}
 		/>
 	);
 }
