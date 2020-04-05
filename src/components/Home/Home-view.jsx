@@ -5,6 +5,7 @@ import StoreIcon from "@material-ui/icons/Storefront";
 import BannerContainer from "./Banner/Banner-container";
 import coverImage from "../../assets/images/Veronica_and_olive_1296x.jpg"
 import SubscriptionMailingContainer from "./SubscriptionMailing/SubscriptionMailing-container";
+import globalStyles from "../../assets/styles/styles";
 
 const useStyles = makeStyles(theme => ({
   coverImg: {
@@ -20,23 +21,18 @@ const useStyles = makeStyles(theme => ({
     height: "auto",
     border: "none",
     marginBottom: "1rem"
-  },
-  divider: {
-    marginBottom: "1rem",
-    backgroundColor: theme.palette.primary.main
-  },
-  containerButtons: {
-    display: "flex",
-    justifyContent: "space-evenly",
-    margin: "1rem 0"
   }
 }));
 
 export default function Home() {
   const classes = useStyles();
+  const classesGlobal = globalStyles();
 
   return (
-    <Container disableGutters>
+    <Container
+      disableGutters
+      className={classesGlobal.containerMain}
+    >
       <BannerContainer/>
       <img
         src={coverImage}
@@ -76,7 +72,7 @@ export default function Home() {
           cold extracted, pure and always fresh
         </Typography>
         <Container
-          className={classes.containerButtons}
+          className={classesGlobal.containerButtons}
         >
           <Button
             variant={"contained"}
@@ -141,7 +137,7 @@ export default function Home() {
         >
           Use it generously - and soon!
         </Typography>
-        <Divider className={classes.divider}/>
+        <Divider/>
       </Container>
       <SubscriptionMailingContainer/>
     </Container>
