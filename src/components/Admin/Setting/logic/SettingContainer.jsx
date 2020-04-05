@@ -84,10 +84,10 @@ class SettingContainer extends Component {
 					info: { ...this.state.info, password: '' }
 				});
 			} else if (response.status >= 400) {
-				this.setState({ error: true, message: 'Something wrong' });
+				this.setState({ error: true, message: 'Error has occured! Please try again later.' });
 			}
 		} catch (err) {
-			this.setState({ error: true, message: 'Something wrong' });
+			this.setState({ error: true, message: 'Error has occured! Please try again later.' });
 		}
 	};
 
@@ -101,11 +101,10 @@ class SettingContainer extends Component {
 			if (response.status === 200) {
 				this.setState({ success: true, message: 'Please check your email!' });
 			} else if (response.status >= 400) {
-				this.setState({ error: true, message: 'Something wrong' });
+				this.setState({ error: true, message: 'Error has occured! Please try again later.' });
 			}
 		} catch (err) {
-			console.log(err);
-			this.setState({ error: true, message: 'Something wrong' });
+			this.setState({ error: true, message: 'Error has occured! Please try again later.' });
 		}
 	};
 
@@ -119,21 +118,20 @@ class SettingContainer extends Component {
 				const response = await fetch(UPLOAD_URL, {
 					method: 'POST',
 					credentials: 'include',
-					
+
 					mode: 'cors',
 					body: formData
 				});
 				if (response.status === 200) {
 					this.setState({ success: true, message: 'Restore Backup Successfully' });
 				} else if (response.status >= 400) {
-					this.setState({ error: true, message: 'Something wrong' });
+					this.setState({ error: true, message: 'Error has occured! Please try again later.' });
 				}
 			} catch (err) {
-				console.log(err.message);
-				this.setState({ error: true, message: 'Something wrong' });
+				this.setState({ error: true, message: 'Error has occured! Please try again later.' });
 			}
 		} else {
-			this.setState({ error: true, message: 'Please use sql file' });
+			this.setState({ error: true, message: 'Please use SQL file' });
 		}
 	};
 
@@ -200,7 +198,6 @@ class SettingContainer extends Component {
 							this.setState({ update: false });
 						}}
 						handleOk={() => {
-							console.log(this.onUpdate);
 							this.onUpdate();
 							this.setState({ update: false });
 						}}

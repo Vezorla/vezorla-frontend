@@ -35,7 +35,6 @@ export default class ClientContainer extends Component {
 			} else {
 			}
 		} catch (err) {
-			console.log(err);
 			this.setState({ stage: 'error' });
 		}
 	};
