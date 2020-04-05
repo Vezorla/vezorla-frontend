@@ -8,7 +8,7 @@ import {
   Button
 } from "@material-ui/core";
 
-import EmailInput from '../../../common/Inputs/Email/EmailInput'
+import EmailInput from '../../common/Inputs/Email/EmailInput'
 
 const useStyles = makeStyles(theme => ({
   card: {

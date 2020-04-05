@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Contact from '../view/Contact'
+import Contact from './Contact'
 
 export default class ContactLogic extends Component {
     constructor() {

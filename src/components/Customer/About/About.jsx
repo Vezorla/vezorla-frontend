@@ -1,7 +1,7 @@
 import React from "react";
 import {Typography, makeStyles, Grid, Container} from "@material-ui/core";
-import topImg from "../../assets/images/VezorlaCover.JPG";
-import globalStyles from "../../assets/styles/styles";
+import topImg from "../../../assets/images/VezorlaCover.JPG";
+import globalStyles from "../../../assets/styles/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
