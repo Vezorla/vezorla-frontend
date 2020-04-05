@@ -90,10 +90,10 @@ class ClientInfoContainer extends Component {
 			if (response.status === 200) {
 				this.setState({ success: true, message: 'Information updated' });
 			} else if (response.status >= 400) {
-				this.setState({ error: true, message: 'something wrong!' });
+				this.setState({ error: true, message: 'Error has occured! Please try again later.' });
 			}
 		} catch (err) {
-			this.setState({ error: true, message: 'something wrong!' });
+			this.setState({ error: true, message: 'Error has occured! Please try again later.' });
 		}
 	};
 
@@ -127,10 +127,10 @@ class ClientInfoContainer extends Component {
 				this.setState({ info: { ...data } });
 				this.setState({ stage: 'done' });
 			} else if (response.status >= 400) {
-				this.setState({ stage: 'error', message: 'something wrong' });
+				this.setState({ stage: 'error', message: 'Error has occured! Please try again later.' });
 			}
 		} catch (err) {
-			this.setState({ stage: 'error', message: 'something wrong' });
+			this.setState({ stage: 'error', message: 'Error has occured! Please try again later.' });
 		}
 	};
 

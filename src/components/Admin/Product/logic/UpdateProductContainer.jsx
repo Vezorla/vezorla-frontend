@@ -169,10 +169,10 @@ class UpdateProductContainer extends Component {
 					stage: 'done'
 				});
 			} else if (response.status >= 400) {
-				this.setState({ stage: 'error', message: 'something wrong' });
+				this.setState({ stage: 'error', message: 'Error has occured! Please try again later.' });
 			}
 		} catch (err) {
-			this.setState({ stage: 'error', message: 'something wrong' });
+			this.setState({ stage: 'error', message: 'Error has occured! Please try again later.' });
 		}
 	};
 
@@ -209,10 +209,10 @@ class UpdateProductContainer extends Component {
 				if (response.status === 200) {
 					this.setState({ success: true, message: 'Product Updated' });
 				} else {
-					this.setState({ error: true, message: 'Oppsss' });
+					this.setState({ error: true, message: 'Error has occured! Please try again later.' });
 				}
 			} catch (err) {
-				this.setState({ error: true, message: 'Oppsss' });
+				this.setState({ error: true, message: 'Error has occured! Please try again later.' });
 			}
 		} else {
 			this.setState({ error: true, message: 'Please field all necessary input' });

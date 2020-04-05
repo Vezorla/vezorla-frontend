@@ -77,7 +77,7 @@ class LoginContainer extends Component {
 					}
 				}
 			} catch (err) {
-				this.setState({ error: 'Something wrong', password: '' });
+				this.setState({ error: 'Error has occured! Please try again later.', password: '' });
 			}
 		}
 	};

@@ -33,7 +33,6 @@ export default class CardPriceContainer extends Component {
 	// Handler for add to card btn
 	onClick = async () => {
 		try {
-			console.log(typeof this.state.value);
 			const response = await fetch(`${PUT_URL}/${this.props.id}`, {
 				method: 'PUT',
 				headers: {

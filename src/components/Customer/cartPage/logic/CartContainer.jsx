@@ -70,12 +70,12 @@ class CartContainer extends Component {
 					this.setState({
 						...this.state,
 						error: true,
-						message: 'Ooops, seem like you reach the maximum stock of this product'
+						message: 'Seem like you reach the maximum stock of this product'
 					});
 				}
 			}
 		} catch (err) {
-			this.setState({ error: true, message: 'something wrong, we cannot change this item right now' });
+			this.setState({ error: true, message: 'Something wrong, we cannot change this item right now' });
 		}
 	};
 
@@ -102,10 +102,10 @@ class CartContainer extends Component {
 					this.setState({ inStockList: newList });
 				}
 			} else if (response.status >= 400) {
-				this.setState({ error: true, message: 'something wrong, we cannot delete this item right now' });
+				this.setState({ error: true, message: 'Something wrong, we cannot delete this item right now' });
 			}
 		} catch (err) {
-			this.setState({ error: true, message: 'something wrong, we cannot delete this item right now' });
+			this.setState({ error: true, message: 'Something wrong, we cannot delete this item right now' });
 		}
 	};
 

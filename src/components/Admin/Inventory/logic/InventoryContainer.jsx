@@ -44,7 +44,6 @@ export default class InventoryContainer extends Component {
 				this.setState({ stage: 'done' });
 			}
 		} catch (err) {
-			console.log(err);
 			this.setState({ stage: 'done' });
 		}
 	};
@@ -55,6 +54,5 @@ export default class InventoryContainer extends Component {
 
 	render() {
 		return <Inventory {...this.state} />;
-		// return <div />;
 	}
 }

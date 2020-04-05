@@ -17,9 +17,6 @@ import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
  * @returns DropDown Component
  */
 const DropDownComponent = ({ label, selections, value, onChange, className }) => {
-	useEffect(() => {
-		console.log('rerender');
-	}, []);
 
 	return (
 		<div className={className !== null ? className : ''}>

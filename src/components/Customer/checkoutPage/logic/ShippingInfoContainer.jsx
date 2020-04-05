@@ -181,12 +181,12 @@ class ShippingInfo extends Component {
 				} else if (response.status === 401 || response.status === 500) {
 					this.props.history.push('/home');
 				} else if (response.status === 406) {
-					this.setState({ error: true, message: 'Missing fields please check again' });
+					this.setState({ error: true, message: 'Missing fields! Please check again' });
 				} else {
-					this.setState({ error: true, message: 'Something wrong on Serer side' });
+					this.setState({ error: true, message: 'Error has occured! Please try again later.' });
 				}
 			} catch (err) {
-				this.setState({ error: true, message: 'Something wrong on Serer side' });
+				this.setState({ error: true, message: 'Error has occured! Please try again later.' });
 			}
 		} else {
 			this.setState({ filled: false });

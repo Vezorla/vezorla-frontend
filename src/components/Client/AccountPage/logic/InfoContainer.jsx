@@ -134,13 +134,12 @@ export default class InfoContainer extends Component {
 				this.props.setMessage('Input incorrect! Please check again');
 				this.props.setError();
 			} else {
-				this.props.setMessage('Something wrong');
+				this.props.setMessage('Error has occured! Please try again later.');
 				this.props.setError();
 			}
 		} catch (err) {
-			this.props.setMessage('Something wrong');
+			this.props.setMessage('Error has occured! Please try again later.');
 			this.props.setError();
-			console.log(err);
 		}
 	};
 

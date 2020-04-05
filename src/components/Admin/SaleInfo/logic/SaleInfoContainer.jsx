@@ -43,10 +43,10 @@ export default class SaleInfoContainer extends Component {
 				const data = await response.json();
 				this.setState({ ...data, stage: 'done' });
 			} else if (response.status >= 400) {
-				this.setState({ stage: 'error', message: 'Something wrong, we cannot get data from server' });
+				this.setState({ stage: 'error', message: 'Error has occured! Please try again later.' });
 			}
 		} catch (err) {
-			this.setState({ stage: 'error', message: 'Something wrong, we cannot get data from server' });
+			this.setState({ stage: 'error', message: 'Error has occured! Please try again later.' });
 		}
 	};
 

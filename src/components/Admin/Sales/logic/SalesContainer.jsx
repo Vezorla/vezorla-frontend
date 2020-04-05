@@ -32,10 +32,10 @@ export default class SalesContainer extends Component {
 				const data = await response.json();
 				this.setState({ list: [ ...data.invoices ], stage: 'done' });
 			} else {
-				this.setState({ stage: 'error', message: 'something wrong' });
+				this.setState({ stage: 'error', message: 'Error has occured! Please try again later.' });
 			}
 		} catch (err) {
-			this.setState({ stage: 'error', message: 'Something wrong' });
+			this.setState({ stage: 'error', message: 'Error has occured! Please try again later.' });
 		}
 	};
 

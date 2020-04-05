@@ -44,10 +44,10 @@ export default class ViewInvoiceContainer extends Component {
 				});
 				// need to catch 418 to redirect
 			} else if (response.status >= 400) {
-				this.setState({ stage: 'error', message: 'Something wrong' });
+				this.setState({ stage: 'error', message: 'Error has occured! Please try again later.' });
 			}
 		} catch (err) {
-			this.setState({ stage: 'error', message: 'Something wrong' });
+			this.setState({ stage: 'error', message: 'Error has occured! Please try again later.' });
 		}
 	};
 
