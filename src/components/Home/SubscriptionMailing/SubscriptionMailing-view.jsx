@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SubscriptionMailing({email, message, setEmail, handleClick}) {
+export default function SubscriptionMailing({email, message, setEmail, handleSubscribe}) {
   const classes = useStyles();
 
   return (
@@ -41,7 +41,7 @@ export default function SubscriptionMailing({email, message, setEmail, handleCli
       <Button
         variant={"contained"}
         color={"primary"}
-        onClick={handleClick}
+        onClick={handleSubscribe}
         className={classes.button}
       >
         subscribe
