@@ -9,7 +9,7 @@ import globalStyles from "../../assets/styles/styles";
 
 const useStyles = makeStyles(theme => ({
   coverImg: {
-    margin: "0.5rem 0",
+    margin: "0 0 0.5rem 0",
     width: "100%",
     height: "auto"
   },
@@ -17,10 +17,21 @@ const useStyles = makeStyles(theme => ({
     textTransform: "uppercase"
   },
   video: {
-    width: "100%",
-    height: "auto",
-    border: "none",
-    marginBottom: "1rem"
+    [theme.breakpoints.up("xs")]: {
+      width: "100%",
+      height: "auto",
+      border: "none",
+      marginBottom: "1rem"
+    },
+    [theme.breakpoints.up("sm")]: {
+      height: "300px"
+    },
+    [theme.breakpoints.up("md")]: {
+      height: "500px"
+    },
+    [theme.breakpoints.up("xl")]: {
+      height: "1000px"
+    }
   }
 }));
 
@@ -32,13 +43,14 @@ export default function Home() {
     <Container
       disableGutters
       className={classesGlobal.containerMain}
+      maxWidth={"false"}
     >
       <BannerContainer/>
       <img
         src={coverImage}
         alt="Veronica with olives"
         className={classes.coverImg}/>
-      <Container>
+      <Container maxWidth={"false"}>
         <Typography
           align={"center"}
           variant={"h5"}
@@ -73,6 +85,7 @@ export default function Home() {
         </Typography>
         <Container
           className={classesGlobal.containerButtons}
+          maxWidth={"false"}
         >
           <Button
             variant={"contained"}
@@ -80,13 +93,12 @@ export default function Home() {
             startIcon={<StoreIcon/>}
             component={Link}
             to="/customer/shop"
-            // onClick={handleShopping}
           >
             Shop
           </Button>
         </Container>
       </Container>
-      <Container>
+      <Container maxWidth={"false"}>
         <iframe
           title="Vezorla's Grove video"
           src="https://www.youtube.com/embed/Yn0kalIKcw8"
@@ -95,7 +107,7 @@ export default function Home() {
           className={classes.video}
         />
       </Container>
-      <Container>
+      <Container maxWidth={"false"}>
         <Typography
           align={"center"}
           variant={"h5"}

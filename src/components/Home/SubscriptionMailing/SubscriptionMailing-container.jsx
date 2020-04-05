@@ -67,7 +67,7 @@ export default class SubscriptionMailingContainer extends Component {
 
   render() {
     return (
-      <Container disableGutters>
+      <Container disableGutters maxWidth={"false"}>
         {this.state.success ? (
           <Snackbar
             anchorOrigin={{
