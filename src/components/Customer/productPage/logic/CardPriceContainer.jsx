@@ -25,14 +25,15 @@ export default class CardPriceContainer extends Component {
 
 	// ----Setter---
 	onChange = (e) => {
-		this.setState({ value: e.target.value });
+		if (e.target.value !== '') {
+			this.setState({ value: e.target.value });
+		}
 	};
 
 	// Handler for add to card btn
 	onClick = async () => {
-
 		try {
-			console.log( typeof this.state.value);
+			console.log(typeof this.state.value);
 			const response = await fetch(`${PUT_URL}/${this.props.id}`, {
 				method: 'PUT',
 				headers: {

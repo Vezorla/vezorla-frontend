@@ -32,12 +32,12 @@ function ClientInfoComponent({
 }) {
 	return (
 		<div>
-			{error ? <PopUp label="Error" message={message} onClose={setError} /> : ''}
+			{error ? <PopUp label="Error" message={message} onClose={setError} handleOk={setError} /> : ''}
 			{success ? <PopUp label="Success" message={message} onClose={goBack} handleOk={goBack} /> : ''}
 			{reseted ? <PopUp label="Reset" message={message} onClose={setReset} handleOk={setReset} /> : ''}
 			<div>
 				<Typography variant="h4" component="h2">
-					Client ID - {info.accountType === 'C' ? 'Client' : 'Admin'}
+					Client Type - {info.accountType === 'C' ? 'Client' : 'Admin'}
 				</Typography>
 			</div>
 			<div>

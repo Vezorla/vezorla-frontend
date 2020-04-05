@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import Sales from '../view/Sales';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 
-const URL = 'http://localhost:8080';
+/**
+ * @author MinhL4m
+ * @version 1.0
+ */
+
+const URL = 'http://localhost:8080/api/admin/order_history';
 
 export default class SalesContainer extends Component {
 	constructor() {
@@ -25,7 +30,7 @@ export default class SalesContainer extends Component {
 
 			if (response.status === 200) {
 				const data = await response.json();
-				this.setState({ list: [ ...data ], stage: 'done' });
+				this.setState({ list: [ ...data.invoices ], stage: 'done' });
 			} else {
 				this.setState({ stage: 'error', message: 'something wrong' });
 			}
@@ -33,6 +38,10 @@ export default class SalesContainer extends Component {
 			this.setState({ stage: 'error', message: 'Something wrong' });
 		}
 	};
+
+	componentDidMount() {
+		this.fetchData();
+	}
 
 	render() {
 		return LoadingHOC(Sales)(this.state);
