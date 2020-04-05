@@ -2,11 +2,9 @@ import React from "react";
 import {Container, Fab, makeStyles, Typography} from "@material-ui/core";
 import {Add} from "@material-ui/icons";
 import {Link} from "react-router-dom";
+import globalStyles from "../../../assets/styles/styles";
 
 const useStyles = makeStyles(theme => ({
-  container: {
-    marginTop: "0.5rem"
-  },
   fab: {
     margin: 0,
     top: "auto",
@@ -19,11 +17,12 @@ const useStyles = makeStyles(theme => ({
 
 export default function PurchaseOrder() {
   const classes = useStyles();
+  const classesGlobal = globalStyles();
 
   return (
     <Container
       disableGutters
-      className={classes.container}>
+      className={classesGlobal.containerMain}>
       <Typography
         align={"center"}
         color={"secondary"}
