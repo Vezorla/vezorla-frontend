@@ -25,11 +25,10 @@ export default function SubscriptionMailing({email, message, setEmail, handleCli
     <Container className={classes.container}>
       <Typography
         align={"center"}
-        color={"secondary"}
         variant={"body1"}
         className={classes.title}
       >
-        Get notified about promotions and news
+        Get notified about the healthy benefits of olive oil, upcoming products, promotions and more
       </Typography>
       <EmailInput onChange={setEmail} value={email} className={classes.email}/>
       <Button variant={"contained"} color={"primary"} onClick={handleClick}>
