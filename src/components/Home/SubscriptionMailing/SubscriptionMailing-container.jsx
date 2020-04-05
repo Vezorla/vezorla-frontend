@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import SubscriptionMailing from "./SubscriptionMailing-view";
+import {Container, Snackbar} from "@material-ui/core";
 
-// TODO: API call to add email to subscription mailing list
 const SUBSCRIPTION_URL = "http://localhost:8080/api/customer/subscribe";
 
 export default class SubscriptionMailingContainer extends Component {
@@ -9,7 +9,10 @@ export default class SubscriptionMailingContainer extends Component {
     super(props);
     this.state = {
       email: "",
-      message: ""
+      message: "",
+      success: false,
+      error: false,
+      openSnackbar: false
     };
     this.setEmail = this.setEmail.bind(this);
     this.handleSubscribe = this.handleSubscribe.bind(this);
@@ -18,6 +21,23 @@ export default class SubscriptionMailingContainer extends Component {
   setEmail = (value) => {
     this.setState({email: value})
   };
+
+  setMessage = (value) => {
+    this.setState({message: value})
+  };
+
+  setSuccess = () => {
+    this.setState({success: !this.state.success})
+  };
+
+  setError = () => {
+    this.setState({error: !this.state.error})
+  };
+
+  setOpenSnackbar = () => {
+    this.setState({openSnackbar: !this.state.openSnackbar})
+  };
+
 
   handleSubscribe = async () => {
     if (this.state.email !== "") {
@@ -33,22 +53,40 @@ export default class SubscriptionMailingContainer extends Component {
         if (response.status === 200) {
           const data = await response.json();
           if (data === true) {
-            // TODO: Show success on subscribing to mailing list
+            this.setMessage("Subscribed to the mailing list");
+            this.setSuccess();
+            this.setOpenSnackbar();
           }
-        }
+        } // TODO: response for already subscribed email
       } catch (e) {
-        this.setState({error: "Subscription failed. Try again please."})
+        this.setMessage("Subscription failed");
+        this.setError();
       }
     }
   };
 
   render() {
     return (
-      <SubscriptionMailing
-        {...this.state}
-        setEmail={this.setEmail}
-        handleSubscribe={this.handleSubscribe}
-      />
+      <Container disableGutters>
+        {this.state.success ? (
+          <Snackbar
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            open={this.state.openSnackbar}
+            autoHideDuration={5000}
+            message={this.state.message}
+            onClose={this.setOpenSnackbar}
+          />
+        ) : ("")
+        }
+        <SubscriptionMailing
+          {...this.state}
+          setEmail={this.setEmail}
+          handleSubscribe={this.handleSubscribe}
+        />
+      </Container>
     );
   }
 }

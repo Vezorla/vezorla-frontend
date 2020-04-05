@@ -3,7 +3,7 @@ import {makeStyles} from "@material-ui/core/styles";
 const globalStyles = makeStyles({
   containerMain: {
     marginTop: "0.3rem",
-    marginBottom: "1rem"
+    marginBottom: "4rem"
   },
   containerButtons: {
     display: "flex",

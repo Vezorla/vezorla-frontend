@@ -46,13 +46,6 @@ export default function SubscriptionMailing({email, message, setEmail, handleSub
       >
         subscribe
       </Button>
-      <Box>
-        {message !== '' ?
-          <Typography align={"center"} color={"error"} variant={"body2"}>
-            {message}
-          </Typography>
-          : ''}
-      </Box>
     </Container>
   );
 }
