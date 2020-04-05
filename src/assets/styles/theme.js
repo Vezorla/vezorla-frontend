@@ -55,6 +55,11 @@ const theme = createMuiTheme({
       primary: {
         color: colorPrimary
       }
+    },
+    MuiButton: {
+      containedPrimary: {
+        color: colorSecondary
+      }
     }
   }
 });
