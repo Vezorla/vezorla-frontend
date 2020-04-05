@@ -13,11 +13,9 @@ import {
 } from "@material-ui/core";
 import {KeyboardDatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import globalStyles from "../../../../assets/styles/styles";
 
 const useStyles = makeStyles(theme => ({
-  containerMain: {
-    marginTop: "0.5rem"
-  },
   containerLot: {
     marginTop: "0.5rem"
   },
@@ -30,11 +28,6 @@ const useStyles = makeStyles(theme => ({
     borderWidth: "0.1rem",
     borderRadius: "1rem",
     paddingBottom: "1rem"
-  },
-  containerButtons: {
-    display: "flex",
-    justifyContent: "space-evenly",
-    margin: "1rem 0"
   }
 }));
 
@@ -56,10 +49,11 @@ export default function PurchaseOrderAdd(
   }) {
 
   const classes = useStyles();
+  const classesGlobal = globalStyles();
 
   return (
     <Container
-      className={classes.containerMain}
+      className={classesGlobal.containerMain}
     >
       <Typography
         align="center"
@@ -191,7 +185,7 @@ export default function PurchaseOrderAdd(
       </Container>
       <Container
         disableGutters
-        className={classes.containerButtons}
+        className={classesGlobal.containerButtons}
       >
         <Button
           variant="contained"

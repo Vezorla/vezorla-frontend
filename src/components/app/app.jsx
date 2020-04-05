@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Switch, Route, Redirect, useLocation} from 'react-router-dom';
 import {ThemeProvider} from '@material-ui/core';
-import theme from './theme';
+import theme from '../../assets/styles/theme';
 import Header from '../common/header/header';
 import Footer from '../common/footer/footer';
 import NotFound from '../common/404/NotFound';
