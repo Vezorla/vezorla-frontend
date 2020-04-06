@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SubscriptionMailing({email, message, setEmail, handleSubscribe}) {
+export default function SubscriptionMailing({email, setEmail, handleSubscribe}) {
   const classes = useStyles();
 
   return (

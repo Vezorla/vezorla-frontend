@@ -38,7 +38,6 @@ export default class SubscriptionMailingContainer extends Component {
     this.setState({openSnackbar: !this.state.openSnackbar})
   };
 
-
   handleSubscribe = async () => {
     if (this.state.email !== "") {
       try {

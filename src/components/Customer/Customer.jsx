@@ -5,7 +5,7 @@ import ProductContainer from './productPage/logic/ProductContainer';
 import RegisterContainer from './registerPage/logic/RegisterContainer';
 import CartContainer from './cartPage/logic/CartContainer';
 import CheckoutPage from './checkoutPage/CheckoutPage';
-import ContactLogic from "./Contact/ContactLogic";
+import ContactContainer from "./Contact/Contact-container";
 import About from "./About/About";
 
 /**
@@ -40,7 +40,7 @@ function Customer({ increaseCart, auth }) {
 				render={() => <CartContainer key="cart" changeCartHandler={increaseCart} />}
 			/>
 			<Route path="/customer/checkout" exact strict render={() => <CheckoutPage auth={auth} />} />
-			<Route path="/customer/contact" exact strict component={ContactLogic}/>
+			<Route path="/customer/contact" exact strict component={ContactContainer}/>
 			<Route path="/customer/about" exact strict component={About}/>
 			<Redirect to="/404" />
 		</Switch>
