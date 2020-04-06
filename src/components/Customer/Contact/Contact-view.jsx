@@ -43,6 +43,7 @@ export default function Contact(
       <Typography
         variant="h4"
         align="center"
+        gutterBottom
       >
         Contact Us
       </Typography>

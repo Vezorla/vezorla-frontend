@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {Button, Container, Divider, makeStyles, Typography} from "@material-ui/core";
 import StoreIcon from "@material-ui/icons/Storefront";
 import BannerContainer from "./Banner/Banner-container";
-import coverImage from "../../assets/images/Veronica_and_olive_1296x.jpg"
+import coverImage from "../../assets/images/Veronica_olive_color_1296x432.jpg"
 import SubscriptionMailingContainer from "./SubscriptionMailing/SubscriptionMailing-container";
 import globalStyles from "../../assets/styles/styles";
 
