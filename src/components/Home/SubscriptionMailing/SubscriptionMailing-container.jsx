@@ -38,6 +38,14 @@ export default class SubscriptionMailingContainer extends Component {
     this.setState({openSnackbar: !this.state.openSnackbar})
   };
 
+  handleSnackbarClose = () => {
+    this.setOpenSnackbar();
+    if (this.state.success)
+      this.setSuccess();
+    else if (this.state.error)
+      this.setError();
+  };
+
   handleSubscribe = async () => {
     if (this.state.email !== "") {
       try {
@@ -56,10 +64,16 @@ export default class SubscriptionMailingContainer extends Component {
             this.setSuccess();
             this.setOpenSnackbar();
           }
-        } // TODO: response for already subscribed email
+        } else if (response.status === 406) {
+          this.setMessage("Invalid email");
+          this.setError();
+          this.setOpenSnackbar();
+        }
+        // TODO: response for already subscribed email
       } catch (e) {
         this.setMessage("Subscription failed");
         this.setError();
+        this.setOpenSnackbar();
       }
     }
   };
@@ -76,7 +90,20 @@ export default class SubscriptionMailingContainer extends Component {
             open={this.state.openSnackbar}
             autoHideDuration={5000}
             message={this.state.message}
-            onClose={this.setOpenSnackbar}
+            onClose={this.handleSnackbarClose}
+          />
+        ) : ("")
+        }
+        {this.state.error ? (
+          <Snackbar
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left"
+            }}
+            open={this.state.openSnackbar}
+            autoHideDuration={5000}
+            message={this.state.message}
+            onClose={this.handleSnackbarClose}
           />
         ) : ("")
         }
