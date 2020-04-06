@@ -48,6 +48,7 @@ const useStyles = makeStyles({
 export default function TemporaryDrawer() {
   const classes = useStyles();
   const classesGlobal = globalStyles();
+
   const [state, setState] = React.useState({
     left: false
   });
@@ -104,7 +105,7 @@ export default function TemporaryDrawer() {
           </Box>
           <Divider/>
           <Box boxShadow={3} padding="5px">
-            <NavLink to="/findus" exact className={classesGlobal.link}>
+            <NavLink to="/customer/find-us" exact className={classesGlobal.link}>
               <ListItem button key={"Find us"} className={classes.type}>
                 <ListItemIcon>
                   <ExploreIcon className={classes.icon} />
@@ -114,7 +115,7 @@ export default function TemporaryDrawer() {
             </NavLink>
           </Box>
           <Box boxShadow={3} padding="5px">
-            <NavLink to="/contact" exact className={classesGlobal.link}>
+            <NavLink to="/customer/contact" exact className={classesGlobal.link}>
               <ListItem button key={"Contact Us"} className={classes.type}>
                 <ListItemIcon>
                   <MailOutlineIcon className={classes.icon} />
@@ -125,7 +126,7 @@ export default function TemporaryDrawer() {
           </Box>
           <Divider/>
           <Box boxShadow={3} padding="5px">
-            <NavLink to="/about" exact className={classesGlobal.link}>
+            <NavLink to="/customer/about" exact className={classesGlobal.link}>
               <ListItem button key={"About Us"} className={classes.type}>
                 <ListItemIcon>
                   <BookmarkIcon className={classes.icon} />

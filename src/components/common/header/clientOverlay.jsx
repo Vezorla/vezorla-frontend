@@ -151,7 +151,7 @@ export default function TemporaryDrawer() {
             </NavLink>
           </Box> */}
 					<Box boxShadow={3} padding="5px">
-						<NavLink to="/contact" exact>
+						<NavLink to="/customer/contact" exact>
 							<ListItem button key={'Contact Us'} className={classes.type}>
 								<ListItemIcon>
 									<MailOutlineIcon className={classes.icon} />
@@ -171,7 +171,7 @@ export default function TemporaryDrawer() {
 						}}
 					/>
 					<Box boxShadow={3} padding="5px">
-						<NavLink to="/about" exact>
+						<NavLink to="/customer/about" exact>
 							<ListItem button key={'About Us'} className={classes.type}>
 								<ListItemIcon>
 									<BookmarkIcon className={classes.icon} />

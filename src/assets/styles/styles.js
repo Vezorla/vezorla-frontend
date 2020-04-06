@@ -1,9 +1,16 @@
 import {makeStyles} from "@material-ui/core/styles";
+import theme from "./theme";
 
 const globalStyles = makeStyles({
   containerMain: {
-    marginTop: "0.3rem",
-    marginBottom: "4rem"
+    [theme.breakpoints.up("xs")]: {
+      marginTop: "0.3rem",
+      marginBottom: "4rem"
+    },
+    [theme.breakpoints.up("sm")]: {
+      marginTop: "0",
+      marginBottom: "5rem"
+    }
   },
   containerButtons: {
     display: "flex",

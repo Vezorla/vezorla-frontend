@@ -38,7 +38,6 @@ export default class SubscriptionMailingContainer extends Component {
     this.setState({openSnackbar: !this.state.openSnackbar})
   };
 
-
   handleSubscribe = async () => {
     if (this.state.email !== "") {
       try {
@@ -67,7 +66,7 @@ export default class SubscriptionMailingContainer extends Component {
 
   render() {
     return (
-      <Container disableGutters>
+      <Container disableGutters maxWidth={"false"}>
         {this.state.success ? (
           <Snackbar
             anchorOrigin={{
