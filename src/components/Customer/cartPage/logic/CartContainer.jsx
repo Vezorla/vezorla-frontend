@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Cart from '../view/Cart';
-import PopUp from '../../../common/PopUp/PopUp';
 import { Link } from 'react-router-dom';
 import { Button, Typography } from '@material-ui/core';
+import PopUp from '../../../common/PopUp/PopUp';
+import Cart from '../view/Cart';
+import CartEmpty from "../view/CartEmpty-view";
 
 /**
  * @file Cart Logic Component
@@ -34,7 +35,6 @@ class CartContainer extends Component {
 		this.onDelete = this.onDelete.bind(this);
 	}
 
-	timeOutVar = [];
 	tax = 0;
 	total = 0;
 
@@ -253,9 +253,7 @@ class CartContainer extends Component {
 						)}
 					</div>
 				) : (
-					<Typography variant="h4" component="h4">
-						Add Something
-					</Typography>
+					<CartEmpty/>
 				)}
 			</div>
 		) : (
