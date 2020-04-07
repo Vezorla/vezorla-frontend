@@ -45,7 +45,11 @@ class LineItem extends React.PureComponent {
             </Typography>
           </div>
           <div className="lineItem-delete">
-            <IconButton aria-label="delete" onClick={() => this.props.onDelete(this.props.prodID)}>
+            <IconButton
+              aria-label="delete"
+              onClick={() => this.props.onDelete(this.props.prodID)}
+              color={"secondary"}
+            >
               <DeleteForeverIcon/>
             </IconButton>
           </div>
