@@ -1,17 +1,25 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {makeStyles, AppBar, Toolbar, Typography, Badge, IconButton} from '@material-ui/core';
+import {
+  AppBar,
+  Badge,
+  Container,
+  IconButton,
+  makeStyles,
+  Toolbar,
+  Typography,
+} from '@material-ui/core';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import AdminNavBar from './adminOverlay';
 import CustomerNavBar from './customerOverlay';
 import ClientNavBar from './clientOverlay';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1
-  },
-  menuButton: {
+  buttonMenu: {
     marginRight: theme.spacing(2)
+  },
+  buttonCart: {
+    marginLeft: theme.spacing(2)
   },
   title: {
     flexGrow: 1
@@ -33,27 +41,35 @@ export default function ButtonAppBar(props) {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <Container>
       <AppBar position={"fixed"}>
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton
+            edge="start"
+            className={classes.buttonMenu}
+            color="secondary"
+            aria-label="menu">
             <NavBar auth={props.auth}/>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             Vezorla
           </Typography>
-          <Link to="/customer/cart">
-            <IconButton color="#D0C50A">
-              <Badge badgeContent={props.cart} color="primary">
-                <ShoppingCart style={{color: '#0C3658'}}/>
-              </Badge>
-            </IconButton>
-          </Link>
+          <IconButton
+            edge={"end"}
+            className={classes.buttonCart}
+            color={"secondary"}
+            component={Link}
+            to="/customer/cart"
+          >
+            <Badge badgeContent={props.cart} color={"secondary"}>
+              <ShoppingCart/>
+            </Badge>
+          </IconButton>
         </Toolbar>
       </AppBar>
       {/* Second static app bar as a shim */}
       <AppBar position={"fixed"}/>
       <Toolbar/>
-    </div>
+    </Container>
   );
 }
