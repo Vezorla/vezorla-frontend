@@ -77,6 +77,21 @@ const theme = createMuiTheme({
       root: {
         background: "transparent"
       }
+    },
+    MuiStepper: {
+      root: {
+        padding: "2rem 0"
+      }
+    },
+    MuiTableHead: {
+      root: {
+        backgroundColor: colorSecondary
+      }
+    },
+    MuiTableCell: {
+      head: {
+        color: "white"
+      }
     }
   }
 });
