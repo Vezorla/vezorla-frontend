@@ -70,7 +70,7 @@ function Stepper(props) {
           enableMouseEvents
         >
           {imgs.map((step, index) => (
-            <div key={step}>
+            <div key={index}>
               {Math.abs(activeStep - index) <= 2 ? (
                 <img className={classes.img} src={step} alt="Product Pictures"/>
               ) : null}
