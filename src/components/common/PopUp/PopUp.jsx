@@ -7,7 +7,14 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Typography, Button }
  * @version 1.0
  */
 
-function PopUp({ message, label = 'Error', handleOk, handleCancel = null, children = '', onClose }) {
+function PopUp({
+	message = 'Error has occured! Please try again later.',
+	label = 'Error',
+	handleOk,
+	handleCancel = null,
+	children = '',
+	onClose
+}) {
 	const [ open, setOpen ] = useState(true);
 
 	const handleClose = () => {

@@ -1,29 +1,37 @@
-import React, {Component} from "react";
-import SubscriptionMailing from "./SubscriptionMailing-view";
+import React, {Component} from 'react'
+import Contact from './Contact-view'
 import {Container, Snackbar} from "@material-ui/core";
 
-const SUBSCRIPTION_URL = "http://localhost:8080/api/customer/subscribe";
+const CONTACT_URL = "http://localhost:8080/api/customer/contact-us";
 
-export default class SubscriptionMailingContainer extends Component {
+export default class ContactContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      message: "",
+      name: '',
+      email: '',
+      message: '',
       success: false,
       error: false,
+      responseMessage: "",
       openSnackbar: false
     };
+    this.setName = this.setName.bind(this);
     this.setEmail = this.setEmail.bind(this);
-    this.handleSubscribe = this.handleSubscribe.bind(this);
-  }
-
-  setEmail = (value) => {
-    this.setState({email: value})
+    this.setMessage = this.setMessage.bind(this);
+    this.handleSend = this.handleSend.bind(this);
   };
 
-  setMessage = (value) => {
-    this.setState({message: value})
+  setName = (e) => {
+    this.setState({name: e.target.value});
+  };
+
+  setEmail = (value) => {
+    this.setState({email: value});
+  };
+
+  setMessage = (e) => {
+    this.setState({message: e.target.value});
   };
 
   setSuccess = () => {
@@ -32,6 +40,10 @@ export default class SubscriptionMailingContainer extends Component {
 
   setError = () => {
     this.setState({error: !this.state.error})
+  };
+
+  setResponseMessage = (value) => {
+    this.setState({responseMessage: value})
   };
 
   setOpenSnackbar = () => {
@@ -46,32 +58,38 @@ export default class SubscriptionMailingContainer extends Component {
       this.setError();
   };
 
-  handleSubscribe = async () => {
-    if (this.state.email !== "") {
+  handleSend = async () => {
+    if (this.state.email !== "" && this.state.message !== "") {
       try {
-        const response = await fetch(SUBSCRIPTION_URL, {
-          method: "POST",
+        const response = await fetch(CONTACT_URL, {
+          method: 'POST',
           headers: {
-            Accept: "application/json",
-            Content: "application/json"
+            Accept: 'application/json',
+            Content: 'application/json'
           },
-          body: JSON.stringify(this.state.email)
+          body: JSON.stringify(
+            {
+              name: this.state.name,
+              senderEmail: this.state.email,
+              message: this.state.message
+            }
+          )
         });
+
         if (response.status === 200) {
           const data = await response.json();
           if (data === true) {
-            this.setMessage("Subscribed to the mailing list");
+            this.setResponseMessage("Message sent");
             this.setSuccess();
             this.setOpenSnackbar();
           }
         } else if (response.status === 406) {
-          this.setMessage("Invalid email");
+          this.setResponseMessage("Invalid email");
           this.setError();
           this.setOpenSnackbar();
         }
-        // TODO: response for already subscribed email
       } catch (e) {
-        this.setMessage("Subscription failed");
+        this.setResponseMessage("Message failed to send");
         this.setError();
         this.setOpenSnackbar();
       }
@@ -80,7 +98,7 @@ export default class SubscriptionMailingContainer extends Component {
 
   render() {
     return (
-      <Container disableGutters maxWidth={"false"}>
+      <Container disableGutters maxWidth="false">
         {this.state.success ? (
           <Snackbar
             anchorOrigin={{
@@ -89,7 +107,7 @@ export default class SubscriptionMailingContainer extends Component {
             }}
             open={this.state.openSnackbar}
             autoHideDuration={5000}
-            message={this.state.message}
+            message={this.state.responseMessage}
             onClose={this.handleSnackbarClose}
           />
         ) : ("")
@@ -102,17 +120,19 @@ export default class SubscriptionMailingContainer extends Component {
             }}
             open={this.state.openSnackbar}
             autoHideDuration={5000}
-            message={this.state.message}
+            message={this.state.responseMessage}
             onClose={this.handleSnackbarClose}
           />
         ) : ("")
         }
-        <SubscriptionMailing
+        <Contact
           {...this.state}
+          setMessage={this.setMessage}
+          setName={this.setName}
           setEmail={this.setEmail}
-          handleSubscribe={this.handleSubscribe}
+          handleSend={this.handleSend}
         />
       </Container>
-    );
+    )
   }
 }

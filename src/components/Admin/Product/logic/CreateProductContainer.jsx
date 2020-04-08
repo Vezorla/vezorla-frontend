@@ -91,7 +91,6 @@ class CreateProductContainer extends Component {
 					this.setState({ added: true, message: 'Image has been added', imageName: file.name });
 				}
 			} catch (err) {
-				console.log(err);
 			}
 		} else {
 			this.setState({ error: true, message: 'This type of file is not supported' });

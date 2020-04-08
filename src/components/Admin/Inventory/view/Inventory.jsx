@@ -78,7 +78,6 @@ const CardComponent = ({ prodId, name, qty, price, img }) => {
 };
 
 const InventoryComponent = ({ list = [], imgs = [] }) => {
-	console.log(list);
 	return (
 		<div>
 			<Typography variant="h2" component="h2">

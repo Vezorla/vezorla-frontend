@@ -1,9 +1,9 @@
 import React from "react";
-import {Box, Button, Container, makeStyles, Typography} from "@material-ui/core";
+import {Button, Container, makeStyles, Typography} from "@material-ui/core";
 import EmailInput from "../../common/Inputs/Email/EmailInput";
 
 const useStyles = makeStyles(theme => ({
-  container: {
+  containerMain: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
@@ -12,36 +12,53 @@ const useStyles = makeStyles(theme => ({
     width: "100%"
   },
   email: {
-    margin: "1vh 0",
-    width: "50vw",
-    alignSelf: "center"
+    [theme.breakpoints.up("xs")]: {
+      margin: "1vh 0",
+      width: "50vw",
+      alignSelf: "center"
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "30vw"
+    }
+  },
+  button: {
+    [theme.breakpoints.up("xs")]: {
+      width: "50vw"
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "30vw"
+    }
   }
 }));
 
-export default function SubscriptionMailing({email, message, setEmail, handleClick}) {
+export default function SubscriptionMailing({email, setEmail, handleSubscribe}) {
   const classes = useStyles();
 
   return (
-    <Container className={classes.container}>
+    <Container
+      className={classes.containerMain}
+      maxWidth={"false"}
+    >
       <Typography
         align={"center"}
-        color={"secondary"}
-        variant={"h6"}
+        variant={"body1"}
         className={classes.title}
       >
-        Get notified about promotions and news
+        Get notified about the healthy benefits of olive oil, upcoming products, promotions and more.
       </Typography>
-      <EmailInput onChange={setEmail} value={email} className={classes.email}/>
-      <Button variant={"contained"} color={"primary"} onClick={handleClick}>
+      <EmailInput
+        onChange={setEmail}
+        value={email}
+        className={classes.email}
+      />
+      <Button
+        variant={"contained"}
+        color={"primary"}
+        onClick={handleSubscribe}
+        className={classes.button}
+      >
         subscribe
       </Button>
-      <Box>
-        {message !== '' ?
-          <Typography align={"center"} color={"error"} variant={"body2"}>
-            {message}
-          </Typography>
-          : ''}
-      </Box>
     </Container>
   );
 }

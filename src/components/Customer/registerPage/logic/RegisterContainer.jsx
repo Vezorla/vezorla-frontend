@@ -93,11 +93,11 @@ class RegisterContainer extends Component {
 						this.setState({ success: true });
 					} else {
 						this.setState({ error: true });
-						this.setState({ message: 'something wrong' });
+						this.setState({ message: 'Something wrong' });
 					}
 				} else {
 					this.setState({ error: true });
-					this.setState({ message: 'email already exist' });
+					this.setState({ message: 'Email already exist' });
 				}
 			} catch (err) {
 				this.setState({ error: true });

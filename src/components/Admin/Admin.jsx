@@ -1,19 +1,17 @@
 import React from 'react';
-
-import { Switch, Route, Redirect } from 'react-router-dom';
-
+import {Switch, Route, Redirect} from 'react-router-dom';
+import DashboardContainer from "./Dashboard/logic/DashboardContainer";
 import ClientPage from './Clients/logic/ClientPage';
 import ClientInfoContainer from './ClientInfo/logic/ClientInfoContainer';
 import SettingContainer from './Setting/logic/SettingContainer';
 import CreateProductContainer from './Product/logic/CreateProductContainer';
-
 import UpdateProductContainer from './Product/logic/UpdateProductContainer';
 import SalesContainer from './Sales/logic/SalesContainer';
 import InventoryContainer from './Inventory/logic/InventoryContainer';
-import PurchaseOrderContainer from './PurchaseOrder/PurchaseOrder-container';
-import DashboardContainer from './Dashboard/logic/DashboardContainer';
-import SaleInfoContainer from './SaleInfo/logic/SaleInfoContainer';
 
+import PurchaseOrderContainer from './PurchaseOrder/PurchaseOrder-container';
+import SaleInfoContainer from './SaleInfo/logic/SaleInfoContainer';
+import PurchaseOrderAddContainer from "./PurchaseOrder/PurchaseOrderAdd/PurchaseOrderAdd-container";
 /**
  * @author MinhL4m
  * @version 1.0
@@ -45,6 +43,7 @@ export default function Admin() {
 				strict
 				render={({ match }) => <SaleInfoContainer saleId={match.params.saleId} />}
 			/>
+      <Route path="/admin/purchase-orders/add" exact strict component={PurchaseOrderAddContainer}/>
 			<Route path="/admin/sales" exact strict component={SalesContainer} />
 			<Route path="/admin/purchase-orders" exact strict component={PurchaseOrderContainer} />
 			<Redirect path="/admin/403" />
