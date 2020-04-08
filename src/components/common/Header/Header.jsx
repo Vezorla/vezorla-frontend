@@ -10,9 +10,9 @@ import {
   Typography,
 } from '@material-ui/core';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
-import AdminNavBar from './adminOverlay';
-import CustomerNavBar from './customerOverlay';
-import ClientNavBar from './clientOverlay';
+import DrawerAdmin from '../Drawer/DrawerAdmin';
+import DrawerCustomer from '../Drawer/DrawerCustomer';
+import DrawerClient from '../Drawer/DrawerClient';
 
 const useStyles = makeStyles((theme) => ({
   buttonMenu: {
@@ -29,11 +29,11 @@ const useStyles = makeStyles((theme) => ({
 function NavBar({auth = 'customer'}) {
   switch (auth) {
     case 'admin':
-      return <AdminNavBar/>;
+      return <DrawerAdmin/>;
     case 'client':
-      return <ClientNavBar/>;
+      return <DrawerClient/>;
     default:
-      return <CustomerNavBar/>;
+      return <DrawerCustomer/>;
   }
 }
 
@@ -51,11 +51,10 @@ export default function ButtonAppBar(props) {
             aria-label="menu">
             <NavBar auth={props.auth}/>
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h5" className={classes.title}>
             Vezorla
           </Typography>
           <IconButton
-            edge={"end"}
             className={classes.buttonCart}
             color={"secondary"}
             component={Link}
