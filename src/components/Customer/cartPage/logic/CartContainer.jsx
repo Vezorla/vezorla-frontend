@@ -23,7 +23,7 @@ class CartContainer extends Component {
 			inStockList: [],
 			outStockList: [],
 			quantity: [],
-			img: [],
+			imgs: [],
 			stage: '',
 			error: false,
 			message: '',
@@ -98,8 +98,16 @@ class CartContainer extends Component {
 
 				if (data === true) {
 					this.props.changeCartHandler();
-					let newList = this.state.inStockList.filter((lineItem) => lineItem.prodID !== prodId);
-					this.setState({ inStockList: newList });
+					let indexRemove = 0;
+					let newList = this.state.inStockList.filter((lineItem, index) => {
+						if (lineItem.prodID !== prodId) {
+							return lineItem;
+						} else {
+							indexRemove = index;
+						}
+					});
+					let imgNewList = this.state.imgs.filter((img, index) => index !== indexRemove);
+					this.setState({ inStockList: newList, imgs: [ ...imgNewList ] });
 				}
 			} else if (response.status >= 400) {
 				this.setState({ error: true, message: 'Something wrong, we cannot delete this item right now' });
