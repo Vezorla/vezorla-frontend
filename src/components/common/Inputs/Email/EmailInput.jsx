@@ -36,13 +36,6 @@ export default function EmailInput({
       } : emailHandler}
       disabled={disabled}
       className={className}
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position={"start"}>
-            <Email/>
-          </InputAdornment>
-        ),
-      }}
     />
   );
 }
