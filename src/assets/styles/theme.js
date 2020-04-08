@@ -72,6 +72,11 @@ const theme = createMuiTheme({
         backgroundColor: "white",
         fontWeight: 700
       }
+    },
+    MuiMobileStepper: {
+      root: {
+        background: "transparent"
+      }
     }
   }
 });

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Product from '../view/Product';
 
 /**
@@ -12,97 +12,97 @@ const INFO_URL = 'http://localhost:8080/api/customer/inventory/product';
 const IMG_URL = 'http://localhost:8080/api/admin/img/get';
 
 /**
-  * Product Logic Class Component
-  */
+ * Product Logic Class Component
+ */
 export default class ProductContainer extends Component {
-	//constructor
-	constructor(props) {
-		super(props);
-		this.state = {
-			product: {
-				prodId: '',
-				name: '',
-				description: '',
-				subdescription: '',
-				harvestTime: '',
-				threshhold: '',
-				price: '',
-				oldPrice: '',
-				active: ''
-			},
-			max: '1',
-			stage: '',
-			imgs: []
-		};
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      product: {
+        prodId: '',
+        name: '',
+        description: '',
+        subdescription: '',
+        harvestTime: '',
+        threshhold: '',
+        price: '',
+        oldPrice: '',
+        active: ''
+      },
+      max: '1',
+      stage: '',
+      imgs: []
+    };
+  }
 
-	setImgs(imageMain, imageOne, imageTwo, imageThree) {
-		let images = [];
-		if (imageOne != null) {
-			images.push(imageOne);
-		}
-		if (imageTwo != null) {
-			images.push(imageTwo);
-		}
-		if (imageThree != null) {
-			images.push(imageThree);
-		}
-		if (imageMain != null) {
-			images.push(imageMain);
-		}
+  setImgs(imageMain, imageOne, imageTwo, imageThree) {
+    let images = [];
+    if (imageOne != null) {
+      images.push(imageOne);
+    }
+    if (imageTwo != null) {
+      images.push(imageTwo);
+    }
+    if (imageThree != null) {
+      images.push(imageThree);
+    }
+    if (imageMain != null) {
+      images.push(imageMain);
+    }
 
-		this.setState({ imgs: images });
-	}
+    this.setState({imgs: images});
+  }
 
-	//--- get max quantity for this product----
-	fetchQuantity = async () => {
-		try {
-			const responseQuantity = await fetch(`${QUANTITY_URL}/${this.props.prodId}`);
-			if (responseQuantity.status === 200) {
-				const max = await responseQuantity.json();
-				if (max !== 0 || max !== null) {
-					this.setState({ max: max });
-				}
-			}
-		} catch (err) {}
-	};
+  //--- get max quantity for this product----
+  fetchQuantity = async () => {
+    try {
+      const responseQuantity = await fetch(`${QUANTITY_URL}/${this.props.prodId}`);
+      if (responseQuantity.status === 200) {
+        const max = await responseQuantity.json();
+        if (max !== 0 || max !== null) {
+          this.setState({max: max});
+        }
+      }
+    } catch (err) {
+    }
+  };
 
-	//----get product information----
-	fetchProductInfo = async () => {
-		try {
-			const responseQuantity = await fetch(`${INFO_URL}/${this.props.prodId}`);
-			if (responseQuantity.status === 200) {
-				const product = await responseQuantity.json();
-				if (product !== null) {
-					this.setState({ product: { ...product[0] } });
-					this.setImgs(product[0].imageOne, product[0].imageTwo, product[0].imageThree, product[0].imageMain);
-					let tempImgs = [];
-					for (let prodId of this.state.imgs) {
-						const response = await fetch(`${IMG_URL}/${prodId}`);
-						const data = await response.json();
-						tempImgs.push(`data:image/jpeg;base64,${data.picByte}`);
-					}
+  //----get product information----
+  fetchProductInfo = async () => {
+    try {
+      const responseQuantity = await fetch(`${INFO_URL}/${this.props.prodId}`);
+      if (responseQuantity.status === 200) {
+        const product = await responseQuantity.json();
+        if (product !== null) {
+          this.setState({product: {...product[0]}});
+          this.setImgs(product[0].imageOne, product[0].imageTwo, product[0].imageThree, product[0].imageMain);
+          let tempImgs = [];
+          for (let prodId of this.state.imgs) {
+            const response = await fetch(`${IMG_URL}/${prodId}`);
+            const data = await response.json();
+            tempImgs.push(`data:image/jpeg;base64,${data.picByte}`);
+          }
 
-					this.setState({ stage: 'done', imgs: [ ...tempImgs ] });
-				}
-			} else if (responseQuantity.status > 400) {
-				this.setState({ stage: 'error' });
-			}
-		} catch (err) {
-			this.setState({ stage: 'error' });
-		}
-	};
+          this.setState({stage: 'done', imgs: [...tempImgs]});
+        }
+      } else if (responseQuantity.status > 400) {
+        this.setState({stage: 'error'});
+      }
+    } catch (err) {
+      this.setState({stage: 'error'});
+    }
+  };
 
-	// fetch data on mount
-	componentDidMount() {
-		(async () => {
-			this.setState({ stage: 'loading' });
-			await this.fetchQuantity();
-			this.fetchProductInfo();
-		})();
-	}
+  // fetch data on mount
+  componentDidMount() {
+    (async () => {
+      this.setState({stage: 'loading'});
+      await this.fetchQuantity();
+      this.fetchProductInfo();
+    })();
+  }
 
-	render() {
-		return <Product {...this.state} addCartHandler={this.props.addCartHandler} />;
-	}
+  render() {
+    return <Product {...this.state} addCartHandler={this.props.addCartHandler}/>;
+  }
 }
