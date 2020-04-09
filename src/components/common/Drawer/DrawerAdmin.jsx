@@ -139,7 +139,7 @@ export default function TemporaryDrawer() {
           </Box>
           <Box boxShadow={3} className={classes.boxListItem}>
             <NavLink to="/admin/discounts" exact className={classesGlobal.link}>
-              <ListItem button>
+              <ListItem disabled button>
                 <ListItemIcon>
                   <Loyalty color={"primary"}/>
                 </ListItemIcon>
