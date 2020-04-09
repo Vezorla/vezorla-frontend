@@ -27,18 +27,18 @@ const containerButtonsStyle = {
 };
 
 class CartContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      inStockList: [],
-      outStockList: [],
-      quantity: [],
-      img: [],
-      stage: '',
-      error: false,
-      message: '',
-      done: false
-    };
+	constructor(props) {
+		super(props);
+		this.state = {
+			inStockList: [],
+			outStockList: [],
+			quantity: [],
+			imgs: [],
+			stage: '',
+			error: false,
+			message: '',
+			done: false
+		};
 
     this.onChange = this.onChange.bind(this);
     this.onDelete = this.onDelete.bind(this);
@@ -105,18 +105,26 @@ class CartContainer extends Component {
       if (response.status === 200) {
         let data = await response.json();
 
-        if (data === true) {
-          this.props.changeCartHandler();
-          let newList = this.state.inStockList.filter((lineItem) => lineItem.prodID !== prodId);
-          this.setState({inStockList: newList});
-        }
-      } else if (response.status >= 400) {
-        this.setState({error: true, message: 'Something wrong, we cannot delete this item right now'});
-      }
-    } catch (err) {
-      this.setState({error: true, message: 'Something wrong, we cannot delete this item right now'});
-    }
-  };
+				if (data === true) {
+					this.props.changeCartHandler();
+					let indexRemove = 0;
+					let newList = this.state.inStockList.filter((lineItem, index) => {
+						if (lineItem.prodID !== prodId) {
+							return lineItem;
+						} else {
+							indexRemove = index;
+						}
+					});
+					let imgNewList = this.state.imgs.filter((img, index) => index !== indexRemove);
+					this.setState({ inStockList: newList, imgs: [ ...imgNewList ] });
+				}
+			} else if (response.status >= 400) {
+				this.setState({ error: true, message: 'Something wrong, we cannot delete this item right now' });
+			}
+		} catch (err) {
+			this.setState({ error: true, message: 'Something wrong, we cannot delete this item right now' });
+		}
+	};
 
   //--- function fetch line item-------
   fetchInStockData = async () => {
@@ -188,11 +196,11 @@ class CartContainer extends Component {
     }
   };
 
-  fetchData = async () => {
-    this.setState({stage: 'loading'});
-    await this.fetchOutStockData();
-    await this.fetchInStockData();
-  };
+	fetchData = async () => {
+		this.setState({ stage: 'loading' });
+		await this.fetchOutStockData();
+		await this.fetchInStockData();
+	};
 
   componentDidMount() {
     this.fetchData();

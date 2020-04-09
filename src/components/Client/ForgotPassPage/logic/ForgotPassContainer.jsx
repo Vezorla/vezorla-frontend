@@ -3,7 +3,7 @@ import ForgotPass from '../view/ForgotPass';
 import {Container} from "@material-ui/core";
 
 /**
- * @file Forgot Password logic Componenet
+ * @file Forgot Password logic Component
  * @author MinhL4m
  * @version 1.0
  */
