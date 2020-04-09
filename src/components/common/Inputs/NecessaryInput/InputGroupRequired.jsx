@@ -21,7 +21,8 @@ const useStyles = makeStyles(theme => ({
     }
   },
   container: {
-    marginBottom: "1rem"
+    marginBottom: "1rem",
+    textAlign: "start"
   }
 }));
 
