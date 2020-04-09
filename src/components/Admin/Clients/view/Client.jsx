@@ -1,71 +1,102 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+import {
+  Button,
+  Card, CardActionArea, CardContent,
+  Container,
+  Grid,
+  makeStyles,
+  Typography
+} from '@material-ui/core';
+import {Email, Person, Phone} from '@material-ui/icons';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
-import { Link } from 'react-router-dom';
-import { Card, Button, Typography } from '@material-ui/core';
+import globalStyles from "../../../../assets/styles/styles";
 
 /**
- * @file Client List View Componenet 
+ * @file Client List View Componenet
  * @author MinhL4m
  * @version 1.0
  */
 
-const ClientCard = ({ firstName = 'Missing', lastName = 'Missing', email, phoneNum = 'Missing' }) => {
-	return (
-		<Link to={`/admin/clients/${email}`} style={{ textDecoration: 'none' }}>
-			<Card
-				key={email}
-				justifyContent="center"
-				disableUnderline={true}
-				style={{ border: '1px solid black', marginTop: '3em', paddingBottom: '10px', color: '#0C3658' }}
-			>
-				<div
-					className="card--price"
-					style={{
-						paddingBottom: '1.5em',
-						display: 'flex',
-						justifyContent: 'center',
-						flexDirection: 'column'
-					}}
-				>
-					<Typography variant="h5" component="h3">
-						First Name: {firstName}
-					</Typography>
-					<Typography variant="h5" component="h3">
-						Last Name: {lastName}
-					</Typography>
-					<Typography variant="h5" component="h3">
-						Email: {email}
-					</Typography>
-					<Typography variant="h5" component="h3">
-						Phone: {phoneNum}
-					</Typography>
+const useStyles = makeStyles((theme) => ({
+  container: {
+    marginTop: "1rem",
+    marginBottom: "4rem"
+  },
+  cardContent: {
+    textAlign: "center"
+  },
+  row: {
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    margin: "0.5rem 0"
+  },
+  icon: {
+    marginRight: "0.5rem"
+  }
+}));
 
-					<Button
-						size="large"
-						variant="outlined"
-						style={{
-							marginLeft: 'auto',
-							marginRight: 'auto',
-							width: '100%',
-							borderRadius: '0',
-							borderLeft: 'none',
-							borderRight: 'none',
-							borderColor: '#000'
-						}}
-					>
-						View
-					</Button>
-				</div>
-			</Card>
-		</Link>
-	);
+const ClientCard = ({firstName = '-', lastName = '-', email, phoneNum = '-'}) => {
+  const stylesGlobal = globalStyles();
+  const styles = useStyles();
+
+  return (
+    <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+      <Link to={`/admin/clients/${email}`} className={stylesGlobal.link}>
+        <Card
+          key={email}
+          raised
+        >
+          <CardActionArea>
+            <CardContent className={styles.cardContent}>
+              <Container disableGutters className={styles.row}>
+                <Person color={"secondary"} className={styles.icon}/>
+                <Typography variant={"h5"}>
+                  {firstName} {lastName}
+                </Typography>
+              </Container>
+              <Container disableGutters className={styles.row}>
+                <Email color={"secondary"} className={styles.icon}/>
+                <Typography variant={"h6"}>
+                  {email}
+                </Typography>
+              </Container>
+              <Container disableGutters className={styles.row}>
+                <Phone color={"secondary"} className={styles.icon}/>
+                <Typography>
+                  {phoneNum}
+                </Typography>
+              </Container>
+            </CardContent>
+          </CardActionArea>
+          <Button
+            color={"primary"}
+            variant="contained"
+            fullWidth
+            size="large"
+          >
+            View
+          </Button>
+        </Card>
+      </Link>
+    </Grid>
+  )
+    ;
 };
 
-function ClientComponent({ list = [] }) {
-	return <div>{list.map((client) => <ClientCard {...client} />)}</div>;
+function ClientComponent({list = []}) {
+  const styles = useStyles();
+  return (
+    <Container maxWidth={false} className={styles.container}>
+      <Grid container spacing={2}>
+        {list.map((client) => <ClientCard {...client} />)}
+      </Grid>
+    </Container>
+  );
 }
 
 const Client = (props) => {
-	return LoadingHOC(ClientComponent)({ ...props, message: 'something went wrong with loading client list' });
+  return LoadingHOC(ClientComponent)({...props, message: 'something went wrong with loading client list'});
 };
 export default Client;

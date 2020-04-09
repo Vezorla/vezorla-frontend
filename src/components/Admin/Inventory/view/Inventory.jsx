@@ -1,105 +1,115 @@
 import React from 'react';
-import { Button, Grid, CardMedia, Card, Typography } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import {
+  Button,
+  Card,
+  CardActionArea, CardContent,
+  CardMedia,
+  Container,
+  Fab,
+  Grid,
+  makeStyles,
+  Typography
+} from '@material-ui/core';
+import {Add} from "@material-ui/icons";
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
+import globalStyles from "../../../../assets/styles/styles";
 
 /**
- * @file Inventory View Componenet 
+ * @file Inventory View Componenet
  * @author MinhL4m
  * @version 1.0
  */
 
-const CardComponent = ({ prodId, name, qty, price, img }) => {
-	const URL = '/admin/inventory';
-	return (
-		<Grid item xs={12} sm={6} md={4}>
-			<Link to={`${URL}/${prodId}`} style={{ textDecoration: 'none' }}>
-				<Card
-					key={name}
-					justifyContent="center"
-					disableUnderline={true}
-					style={{ border: '1px solid black', marginTop: '3em', paddingBottom: '10px', color: '#0C3658' }}
-				>
-					<CardMedia
-						component="img"
-						alt={img}
-						height="140"
-						image={`data:image/jpeg;base64,${img}`}
-						title="props.name"
-						style={{
-							width: '70%',
-							margin: 'auto',
-							marginTop: '2em',
-							marginBottom: '2em',
-							height: '40%',
-							border: '3px solid black',
-							borderRadius: '10px',
-							boxShadow: '0px 3px 5px black'
-						}}
-					/>
-					<Typography variant="h5" component="h4">
-						Name: {name}
-					</Typography>
-					<Typography variant="h5" component="h4">
-						Quantity: {qty}
-					</Typography>
-					<Typography variant="h5" component="h4">
-						Price: ${price}
-					</Typography>
+const useStyles = makeStyles(theme => ({
+  fab: {
+    margin: 0,
+    top: "auto",
+    right: 20,
+    bottom: 20,
+    left: "auto",
+    position: "fixed",
+  }
+}));
 
-					<div
-						className="card--price"
-						style={{
-							paddingBottom: '1.5em',
-							display: 'flex',
-							justifyContent: 'center'
-						}}
-					>
-						<Button
-							size="large"
-							variant="outlined"
-							style={{
-								marginLeft: 'auto',
-								marginRight: 'auto',
-								width: '100%',
-								borderRadius: '0',
-								borderLeft: 'none',
-								borderRight: 'none',
-								borderColor: '#000'
-							}}
-						>
-							View
-						</Button>
-					</div>
-				</Card>
-			</Link>
-		</Grid>
-	);
+const CardComponent = ({prodId, name, qty, price, img}) => {
+  const stylesGlobal = globalStyles();
+  const styles = useStyles();
+  const URL = '/admin/inventory';
+
+  return (
+    <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+      <Link to={`${URL}/${prodId}`} className={stylesGlobal.link}>
+        <Card
+          key={prodId}
+          raised
+        >
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              alt={name}
+              image={`data:image/jpeg;base64,${img}`}
+              title="props.name"
+            />
+            <CardContent className={styles.content}>
+              <Typography variant="h6">
+                {name}
+              </Typography>
+              <Typography>
+                <b>{qty} in stock</b>
+              </Typography>
+              <Typography>
+                ${price}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <Button
+            color={"primary"}
+            size="large"
+            variant="contained"
+            fullWidth
+          >
+            View
+          </Button>
+        </Card>
+      </Link>
+    </Grid>
+  );
 };
 
-const InventoryComponent = ({ list = [], imgs = [] }) => {
-	return (
-		<div>
-			<Typography variant="h2" component="h2">
-				Inventory
-			</Typography>
+const InventoryComponent = ({list = [], imgs = []}) => {
+  const stylesGlobal = globalStyles();
+  const styles = useStyles();
 
-			<div>
-				<Link to="/admin/inventory/create">
-					<Button variant="contained" size="large">
-						Create Product
-					</Button>
-				</Link>
-			</div>
-			<Grid container xs={12} spacing={3}>
-				{list.map((item, index) => <CardComponent {...item} img={imgs[index]} />)}
-			</Grid>
-		</div>
-	);
+  return (
+    <Container maxWidth={false} className={stylesGlobal.containerMain}>
+      <Typography
+        variant="h4"
+        align={"center"}
+        gutterBottom
+      >
+        Inventory
+      </Typography>
+      <Grid container spacing={2}>
+        {list.map((item, index) => <CardComponent {...item} img={imgs[index]}/>)}
+      </Grid>
+      <Fab
+        color={"primary"}
+        aria-label={"add"}
+        variant={"extended"}
+        className={styles.fab}
+        component={Link}
+        to="/admin/inventory/create"
+      >
+        <Add/>
+        Add
+      </Fab>
+    </Container>
+  );
 };
 
 const Inventory = (props) => {
-	return LoadingHOC(InventoryComponent)(props);
+  return LoadingHOC(InventoryComponent)(props);
 };
 
 export default Inventory;

@@ -10,26 +10,27 @@ import {Button, Container, FormControlLabel, Switch} from '@material-ui/core';
  */
 
 const containerStyle = {
-	textAlign: "center"
+  textAlign: "center"
 };
 const buttonStyle = {
   margin: "1rem 0"
 };
 
-const InfoComponent = ({
-                         info,
-                         setFirstname,
-                         setLastname,
-                         setPhone,
-                         setAddress,
-                         setCity,
-                         setProvince,
-                         setPostalCode,
-                         setCountry,
-                         setPassword,
-                         setSubscription,
-                         onClick
-                       }) => {
+const InfoComponent = (
+  {
+    info,
+    setFirstname,
+    setLastname,
+    setPhone,
+    setAddress,
+    setCity,
+    setProvince,
+    setPostalCode,
+    setCountry,
+    setPassword,
+    setSubscription,
+    onClick
+  }) => {
   return (
     <Container maxWidth={"sm"} style={containerStyle}>
       <InputGroupRequired
