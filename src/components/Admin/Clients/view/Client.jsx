@@ -29,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
   row: {
     display: "flex",
     justifyContent: "flex-start",
-    alignItems: "center"
+    alignItems: "center",
+    margin: "0.5rem 0"
   },
   icon: {
     marginRight: "0.5rem"
