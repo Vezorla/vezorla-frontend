@@ -2,7 +2,9 @@ import React from 'react';
 import {
   Container,
   Paper,
-  Table, TableBody, TableCell,
+  Table,
+  TableBody,
+  TableCell,
   TableContainer,
   TableHead,
   TableRow,

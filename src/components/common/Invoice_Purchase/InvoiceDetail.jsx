@@ -1,48 +1,84 @@
 import React from 'react';
+import {
+  Container,
+  makeStyles,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography
+} from "@material-ui/core";
 
 /**
- * @file Invoice Detail Componenet 
+ * @file Invoice Detail Componenet
  * @author MinhL4m
  * @version 1.0
  */
 
-export default function InvoiceDetail({ list, subtotal, taxes, total, discount }) {
-	return (
-		<div>
-			<table>
-				<tr>
-					<th>Name</th>
-					<th>QTy</th>
-					<th>Price</th>
-					<th>Total</th>
-				</tr>
-				{list.map((item) => (
-					<tr>
-						<td>{item.name}</td>
-						<td>{item.qty}</td>
-						<td>{item.price}</td>
-						<td>{item.extendedPrice}</td>
-					</tr>
-				))}
-			</table>
-			<div>
-				<div>
-					<p>SUBTOTAL</p>
-					<p>{subtotal}</p>
-				</div>
-				<div>
-					<p>DISCOUNT</p>
-					<p>{discount}</p>
-				</div>
-				<div>
-					<p>TAX RATE</p>
-					<p>{taxes}</p>
-				</div>
-				<div>
-					<p>INVOICE TOTAL</p>
-					<p>{total}</p>
-				</div>
-			</div>
-		</div>
-	);
+const useStyles = makeStyles(theme => ({
+  table: {
+    marginBottom: "1rem"
+  }
+}));
+
+export default function InvoiceDetail({list, subtotal, taxes, total, discount}) {
+  const classes = useStyles();
+
+  return (
+    <Container disableGutters>
+      <TableContainer component={Paper} className={classes.table}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Product</TableCell>
+              <TableCell>Quantity</TableCell>
+              <TableCell>Unit Price</TableCell>
+              <TableCell>Total</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {list.map((item) => (
+              <TableRow key={item.prodId}>
+                <TableCell component={"th"} scope={"row"}>
+                  {item.name}
+                </TableCell>
+                <TableCell>
+                  {item.qty}
+                </TableCell>
+                <TableCell>
+                  {item.price}
+                </TableCell>
+                <TableCell>
+                  {item.extendedPrice}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <Container disableGutters>
+        <Typography>
+          Subtotal ${subtotal}
+        </Typography>
+        <Typography>
+          Discount ${discount}
+        </Typography>
+        {/*<Typography>
+          Discounted Subtotal ${}
+        </Typography>*/}
+        <Typography gutterBottom>
+          Tax ${taxes}
+        </Typography>
+        {/*<Typography gutterBottom>
+          Shipping ${}
+        </Typography>*/}
+        <Typography>
+          Total <b>${total}</b>
+        </Typography>
+      </Container>
+    </Container>
+  );
 }

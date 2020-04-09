@@ -34,7 +34,7 @@ const OrderHistoryComponent = ({list}) => {
         </Grid>
       ) : (
         <Typography variant={"h4"} style={titleStyle}>
-          There are no current order history
+          You haven't processed any order yet
         </Typography>
       )}
     </Container>

@@ -80,8 +80,8 @@ export default function InvoicePO({title, invoiceNum, vendor = '', email = '', t
           >
             View
           </Button>
-          {vendor !== '' ? <Vendor vendor={vendor}/> : ''}
-          {email !== '' ? <Email email={email}/> : ''}
+          {/*{vendor !== '' ? <Vendor vendor={vendor}/> : ''}
+          {email !== '' ? <Email email={email}/> : ''}*/}
         </Card>
       </Link>
     </Grid>
