@@ -59,7 +59,7 @@ export default function PurchaseOrderAdd(
         align="center"
         variant={"h6"}
       >
-        PO number: {nextPO}
+        PO #{nextPO}
       </Typography>
       <Container
         className={classes.containerLot}
