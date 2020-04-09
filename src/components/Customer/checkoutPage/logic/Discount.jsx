@@ -118,7 +118,7 @@ export default class Discount extends Component {
               <FormControlLabel
                 key="NS"
                 value="NS"
-                control={<Radio color="secondary"/>}
+                control={<Radio color="primary"/>}
                 label="None"
               />
             </RadioGroup>

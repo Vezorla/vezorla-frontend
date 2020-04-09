@@ -219,10 +219,14 @@ class ShippingInfo extends Component {
           />
           <FormControlLabel
             control={
-              <Checkbox checked={this.state.info.pickup} onChange={this.setPickup} value="pickup"/>
+              <Checkbox
+                checked={this.state.info.pickup}
+                onChange={this.setPickup}
+                value="pickup"
+                color={"primary"}
+              />
             }
-            // TODO: address of warehouse
-            label="Pickup at # street for free"
+            label="Pickup at warehouse (FREE)"
           />
           {!this.state.filled ?
             <Typography
