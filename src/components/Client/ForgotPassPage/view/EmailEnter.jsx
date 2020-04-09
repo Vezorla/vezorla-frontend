@@ -1,32 +1,66 @@
 import React from 'react';
+import {Button, Container, FormControl, makeStyles, Typography} from '@material-ui/core';
 import EmailInput from '../../../common/Inputs/Email/EmailInput';
-import { Button, Typography } from '@material-ui/core';
 import PopUp from '../../../common/PopUp/PopUp';
+import {Link} from "react-router-dom";
 
 /**
- * @file Email Input Componenet 
+ * @file Email Input Componenet
  * @author MinhL4m
  * @version 1.0
  */
 
-export default function EmailEnter({ value, onChange, onClick, helperText, error, setError }) {
-	return (
-		<div>
-			{error === true ? <PopUp message="Can't find email" handleOk={setError} onClose={setError} /> : ''}
-			<div>
-				<Typography variant="h4" component="h4">
-					Forgot Your Password?
-				</Typography>
-				<Typography variant="h6" component="h4">
-					Don't worry, just enter the e-mail you registered and we will help you with that!
-				</Typography>
-			</div>
-			<div>
-				<EmailInput value={value} onChange={onChange} helperText={helperText} />
-			</div>
-			<Button onClick={onClick} variant="contained" size="large">
-				SEND
-			</Button>
-		</div>
-	);
+const useStyles = makeStyles(theme => ({
+  containerCentered: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  button: {
+    margin: "1rem 0"
+  },
+  remembered: {
+    margin: "1rem 0",
+    textAlign: "center"
+  },
+}));
+
+export default function EmailEnter({value, onChange, onClick, helperText, error, setError}) {
+  const classes = useStyles();
+
+  return (
+    <Container disableGutters className={classes.containerCentered}>
+      {error === true ? <PopUp message="Email is not registered" handleOk={setError} onClose={setError}/> : ''}
+      <Typography variant="h4" gutterBottom>
+        Forgot Password?
+      </Typography>
+      <Typography>
+        Enter the email address associated with your account
+      </Typography>
+      <FormControl fullWidth margin={"normal"}>
+        <EmailInput
+          value={value}
+          onChange={onChange}
+          helperText={helperText}/>
+      </FormControl>
+      <Button
+        onClick={onClick}
+        variant="contained"
+        color={"primary"}
+        size="large"
+        fullWidth
+        className={classes.button}
+      >
+        reset password
+      </Button>
+      <Typography
+        component={Link}
+        to={"/login"}
+        className={classes.remembered}
+      >
+        I remembered my password
+      </Typography>
+    </Container>
+  );
 }
