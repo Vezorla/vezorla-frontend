@@ -1,14 +1,16 @@
 import React from 'react';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-
+import {
+  Container,
+  Step,
+  StepLabel,
+  Stepper
+} from '@material-ui/core';
 
 /**
  * @author Minh Lam
- * @description Function Component for  ProcessBar 
+ * @description Function Component for  ProcessBar
  * This component contains Stepper
- * props: 
+ * props:
  *      - steps: array of string contains name of all the step
  *      - stage: current step
  */
@@ -18,8 +20,8 @@ function ProcessBar(props) {
   const steps = props.steps;
 
   return (
-    <div>
-      <Stepper activeStep={props.stage}>
+    <Container disableGutters>
+      <Stepper activeStep={props.stage} alternativeLabel>
         {steps.map((label) => {
           const stepProps = {};
           const labelProps = {};
@@ -30,7 +32,7 @@ function ProcessBar(props) {
           );
         })}
       </Stepper>
-    </div>
+    </Container>
   );
 }
 

@@ -1,17 +1,28 @@
 .lineItem {
-    display: grid;
-    grid-auto-flow: column dense;
-    grid-template-columns: repeat(5, 1fr);
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
 
+.lineItem-img,
+.lineItem-price {
+    width: 20%;
+}
+
+.lineItem-name {
+    width: 40%;
+    padding: 0 0.5rem;
+}
+
+.lineItem-quantity,
+.lineItem-delete {
+    width: 10%;
+}
+
+.lineItem-quantity {
+    padding: 0 0.5rem;
 }
 
 .productImg {
-    width: 20%;
-    justify-self: center;
-}
-
-.lineItem--img,
-.lineItem--name,
-.lineItem--price {
-    text-align: center;
+    width: 100%;
 }

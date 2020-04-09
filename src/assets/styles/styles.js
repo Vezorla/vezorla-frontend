@@ -19,7 +19,7 @@ const globalStyles = makeStyles({
   },
   link: {
     textDecoration: "none"
-  },
+  }
 });
 
 export default globalStyles;

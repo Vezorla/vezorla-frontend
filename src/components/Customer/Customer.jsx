@@ -6,7 +6,7 @@ import RegisterContainer from './registerPage/logic/RegisterContainer';
 import CartContainer from './cartPage/logic/CartContainer';
 import CheckoutPage from './checkoutPage/CheckoutPage';
 import ContactContainer from "./Contact/Contact-container";
-import About from "./About/About";
+import About from "./About/About-view";
 
 /**
  * @file Routing Component for Customer features
@@ -18,7 +18,7 @@ import About from "./About/About";
  * Return Switch component contains all route for customer 
  * @param {Function} increaseCart - function use to increase line item of header component. line item is state of App component
  */
-function Customer({ increaseCart, auth }) {
+export default function Customer({ increaseCart, auth }) {
 	return (
 		<Switch>
 			<Route path="/customer/shop" exact strict component={ShopContainer} />
@@ -46,6 +46,3 @@ function Customer({ increaseCart, auth }) {
 		</Switch>
 	);
 }
-
-
-export default Customer

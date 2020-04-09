@@ -36,6 +36,11 @@ const theme = createMuiTheme({
         backgroundColor: colorPrimary,
       }
     },
+    MuiToolbar: {
+      root: {
+        justifyContent: "space-between"
+      }
+    },
     MuiInputBase: {
       root: {
         color: colorSecondary
@@ -59,6 +64,33 @@ const theme = createMuiTheme({
     MuiButton: {
       containedPrimary: {
         color: colorSecondary
+      }
+    },
+    MuiBadge: {
+      colorSecondary: {
+        color: colorSecondary,
+        backgroundColor: "white",
+        fontWeight: 700
+      }
+    },
+    MuiMobileStepper: {
+      root: {
+        background: "transparent"
+      }
+    },
+    MuiStepper: {
+      root: {
+        padding: "2rem 0"
+      }
+    },
+    MuiTableHead: {
+      root: {
+        backgroundColor: colorSecondary
+      }
+    },
+    MuiTableCell: {
+      head: {
+        color: "white"
       }
     }
   }

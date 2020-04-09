@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
+import {Button, Container} from '@material-ui/core';
+import globalStyles from "../../../assets/styles/styles";
 
 /**
  * @file Process Buttons Component
@@ -7,19 +8,28 @@ import { Button } from '@material-ui/core';
  * @version 1.0
  */
 
-function ProcessButtons(props) {
-	return (
-		<div>
-			<div>
-				<Button disabled={props.stage === 0} onClick={props.handleBack}>
-					Back
-				</Button>
+export default function ProcessButtons(props) {
+  const classesGlobal = globalStyles();
 
-				{props.handleNext?<Button variant="contained" color="primary" onClick={props.handleNext} disabled={!props.complete}>
-					{props.hasNext ? 'Next' : 'Submit'}
-				</Button>:''}
-			</div>
-		</div>
-	);
+  return (
+    <Container className={classesGlobal.containerButtons}>
+      <Button
+        variant={"contained"}
+		color={"primary"}
+        disabled={props.stage === 0}
+        onClick={props.handleBack}
+      >
+        Back
+      </Button>
+      {props.handleNext ?
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={!props.complete}
+		  onClick={props.handleNext}
+        >
+          {props.hasNext ? 'Next' : 'Submit'}
+        </Button> : ''}
+    </Container>
+  );
 }
-export default ProcessButtons;

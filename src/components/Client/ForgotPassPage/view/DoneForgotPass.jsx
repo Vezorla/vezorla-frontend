@@ -1,28 +1,43 @@
 import React from 'react';
-import { CheckCircle } from '@material-ui/icons';
-import { Link } from 'react-router-dom';
-import { Button, Typography } from '@material-ui/core';
+import {Link} from 'react-router-dom';
+import {Button, Container, makeStyles, Typography} from '@material-ui/core';
+import {CheckCircle} from '@material-ui/icons';
 
 /**
- * @file Done Page View Componenet 
+ * @file Done Page View Componenet
  * @author MinhL4m
  * @version 1.0
  */
 
-export default function DoneForgotPass() {
-	return (
-		<div>
-			<Typography variant="h4" component="h4">
-				Thank you
-			</Typography>
+const useStyles = makeStyles(theme => ({
+  button: {
+    margin: "1rem 0"
+  }
+}));
 
-			<CheckCircle />
-			<Typography variant="h4" component="h4">
-				Sign in to continue
-			</Typography>
-			<Link to="/login">
-				<Button>Sign In</Button>
-			</Link>
-		</div>
-	);
+export default function DoneForgotPass({email}) {
+  const classes = useStyles();
+
+  return (
+    <Container>
+      <CheckCircle fontSize={"large"} htmlColor={"green"}/>
+      <Typography variant="h4" gutterBottom>
+        Check your email
+      </Typography>
+      <Typography>
+        Use the new password sent to {email}
+      </Typography>
+      <Button
+        variant={"contained"}
+        color={"primary"}
+        component={Link}
+        to={"/login"}
+        size={"large"}
+        className={classes.button}
+        fullWidth
+      >
+        sign in
+      </Button>
+    </Container>
+  );
 }

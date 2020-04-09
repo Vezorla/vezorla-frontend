@@ -1,5 +1,5 @@
 import React from 'react';
-import NecessaryInput from '../../../common/Inputs/NecessaryInput/NecessaryInput';
+import InputGroupRequired from '../../../common/Inputs/NecessaryInput/InputGroupRequired';
 import { Button, Typography } from '@material-ui/core';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 import PopUp from '../../../common/PopUp/PopUp';
@@ -41,7 +41,7 @@ function ClientInfoComponent({
 				</Typography>
 			</div>
 			<div>
-				<NecessaryInput
+				<InputGroupRequired
 					info={info}
 					setAddress={setAddress}
 					setCity={setCity}

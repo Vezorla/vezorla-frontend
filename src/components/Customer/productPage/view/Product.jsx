@@ -1,8 +1,9 @@
 import React from 'react';
+import {Container, Typography} from '@material-ui/core';
 import CardPriceContainer from '../logic/CardPriceContainer';
 import Stepper from '../../../common/Stepper/Stepper';
 import loadingHOC from '../../../common/HOC/LoadingHOC';
-import { Typography } from '@material-ui/core';
+import globalStyles from "../../../../assets/styles/styles";
 
 /**
  * @file Product View Component
@@ -11,34 +12,44 @@ import { Typography } from '@material-ui/core';
  */
 
 /**
-  * 
-  * @param {products} - product
-  * @param {imgs} - list of images 
-  * @param {price} - price of the product
-  * @param {value} - user select quantity 
-  * @param {max} - current quantity in storage of this product
-  * @param {addCartHandler} - handler for adding to cart 
-  */
-const ProductDetail = ({ product, imgs, price, max, addCartHandler }) => {
-	return (
-		<div>
-			<Typography variant="h3" component="h4">
-				{product.name}
-			</Typography>
-			<Stepper imgs={imgs} default={true} />
-			<CardPriceContainer price={product.price} max={max} addCartHandler={addCartHandler} id={product.prodId} />
+ * @param {products} - product
+ * @param {imgs} - list of images
+ * @param {price} - price of the product
+ * @param {value} - user select quantity
+ * @param {max} - current quantity in storage of this product
+ * @param {addCartHandler} - handler for adding to cart
+ */
+const ProductDetail = ({product, imgs, max, addCartHandler}) => {
+  const classesGlobal = globalStyles();
 
-			<section style={{ marginLeft: '8%', marginRight: '8%', color: '#0C3658' }}>
-				<h1 style={{ fontSize: '2em', letterSpacing: '0.09em', textTransform: 'uppercase' }}>Description</h1>
-				<span style={{ fontSize: '1.3em', letterSpacing: '0.07em' }}>{product.description}</span>
-			</section>
-		</div>
-	);
+  return (
+    <Container className={classesGlobal.containerMain}>
+      <Stepper imgs={imgs} default={true}/>
+      <Typography
+        variant="h6"
+        align={"center"}
+        gutterBottom
+      >
+        {product.name}
+      </Typography>
+      <CardPriceContainer
+        price={product.price}
+        max={max}
+        addCartHandler={addCartHandler}
+        id={product.prodId}/>
+      <Typography
+        align={"justify"}
+        style={{marginTop: "1rem"}}
+      >
+        {product.description}
+      </Typography>
+    </Container>
+  );
 };
 
 function Product(props) {
-	const ProductComponent = loadingHOC(ProductDetail)({ ...props, message: 'something wrong' });
-	return ProductComponent;
+  const ProductComponent = loadingHOC(ProductDetail)({...props, message: 'something wrong'});
+  return ProductComponent;
 }
 
 export default Product;

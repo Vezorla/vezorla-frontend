@@ -1,5 +1,5 @@
 import React from 'react';
-import NecessaryInput from '../../../common/Inputs/NecessaryInput/NecessaryInput';
+import InputGroupRequired from '../../../common/Inputs/NecessaryInput/InputGroupRequired';
 import LoadingHOC from '../../../common/HOC/LoadingHOC';
 import { Button, FormControlLabel, Switch } from '@material-ui/core';
 /**
@@ -24,7 +24,7 @@ const InfoComponent = ({
 }) => {
 	return (
 		<div>
-			<NecessaryInput
+			<InputGroupRequired
 				info={info}
 				setAddress={setAddress}
 				setCity={setCity}
