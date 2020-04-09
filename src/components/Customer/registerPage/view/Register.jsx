@@ -1,11 +1,11 @@
 import React from 'react';
-import { TextField, Typography } from '@material-ui/core';
+import {Button, Container, FormControl, TextField, Typography} from '@material-ui/core';
 import EmailInput from '../../../common/Inputs/Email/EmailInput';
 
 /**
  * @file Register View Component
  * @author MinhL4m
- * @version 1.0 
+ * @version 1.0
  */
 
 /**
@@ -20,27 +20,49 @@ import EmailInput from '../../../common/Inputs/Email/EmailInput';
  * @param {function} setEmail - function to change the value of email
  * @param {function} setPassword - function to change the value of password
  * @param {function} setRePassword - function to change the value of repassword
- * @param {function} match - function to check if repassword and password match 
+ * @param {function} match - function to check if repassword and password match
  * @returns Register Component
  */
-export default function Register({ email, setEmail, password, setPassword, rePassword, setRePassword, match }) {
-	return (
-		<div>
-			<div>
-				<Typography variant="h3" component="h4">
-					Registration
-				</Typography>
-			</div>
-			<EmailInput helperText="Invalid Email" value={email} onChange={setEmail} />
-			<TextField label="Password" type="password" value={password} onChange={setPassword} />
-			<TextField
-				label="Confirm Password"
-				type="password"
-				value={rePassword}
-				onChange={setRePassword}
-				error={!match}
-				helperText={match ? '' : 'Unmatch password'}
-			/>
-		</div>
-	);
+export default function Register(
+  {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    rePassword,
+    setRePassword,
+    match
+  }) {
+  return (
+    <Container disableGutters>
+      <Typography variant="h4">
+        Registration
+      </Typography>
+      <FormControl fullWidth margin={"normal"}>
+        <EmailInput
+          helperText="Invalid Email"
+          value={email}
+          onChange={setEmail}
+        />
+      </FormControl>
+      <FormControl fullWidth margin={"normal"}>
+        <TextField
+          label="Password"
+          type="password"
+          value={password}
+          onChange={setPassword}
+        />
+      </FormControl>
+      <FormControl fullWidth margin={"normal"}>
+        <TextField
+          label="Confirm Password"
+          type="password"
+          value={rePassword}
+          onChange={setRePassword}
+          error={!match}
+          helperText={match ? '' : 'Unmatch password'}
+        />
+      </FormControl>
+    </Container>
+  );
 }
