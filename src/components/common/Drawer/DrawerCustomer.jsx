@@ -27,10 +27,8 @@ const useStyles = makeStyles((theme) => ({
     padding: "0.3rem 0"
   },
   text: {
-    color: theme.palette.primary.main,
     letterSpacing: ".15rem",
     textTransform: "uppercase",
-    fontSize: "1.3rem"
   }
 }));
 
@@ -67,9 +65,10 @@ export default function DrawerCustomer() {
                 <Home color={"primary"}/>
               </ListItemIcon>
               <ListItemText
-                disableTypography
                 primary={"Home"}
-                className={classes.text}/>
+                className={classes.text}
+                primaryTypographyProps={{variant: "h6"}}
+              />
             </ListItem>
           </NavLink>
         </Box>
@@ -80,9 +79,10 @@ export default function DrawerCustomer() {
                 <ShoppingCart color={"primary"}/>
               </ListItemIcon>
               <ListItemText
-                disableTypography
                 primary={"Cart"}
-                className={classes.text}/>
+                className={classes.text}
+                primaryTypographyProps={{variant: "h6"}}
+              />
             </ListItem>
           </NavLink>
         </Box>
@@ -93,9 +93,10 @@ export default function DrawerCustomer() {
                 <Storefront color={"primary"}/>
               </ListItemIcon>
               <ListItemText
-                disableTypography
                 primary={"Shop"}
-                className={classes.text}/>
+                className={classes.text}
+                primaryTypographyProps={{variant: "h6"}}
+              />
             </ListItem>
           </NavLink>
         </Box>
@@ -117,9 +118,10 @@ export default function DrawerCustomer() {
                 <Email color={"primary"}/>
               </ListItemIcon>
               <ListItemText
-                disableTypography
                 primary={"Contact"}
-                className={classes.text}/>
+                className={classes.text}
+                primaryTypographyProps={{variant: "h6"}}
+              />
             </ListItem>
           </NavLink>
         </Box>
@@ -130,9 +132,10 @@ export default function DrawerCustomer() {
                 <Bookmark color={"primary"}/>
               </ListItemIcon>
               <ListItemText
-                disableTypography
                 primary={"About"}
-                className={classes.text}/>
+                className={classes.text}
+                primaryTypographyProps={{variant: "h6"}}
+              />
             </ListItem>
           </NavLink>
         </Box>
@@ -144,9 +147,10 @@ export default function DrawerCustomer() {
                 <AccountCircle color={"primary"}/>
               </ListItemIcon>
               <ListItemText
-                disableTypography
                 primary={"Sign In"}
-                className={classes.text}/>
+                className={classes.text}
+                primaryTypographyProps={{variant: "h6"}}
+              />
             </ListItem>
           </NavLink>
         </Box>

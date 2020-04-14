@@ -29,10 +29,8 @@ const useStyles = makeStyles((theme) => ({
     padding: "0.3rem 0"
   },
   text: {
-	  color: theme.palette.primary.main,
 	  letterSpacing: ".15rem",
 	  textTransform: "uppercase",
-	  fontSize: "1.3rem"
   }
 }));
 
@@ -79,9 +77,10 @@ export default function TemporaryDrawer() {
                   <Dashboard color={"primary"}/>
                 </ListItemIcon>
                 <ListItemText
-                  disableTypography
                   primary={'Dashboard'}
-                  className={classes.text}/>
+                  className={classes.text}
+                  primaryTypographyProps={{variant: "h6"}}
+                />
               </ListItem>
             </NavLink>
           </Box>
@@ -92,9 +91,10 @@ export default function TemporaryDrawer() {
                   <Store color={"primary"}/>
                 </ListItemIcon>
                 <ListItemText
-                  disableTypography
                   primary={'Inventory'}
-                  className={classes.text}/>
+                  className={classes.text}
+                  primaryTypographyProps={{variant: "h6"}}
+                />
               </ListItem>
             </NavLink>
           </Box>
@@ -105,9 +105,10 @@ export default function TemporaryDrawer() {
                   <Person color={"primary"}/>
                 </ListItemIcon>
                 <ListItemText
-					disableTypography
 					primary={'Clients'}
-					className={classes.text}/>
+					className={classes.text}
+                    primaryTypographyProps={{variant: "h6"}}
+                />
               </ListItem>
             </NavLink>
           </Box>
@@ -118,9 +119,10 @@ export default function TemporaryDrawer() {
                   <ShoppingCart color={"primary"}/>
                 </ListItemIcon>
                 <ListItemText
-					disableTypography
 					primary={'Purchase Orders'}
-					className={classes.text}/>
+					className={classes.text}
+                    primaryTypographyProps={{variant: "h6"}}
+                />
               </ListItem>
             </NavLink>
           </Box>
@@ -131,9 +133,10 @@ export default function TemporaryDrawer() {
                   <MonetizationOn color={"primary"}/>
                 </ListItemIcon>
                 <ListItemText
-					disableTypography
 					primary={'Sales'}
-					className={classes.text}/>
+					className={classes.text}
+                    primaryTypographyProps={{variant: "h6"}}
+                />
               </ListItem>
             </NavLink>
           </Box>
@@ -144,9 +147,10 @@ export default function TemporaryDrawer() {
                   <Loyalty color={"primary"}/>
                 </ListItemIcon>
                 <ListItemText
-					disableTypography
 					primary={'Discounts'}
-					className={classes.text}/>
+					className={classes.text}
+                    primaryTypographyProps={{variant: "h6"}}
+                />
               </ListItem>
             </NavLink>
           </Box>
@@ -157,9 +161,10 @@ export default function TemporaryDrawer() {
                   <Settings color={"primary"}/>
                 </ListItemIcon>
                 <ListItemText
-					disableTypography
 					primary={'Settings'}
-					className={classes.text}/>
+					className={classes.text}
+                    primaryTypographyProps={{variant: "h6"}}
+                />
               </ListItem>
             </NavLink>
           </Box>
@@ -171,9 +176,10 @@ export default function TemporaryDrawer() {
                   <PowerSettingsNew color={"primary"}/>
                 </ListItemIcon>
                 <ListItemText
-					disableTypography
 					primary={'Logout'}
-					className={classes.text}/>
+					className={classes.text}
+                    primaryTypographyProps={{variant: "h6"}}
+                />
               </ListItem>
             </NavLink>
           </Box>

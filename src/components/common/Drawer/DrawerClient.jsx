@@ -28,10 +28,8 @@ const useStyles = makeStyles((theme) => ({
     padding: "0.3rem 0"
   },
   text: {
-    color: theme.palette.primary.main,
     letterSpacing: ".15rem",
     textTransform: "uppercase",
-    fontSize: "1.3rem"
   }
 }));
 
@@ -78,9 +76,10 @@ export default function DrawerClient() {
                 <AccountCircle color={"primary"}/>
               </ListItemIcon>
               <ListItemText
-                disableTypography
                 primary={'Account'}
-                className={classes.text}/>
+                className={classes.text}
+                primaryTypographyProps={{variant: "h6"}}
+              />
             </ListItem>
           </NavLink>
         </Box>
@@ -92,9 +91,10 @@ export default function DrawerClient() {
                 <Home color={"primary"}/>
               </ListItemIcon>
               <ListItemText
-                disableTypography
                 primary={'Home'}
-                className={classes.text}/>
+                className={classes.text}
+                primaryTypographyProps={{variant: "h6"}}
+              />
             </ListItem>
           </NavLink>
         </Box>
@@ -105,9 +105,10 @@ export default function DrawerClient() {
                 <ShoppingCart color={"primary"}/>
               </ListItemIcon>
               <ListItemText
-                disableTypography
                 primary={'Cart'}
-                className={classes.text}/>
+                className={classes.text}
+                primaryTypographyProps={{variant: "h6"}}
+              />
             </ListItem>
           </NavLink>
         </Box>
@@ -118,9 +119,10 @@ export default function DrawerClient() {
                 <Storefront color={"primary"}/>
               </ListItemIcon>
               <ListItemText
-                disableTypography
                 primary={'Shop'}
-                className={classes.text}/>
+                className={classes.text}
+                primaryTypographyProps={{variant: "h6"}}
+              />
             </ListItem>
           </NavLink>
         </Box>
@@ -142,9 +144,10 @@ export default function DrawerClient() {
                 <Email color={"primary"}/>
               </ListItemIcon>
               <ListItemText
-                disableTypography
                 primary={'Contact'}
-                className={classes.text}/>
+                className={classes.text}
+                primaryTypographyProps={{variant: "h6"}}
+              />
             </ListItem>
           </NavLink>
         </Box>
@@ -155,9 +158,10 @@ export default function DrawerClient() {
                 <Bookmark color={"primary"}/>
               </ListItemIcon>
               <ListItemText
-                disableTypography
                 primary={'About'}
-                className={classes.text}/>
+                className={classes.text}
+                primaryTypographyProps={{variant: "h6"}}
+              />
             </ListItem>
           </NavLink>
         </Box>
@@ -169,9 +173,10 @@ export default function DrawerClient() {
                 <PowerSettingsNew color={"primary"}/>
               </ListItemIcon>
               <ListItemText
-                disableTypography
                 primary={'Logout'}
-                className={classes.text}/>
+                className={classes.text}
+                primaryTypographyProps={{variant: "h6"}}
+              />
             </ListItem>
           </NavLink>
         </Box>
