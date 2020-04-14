@@ -54,16 +54,19 @@ export default function ButtonAppBar(props) {
           <Typography variant="h5" className={classes.title}>
             Vezorla
           </Typography>
-          <IconButton
-            className={classes.buttonCart}
-            color={"secondary"}
-            component={Link}
-            to="/customer/cart"
-          >
-            <Badge badgeContent={props.cart} color={"secondary"}>
-              <ShoppingCart/>
-            </Badge>
-          </IconButton>
+          {props.auth !== "admin" ? (
+            <IconButton
+              className={classes.buttonCart}
+              color={"secondary"}
+              component={Link}
+              to="/customer/cart"
+            >
+              <Badge badgeContent={props.cart} color={"secondary"}>
+                <ShoppingCart/>
+              </Badge>
+            </IconButton>
+          ) : ("")
+          }
         </Toolbar>
       </AppBar>
       {/* Second static app bar as a shim */}
